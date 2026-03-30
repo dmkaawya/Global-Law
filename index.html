@@ -1,1 +1,164 @@
-test web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobalLaw — Coming Soon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#0a0f1e',
+              900: '#0d1526',
+              800: '#111d35',
+              700: '#162544',
+              600: '#1c2e54',
+            },
+            gold: {
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px 2px rgba(251, 191, 36, 0.5); }
+      50% { opacity: 0.5; box-shadow: 0 0 16px 6px rgba(251, 191, 36, 0.25); }
+    }
+    @keyframes progress-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .pulse-dot { animation: pulse-glow 2s ease-in-out infinite; }
+    .progress-bar-shimmer {
+      background: linear-gradient(90deg, #d97706 0%, #fbbf24 30%, #fcd34d 50%, #fbbf24 70%, #d97706 100%);
+      background-size: 200% 100%;
+      animation: progress-shimmer 2.5s ease-in-out infinite;
+    }
+    .float-subtle { animation: subtle-float 6s ease-in-out infinite; }
+    .gold-glow {
+      text-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+    }
+    .badge-glow {
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .bg-radial-glow {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <div class="min-h-screen bg-navy-950 bg-grid relative flex flex-col items-center justify-center px-6 overflow-hidden">
+
+    <!-- Radial Gold Glow at Top -->
+    <div class="bg-radial-glow absolute inset-0 pointer-events-none"></div>
+
+    <!-- Subtle Top Border Accent -->
+    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-2xl w-full text-center">
+
+      <!-- Brand Header -->
+      <div class="float-subtle mb-12">
+        <div class="inline-flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-navy-950" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 7v10l10 4 10-4V7L12 3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 12l10-5M12 12v9M12 12L2 7" />
+            </svg>
+          </div>
+          <span class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            Global<span class="text-gold-400">Law</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Construction Badge -->
+      <div class="flex justify-center mb-10">
+        <div class="badge-glow inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold-500/20 bg-navy-800/60 backdrop-blur-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-gold-400"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-400"></span>
+          </span>
+          <span class="text-xs md:text-sm font-semibold tracking-widest uppercase text-gold-300">
+            System Under Construction
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-white gold-glow mb-8">
+        Demystifying the Law<br class="hidden sm:block" />
+        <span class="text-gold-400">for Everyone.</span>
+      </h1>
+
+      <!-- Progress Bar -->
+      <div class="max-w-xs mx-auto mb-10">
+        <div class="h-1 w-full rounded-full bg-navy-700 overflow-hidden">
+          <div class="progress-bar-shimmer h-full rounded-full w-[62%]"></div>
+        </div>
+        <p class="mt-2.5 text-[11px] font-medium tracking-wider uppercase text-white/30">Active Development — 62%</p>
+      </div>
+
+      <!-- Description -->
+      <p class="text-base md:text-lg font-light leading-relaxed text-white/60 max-w-lg mx-auto mb-14">
+        We are currently building a comprehensive, multi-language platform to make global and local laws accessible, easy to understand, and completely free for the general public. We will be launching soon.
+      </p>
+
+      <!-- Divider -->
+      <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mx-auto mb-14"></div>
+
+      <!-- Contact Section -->
+      <div class="bg-navy-800/40 border border-white/[0.06] rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm">
+        <p class="text-xs font-semibold tracking-widest uppercase text-gold-400/80 mb-3">Official Inquiries</p>
+        <p class="text-sm md:text-base font-light text-white/50 leading-relaxed mb-4">
+          For official authorities, partnerships, and inquiries, please contact:
+        </p>
+        <a href="mailto:dmkaawya@gmail.com" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors duration-200 font-medium text-sm md:text-base">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          dmkaawya@gmail.com
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <p class="text-[11px] font-medium tracking-wider uppercase text-white/20">
+        Powered by <span class="text-white/30">Vezlo</span>
+      </p>
+
+    </div>
+
+    <!-- Subtle Bottom Border Accent -->
+    <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"></div>
+
+  </div>
+
+</body>
+</html>
