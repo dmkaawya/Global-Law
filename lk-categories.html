@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <!-- =============================================
+       GlobalLaw - Sri Lanka Categories (lk-categories.html)
+       
+       🔧 HOW TO EDIT (සරල උපදෙස්):
+       
+       1. අලුත් card එකක් add කරන්න:
+          → පහළ CATEGORIES array එකට object එකක් copy කරන්න
+          → icon, title, laws count වෙනුවට ඔයාම දේ දාන්න
+          
+       2. Card එකක් "Coming Soon" කරන්න:
+          → file: 'lk-cyber.html' කියන තැනට
+          → file: null කරන්න
+          
+       3. Card එකක් activate කරන්න:
+          → file: null කියන තැනට
+          → file: 'lk-xxxx.html' කරන්න (ඔයාගේ file එකේ නම)
+       
+       ============================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Law Categories - GlobalLaw Sri Lanka</title>
+  <meta name="description" content="Browse Sri Lankan laws by category. Click any card to explore.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { red: '#DC2626', 'red-light': '#EF4444', 'red-dark': '#B91C1C', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 9px; }
+
+    /* Card hover effect */
+    .cat-card {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #DC2626;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .cat-card:hover::before { transform: scaleX(1); }
+    .cat-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(220,38,38,0.1); }
+
+    /* Coming Soon card */
+    .cat-card.soon { opacity: 0.55; cursor: not-allowed; }
+    .cat-card.soon:hover { transform: none; box-shadow: none; }
+    .cat-card.soon::before { display: none; }
+
+    /* WhatsApp pulse */
+    @keyframes pulse-ring { 0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0} }
+    .wa-pulse::before { content:'';position:absolute;inset:-5px;border-radius:50%;background:#22C55E;animation:pulse-ring 2s ease-out infinite;z-index:-1; }
+
+    /* Fade animation */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)} }
+    .fu { animation: fadeUp 0.4s ease forwards; }
+    .fu1 { animation-delay: 0.06s; opacity: 0; }
+    .fu2 { animation-delay: 0.12s; opacity: 0; }
+    .fu3 { animation-delay: 0.18s; opacity: 0; }
+
+    /* Toast */
+    @keyframes slideR { from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1} }
+    .toast-in { animation: slideR 0.35s ease forwards; }
+
+    /* Mobile menu */
+    @keyframes slideD { from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)} }
+    .mob-menu { animation: slideD 0.25s ease forwards; }
+
+    /* Dot pattern */
+    .dot-bg { background-image: radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0); background-size: 36px 36px; }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
+
+
+  <!-- ============ NAVIGATION BAR ============ -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="flex items-center justify-between h-14 md:h-16">
+        <!-- Logo -->
+        <a href="lk.html" class="flex items-center gap-1.5 shrink-0">
+          <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span>
+          <span class="text-base md:text-lg">🇱🇰</span>
+        </a>
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-5 lg:gap-7 text-[13px] font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navHome">Home</a>
+          <a href="lk-categories.html" class="text-brand-red border-b-2 border-brand-red pb-0.5" data-i18n="navCat">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navContact">Contact</a>
+        </div>
+        <!-- Right Side -->
+        <div class="flex items-center gap-1.5 md:gap-2.5">
+          <!-- Language Switch -->
+          <div class="relative">
+            <button onclick="toggleLangDD()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+              <i data-lucide="globe" class="w-3 h-3"></i><span id="langLabel">EN</span><i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
+            </button>
+            <div id="langDD" class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg shadow-xl overflow-hidden z-50">
+              <button onclick="setLang('en')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+              <button onclick="setLang('si')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+            </div>
+          </div>
+          <!-- Dark/Light -->
+          <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Toggle theme">
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i>
+          </button>
+          <!-- Mobile Menu -->
+          <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Menu">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-brand-dark-border pt-3 mob-menu">
+        <div class="flex flex-col gap-2.5 text-sm font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navHome">Home</a>
+          <a href="lk-categories.html" class="text-brand-red py-1" data-i18n="navCat">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navAbout">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navContact">Contact</a>
+          <a href="lk-credits.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navCredits">Credits</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ============ BREADCRUMB ============ -->
+  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
+      <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
+        <a href="index.html" class="hover:text-brand-red transition">GlobalLaw</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <a href="lk.html" class="hover:text-brand-red transition">🇱🇰 Sri Lanka</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <span class="text-neutral-700 dark:text-neutral-200 font-medium" data-i18n="navCat">Categories</span>
+      </nav>
+    </div>
+  </div>
+
+
+  <!-- ============ PAGE HEADER ============ -->
+  <section class="relative overflow-hidden bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="absolute inset-0 dot-bg opacity-[0.02] dark:opacity-[0.04]"></div>
+    <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-10 pb-8 md:pt-14 md:pb-10">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-2 fu" data-i18n="pgTitle">Law Categories</h1>
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base max-w-xl fu fu1" data-i18n="pgSub">Select a category to browse related laws explained in simple language.</p>
+    </div>
+  </section>
+
+
+  <!-- ============ CATEGORY CARDS GRID ============ -->
+  <section class="py-8 md:py-12 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div id="cardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+        <!-- Cards rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+        <div class="col-span-2 md:col-span-1">
+          <div class="text-xl font-extrabold tracking-tight mb-2.5"><span class="text-brand-red">Global</span>Law <span class="text-base">🇱🇰</span></div>
+          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone.</p>
+          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-i18n="ftDisc">⚠️ Disclaimer: Educational platform only. Not legal advice.</div>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftQL">Quick Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="lk.html" class="text-neutral-400 hover:text-brand-red transition">Home</a></li>
+            <li><a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCat">Categories</a></li>
+            <li><a href="lk-about.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a></li>
+            <li><a href="lk-contact.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navSupport">Support</a></li>
+            <li><a href="lk-credits.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCredits">Credits</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftLL">Legal Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftPriv">Privacy Policy</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftTerms">Terms of Use</a></li>
+            <li><a href="https://www.justice.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Ministry of Justice ↗</a></li>
+            <li><a href="https://www.cert.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">CERT Sri Lanka ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftCon">Contact</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i><a href="mailto:dmkaawya@gmail.com" class="hover:text-brand-red transition">dmkaawya@gmail.com</a></li>
+            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="message-circle" class="w-3.5 h-3.5 shrink-0"></i><a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="hover:text-brand-red transition">WhatsApp</a></li>
+            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i><span>+94 77 504 8455</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-neutral-500 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
+        <p class="text-neutral-500 text-[11px]">Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a> <span class="text-neutral-600 mx-0.5">|</span> DMC Group</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating WhatsApp -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse relative flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:50px;height:50px" aria-label="WhatsApp">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
+  <!-- Toast -->
+  <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-4 py-3 toast-in max-w-xs">
+    <div class="flex items-center gap-2.5">
+      <div class="w-7 h-7 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center shrink-0"><i data-lucide="clock" class="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400"></i></div>
+      <p id="toastMsg" class="text-xs font-medium"></p>
+    </div>
+  </div>
+
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    lucide.createIcons();
+
+    // =============================================================
+    //
+    //   🔧 EDIT HERE — ADD / REMOVE / MODIFY CATEGORIES
+    //
+    //   Each card needs:
+    //     icon    → Emoji (any emoji)
+    //     title   → { en: 'English name', si: 'සිංහල නම' }
+    //     laws    → Number of laws inside (e.g. 12)
+    //     file    → HTML file to link to (e.g. 'lk-cyber.html')
+    //                ⚡ Set to: null → Shows "Coming Soon"
+    //                ⚡ Set to: 'lk-xxxx.html' → Clickable card
+    //     tag     → (optional) 'popular', 'new', or remove it
+    //
+    // =============================================================
+    const CATEGORIES = [
+
+      {
+        icon: '💻',
+        title: { en: 'Cyber Laws', si: 'සයිබර් නීති' },
+        laws: 12,
+        file: 'lk-cyber.html',
+        tag: 'popular'
+      },
+      {
+        icon: '🛡️',
+        title: { en: 'Fundamental Rights', si: 'මූලික අයිතිවාසිකම්' },
+        laws: 8,
+        file: 'lk-fundamental.html',
+        tag: null
+      },
+      {
+        icon: '🚔',
+        title: { en: 'Criminal Laws', si: 'අපරාධ නීති' },
+        laws: 15,
+        file: 'lk-criminal.html',
+        tag: 'popular'
+      },
+      {
+        icon: '🏢',
+        title: { en: 'Civil Laws', si: 'සිවිල් නීති' },
+        laws: 10,
+        file: 'lk-civil.html',
+        tag: null
+      },
+      {
+        icon: '💼',
+        title: { en: 'Corporate / Labor Laws', si: 'කෝපරේට් / කම්කරු නීති' },
+        laws: 9,
+        file: 'lk-labor.html',
+        tag: null
+      },
+      {
+        icon: '🚗',
+        title: { en: 'Motor Vehicle Laws', si: 'මෝටර් රථ නීති' },
+        laws: 7,
+        file: 'lk-motor.html',
+        tag: 'new'
+      },
+      {
+        icon: '👨‍👩‍👧',
+        title: { en: 'Family Laws', si: 'පවුල් නීති' },
+        laws: 6,
+        file: 'lk-family.html',
+        tag: null
+      },
+      {
+        icon: '🏠',
+        title: { en: 'Property Laws', si: 'දේපළ නීති' },
+        laws: 8,
+        file: 'lk-property.html',
+        tag: null
+      },
+      {
+        icon: '⚖️',
+        title: { en: 'Court Procedures', si: 'අධිකරණ ක්‍රියාපටිපාදි' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📜',
+        title: { en: 'Constitutional Law', si: 'ව්‍යවස්ථාමූලික නීතිය' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏦',
+        title: { en: 'Banking & Finance', si: 'බැංකු හා මූල්‍ය ධන' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🌍',
+        title: { en: 'International Law', si: 'ජාත්‍යන්තර නීතිය' },
+        laws: 3,
+        file: null,
+        tag: null
+      }
+
+      // ================================================
+      // 📌 ADD MORE CARDS HERE
+      // Just copy the block below, paste it, and edit:
+      //
+      // {
+      //   icon: '📝',
+      //   title: { en: 'New Category Name', si: 'අලුත් කාණ්ඩයේ නම' },
+      //   laws: 5,
+      //   file: null,          ← change to 'lk-xxx.html' when ready
+      //   tag: 'new'           ← 'popular', 'new', or null
+      // },
+      // ================================================
+
+    ];
+
+
+    // =============================================================
+    // TRANSLATIONS
+    // =============================================================
+    const T = {
+      en: {
+        navHome: 'Home', navCat: 'Categories', navAbout: 'About Us', navContact: 'Contact', navSupport: 'Support', navCredits: 'Credits',
+        pgTitle: 'Law Categories',
+        pgSub: 'Select a category to browse related laws explained in simple language.',
+        lawsWord: 'Laws',
+        viewDetails: 'View Laws →',
+        comingSoon: 'Coming Soon',
+        tagPopular: '🔥 POPULAR',
+        tagNew: 'NEW',
+        ftDesc: "Making Sri Lanka's law accessible to everyone.",
+        ftDisc: '⚠️ Disclaimer: Educational platform only. Not legal advice.',
+        ftQL: 'Quick Links', ftLL: 'Legal Links', ftCon: 'Contact', ftPriv: 'Privacy Policy', ftTerms: 'Terms of Use',
+      },
+      si: {
+        navHome: 'මුල් පිටුව', navCat: 'කාණ්ඩ', navAbout: 'අප ගැන', navContact: 'සම්බන්ධ කරගන්න', navSupport: 'සහාය', navCredits: 'ස්තුතිය',
+        pgTitle: 'නීති කාණ්ඩ',
+        pgSub: 'සරල භාෂාවෙන් පැහැදිලි කළ අදාළ නීති බැලීමට කාණ්ඩයක් තෝරන්න.',
+        lawsWord: 'නීති',
+        viewDetails: 'නීති බලන්න →',
+        comingSoon: 'මේ තවම එනවා',
+        tagPopular: '🔥 ජනප්‍රිය',
+        tagNew: 'අලුත',
+        ftDesc: 'ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
+        ftDisc: '⚠️ අවවාදයයි: අධ්‍යාපනික වේදිකාවක් පමණයි. නීති උපදෙස් නොවේ.',
+        ftQL: 'ඉක්මන් සබැඳි', ftLL: 'නීතිමය සබැඳි', ftCon: 'සම්බන්ධ කරගන්න', ftPriv: 'පෞද්ගලිකත්ව ප්‍රතිපත්තිය', ftTerms: 'භාවිතා කිරීමේ කොන්දේසි',
+      }
+    };
+
+
+    // =============================================================
+    // STATE
+    // =============================================================
+    let lang = 'en';
+    const saved = localStorage.getItem('gl_lk_lang');
+    if (saved && T[saved]) lang = saved;
+
+
+    // =============================================================
+    // RENDER CARDS
+    // =============================================================
+    function renderCards() {
+      const d = T[lang] || T.en;
+      const grid = document.getElementById('cardGrid');
+      let html = '';
+
+      CATEGORIES.forEach(function(cat, index) {
+        const name = cat.title[lang] || cat.title.en;
+        const isSoon = (cat.file === null);
+
+        // Tag badge
+        let tagHTML = '';
+        if (cat.tag === 'popular') {
+          tagHTML = '<div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagPopular + '</div>';
+        } else if (cat.tag === 'new') {
+          tagHTML = '<div class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagNew + '</div>';
+        }
+
+        // Coming Soon overlay
+        let soonHTML = '';
+        if (isSoon) {
+          soonHTML = '<div class="absolute inset-0 bg-white/60 dark:bg-brand-dark/60 backdrop-blur-[1px] rounded-2xl z-20 flex items-center justify-center">' +
+            '<div class="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-bold px-3 py-1.5 rounded-lg">🚧 ' + d.comingSoon + '</div>' +
+            '</div>';
+        }
+
+        // Click handler
+        const clickAttr = isSoon
+          ? 'onclick="showToast(\'' + d.comingSoon + '\')"'
+          : 'onclick="window.location.href=\'' + cat.file + '\'"';
+
+        // Delay class for stagger animation
+        const delayClass = index < 4 ? ' fu fu' + (index + 1) : ' fu';
+
+        html += '<div ' + clickAttr + ' class="cat-card' + (isSoon ? ' soon' : '') + ' bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 sm:p-6 text-center' + delayClass + '">' +
+          soonHTML +
+          tagHTML +
+          '<div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-3xl sm:text-4xl mx-auto mb-3 sm:mb-4">' + cat.icon + '</div>' +
+          '<h3 class="font-bold text-sm sm:text-base mb-1">' + name + '</h3>' +
+          '<p class="text-brand-red text-xs font-semibold mb-3">' + cat.laws + ' ' + d.lawsWord + '</p>' +
+          '<div class="inline-flex items-center gap-1 text-[11px] font-semibold ' + (isSoon ? 'text-neutral-400' : 'text-brand-red hover:gap-2') + ' transition-all">' +
+          '<span>' + (isSoon ? '🔒' : '') + ' ' + d.viewDetails + '</span>' +
+          '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>' +
+          '</div>' +
+          '</div>';
+      });
+
+      grid.innerHTML = html;
+    }
+
+
+    // =============================================================
+    // TRANSLATION ENGINE
+    // =============================================================
+    function applyT() {
+      const d = T[lang] || T.en;
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        const k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      document.documentElement.lang = lang === 'si' ? 'si' : 'en';
+      // Update language dropdown checkmarks
+      document.querySelectorAll('.ld-opt').forEach(function(b) {
+        const isEn = b.textContent.includes('English');
+        const chk = b.querySelector('.ld-chk');
+        if (chk) {
+          if ((isEn && lang === 'en') || (!isEn && lang === 'si')) chk.classList.remove('hidden');
+          else chk.classList.add('hidden');
+        }
+      });
+    }
+
+    function setLang(l) {
+      lang = l;
+      localStorage.setItem('gl_lk_lang', l);
+      document.getElementById('langLabel').textContent = l.toUpperCase();
+      applyT();
+      renderCards();
+      toggleLangDD();
+    }
+
+    function toggleLangDD() { document.getElementById('langDD').classList.toggle('hidden'); }
+
+    // Close lang dropdown on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#langBtn') && !e.target.closest('#langDD'))
+        document.getElementById('langDD').classList.add('hidden');
+    });
+
+
+    // =============================================================
+    // DARK MODE
+    // =============================================================
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('gl_dark', document.documentElement.classList.contains('dark'));
+    }
+    if (localStorage.getItem('gl_dark') === 'true' ||
+      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+
+    // =============================================================
+    // MOBILE MENU
+    // =============================================================
+    function toggleMob() { document.getElementById('mobMenu').classList.toggle('hidden'); }
+
+
+    // =============================================================
+    // TOAST NOTIFICATION
+    // =============================================================
+    let toastTimer = null;
+    function showToast(msg) {
+      var box = document.getElementById('toastBox');
+      document.getElementById('toastMsg').textContent = msg;
+      box.classList.remove('hidden');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { box.classList.add('hidden'); }, 2500);
+    }
+
+
+    // =============================================================
+    // INITIALIZE
+    // =============================================================
+    document.getElementById('langLabel').textContent = lang.toUpperCase();
+    applyT();
+    renderCards();
+
+  </script>
+
+</body>
+</html>
