@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
-  <!-- =============================================
-       GlobalLaw - Sri Lanka Home Page (lk.html)
-       Every content block links to its own detail file
-       Mobile-First | EN/SI | Dark/Light | Black/Red/White
-       ============================================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalLaw Sri Lanka - Know Your Rights. Understand the Law.</title>
-  <meta name="description" content="Sri Lanka's laws explained simply in English and Sinhala. Browse 52 categories covering cyber, criminal, civil, tax, environmental laws and more.">
+  <title>Court System - GlobalLaw Sri Lanka</title>
+  <meta name="description" content="Complete guide to Sri Lanka's court system explained simply.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: { red: '#DC2626', 'red-light': '#EF4444', 'red-dark': '#B91C1C', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' }
-          }
-        }
-      }
-    }
+    tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{red:'#DC2626','red-light':'#EF4444','red-dark':'#B91C1C',dark:'#050505','dark-card':'#1A1A1A','dark-border':'#262626'}}}}}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,768 +19,490 @@
     ::-webkit-scrollbar{width:5px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:#DC2626;border-radius:9px}
-    .cat-card{transition:all .25s ease}
-    .cat-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(220,38,38,.1)}
-    .trend-card{transition:all .2s ease}
-    .trend-card:hover{border-color:#DC2626 !important}
     @keyframes pulse-ring{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
     .wa-pulse::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:#22C55E;animation:pulse-ring 2s ease-out infinite;z-index:-1}
     @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     .fu{animation:fadeUp .5s ease forwards}.fu1{animation-delay:.08s;opacity:0}.fu2{animation-delay:.16s;opacity:0}.fu3{animation-delay:.24s;opacity:0}
     @keyframes slideR{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
     .toast-in{animation:slideR .35s ease forwards}
-    .search-glow:focus-within{box-shadow:0 0 0 3px rgba(220,38,38,.25)}
     @keyframes slideD{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
     .mob-menu{animation:slideD .25s ease forwards}
     .dot-bg{background-image:radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0);background-size:36px 36px}
-    .read-more{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:#DC2626;transition:gap .2s}
-    .read-more:hover{gap:8px}
-    .sit-card{transition:all .2s ease}
-    .sit-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(220,38,38,.08)}
-    @keyframes countUp{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-    .count-anim{animation:countUp .6s ease forwards}
+    .tab-btn.active{color:#DC2626;border-bottom-color:#DC2626}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+    .court-node{transition:all .2s ease}
+    .court-node:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(220,38,38,.12)}
+    .gloss-item{transition:background .15s}
+    .gloss-item:hover{background:rgba(220,38,38,.05)}
+    .dark .gloss-item:hover{background:rgba(220,38,38,.1)}
     .no-scrollbar::-webkit-scrollbar{display:none}
     .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
   </style>
 </head>
-
 <body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
 
-  <!-- ============ ANNOUNCEMENT BANNER ============ -->
-  <div id="announceBar" class="bg-brand-red text-white text-center py-2 px-4 text-xs md:text-sm font-medium relative z-[60]">
-    <span data-i18n="announce">🚀 52 law categories now available! Browse Sri Lanka's complete legal guide.</span>
-    <button onclick="document.getElementById('announceBar').style.display='none'" class="absolute right-3 top-1/2 -translate-y-1/2 hover:opacity-60 transition p-1" aria-label="Close">
-      <i data-lucide="x" class="w-3.5 h-3.5"></i>
-    </button>
-  </div>
-
-  <!-- ============ NAVIGATION BAR ============ -->
+  <!-- NAV -->
   <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border transition-colors">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between h-14 md:h-16">
-
-        <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-1.5 shrink-0" title="Change Country">
-          <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span>
-          <span class="text-base md:text-lg">🇱🇰</span>
+        <a href="lk.html" class="flex items-center gap-1.5 shrink-0">
+          <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span><span class="text-base md:text-lg">🇱🇰</span>
         </a>
-
-        <!-- Desktop Links -->
         <div class="hidden md:flex items-center gap-5 lg:gap-7 text-[13px] font-medium">
-          <a href="lk.html" class="text-brand-red border-b-2 border-brand-red pb-0.5" data-i18n="navHome">Home</a>
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navHome">Home</a>
           <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navCat">Categories</a>
+          <a href="lk-court-system.html" class="text-brand-red border-b-2 border-brand-red pb-0.5" data-i18n="navCourt">Court System</a>
           <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a>
           <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navContact">Contact</a>
         </div>
-
-        <!-- Right Controls -->
         <div class="flex items-center gap-1.5 md:gap-2.5">
-          <button onclick="document.getElementById('heroSearch').focus()" class="hidden md:flex w-8 h-8 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Search">
-            <i data-lucide="search" class="w-4 h-4 text-neutral-500"></i>
-          </button>
-
-          <!-- Language Switch -->
           <div class="relative">
             <button onclick="toggleLangDD()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-              <i data-lucide="globe" class="w-3 h-3"></i>
-              <span id="langLabel">EN</span>
-              <i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
+              <i data-lucide="globe" class="w-3 h-3"></i><span id="langLabel">EN</span><i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
             </button>
             <div id="langDD" class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg shadow-xl overflow-hidden z-50">
-              <button onclick="setLang('en')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left">
-                <span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span>
-              </button>
-              <button onclick="setLang('si')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left">
-                <span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span>
-              </button>
+              <button onclick="setLang('en')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+              <button onclick="setLang('si')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
             </div>
           </div>
-
-          <!-- Dark/Light -->
           <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Toggle theme">
             <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
             <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i>
           </button>
-
-          <!-- Mobile Hamburger -->
-          <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Menu">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-          </button>
+          <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Menu"><i data-lucide="menu" class="w-5 h-5"></i></button>
         </div>
       </div>
-
-      <!-- Mobile Menu -->
       <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-brand-dark-border pt-3 mob-menu">
         <div class="flex flex-col gap-2.5 text-sm font-medium">
-          <a href="lk.html" class="text-brand-red py-1" data-i18n="navHome">Home</a>
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navHome">Home</a>
           <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navCat">Categories</a>
+          <a href="lk-court-system.html" class="text-brand-red py-1" data-i18n="navCourt">Court System</a>
           <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navAbout">About Us</a>
           <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navContact">Contact</a>
-          <a href="lk-credits.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navCredits">Credits</a>
-        </div>
-        <div class="mt-3 relative">
-          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"></i>
-          <input type="text" data-i18n-placeholder="searchPH" placeholder='Try "Cyber Crime Act"...' class="w-full pl-10 pr-4 py-2.5 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg text-sm focus:outline-none focus:border-brand-red transition">
         </div>
       </div>
     </div>
   </nav>
 
+  <!-- BREADCRUMB -->
+  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
+      <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
+        <a href="index.html" class="hover:text-brand-red transition">GlobalLaw</a><i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <a href="lk.html" class="hover:text-brand-red transition">🇱🇰 Sri Lanka</a><i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <span class="text-neutral-700 dark:text-neutral-200 font-medium" data-i18n="navCourt">Court System</span>
+      </nav>
+    </div>
+  </div>
 
-  <!-- ============ HERO SECTION ============ -->
+  <!-- HEADER -->
   <section class="relative overflow-hidden bg-neutral-50 dark:bg-brand-dark transition-colors">
     <div class="absolute inset-0 dot-bg opacity-[0.02] dark:opacity-[0.04]"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-red/[0.04] rounded-full blur-[80px]"></div>
-
-    <div class="relative max-w-4xl mx-auto px-4 md:px-6 pt-14 pb-16 md:pt-20 md:pb-24 text-center">
-      <div class="inline-flex items-center gap-2 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-4 py-1.5 text-xs font-medium mb-6 fu">
-        <span>🇱🇰</span>
-        <span class="text-neutral-500 dark:text-neutral-400" data-i18n="heroBadge">Sri Lanka</span>
-        <a href="index.html" class="text-neutral-400 hover:text-brand-red transition ml-0.5" aria-label="Change country"><i data-lucide="refresh-cw" class="w-3 h-3"></i></a>
-      </div>
-
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight leading-[1.1] mb-4 fu fu1">
-        <span data-i18n="heroT1">Know Your Rights.</span><br>
-        <span class="text-brand-red" data-i18n="heroT2">Understand the Law.</span>
-      </h1>
-
-      <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10 fu fu2" data-i18n="heroSub">
-        52 categories. 200+ laws explained simply. Search, browse, and understand your legal rights in minutes.
-      </p>
-
-      <!-- Search Bar -->
-      <div class="max-w-2xl mx-auto fu fu3">
-        <div class="search-glow flex items-center bg-white dark:bg-brand-dark-card border-2 border-neutral-200 dark:border-brand-dark-border rounded-2xl px-4 py-3 md:px-6 md:py-4 transition-all focus-within:border-brand-red">
-          <i data-lucide="search" class="w-5 h-5 text-neutral-400 shrink-0"></i>
-          <input id="heroSearch" type="text" data-i18n-placeholder="searchPH" placeholder='Try "Cyber Crime Act" or "Land Dispute"...' class="flex-1 bg-transparent ml-3 text-sm sm:text-base md:text-lg focus:outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-600" onkeydown="if(event.key==='Enter')doSearch()">
-          <button onclick="doSearch()" class="bg-brand-red hover:bg-brand-red-dark text-white rounded-xl px-4 md:px-6 py-2 md:py-2.5 text-xs md:text-sm font-semibold transition shrink-0" data-i18n="searchBtn">Search</button>
-        </div>
-        <!-- Quick Tags -->
-        <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2 mt-3.5">
-          <button onclick="qSearch('Cyber Crime')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">💻 Cyber Crime</button>
-          <button onclick="qSearch('Land Dispute')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">🏠 Land Dispute</button>
-          <button onclick="qSearch('Workers Rights')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">💼 Workers Rights</button>
-          <button onclick="qSearch('Online Safety Bill')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">🛡️ Online Safety</button>
-          <button onclick="qSearch('Tax')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition hidden sm:inline-flex">💰 Tax Laws</button>
-          <button onclick="qSearch('Environmental')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition hidden sm:inline-flex">🌿 Environment</button>
-        </div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-brand-red/[0.04] rounded-full blur-[80px]"></div>
+    <div class="relative max-w-4xl mx-auto px-4 md:px-6 pt-10 pb-8 md:pt-14 md:pb-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-4 py-1.5 text-xs font-medium mb-5 fu"><span>⚖️</span><span class="text-neutral-500 dark:text-neutral-400" data-i18n="heroBadge">Judicial System Guide</span></div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-3 fu fu1" data-i18n="pgTitle">Sri Lanka's Court System</h1>
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto fu fu2" data-i18n="pgSub">Complete guide to every court, tribunal, and quasi-judicial body — explained in simple language.</p>
+      <div class="flex flex-wrap justify-center gap-2 mt-5 fu fu3 no-scrollbar overflow-x-auto">
+        <a href="#hierarchy" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qHierarchy">📜 Hierarchy</a>
+        <a href="#supreme" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qSupreme">🏛️ Supreme</a>
+        <a href="#appeal" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qAppeal">⚖️ Appeal</a>
+        <a href="#high" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qHigh">🔨 High Court</a>
+        <a href="#district" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qDistrict">📋 District</a>
+        <a href="#magistrate" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qMagistrate">📌 Magistrate</a>
+        <a href="#special" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qSpecial">⭐ Special</a>
+        <a href="#quasi" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qQuasi">🏢 Quasi-Judicial</a>
+        <a href="#glossary" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qGlossary">📖 Glossary</a>
+        <a href="#faq" class="text-[11px] font-semibold px-3 py-1.5 rounded-full bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red hover:text-brand-red transition" data-i18n="qFAQ">❓ FAQ</a>
       </div>
     </div>
   </section>
 
-
-  <!-- ============ EMERGENCY STRIP ============ -->
+  <!-- STATS -->
   <section class="bg-brand-red text-white">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
-      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] sm:text-xs md:text-sm font-medium">
-        <span class="font-bold" data-i18n="emLabel">🚨 Emergency:</span>
-        <a href="tel:119" class="flex items-center gap-1 hover:underline"><i data-lucide="phone" class="w-3 h-3"></i><span data-i18n="emPolice">Police - 119</span></a>
-        <a href="tel:1919" class="flex items-center gap-1 hover:underline"><i data-lucide="shield" class="w-3 h-3"></i><span data-i18n="emCERT">CERT - 1919</span></a>
-        <a href="tel:1929" class="flex items-center gap-1 hover:underline"><i data-lucide="baby" class="w-3 h-3"></i><span data-i18n="emChild">Child Protection - 1929</span></a>
-        <a href="tel:1990" class="flex items-center gap-1 hover:underline"><i data-lucide="heart-pulse" class="w-3 h-3"></i><span data-i18n="emAmb">Ambulance - 1990</span></a>
-        <a href="tel:1190" class="flex items-center gap-1 hover:underline"><i data-lucide="flame" class="w-3 h-3"></i><span data-i18n="emFire">Fire - 1190</span></a>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3">
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] sm:text-xs font-medium">
+        <div class="flex items-center gap-1.5"><span class="font-bold text-lg sm:text-xl">5</span><span data-i18n="sCourts">Main Courts</span></div>
+        <div class="w-px h-5 bg-white/20"></div>
+        <div class="flex items-center gap-1.5"><span class="font-bold text-lg sm:text-xl">12</span><span data-i18n="sSpecial">Special Tribunals</span></div>
+        <div class="w-px h-5 bg-white/20"></div>
+        <div class="flex items-center gap-1.5"><span class="font-bold text-lg sm:text-xl">15+</span><span data-i18n="sQuasi">Quasi-Judicial Bodies</span></div>
+        <div class="w-px h-5 bg-white/20"></div>
+        <div class="flex items-center gap-1.5"><span class="font-bold text-lg sm:text-xl">54+</span><span data-i18n="sDistricts">District Courts</span></div>
+        <div class="w-px h-5 bg-white/20"></div>
+        <div class="flex items-center gap-1.5"><span class="font-bold text-lg sm:text-xl">75+</span><span data-i18n="sMagistrate">Magistrate Courts</span></div>
       </div>
     </div>
   </section>
 
-
-  <!-- ============ QUICK SITUATIONS ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-center mb-1.5" data-i18n="qsTitle">What's your situation?</h2>
-      <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm text-center mb-6 md:mb-8" data-i18n="qsSub">Tap to find relevant laws instantly</p>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 md:gap-4">
-        <!-- Row 1 -->
-        <a href="lk-categories.html?cat=criminal" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">🚔</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsArrest">Got Arrested?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsArrestS">Know your rights</div>
-        </a>
-        <a href="lk-categories.html?cat=cyber" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">💬</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsCyber">Cyber Bullying?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsCyberS">Report & protect</div>
-        </a>
-        <a href="lk-categories.html?cat=property" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">🏠</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsLand">Land Dispute?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsLandS">Property laws</div>
-        </a>
-        <a href="lk-categories.html?cat=labor" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">💼</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsWork">Workplace Issue?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsWorkS">Labor rights</div>
-        </a>
-        <a href="lk-categories.html?cat=family" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group col-span-2 sm:col-span-1">
-          <div class="text-2xl sm:text-3xl mb-1.5">👨‍👩‍👧</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsFam">Family Issue?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsFamS">Marriage & divorce</div>
-        </a>
-        <!-- Row 2 -->
-        <a href="lk-categories.html?cat=motor" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">🚗</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsMotor">Traffic Accident?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsMotorS">Vehicle laws</div>
-        </a>
-        <a href="lk-categories.html?cat=tax" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">💰</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsTax">Tax Problem?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsTaxS">Tax laws</div>
-        </a>
-        <a href="lk-categories.html?cat=environmental" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">🌿</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsEnv">Environmental Issue?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsEnvS">Protection laws</div>
-        </a>
-        <a href="lk-categories.html?cat=consumer" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
-          <div class="text-2xl sm:text-3xl mb-1.5">🛒</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsCons">Consumer Complaint?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsConsS">Your rights</div>
-        </a>
-        <a href="lk-categories.html?cat=ip" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group col-span-2 sm:col-span-1">
-          <div class="text-2xl sm:text-3xl mb-1.5">💡</div>
-          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsIP">IP Infringement?</div>
-          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsIPS">Copyright & patents</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ LAW CATEGORIES ============ -->
-  <section class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="flex items-end justify-between mb-6 md:mb-8">
-        <div>
-          <h2 class="text-lg sm:text-xl md:text-2xl font-bold" data-i18n="catTitle">Browse Law Categories</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-0.5" data-i18n="catSub">52 categories covering every aspect of Sri Lankan law</p>
-        </div>
-        <a href="lk-categories.html" class="hidden sm:flex items-center gap-1 text-xs sm:text-sm font-semibold text-brand-red hover:underline">
-          <span data-i18n="viewAll">View All 52 →</span>
-        </a>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-
-        <!-- Cyber Laws -->
-        <a href="lk-categories.html?cat=cyber" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💻</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">12 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCyber">Cyber Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCyberD">Computer and internet laws, cyber crime, online safety, and digital privacy.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Criminal Laws -->
-        <a href="lk-categories.html?cat=criminal" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
-          <div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">🔥 POPULAR</div>
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🚔</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">15 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCrim">Criminal Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCrimD">Fraud, theft, assault, penalties, weapons, and criminal procedure codes.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Fundamental Rights -->
-        <a href="lk-categories.html?cat=fundamental" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🛡️</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cFund">Fundamental Rights</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFundD">Constitutional rights, equality, freedom of speech, and human rights.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Civil Laws -->
-        <a href="lk-categories.html?cat=civil" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🏢</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">10 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCivil">Civil Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCivilD">Land disputes, contracts, tort, compensation, and civil procedure.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Labor Laws -->
-        <a href="lk-categories.html?cat=labor" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💼</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">9 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cLab">Corporate / Labor Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cLabD">Employment rights, EPF, ETF, company registration, securities.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Tax Laws -->
-        <a href="lk-categories.html?cat=tax" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
-          <div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">🔥 POPULAR</div>
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💰</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cTax">Tax Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cTaxD">Income tax, VAT, customs, excise, and revenue regulations.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Environmental Laws -->
-        <a href="lk-categories.html?cat=environmental" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🌿</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">9 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cEnv">Environmental Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cEnvD">Wildlife, forestry, water, marine, mining, and pollution control.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Motor Vehicle Laws -->
-        <a href="lk-categories.html?cat=motor" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
-          <div class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">NEW</div>
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🚗</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">7 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cMotor">Motor Vehicle Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cMotorD">Traffic regulations, fines, license laws, railway, and aviation.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Family Laws -->
-        <a href="lk-categories.html?cat=family" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">👨‍👩‍👧</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">6 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cFam">Family Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFamD">Marriage, divorce, child custody, inheritance, domestic violence.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Property & Land -->
-        <a href="lk-categories.html?cat=property" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🏠</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cProp">Property & Land Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cPropD">Land ownership, transfers, leases, mortgages, housing, construction.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Consumer Protection -->
-        <a href="lk-categories.html?cat=consumer" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🛒</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">6 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCons">Consumer Protection</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cConsD">Consumer rights, contracts, insurance, cooperatives, tourism.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-        <!-- Intellectual Property -->
-        <a href="lk-categories.html?cat=ip" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
-          <div class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">NEW</div>
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💡</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">7 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cIP">Intellectual Property</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cIPD">Copyright, trademarks, patents, data protection, AI & tech laws.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
-      </div>
-
-      <div class="mt-5 text-center sm:hidden">
-        <a href="lk-categories.html" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-red"><span data-i18n="viewAll">View All 52 Categories</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
-      </div>
-
-      <!-- More categories teaser -->
-      <div class="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
-        <a href="lk-categories.html?cat=health" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">🏥</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreHealth">Health</div>
-        </a>
-        <a href="lk-categories.html?cat=education" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">📚</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreEdu">Education</div>
-        </a>
-        <a href="lk-categories.html?cat=election" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">🗳️</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreElect">Elections</div>
-        </a>
-        <a href="lk-categories.html?cat=human-rights" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">🙌</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreHR">Human Rights</div>
-        </a>
-        <a href="lk-categories.html?cat=media" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">📢</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreMedia">Media</div>
-        </a>
-        <a href="lk-categories.html?cat=military" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
-          <div class="text-lg sm:text-xl mb-0.5">🎖️</div>
-          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreMil">Military</div>
-        </a>
-      </div>
-      <div class="text-center mt-3">
-        <a href="lk-categories.html" class="text-[11px] text-neutral-400 hover:text-brand-red transition font-medium" data-i18n="moreTeaser">+ 40 more categories including Agriculture, Banking, Maritime, Sports, Gambling & more →</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ TRENDING LAWS ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="flex items-end justify-between mb-6 md:mb-8">
-        <div>
-          <h2 class="text-lg sm:text-xl md:text-2xl font-bold" data-i18n="trTitle">🔥 Trending Laws</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-0.5" data-i18n="trSub">Most searched in Sri Lanka right now</p>
-        </div>
-        <a href="lk-categories.html" class="hidden sm:flex items-center gap-1 text-xs font-semibold text-brand-red hover:underline">
-          <span data-i18n="viewAll">View All</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-
-        <a href="lk-law-details.html?id=online-safety-bill" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🛡️</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr1">Online Safety Bill</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr1S">New digital safety regulations affecting social media users</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trHot">HOT</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=child-protection" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">👶</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr2">Child Protection Laws</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr2S">Child rights, abuse prevention & reporting procedures</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trRise">RISING</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=traffic-fines" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🚦</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr3">Traffic Fine Updates</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr3S">New penalty amounts, demerit points & traffic rules</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trUpd">UPDATED</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=cyber-crime-act" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">💻</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr4">Cyber Crime Act</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr4S">Hacking, online fraud, identity theft penalties</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trHot">HOT</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=domestic-violence" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🏠</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr5">Domestic Violence Act</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr5S">Protection orders, rights & legal remedies</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trRise">RISING</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=epf-etf" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">💰</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr6">EPF & ETF Regulations</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr6S">Employee fund benefits, withdrawal & calculation</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trUpd">UPDATED</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=anti-corruption" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🔍</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr7">Anti-Corruption Laws</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr7S">Bribery commission, asset declarations & penalties</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trHot">HOT</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=ip-act" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">💡</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr8">Intellectual Property Act</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr8S">Copyright, trademark registration & infringement penalties</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trRise">RISING</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-        <a href="lk-law-details.html?id=environment-protection" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
-          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🌿</div>
-          <div class="flex-1 min-w-0">
-            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr9">Environmental Protection</h4>
-            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr9S">NEA regulations, EIA requirements & pollution controls</p>
-          </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trUpd">UPDATED</span>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ LAW OF THE WEEK ============ -->
-  <section class="py-10 md:py-14 bg-brand-dark text-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-56 h-56 bg-brand-red/10 rounded-full blur-[80px]"></div>
-    <div class="absolute bottom-0 left-0 w-40 h-40 bg-brand-red/5 rounded-full blur-[60px]"></div>
-    <div class="relative max-w-7xl mx-auto px-4 md:px-6">
-      <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-
-        <div class="flex-1 text-center md:text-left">
-          <div class="inline-flex items-center gap-1.5 bg-brand-red/20 text-red-300 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full mb-3">
-            <i data-lucide="star" class="w-3 h-3"></i>
-            <span data-i18n="lotwBadge">LAW OF THE WEEK</span>
-          </div>
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2.5" data-i18n="lotwTitle">Penal Code (No. 2 of 1883)</h2>
-          <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed mb-5" data-i18n="lotwDesc">
-            Sri Lanka's primary criminal law defining offences and punishments. Recently amended with cyber crime and online harassment provisions. Understanding this helps you know your rights if accused or reporting a crime.
-          </p>
-          <a href="lk-law-details.html?id=penal-code" class="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition">
-            <span data-i18n="lotwBtn">Read Full Explanation</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </a>
-        </div>
-
-        <!-- Stats Box -->
-        <div class="shrink-0 bg-brand-dark-card border border-brand-dark-border rounded-2xl p-5 w-full md:w-64">
-          <div class="space-y-3.5 text-sm">
-            <div class="flex justify-between"><span class="text-neutral-400 text-xs" data-i18n="lotwSec">Sections</span><span class="font-bold text-red-400">511</span></div>
-            <div class="h-px bg-brand-dark-border"></div>
-            <div class="flex justify-between"><span class="text-neutral-400 text-xs" data-i18n="lotwYr">Enacted</span><span class="font-bold">1883</span></div>
-            <div class="h-px bg-brand-dark-border"></div>
-            <div class="flex justify-between"><span class="text-neutral-400 text-xs" data-i18n="lotwUpd">Last Amended</span><span class="font-bold">2024</span></div>
-            <div class="h-px bg-brand-dark-border"></div>
-            <div class="flex justify-between"><span class="text-neutral-400 text-xs" data-i18n="lotwTime">Read Time</span><span class="font-bold">~8 min</span></div>
-          </div>
-          <a href="lk-law-details.html?id=penal-code" class="mt-4 block text-center text-[11px] text-brand-red hover:underline font-medium" data-i18n="lotwLink">View full details →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ STATISTICS ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
+  <!-- 1. HIERARCHY -->
+  <section id="hierarchy" class="py-10 md:py-16 bg-white dark:bg-brand-dark transition-colors">
     <div class="max-w-4xl mx-auto px-4 md:px-6">
-      <h2 class="text-lg sm:text-xl font-bold text-center mb-6" data-i18n="statTitle">GlobalLaw Sri Lanka in Numbers</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-        <a href="lk-categories.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim">200+</div>
-          <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statLaws">Laws Explained</div>
-          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statBrowse">Browse all →</div>
-        </a>
-        <a href="lk-categories.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.1s">52</div>
-          <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statCat">Categories</div>
-          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statBrowse">Browse all →</div>
-        </a>
-        <a href="lk-about.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.2s">2</div>
-          <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statLang">Languages</div>
-          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statLearn">EN / සිංහල →</div>
-        </a>
-        <a href="lk-about.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.3s">100%</div>
-          <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statFree">Free Forever</div>
-          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statLearn">Learn more →</div>
-        </a>
+      <div class="text-center mb-8"><h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2" data-i18n="hTitle">📜 Court Hierarchy</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm max-w-lg mx-auto" data-i18n="hSub">Sri Lanka's courts are arranged in a strict hierarchy.</p></div>
+      <div class="flex flex-col items-center gap-3 sm:gap-4">
+        <a href="#supreme" class="court-node bg-brand-red text-white font-bold px-8 sm:px-12 py-3 sm:py-4 rounded-2xl text-sm sm:text-base text-center w-full max-w-[300px] hover:bg-brand-red-dark transition shadow-lg shadow-brand-red/20"><div class="text-xl sm:text-2xl mb-1">🏛️</div><div data-i18n="hSup">Supreme Court</div><div class="text-[10px] sm:text-xs opacity-80 mt-0.5" data-i18n="hSupS">Highest court • Final appeals • Constitutional matters</div></a>
+        <div class="flex flex-col items-center"><i data-lucide="chevrons-down" class="w-5 h-5 text-brand-red/40"></i><span class="text-[9px] text-neutral-300 dark:text-neutral-700 -mt-1" data-i18n="hDir">Appeals go up ↑</span></div>
+        <a href="#appeal" class="court-node bg-neutral-800 dark:bg-neutral-700 text-white font-bold px-8 sm:px-12 py-3 sm:py-4 rounded-2xl text-sm sm:text-base text-center w-full max-w-[300px] hover:bg-neutral-700 dark:hover:bg-neutral-600 transition"><div class="text-xl sm:text-2xl mb-1">⚖️</div><div data-i18n="hAppeal">Court of Appeal</div><div class="text-[10px] sm:text-xs opacity-80 mt-0.5" data-i18n="hAppealS">Appellate jurisdiction • Reviews lower courts</div></a>
+        <div class="flex flex-col items-center"><i data-lucide="chevrons-down" class="w-5 h-5 text-brand-red/30"></i><span class="text-[9px] text-neutral-300 dark:text-neutral-700 -mt-1" data-i18n="hDir">Appeals go up ↑</span></div>
+        <a href="#high" class="court-node bg-neutral-600 dark:bg-neutral-600 text-white font-bold px-8 sm:px-12 py-3 sm:py-4 rounded-2xl text-sm sm:text-base text-center w-full max-w-[300px] hover:bg-neutral-500 transition"><div class="text-xl sm:text-2xl mb-1">🔨</div><div data-i18n="hHigh">High Court</div><div class="text-[10px] sm:text-xs opacity-80 mt-0.5" data-i18n="hHighS">Serious crimes • Original jurisdiction • Bail</div></a>
+        <div class="flex flex-col items-center"><i data-lucide="chevrons-down" class="w-5 h-5 text-brand-red/20"></i><span class="text-[9px] text-neutral-300 dark:text-neutral-700 -mt-1" data-i18n="hDir">Appeals go up ↑</span></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[640px]">
+          <a href="#district" class="court-node bg-neutral-400 dark:bg-neutral-600 text-neutral-900 dark:text-white font-bold px-6 py-3 sm:py-4 rounded-2xl text-sm text-center hover:bg-neutral-300 dark:hover:bg-neutral-500 transition"><div class="text-xl mb-1">📋</div><div data-i18n="hDistrict">District Court</div><div class="text-[10px] opacity-70 mt-0.5" data-i18n="hDistrictS">Civil cases • Land • Family</div></a>
+          <a href="#magistrate" class="court-node bg-neutral-200 dark:bg-neutral-500 text-neutral-700 dark:text-white font-bold px-6 py-3 sm:py-4 rounded-2xl text-sm text-center hover:bg-neutral-100 dark:hover:bg-neutral-400 transition"><div class="text-xl mb-1">📌</div><div data-i18n="hMagistrate">Magistrate Court</div><div class="text-[10px] opacity-70 mt-0.5" data-i18n="hMagistrateS">Minor crimes • Summary offences</div></a>
+        </div>
+      </div>
+      <div class="mt-8 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-4 md:p-6">
+        <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center shrink-0"><i data-lucide="info" class="w-4 h-4 text-yellow-600 dark:text-yellow-400"></i></div><div><h4 class="font-bold text-sm mb-1" data-i18n="hNoteT">⚠️ Important Note</h4><p class="text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed" data-i18n="hNoteD">Besides these 5 main courts, Sri Lanka has 12+ Special Tribunals and 15+ Quasi-Judicial Bodies that handle specific types of cases. Scroll down to learn about each one.</p></div></div>
       </div>
     </div>
   </section>
 
-
-  <!-- ============ CATEGORY SPOTLIGHT (New Section) ============ -->
-  <section class="py-10 md:py-14 bg-neutral-50 dark:bg-brand-dark transition-colors">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-8">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-1.5" data-i18n="spotTitle">Explore by Domain</h2>
-        <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="spotSub">52 categories organized into key legal areas</p>
+  <!-- 2. SUPREME COURT -->
+  <section id="supreme" class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3 mb-6"><div class="w-12 h-12 rounded-2xl bg-brand-red/10 flex items-center justify-center text-2xl shrink-0">🏛️</div><div><h2 class="text-xl sm:text-2xl font-bold" data-i18n="scTitle">Supreme Court</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs" data-i18n="scSub">ශ්‍රේෂ්ඨාධිකරණය • Article 105</p></div></div>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar border-b border-neutral-200 dark:border-brand-dark-border mb-6">
+        <button onclick="switchTab('sc','overview')" class="tab-btn active text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent whitespace-nowrap transition" data-tab="sc" data-panel="overview" data-i18n="tabOverview">Overview</button>
+        <button onclick="switchTab('sc','jurisdiction')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="sc" data-panel="jurisdiction" data-i18n="tabJurisdiction">Jurisdiction</button>
+        <button onclick="switchTab('sc','process')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="sc" data-panel="process" data-i18n="tabProcess">Process</button>
+        <button onclick="switchTab('sc','judges')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="sc" data-panel="judges" data-i18n="tabJudges">Judges</button>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-        <a href="lk-categories.html?filter=popular" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">🔥</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotPop">Popular</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotPopS">Most viewed</div>
-        </a>
-        <a href="lk-categories.html?filter=new" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">🆕</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotNew">Newly Added</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotNewS">Latest updates</div>
-        </a>
-        <a href="lk-categories.html?search=rights" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">🛡️</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotRights">Rights & Freedoms</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotRightsS">12 categories</div>
-        </a>
-        <a href="lk-categories.html?search=business" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">📊</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotBiz">Business & Trade</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotBizS">8 categories</div>
-        </a>
-        <a href="lk-categories.html?search=crime" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">⚖️</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotCrime">Crime & Enforcement</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotCrimeS">10 categories</div>
-        </a>
-        <a href="lk-categories.html?search=nature" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-          <div class="text-3xl mb-2">🌍</div>
-          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotNature">Nature & Resources</div>
-          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotNatureS">8 categories</div>
-        </a>
+      <div class="tab-panel active" data-tab="sc" data-panel="overview">
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="scEst">Established</div><div class="font-bold text-sm">1972</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="scJudges">No. of Judges</div><div class="font-bold text-sm">11 (incl. CJ)</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="scLoc">Location</div><div class="font-bold text-sm">Hulftsdorp, Colombo</div></div>
+        </div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
+          <p data-i18n="scD1">The Supreme Court is the <strong>highest and final court</strong> in Sri Lanka. It sits at the top of the judicial hierarchy and its decisions are binding on all other courts.</p>
+          <p data-i18n="scD2">Established under the 1972 Constitution, its powers are defined in <strong>Article 105</strong> of the 1978 Constitution. It has both <strong>original jurisdiction</strong> and <strong>appellate jurisdiction</strong>.</p>
+          <p data-i18n="scD3">The Chief Justice and puisne judges are appointed by the President. The Supreme Court also has power to <strong>review legislation</strong> and determine whether laws are consistent with the Constitution.</p>
+        </div>
       </div>
-    </div>
-  </section>
-
-
-  <!-- ============ REPORT CYBER CRIME ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
-    <div class="max-w-3xl mx-auto px-4 md:px-6 text-center">
-      <div class="text-4xl sm:text-5xl mb-3">🚨</div>
-      <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-2" data-i18n="rpTitle">Report a Cyber Crime</h2>
-      <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mb-6 max-w-md mx-auto" data-i18n="rpDesc">
-        Victim of cyber bullying, hacking, or online fraud? Don't wait — report it now to the authorities.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="lk-contact.html#report" class="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-xl text-sm transition w-full sm:w-auto justify-center">
-          <i data-lucide="shield" class="w-4 h-4"></i>
-          <span data-i18n="rpCERT">Report to CERT (1919)</span>
-        </a>
-        <a href="lk-contact.html#report" class="inline-flex items-center gap-2 bg-neutral-50 dark:bg-brand-dark-card hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-semibold px-6 py-3 rounded-xl border border-neutral-200 dark:border-brand-dark-border transition w-full sm:w-auto justify-center">
-          <i data-lucide="phone" class="w-4 h-4"></i>
-          <span data-i18n="rpCID">Call CID</span>
-        </a>
+      <div class="tab-panel" data-tab="sc" data-panel="jurisdiction">
+        <div class="space-y-3">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-lg">📜</span><h4 class="font-bold text-sm">Constitutional Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed" data-i18n="scJ1D">Hears fundamental rights violations (Article 126), determines constitutionality of Bills, decides on constitutional interpretation referred by the President.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-lg">⚖️</span><h4 class="font-bold text-sm">Appellate Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed" data-i18n="scJ2D">Hears appeals from Court of Appeal in civil and criminal matters. Can grant leave to appeal. Issues Certiorari, Prohibition, Mandamus.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-lg">👑</span><h4 class="font-bold text-sm">Advisory Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed" data-i18n="scJ3D">President may refer questions of law of public importance for advisory opinion. Not binding but carries significant weight.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-lg">🔗</span><h4 class="font-bold text-sm">Revisionary Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed" data-i18n="scJ4D">Can call for and examine records from any court or tribunal. Can enhance or reduce sentences, order new trial.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span class="text-lg">🌍</span><h4 class="font-bold text-sm">Presidential Election Petitions</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed" data-i18n="scJ5D">Exclusive jurisdiction to hear and determine election petitions regarding the election of the President.</p></div>
+        </div>
       </div>
-      <div class="mt-5 inline-flex items-center gap-2 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-lg px-3 py-2 text-[10px] sm:text-xs text-red-600 dark:text-red-400">
-        <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i>
-        <span data-i18n="rpWarn">For emergencies, call 119 immediately. GlobalLaw is educational, not law enforcement.</span>
+      <div class="tab-panel" data-tab="sc" data-panel="process">
+        <div class="space-y-4">
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-bold shrink-0">1</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="scP1T">File Petition</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="scP1D">FR petition within 30 days of violation. For appeals, need leave to appeal first.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-bold shrink-0">2</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="scP2T">Notice to Respondents</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="scP2D">Court issues notice to respondents. They file objections within granted time.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-bold shrink-0">3</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="scP3T">Hearing</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="scP3D">Bench of 3-5 judges hears arguments. Attorney General may be heard in constitutional cases.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-bold shrink-0">4</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="scP4T">Judgment</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="scP4D">Court delivers judgment. Can grant compensation, declarations, directives. Final and binding.</p></div></div>
+        </div>
       </div>
-      <a href="lk-contact.html" class="inline-block mt-3 text-[11px] text-brand-red hover:underline font-medium" data-i18n="rpMore">View all emergency contacts & reporting guide →</a>
-    </div>
-  </section>
-
-
-  <!-- ============ COURT HIERARCHY ============ -->
-  <section class="py-10 md:py-14 bg-neutral-50 dark:bg-brand-dark transition-colors">
-    <div class="max-w-3xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-6 md:mb-8">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-1" data-i18n="courtTitle">Sri Lanka's Court System</h2>
-        <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="courtSub">How the legal system works, simplified</p>
-      </div>
-      <div class="flex flex-col items-center gap-2 sm:gap-2.5">
-        <a href="lk-court-system.html" class="bg-brand-red text-white font-bold px-6 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm w-full max-w-[260px] text-center hover:bg-brand-red-dark transition">Supreme Court</a>
-        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-300 dark:text-neutral-700"></i>
-        <a href="lk-court-system.html#appeal" class="bg-neutral-800 dark:bg-neutral-700 text-white font-semibold px-6 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm w-full max-w-[260px] text-center hover:bg-neutral-700 dark:hover:bg-neutral-600 transition">Court of Appeal</a>
-        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-300 dark:text-neutral-700"></i>
-        <a href="lk-court-system.html#high" class="bg-neutral-600 text-white font-medium px-6 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm w-full max-w-[260px] text-center hover:bg-neutral-500 transition">High Court</a>
-        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-300 dark:text-neutral-700"></i>
-        <a href="lk-court-system.html#district" class="bg-neutral-400 dark:bg-neutral-600 text-neutral-900 dark:text-white font-medium px-6 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm w-full max-w-[260px] text-center hover:bg-neutral-300 dark:hover:bg-neutral-500 transition">District Court</a>
-        <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-300 dark:text-neutral-700"></i>
-        <a href="lk-court-system.html#magistrate" class="bg-neutral-200 dark:bg-neutral-500 text-neutral-700 dark:text-white font-medium px-6 sm:px-8 py-2.5 rounded-xl text-xs sm:text-sm w-full max-w-[260px] text-center hover:bg-neutral-100 dark:hover:bg-neutral-400 transition">Magistrate Court</a>
-      </div>
-      <div class="text-center mt-5">
-        <a href="lk-court-system.html" class="read-more text-xs" data-i18n="courtMore">Learn how the court system works in detail <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+      <div class="tab-panel" data-tab="sc" data-panel="judges">
+        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5">
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">Chief Justice</span><span class="text-neutral-500 text-xs" data-i18n="scJHeadR">Appointed by President</span></div>
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">Puisne Judges</span><span class="text-neutral-500 text-xs">10</span></div>
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">Minimum Quorum</span><span class="text-neutral-500 text-xs">3 Judges</span></div>
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">Full Bench</span><span class="text-neutral-500 text-xs">All 11 Judges</span></div>
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">Retirement Age</span><span class="text-neutral-500 text-xs">65 years</span></div>
+            <div class="flex justify-between items-center py-2 border-b border-neutral-100 dark:border-brand-dark-border"><span class="font-semibold">FR Bench Size</span><span class="text-neutral-500 text-xs">3-5 Judges</span></div>
+            <div class="flex justify-between items-center py-2"><span class="font-semibold">Appeal Bench Size</span><span class="text-neutral-500 text-xs">3-5 Judges</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ============ NEWSLETTER ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
-    <div class="max-w-md mx-auto px-4 md:px-6 text-center">
-      <i data-lucide="mail" class="w-8 h-8 text-brand-red mx-auto mb-3"></i>
-      <h2 class="text-base sm:text-lg font-bold mb-1.5" data-i18n="nlTitle">Stay Updated</h2>
-      <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mb-5" data-i18n="nlDesc">Get new law explanations to your email. No spam.</p>
-      <div class="flex flex-col sm:flex-row gap-2.5">
-        <input type="email" data-i18n-placeholder="nlPH" placeholder="Enter your email" class="flex-1 px-3.5 py-2.5 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition">
-        <button onclick="toast('Thanks for subscribing! 🎉')" class="bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition shrink-0" data-i18n="nlBtn">Subscribe</button>
+  <!-- 3. COURT OF APPEAL -->
+  <section id="appeal" class="py-10 md:py-16 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3 mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-800/10 dark:bg-neutral-700/20 flex items-center justify-center text-2xl shrink-0">⚖️</div><div><h2 class="text-xl sm:text-2xl font-bold" data-i18n="caTitle">Court of Appeal</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs" data-i18n="caSub">අභියාදන උසාවිය • Article 136</p></div></div>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar border-b border-neutral-200 dark:border-brand-dark-border mb-6">
+        <button onclick="switchTab('ca','overview')" class="tab-btn active text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent whitespace-nowrap transition" data-tab="ca" data-panel="overview" data-i18n="tabOverview">Overview</button>
+        <button onclick="switchTab('ca','jurisdiction')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="ca" data-panel="jurisdiction" data-i18n="tabJurisdiction">Jurisdiction</button>
+        <button onclick="switchTab('ca','process')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="ca" data-panel="process" data-i18n="tabProcess">Appeal Process</button>
       </div>
-      <p class="text-[10px] text-neutral-400 mt-2.5" data-i18n="nlPriv">We respect your privacy. Unsubscribe anytime.</p>
+      <div class="tab-panel active" data-tab="ca" data-panel="overview">
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="caEst">Established</div><div class="font-bold text-sm">1978</div></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="caJudges">No. of Judges</div><div class="font-bold text-sm">11-12</div></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1" data-i18n="caPres">President</div><div class="font-bold text-sm" data-i18n="caPresR">President of CoA</div></div>
+        </div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
+          <p data-i18n="caD1">The Court of Appeal is the <strong>intermediate appellate court</strong>. It hears appeals from High Court, District Courts, and certain Tribunals.</p>
+          <p data-i18n="caD2">It does not hear cases for the first time — it reviews decisions to determine if there were errors of law or procedure.</p>
+          <p data-i18n="caD3">Sits in benches of 3 judges. Can confirm, reverse, modify lower court decisions, or order a new trial.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="ca" data-panel="jurisdiction">
+        <div class="space-y-3">
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>🔨</span><h4 class="font-bold text-sm">High Court Appeals</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Criminal appeals generally by right, civil appeals may require leave.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>📋</span><h4 class="font-bold text-sm">District Court Appeals</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Civil appeals, usually requires leave unless on a question of law.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>⭐</span><h4 class="font-bold text-sm">Tribunal Appeals</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Appeals from Labor Tribunals, Industrial Courts, and other tribunals.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>📝</span><h4 class="font-bold text-sm">Writ Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Certiorari, Prohibition, Mandamus, Quo Warranto, Habeas Corpus.</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="ca" data-panel="process">
+        <div class="space-y-4">
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-neutral-800 text-white flex items-center justify-center text-xs font-bold shrink-0">1</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="caP1T">Notice of Appeal</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="caP1D">File within 14-30 days. Pay court fees and security deposit.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-neutral-800 text-white flex items-center justify-center text-xs font-bold shrink-0">2</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="caP2T">Record & Documents</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="caP2D">Obtain certified copies. File appeal documents with grounds.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-neutral-800 text-white flex items-center justify-center text-xs font-bold shrink-0">3</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="caP3T">Hearing</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="caP3D">Bench of 3 judges. Written or oral arguments.</p></div></div>
+          <div class="flex gap-3"><div class="w-8 h-8 rounded-full bg-neutral-800 text-white flex items-center justify-center text-xs font-bold shrink-0">4</div><div><h4 class="font-bold text-sm mb-0.5" data-i18n="caP4T">Decision</h4><p class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="caP4D">Affirm, reverse, modify, or remit. Further appeal to SC requires leave.</p></div></div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- 4. HIGH COURT -->
+  <section id="high" class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3 mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-600/10 dark:bg-neutral-600/20 flex items-center justify-center text-2xl shrink-0">🔨</div><div><h2 class="text-xl sm:text-2xl font-bold" data-i18n="hcTitle">High Court</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs" data-i18n="hcSub">මහා අධිකරණය • Article 138</p></div></div>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar border-b border-neutral-200 dark:border-brand-dark-border mb-6">
+        <button onclick="switchTab('hc','overview')" class="tab-btn active text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent whitespace-nowrap transition" data-tab="hc" data-panel="overview" data-i18n="tabOverview">Overview</button>
+        <button onclick="switchTab('hc','jurisdiction')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="hc" data-panel="jurisdiction" data-i18n="tabJurisdiction">Jurisdiction</button>
+        <button onclick="switchTab('hc','types')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="hc" data-panel="types" data-i18n="tabTypes">Case Types</button>
+      </div>
+      <div class="tab-panel active" data-tab="hc" data-panel="overview">
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">No. of Courts</div><div class="font-bold text-sm">14</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Zones</div><div class="font-bold text-sm">9</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Judges per Court</div><div class="font-bold text-sm">1-3</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Trial Type</div><div class="font-bold text-sm">Judge alone</div></div>
+        </div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
+          <p data-i18n="hcD1">The High Court is a <strong>court of first instance</strong> for serious criminal offences and also exercises appellate jurisdiction over Magistrate Courts.</p>
+          <p data-i18n="hcD2">Established under the Judicature Act No. 2 of 1978. Each High Court covers one or more districts. Tries murder, rape, large-scale fraud, dangerous drugs offences.</p>
+          <p data-i18n="hcD3">Jury trials were suspended in 1978. Currently most trials are by judge alone. Maximum penalties include death sentence and life imprisonment.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="hc" data-panel="jurisdiction">
+        <div class="space-y-3">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>🔪</span><h4 class="font-bold text-sm">Original Criminal Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Tries offences punishable with death, life imprisonment, or imprisonment over 7 years under Penal Code, Firearms Ordinance, Dangerous Drugs Act.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>📊</span><h4 class="font-bold text-sm">Appellate Criminal Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Hears appeals from Magistrate Court convictions. Can enhance, reduce, or alter sentences.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>🔓</span><h4 class="font-bold text-sm">Bail Applications</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Entertains bail in non-bailable offences where Magistrate refused. Broader bail powers.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="flex items-center gap-2 mb-2"><span>📋</span><h4 class="font-bold text-sm">Limited Civil Jurisdiction</h4></div><p class="text-xs text-neutral-500 dark:text-neutral-400">Election petitions, certain commercial disputes, specific matters under special statutes.</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="hc" data-panel="types">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🔪</span><h4 class="font-bold text-sm mt-1">Murder & Culpable Homicide</h4><p class="text-[11px] text-neutral-400 mt-1">Penal Code Sections 293-304. Death penalty or life imprisonment.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">💊</span><h4 class="font-bold text-sm mt-1">Dangerous Drugs Offences</h4><p class="text-[11px] text-neutral-400 mt-1">Possession, trafficking under Dangerous Drugs Act. Mandatory death for large quantities.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🔫</span><h4 class="font-bold text-sm mt-1">Firearms Offences</h4><p class="text-[11px] text-neutral-400 mt-1">Unlawful possession, use, trafficking under Firearms Ordinance.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">💸</span><h4 class="font-bold text-sm mt-1">Large-Scale Fraud</h4><p class="text-[11px] text-neutral-400 mt-1">Cheating, misappropriation, forgery involving large amounts.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🚫</span><h4 class="font-bold text-sm mt-1">Rape & Sexual Offences</h4><p class="text-[11px] text-neutral-400 mt-1">Grave sexual abuse, child abuse under Penal Code amendments.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🔥</span><h4 class="font-bold text-sm mt-1">Arson & Property Crimes</h4><p class="text-[11px] text-neutral-400 mt-1">Arson, mischief causing damage exceeding threshold amounts.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🤝</span><h4 class="font-bold text-sm mt-1">Corruption & Bribery</h4><p class="text-[11px] text-neutral-400 mt-1">Certain bribery cases under Bribery Act based on severity.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">💻</span><h4 class="font-bold text-sm mt-1">Serious Cyber Crime</h4><p class="text-[11px] text-neutral-400 mt-1">Serious computer offences under Computer Crimes Act referred by Magistrate.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- 5. DISTRICT COURT -->
+  <section id="district" class="py-10 md:py-16 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3 mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-400/10 dark:bg-neutral-600/20 flex items-center justify-center text-2xl shrink-0">📋</div><div><h2 class="text-xl sm:text-2xl font-bold" data-i18n="dcTitle">District Court</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs" data-i18n="dcSub">දිස්ත්‍රික් අධිකරණය • One per district</p></div></div>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar border-b border-neutral-200 dark:border-brand-dark-border mb-6">
+        <button onclick="switchTab('dc','overview')" class="tab-btn active text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent whitespace-nowrap transition" data-tab="dc" data-panel="overview" data-i18n="tabOverview">Overview</button>
+        <button onclick="switchTab('dc','cases')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="dc" data-panel="cases" data-i18n="tabCases">Case Types</button>
+        <button onclick="switchTab('dc','fees')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="dc" data-panel="fees" data-i18n="tabFees">Court Fees</button>
+      </div>
+      <div class="tab-panel active" data-tab="dc" data-panel="overview">
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">No. of Courts</div><div class="font-bold text-sm">54+</div></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Court Type</div><div class="font-bold text-sm">Civil Only</div></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Monetary Limit</div><div class="font-bold text-sm">No limit</div></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Appeal To</div><div class="font-bold text-sm">Court of Appeal</div></div>
+        </div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
+          <p data-i18n="dcD1">The District Court is the <strong>primary civil court</strong>. At least one per district, with Colombo having several.</p>
+          <p data-i18n="dcD2">Hears <strong>all civil matters</strong> regardless of amount — land disputes, contract breaches, debt recovery, divorce, child custody, inheritance.</p>
+          <p data-i18n="dcD3">Cases can be filed where the defendant resides, where the cause of action arose, or where the property is located.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="dc" data-panel="cases">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🏠</span><h4 class="font-bold text-sm mt-1">Land & Property Disputes</h4><p class="text-[11px] text-neutral-400 mt-1">Ownership, partition, ejectment, boundary disputes.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">💰</span><h4 class="font-bold text-sm mt-1">Debt Recovery</h4><p class="text-[11px] text-neutral-400 mt-1">Loans, unpaid invoices, dishonoured cheques.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">👨‍👩‍👧</span><h4 class="font-bold text-sm mt-1">Family & Divorce</h4><p class="text-[11px] text-neutral-400 mt-1">Divorce (general law), alimony, child custody.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🔗</span><h4 class="font-bold text-sm mt-1">Inheritance & Succession</h4><p class="text-[11px] text-neutral-400 mt-1">Letters of administration, probate, succession certificates.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">📄</span><h4 class="font-bold text-sm mt-1">Contract Disputes</h4><p class="text-[11px] text-neutral-400 mt-1">Breach of contract, specific performance, injunctions.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">⚖️</span><h4 class="font-bold text-sm mt-1">Tort Claims</h4><p class="text-[11px] text-neutral-400 mt-1">Negligence, defamation, nuisance, trespass.</p></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🏢</span><h4 class="font-bold text-sm mt-1">Landlord-Tenant</h4><p class="text-[11px] text-neutral-400 mt-1">Eviction, rent recovery under Rent Act.</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="dc" data-panel="fees">
+        <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl overflow-hidden">
+          <div class="grid grid-cols-3 text-[10px] font-bold uppercase tracking-wider bg-neutral-100 dark:bg-brand-dark-border px-4 py-2.5 text-neutral-500"><span>Type</span><span class="text-center">Amount</span><span>Note</span></div>
+          <div class="divide-y divide-neutral-100 dark:divide-brand-dark-border text-xs">
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Civil Summons</span><span class="text-center">Rs. 500-2,500</span><span class="text-neutral-400">Based on claim</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Partition Action</span><span class="text-center">Rs. 1,000-5,000</span><span class="text-neutral-400">Per share</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Divorce (General)</span><span class="text-center">Rs. 1,500</span><span class="text-neutral-400">Fixed fee</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Injunction</span><span class="text-center">Rs. 500-3,000</span><span class="text-neutral-400">Varies by type</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Ejectment</span><span class="text-center">Rs. 500-2,000</span><span class="text-neutral-400">Property value</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Execution</span><span class="text-center">Rs. 250-1,000</span><span class="text-neutral-400">Per warrant</span></div>
+            <div class="grid grid-cols-3 px-4 py-2.5"><span>Appeal to CoA</span><span class="text-center">Rs. 2,500-10,000</span><span class="text-neutral-400">Case value</span></div>
+          </div>
+        </div>
+        <p class="text-[10px] text-neutral-400 mt-2">⚠️ Fees are approximate. Consult the court or a lawyer for current fees.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MAGISTRATE COURT -->
+  <section id="magistrate" class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3 mb-6"><div class="w-12 h-12 rounded-2xl bg-neutral-200/50 dark:bg-neutral-500/20 flex items-center justify-center text-2xl shrink-0">📌</div><div><h2 class="text-xl sm:text-2xl font-bold" data-i18n="mcTitle">Magistrate Court</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs" data-i18n="mcSub">මහේස්ත්‍රාත් අධිකරණය • Entry-level criminal court</p></div></div>
+      <div class="flex gap-1 overflow-x-auto no-scrollbar border-b border-neutral-200 dark:border-brand-dark-border mb-6">
+        <button onclick="switchTab('mc','overview')" class="tab-btn active text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent whitespace-nowrap transition" data-tab="mc" data-panel="overview" data-i18n="tabOverview">Overview</button>
+        <button onclick="switchTab('mc','cases')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="mc" data-panel="cases" data-i18n="tabCases">Case Types</button>
+        <button onclick="switchTab('mc','bail')" class="tab-btn text-xs font-semibold px-4 py-2.5 border-b-2 border-transparent text-neutral-500 whitespace-nowrap transition" data-tab="mc" data-panel="bail" data-i18n="tabBail">Bail Rules</button>
+      </div>
+      <div class="tab-panel active" data-tab="mc" data-panel="overview">
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">No. of Courts</div><div class="font-bold text-sm">75+</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Court Type</div><div class="font-bold text-sm">Criminal Only</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Max Sentence</div><div class="font-bold text-sm">7 years / Rs. 15,000</div></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><div class="text-[10px] text-neutral-400 mb-1">Appeal To</div><div class="font-bold text-sm">High Court</div></div>
+        </div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
+          <p data-i18n="mcD1">The Magistrate Court is the <strong>lowest-level criminal court</strong>. Handles the vast majority of criminal cases.</p>
+          <p data-i18n="mcD2">Over 75 Magistrate Courts across the country. Magistrates are appointed by the Judicial Service Commission.</p>
+          <p data-i18n="mcD3">Maximum sentence: <strong>7 years imprisonment and/or Rs. 15,000 fine</strong>. Serious offences are committed to High Court.</p>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="mc" data-panel="cases">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🍶</span><h4 class="font-bold text-sm mt-1">Minor Offences</h4><p class="text-[11px] text-neutral-400 mt-1">Public nuisance, drunkenness, loitering, bylaw offences.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🤜</span><h4 class="font-bold text-sm mt-1">Simple Hurt & Assault</h4><p class="text-[11px] text-neutral-400 mt-1">Simple hurt, criminal intimidation, wrongful restraint.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">👛</span><h4 class="font-bold text-sm mt-1">Minor Theft</h4><p class="text-[11px] text-neutral-400 mt-1">Theft below threshold, shoplifting, pickpocketing.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">🚗</span><h4 class="font-bold text-sm mt-1">Traffic Offences</h4><p class="text-[11px] text-neutral-400 mt-1">DUI, reckless driving, no license — Motor Traffic Act.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">💻</span><h4 class="font-bold text-sm mt-1">Cyber Crimes (Minor)</h4><p class="text-[11px] text-neutral-400 mt-1">Minor computer offences. Serious ones go to High Court.</p></div>
+          <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><span class="text-lg">📋</span><h4 class="font-bold text-sm mt-1">Summary Trials</h4><p class="text-[11px] text-neutral-400 mt-1">Offences triable summarily — simplified procedure.</p></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="mc" data-panel="bail">
+        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 space-y-4">
+          <div class="flex items-start gap-3"><div class="w-7 h-7 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0 text-sm">✅</div><div><h4 class="font-bold text-sm">Bailable Offences</h4><p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Bail is a RIGHT. Magistrate MUST grant. Examples: minor assault, public nuisance, simple theft.</p></div></div>
+          <div class="flex items-start gap-3"><div class="w-7 h-7 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center shrink-0 text-sm">⚠️</div><div><h4 class="font-bold text-sm">Non-Bailable Offences</h4><p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Bail at Magistrate's DISCRETION. Can refuse if risk of absconding or evidence tampering.</p></div></div>
+          <div class="flex items-start gap-3"><div class="w-7 h-7 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0 text-sm">🚫</div><div><h4 class="font-bold text-sm">Unbailable Offences</h4><p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">Magistrate CANNOT grant bail. Must apply to High Court. Examples: murder, rape, certain drug offences.</p></div></div>
+          <div class="flex items-start gap-3"><div class="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0 text-sm">🔄</div><div><h4 class="font-bold text-sm">Bail Refused? Your Options</h4><p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">1. Apply to High Court 2. File FR case if refusal unreasonable 3. Apply again with changed circumstances</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SPECIAL TRIBUNALS -->
+  <section id="special" class="py-10 md:py-16 bg-brand-dark text-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-60 h-60 bg-brand-red/10 rounded-full blur-[80px]"></div>
+    <div class="relative max-w-6xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8"><h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2" data-i18n="spTitle">⭐ Special Courts & Tribunals</h2><p class="text-neutral-400 text-xs sm:text-sm max-w-lg mx-auto" data-i18n="spSub">Specialized bodies created by specific legislation to handle particular types of disputes</p></div>
+      <div id="tribunalsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4"></div>
+    </div>
+  </section>
+
+  <!-- 8. QUASI-JUDICIAL -->
+  <section id="quasi" class="py-10 md:py-16 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8"><h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2" data-i18n="qjTitle">🏢 Quasi-Judicial Bodies</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm max-w-lg mx-auto" data-i18n="qjSub">Bodies with powers similar to courts but established under specific statutes</p></div>
+      <div id="quasiGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4"></div>
+    </div>
+  </section>
+
+  <!-- 9. CASE FLOW -->
+  <section id="caseflow" class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8"><h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="cfTitle">🔄 How a Case Flows</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="cfSub">Visual guide to the journey of a typical case</p></div>
+      <div class="mb-8">
+        <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><span class="w-6 h-6 rounded bg-brand-red text-white flex items-center justify-center text-[10px] font-bold">1</span><span data-i18n="cfCrimT">Criminal Case Flow</span></h3>
+        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-4 md:p-6">
+          <div class="flex flex-col gap-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-3 p-2.5 bg-red-50 dark:bg-red-900/10 rounded-lg"><span class="text-lg">🚨</span><span data-i18n="cfC1">Police Investigation / FIR Filed</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-red-50 dark:bg-red-900/10 rounded-lg"><span class="text-lg">📌</span><span data-i18n="cfC2">Produced before Magistrate Court</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-yellow-50 dark:bg-yellow-900/10 rounded-lg"><span class="text-lg">🔀</span><span data-i18n="cfC3">Minor → Magistrate tries | Serious → Committed to High Court</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-orange-50 dark:bg-orange-900/10 rounded-lg"><span class="text-lg">⚖️</span><span data-i18n="cfC4">Trial & Judgment</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-yellow-50 dark:bg-yellow-900/10 rounded-lg"><span class="text-lg">🔄</span><span data-i18n="cfC5">Appeal: Magistrate → High Court → Court of Appeal → Supreme Court</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><span class="w-6 h-6 rounded bg-brand-red text-white flex items-center justify-center text-[10px] font-bold">2</span><span data-i18n="cfCivilT">Civil Case Flow</span></h3>
+        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-4 md:p-6">
+          <div class="flex flex-col gap-2 text-xs sm:text-sm">
+            <div class="flex items-center gap-3 p-2.5 bg-blue-50 dark:bg-blue-900/10 rounded-lg"><span class="text-lg">📄</span><span data-i18n="cfV1">Plaint filed in District Court</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-blue-50 dark:bg-blue-900/10 rounded-lg"><span class="text-lg">📬</span><span data-i18n="cfV2">Summons issued to defendant</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-blue-50 dark:bg-blue-900/10 rounded-lg"><span class="text-lg">📝</span><span data-i18n="cfV3">Written submissions, evidence, trial</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-blue-50 dark:bg-blue-900/10 rounded-lg"><span class="text-lg">⚖️</span><span data-i18n="cfV4">Judgment by District Court</span></div>
+            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-4 h-4 text-brand-red/40"></i></div>
+            <div class="flex items-center gap-3 p-2.5 bg-yellow-50 dark:bg-yellow-900/10 rounded-lg"><span class="text-lg">🔄</span><span data-i18n="cfV5">Appeal: District Court → Court of Appeal → Supreme Court</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. LEGAL AID -->
+  <section id="legalaid" class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-6"><h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="laTitle">🆓 Free Legal Aid Services</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="laSub">If you can't afford a lawyer, these services can help</p></div>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><h4 class="font-bold text-sm mb-1">Legal Aid Commission</h4><p class="text-[11px] text-neutral-500 dark:text-neutral-400 mb-2">Government body providing free legal assistance for criminal and civil matters.</p><div class="text-[10px] text-neutral-400">📞 +94 11 243 3533 | 📍 Colombo</div></div>
+        <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><h4 class="font-bold text-sm mb-1">Bar Association of SL</h4><p class="text-[11px] text-neutral-500 dark:text-neutral-400 mb-2">BASL runs legal aid clinics with volunteer lawyers.</p><div class="text-[10px] text-neutral-400">📞 +94 11 243 3544 | 📍 Hulftsdorp</div></div>
+        <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><h4 class="font-bold text-sm mb-1">University Legal Aid</h4><p class="text-[11px] text-neutral-500 dark:text-neutral-400 mb-2">Law faculties run legal aid clinics staffed by senior students.</p><div class="text-[10px] text-neutral-400">📍 University law faculties</div></div>
+        <div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4"><h4 class="font-bold text-sm mb-1">NGO Legal Aid</h4><p class="text-[11px] text-neutral-500 dark:text-neutral-400 mb-2">Specialized free legal aid: women's rights, child rights, labor disputes.</p><div class="text-[10px] text-neutral-400">📍 Multiple organizations</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. GLOSSARY -->
+  <section id="glossary" class="py-10 md:py-16 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-6"><h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="glTitle">📖 Legal Glossary</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="glSub">Common court terms explained simply</p></div>
+      <div id="glossaryList" class="space-y-1.5"></div>
+    </div>
+  </section>
+
+  <!-- 12. FAQ -->
+  <section id="faq" class="py-10 md:py-16 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-6"><h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="faqTitle">❓ Frequently Asked Questions</h2><p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="faqSub">Common questions about Sri Lanka's court system</p></div>
+      <div id="faqList" class="space-y-2"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
-
         <div class="col-span-2 md:col-span-1">
           <div class="text-xl font-extrabold tracking-tight mb-2.5"><span class="text-brand-red">Global</span>Law <span class="text-base">🇱🇰</span></div>
-          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone through simple explanations across 52 categories.</p>
-          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-i18n="ftDisc">⚠️ Disclaimer: Educational platform only. Not official legal advice. Always consult a qualified lawyer.</div>
+          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone.</p>
+          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-i18n="ftDisc">⚠️ Disclaimer: Educational platform only. Not legal advice.</div>
         </div>
-
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftQL">Quick Links</h4>
           <ul class="space-y-2 text-xs">
             <li><a href="lk.html" class="text-neutral-400 hover:text-brand-red transition">Home</a></li>
             <li><a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCat">Categories</a></li>
+            <li><a href="lk-court-system.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCourt">Court System</a></li>
             <li><a href="lk-about.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a></li>
-            <li><a href="lk-contact.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navContact">Support</a></li>
-            <li><a href="lk-credits.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCredits">Credits</a></li>
           </ul>
         </div>
-
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftLL">Legal Links</h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftPriv">Privacy Policy</a></li>
-            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftTerms">Terms of Use</a></li>
-            <li><a href="https://www.justice.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Ministry of Justice ↗</a></li>
-            <li><a href="https://www.cert.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">CERT Sri Lanka ↗</a></li>
             <li><a href="https://www.supremecourt.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Supreme Court ↗</a></li>
+            <li><a href="https://www.justice.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Ministry of Justice ↗</a></li>
+            <li><a href="https://www.courts.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Courts Dept ↗</a></li>
+            <li><a href="https://www.cert.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">CERT ↗</a></li>
           </ul>
         </div>
-
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftCon">Contact</h4>
           <ul class="space-y-2 text-xs">
@@ -803,9 +511,7 @@
             <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i><span>+94 77 504 8455</span></li>
           </ul>
         </div>
-
       </div>
-
       <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-neutral-500 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
         <p class="text-neutral-500 text-[11px]">Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a> <span class="text-neutral-600 mx-0.5">|</span> DMC Group</p>
@@ -813,221 +519,83 @@
     </div>
   </footer>
 
-
-  <!-- ============ FLOATING WHATSAPP ============ -->
+  <!-- WhatsApp Float -->
   <div class="fixed bottom-5 right-5 z-50">
-    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse relative flex items-center justify-center w-13 h-13 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:52px;height:52px" title="WhatsApp" aria-label="Chat on WhatsApp">
-      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse relative flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:50px;height:50px" aria-label="WhatsApp">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
   </div>
 
-
-  <!-- ============ TOAST ============ -->
+  <!-- Toast -->
   <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-4 py-3 toast-in max-w-xs">
-    <div class="flex items-center gap-2.5">
-      <div class="w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i></div>
-      <p id="toastMsg" class="text-xs font-medium"></p>
-    </div>
+    <div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i></div><p id="toastMsg" class="text-xs font-medium"></p></div>
   </div>
-
 
   <!-- ============ JAVASCRIPT ============ -->
   <script>
     lucide.createIcons();
 
-    // ===== TRANSLATIONS =====
-    const L={
-      en:{
-        announce:'🚀 52 law categories now available! Browse Sri Lanka\'s complete legal guide.',
-        navHome:'Home',navCat:'Categories',navAbout:'About Us',navContact:'Contact',navSupport:'Support',navCredits:'Credits',
-        searchPH:'Try "Cyber Crime Act" or "Land Dispute"...',searchBtn:'Search',
-        heroBadge:'Sri Lanka',heroT1:'Know Your Rights.',heroT2:'Understand the Law.',
-        heroSub:'52 categories. 200+ laws explained simply. Search, browse, and understand your legal rights in minutes.',
-        emLabel:'🚨 Emergency:',emPolice:'Police - 119',emCERT:'CERT - 1919',emChild:'Child Protection - 1929',emAmb:'Ambulance - 1990',emFire:'Fire - 1190',
-        qsTitle:"What's your situation?",qsSub:'Tap to find relevant laws instantly',
-        qsArrest:'Got Arrested?',qsArrestS:'Know your rights',qsCyber:'Cyber Bullying?',qsCyberS:'Report & protect',
-        qsLand:'Land Dispute?',qsLandS:'Property laws',qsWork:'Workplace Issue?',qsWorkS:'Labor rights',qsFam:'Family Issue?',qsFamS:'Marriage & divorce',
-        qsMotor:'Traffic Accident?',qsMotorS:'Vehicle laws',qsTax:'Tax Problem?',qsTaxS:'Tax laws',
-        qsEnv:'Environmental Issue?',qsEnvS:'Protection laws',qsCons:'Consumer Complaint?',qsConsS:'Your rights',
-        qsIP:'IP Infringement?',qsIPS:'Copyright & patents',
-        catTitle:'Browse Law Categories',catSub:'52 categories covering every aspect of Sri Lankan law',viewAll:'View All 52 →',readMore:'Read More',
-        cCyber:'Cyber Laws',cCyberD:'Computer and internet laws, cyber crime, online safety, and digital privacy.',
-        cCrim:'Criminal Laws',cCrimD:'Fraud, theft, assault, penalties, weapons, and criminal procedure codes.',
-        cFund:'Fundamental Rights',cFundD:'Constitutional rights, equality, freedom of speech, and human rights.',
-        cCivil:'Civil Laws',cCivilD:'Land disputes, contracts, tort, compensation, and civil procedure.',
-        cLab:'Corporate / Labor Laws',cLabD:'Employment rights, EPF, ETF, company registration, securities.',
-        cTax:'Tax Laws',cTaxD:'Income tax, VAT, customs, excise, and revenue regulations.',
-        cEnv:'Environmental Laws',cEnvD:'Wildlife, forestry, water, marine, mining, and pollution control.',
-        cMotor:'Motor Vehicle Laws',cMotorD:'Traffic regulations, fines, license laws, railway, and aviation.',
-        cFam:'Family Laws',cFamD:'Marriage, divorce, child custody, inheritance, domestic violence.',
-        cProp:'Property & Land Laws',cPropD:'Land ownership, transfers, leases, mortgages, housing, construction.',
-        cCons:'Consumer Protection',cConsD:'Consumer rights, contracts, insurance, cooperatives, tourism.',
-        cIP:'Intellectual Property',cIPD:'Copyright, trademarks, patents, data protection, AI & tech laws.',
-        moreHealth:'Health',moreEdu:'Education',moreElect:'Elections',moreHR:'Human Rights',moreMedia:'Media',moreMil:'Military',
-        moreTeaser:'+ 40 more categories including Agriculture, Banking, Maritime, Sports, Gambling & more →',
-        trTitle:'🔥 Trending Laws',trSub:'Most searched in Sri Lanka right now',
-        tr1:'Online Safety Bill',tr1S:'New digital safety regulations affecting social media users',
-        tr2:'Child Protection Laws',tr2S:'Child rights, abuse prevention & reporting procedures',
-        tr3:'Traffic Fine Updates',tr3S:'New penalty amounts, demerit points & traffic rules',
-        tr4:'Cyber Crime Act',tr4S:'Hacking, online fraud, identity theft penalties',
-        tr5:'Domestic Violence Act',tr5S:'Protection orders, rights & legal remedies',
-        tr6:'EPF & ETF Regulations',tr6S:'Employee fund benefits, withdrawal & calculation',
-        tr7:'Anti-Corruption Laws',tr7S:'Bribery commission, asset declarations & penalties',
-        tr8:'Intellectual Property Act',tr8S:'Copyright, trademark registration & infringement penalties',
-        tr9:'Environmental Protection',tr9S:'NEA regulations, EIA requirements & pollution controls',
-        trHot:'HOT',trRise:'RISING',trUpd:'UPDATED',
-        lotwBadge:'LAW OF THE WEEK',lotwTitle:'Penal Code (No. 2 of 1883)',
-        lotwDesc:"Sri Lanka's primary criminal law defining offences and punishments. Recently amended with cyber crime and online harassment provisions.",
-        lotwBtn:'Read Full Explanation',lotwLink:'View full details →',
-        lotwSec:'Sections',lotwYr:'Enacted',lotwUpd:'Last Amended',lotwTime:'Read Time',
-        statTitle:'GlobalLaw Sri Lanka in Numbers',statLaws:'Laws Explained',statCat:'Categories',statLang:'Languages',statFree:'Free Forever',statBrowse:'Browse all →',statLearn:'Learn more →',
-        spotTitle:'Explore by Domain',spotSub:'52 categories organized into key legal areas',
-        spotPop:'Popular',spotPopS:'Most viewed',spotNew:'Newly Added',spotNewS:'Latest updates',
-        spotRights:'Rights & Freedoms',spotRightsS:'12 categories',spotBiz:'Business & Trade',spotBizS:'8 categories',
-        spotCrime:'Crime & Enforcement',spotCrimeS:'10 categories',spotNature:'Nature & Resources',spotNatureS:'8 categories',
-        rpTitle:'Report a Cyber Crime',rpDesc:'Victim of cyber bullying, hacking, or online fraud? Don\'t wait — report it now.',
-        rpCERT:'Report to CERT (1919)',rpCID:'Call CID',rpWarn:'For emergencies, call 119 immediately. GlobalLaw is educational, not law enforcement.',rpMore:'View all emergency contacts & reporting guide →',
-        courtTitle:"Sri Lanka's Court System",courtSub:'How the legal system works, simplified',courtMore:'Learn how the court system works in detail',
-        nlTitle:'Stay Updated',nlDesc:'Get new law explanations to your email. No spam.',nlPH:'Enter your email',nlBtn:'Subscribe',nlPriv:'We respect your privacy. Unsubscribe anytime.',
-        ftDesc:"Making Sri Lanka's law accessible to everyone through simple explanations across 52 categories.",
-        ftDisc:'⚠️ Disclaimer: Educational platform only. Not official legal advice. Always consult a qualified lawyer.',
-        ftQL:'Quick Links',ftLL:'Legal Links',ftCon:'Contact',ftPriv:'Privacy Policy',ftTerms:'Terms of Use',
-      },
-      si:{
-        announce:'🚀 52 නීති කාණ්ඩ දැන් ලබා ගන්න! ශ්‍රී ලංකාවේ සම්පූර්ණ නීති මාර්ගෝපදේශය.',
-        navHome:'මුල් පිටුව',navCat:'කාණ්ඩ',navAbout:'අප ගැන',navContact:'සම්බන්ධ කරගන්න',navSupport:'සහාය',navCredits:'ස්තුතිය',
-        searchPH:'"සයිබර් අපරාධ" හෝ "ඉඩම් ආරවුල" උත්සාහ කරන්න...',searchBtn:'සොයන්න',
-        heroBadge:'ශ්‍රී ලංකාව',heroT1:'ඔබේ අයිතිවාසිකම්',heroT2:'සරලව දන්න.',
-        heroSub:'52 කාණ්ඩ. 200+ නීති සරලව පැහැදිලි කරලා. මිනිත්තු කිහිපයකින් අයිතිවාසිකම් තේරුම් ගන්න.',
-        emLabel:'🚨 හදිසි:',emPolice:'පොලිසිය - 119',emCERT:'CERT - 1919',emChild:'ළමා ආරක්ෂාව - 1929',emAmb:'ඇම්බියුලන්ස් - 1990',emFire:'ගිනි නිවන - 1190',
-        qsTitle:'ඔබේ තත්ත්වය කුමක්ද?',qsSub:'ඔබ්බට ඔබන්න, අදාළ නීති හොයන්න',
-        qsArrest:'අත්අඩංගුවට ගත්තොත්?',qsArrestS:'අයිතිවාසිකම්',qsCyber:'සයිබර් බුලියින්ග්?',qsCyberS:'වාර්තා කරන්න',
-        qsLand:'ඉඩම් ආරවුලක්ද?',qsLandS:'දේපළ නීති',qsWork:'රැකියා ප්‍රශ්නයක්ද?',qsWorkS:'කම්කරු අයිතිවාසිකම්',qsFam:'පවුල් ප්‍රශ්නයක්ද?',qsFamS:'විවාහ & දික්කෙරීම',
-        qsMotor:'රථ වාහන අනතුරක්ද?',qsMotorS:'වාහන නීති',qsTax:'බදු ප්‍රශ්නයක්ද?',qsTaxS:'බදු නීති',
-        qsEnv:'පරිසර ප්‍රශ්නයක්ද?',qsEnvS:'ආරක්ෂණ නීති',qsCons:'පාරිභෝගික පැමිණිල්ලක්ද?',qsConsS:'ඔබේ අයිතිවාසිකම්',
-        qsIP:'බුද්ධිමය දේපළ උල්ලංඝනයක්ද?',qsIPS:'ප්‍රකාශන හා පේටන්ට්',
-        catTitle:'නීති කාණ්ඩ බලන්න',catSub:'ශ්‍රී ලංකාවේ නීතියේ සෑම අංශයක්ම ආවරණය කරන 52 කාණ්ඩ',viewAll:'සියල්ල 52 බලන්න →',readMore:'වැඩි කියවන්න',
-        cCyber:'සයිබර් නීති',cCyberD:'පරිගණක සහ අන්තර්ජාල නීති, සයිබර් අපරාධ, මාර්ගගත ආරක්ෂාව.',
-        cCrim:'අපරාධ නීති',cCrimD:'වංචා, හොරකම්, පහරදීම්, දඬුවම්, ආයුධ, අපරාධ විධිවිධාන.',
-        cFund:'මූලික අයිතිවාසිකම්',cFundD:'ව්‍යවස්ථාමූලික අයිතිවාසිකම්, සමානාත්මතාව, ප්‍රකාශන නිදහස.',
-        cCivil:'සිවිල් නීති',cCivilD:'ඉඩම් ආරවුල්, ගිවිසුම්, වැරදි ක්‍රියා, වන්දි, සිවිල් විධිවිධාන.',
-        cLab:'කෝපරේට් / කම්කරු නීති',cLabD:'රැකියා අයිතිවාසිකම්, EPF, ETF, සමාගම් ලියාපදිංචිය.',
-        cTax:'බදු නීති',cTaxD:'ආදායම් බද්ද, VAT, රේගු, බලපත්‍ර, ආදායම් රෙගුලාසි.',
-        cEnv:'පරිසර නීති',cEnvD:'වන සතුන්, වන, ජල, මුහුදු, ඛනිජ, දූෂණ පාලනය.',
-        cMotor:'මෝටර් රථ නීති',cMotorD:'මාර්ග රීති, දඩ, බලපත්‍ර, දුම්රිය, ගුවන් සේවා.',
-        cFam:'පවුල් නීති',cFamD:'විවාහ, දික්කෙරීම, ළමා භාරකාරිත්වය, උරුමය.',
-        cProp:'දේපළ හා ඉඩම් නීති',cPropD:'ඉඩම් හිමිකම්, හුවමාරු, බද්ද, බලපත්‍රකරණය, නිවාස, ඉදිකිරීම්.',
-        cCons:'පාරිභෝගික ආරක්ෂණය',cConsD:'පාරිභෝගික අයිතිවාසිකම්, ගිවිසුම්, රක්ෂණ, සංගම්, සංචාරක.',
-        cIP:'බුද්ධිමය දේපළ',cIPD:'ප්‍රකාශන, වෙළඳ ලකුණු, පේටන්ට්, දත්ත ආරක්ෂණ, AI නීති.',
-        moreHealth:'සෞඛ්‍ය',moreEdu:'අධ්‍යාපන',moreElect:'මැතිවරණ',moreHR:'මානව අයිතිවාසිකම්',moreMedia:'මාධ්‍ය',moreMil:'හමුදා',
-        moreTeaser:'+ කෘෂිකර්ම, බැංකු, නාවික, ක්‍රීඩා, ජූලා ඇතුළු තවත් 40+ කාණ්ඩ →',
-        trTitle:'🔥 ජනප්‍රිය නීති',trSub:'දැන් වැඩියෙන්ම සොයන නීති',
-        tr1:'Online Safety Bill',tr1S:'සමාජ මාධ්‍ය පරිශීලකයන්ට බලපාන නව ඩිජිටල් ආරක්ෂණ රෙගුලාසි',
-        tr2:'ළමා ආරක්ෂණ නීති',tr2S:'ළමා අයිතිවාසිකම්, අපචාර වැළැක්වීම සහ වාර්තා කිරීම',
-        tr3:'මාර්ග දඩ යාවත්කාලීන',tr3S:'නව දඩ මුදල්, demerit points සහ මාර්ග රීති',
-        tr4:'සයිබර් අපරාධ පනත',tr4S:'හැකිං, මාර්ගගත වංචා, අනන්‍යතාවය සොරකම් දඬුවම්',
-        tr5:'ගෘහස්ථ ප්‍රචණ්ඩත්වය පනත',tr5S:'ආරක්ෂා ආඥා, අයිතිවාසිකම් සහ නෛතික විසඳුම්',
-        tr6:'EPF & ETF රෙගුලාසි',tr6S:'සේවක අරමුදල් ප්‍රතිලාභ, ආපසු ගැනීම සහ ගණනය',
-        tr7:'දූෂණ විරෝධී නීති',tr7S:'අල්ලස් කොමිසම, වත්කම් ප්‍රකාශයන් සහ දඬුවම්',
-        tr8:'බුද්ධිමය දේපළ පනත',tr8S:'ප්‍රකාශන, වෙළඳ ලකුණු ලියාපදිංචිය සහ උල්ලංඝන දඬුවම්',
-        tr9:'පරිසර ආරක්ෂණය',tr9S:'NEA රෙගුලාසි, EIA අවශ්‍යතා සහ දූෂණ පාලනය',
-        trHot:'ජනප්‍රිය',trRise:'ඉහළ යන',trUpd:'යාවත්කාලීන',
-        lotwBadge:'සතියේ නීතිය',lotwTitle:'දණ්ඩ නීති සංග්‍රහය (1883 අංක 2)',
-        lotwDesc:'ශ්‍රී ලංකාවේ ප්‍රධාන අපරාධ නීතිය. මෑතකදී සයිබර් අපරාධ සඳහා අලුතින් සංශෝධනය කරලා.',
-        lotwBtn:'සම්පූර්ණ පැහැදිලි කියවන්න',lotwLink:'සම්පූර්ණ විස්තර බලන්න →',
-        lotwSec:'වගන්ති',lotwYr:'ස්ථාපිත',lotwUpd:'අවසාන සංශෝධනය',lotwTime:'කියවීමේ කාලය',
-        statTitle:'GlobalLaw ශ්‍රී ලංකාව ඉලක්කම් වලින්',statLaws:'නීති පැහැදිලි කරලා',statCat:'කාණ්ඩ',statLang:'භාෂා',statFree:'සදහටම නොමිලේ',statBrowse:'සියල්ල බලන්න →',statLearn:'වැඩි දන්න →',
-        spotTitle:'අංශය අනුව ගවේෂණය කරන්න',spotSub:'ප්‍රධාන නීති ක්ෂේත්‍ර යටතේ සංවිධානය කළ 52 කාණ්ඩ',
-        spotPop:'ජනප්‍රිය',spotPopS:'වැඩියෙන්ම බලන',spotNew:'අලුතින් එකතු කළ',spotNewS:'නවතම යාවත්කාලීන',
-        spotRights:'අයිතිවාසිකම් හා නිදහස්',spotRightsS:'12 කාණ්ඩ',spotBiz:'ව්‍යාපාර හා වෙළඳාම',spotBizS:'8 කාණ්ඩ',
-        spotCrime:'අපරාධ හා බලාත්මක කිරීම',spotCrimeS:'10 කාණ්ඩ',spotNature:'ස්වභාවිකය හා සම්පත්',spotNatureS:'8 කාණ්ඩ',
-        rpTitle:'සයිබර් අපරාධයක් වාර්තා කරන්න',rpDesc:'සයිබර් බුලියින්ග්, හැකිං හෝ මාර්ගගත වංචාවක් වුණොත් දැන්ම වාර්තා කරන්න.',
-        rpCERT:'CERT වෙත වාර්තා කරන්න (1919)',rpCID:'CID ට කතා කරන්න',rpWarn:'හදිසි අවස්ථාවකදී 119 ට කතා කරන්න. GlobalLaw අධ්‍යාපනිකයි.',rpMore:'සියලු හදිසි අංක සහ වාර්තා මාර්ගෝපදේශය බලන්න →',
-        courtTitle:'ශ්‍රී ලංකාවේ උසාවි පද්ධතිය',courtSub:'නීති පද්ධතිය ක්‍රියා කරන්නේ කොහොමද',courtMore:'උසාවි පද්ධතිය විස්තරව ඉගෙන ගන්න',
-        nlTitle:'යාවත්කාලීන වෙන්න',nlDesc:'අලුත් නීති පැහැදිලි කිරීම් ඊමේල් එකට ගන්න. ස්පෑම් නෑ.',nlPH:'ඊමේල් ලිපිනය ඇතුළත් කරන්න',nlBtn:'දාන්න',nlPriv:'පෞද්ගලිකත්වය ආරක්ෂා කරනවා. ඕනම වෙලාවක නතර කරන්න.',
-        ftDesc:'52 කාණ්ඩ පුරා සරල පැහැදිලි කිරීම් මගින් ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
-        ftDisc:'⚠️ අවවාදයයි: අධ්‍යාපනික වේදිකාවක් පමණයි. නිල නීති උපදෙස් නොවේ. සුදුසුකම් ලත් නීතිඥයෙකු උපදෙස් ගන්න.',
-        ftQL:'ඉක්මන් සබැඳි',ftLL:'නීතිමය සබැඳි',ftCon:'සම්බන්ධ කරගන්න',ftPriv:'පෞද්ගලිකත්ව ප්‍රතිපත්තිය',ftTerms:'භාවිතා කිරීමේ කොන්දේසි',
-      }
-    };
+    // ===== DATA =====
+    var TRIBUNALS=[
+      {icon:'💼',name:{en:'Labor Tribunal',si:'කම්කරු අධිකරණය'},law:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},desc:{en:'Handles unfair dismissal, wrongful termination, employment disputes. Can order reinstatement or compensation.',si:'අසාධාරණ ලෙස ඉවත් කිරීම්, රැකියා ආරවුල් සමත් කරයි.'}},
+      {icon:'🏭',name:{en:'Industrial Court',si:'කාර්මික අධිකරණය'},law:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},desc:{en:'Hears appeals from Labor Tribunal decisions. Higher authority in industrial disputes.',si:'කම්කරු අධිකරණ තීන්දුවලින් අභියාදන. කාර්මික ආරවුල්වල ඉහළ අධිකාරන.'}},
+      {icon:'🛒',name:{en:'Consumer Affairs Authority',si:'පාරිභෝගික අධිකාරිය'},law:{en:'CAA Act',si:'CAA පනත'},desc:{en:'Consumer complaints, defective goods, unfair trade practices, price control violations.',si:'පාරිභෝගික පැමිණිල්, දෝෂ සහිතිත් භාණ්ඩ, වෙළඳ පාලිත් උල්ලංඝනයන්.'}},
+      {icon:'🏠',name:{en:'Rent Board',si:'කුලි මණ්ඩලය'},law:{en:'Rent Act No. 7 of 1972',si:'කුලි පනත අංක 7 ක්‍ර. 1972'},desc:{en:'Rent disputes between landlords and tenants of controlled premises.',si:'කුලිකරුවන් සහ අධිකරණ පාලිත් රැකියා අතර කුලි ආරවුල්.'}},
+      {icon:'🏗️',name:{en:'UDA Tribunal',si:'නාගරික සංවර්ධන අධිකරණය'},law:{en:'UDA Act',si:'UDA පනත'},desc:{en:'Unauthorized construction, building code violations, development plan objections.',si:'අනුමත ඉදිකිරීම්, ගොඩනැගිලි විධිවිධින් උල්ලංඝනයන්.'}},
+      {icon:'🌾',name:{en:'Agricultural Tribunal',si:'කෘෂිකර්ම අධිකරණය'},law:{en:'Agricultural Lands Act',si:'කෘෂිකර්ම ඉඩම් පනත'},desc:{en:'Agricultural land tenure, cultivation rights, landlord-tenant agricultural relations.',si:'කෘෂිකර්ම ඉඩම් භාවිතය, වගාකිරීම් අයිතිවාසිකම් පිළිබවෙන කරන්න.'}},
+      {icon:'🏦',name:{en:'Financial Crimes Tribunal',si:'මූල්‍ය අපරාධ අධිකරණය'},law:{en:'Financial Crimes Act',si:'මූල්‍ය අපරාධ පනත'},desc:{en:'Money laundering, large-scale banking fraud, market manipulation.',si:'මුදල් විශුද්ධිකරණය, බැංකු වංචා, වෙළඳපොළ මැඩීම්.'}},
+      {icon:'🗳️',name:{en:'Election Petition Court',si:'මැතිවරණ පෙත්සම් අධිකරණය'},law:{en:'Parliamentary Elections Act',si:'පාර්ලිමේන්තු මැතිවරණ පනත'},desc:{en:'Election petitions challenging parliamentary and provincial council results.',si:'පාර්ලිමේන්තු සහ පළාත් සභාවාරණ මැතිවරණ ප්‍රතිඵල අභියෝගය.'}},
+      {icon:'⚖️',name:{en:'Bribery Commission',si:'අල්ලස් කොමිෂන් සභාව'},law:{en:'Bribery Act',si:'අල්ලස් පනත'},desc:{en:'Investigates bribery and corruption allegations. Can prosecute.',si:'අල්ලස් හෝ දූෂණ චෝදනා පරීක්ෂා කරයි, නඩු පවරයි.'}},
+      {icon:'📝',name:{en:'Board of Quotation',si:'උද්ධෘත මණ්ඩලය'},law:{en:'Board of Quotation Act',si:'උද්ධෘත මණ්ඩල පනත'},desc:{en:'Determines fair market value of government-acquired property.',si:'රජය ලබාගන්නා දේපළවලවලස් සාධාරණ වට්ටම තීරණය කරයි.'}},
+      {icon:'🔄',name:{en:'Land Claims Tribunal',si:'ඉඩම් හිමිකම් අධිකරණය'},law:{en:'Land Claims Act',si:'ඉඩම් හිමිකම් පනත'},desc:{en:'Resolves disputed land titles due to historical or administrative reasons.',si:'ඓතිහාසික හෝ පරිපාලන හේතූන් මත ඉඩම් හිමිකම් ආරවුල්.'}},
+      {icon:'🚢',name:{en:'Admiralty Jurisdiction',si:'අධිරාජ අධිකරණ බලය'},law:{en:'Admiralty Jurisdiction Act',si:'අධිරාජ අධිකරණ බලය පනත'},desc:{en:'Maritime claims, ship arrests, cargo disputes via Commercial Court.',si:'නාවික ඉල්ලීම්, නැව් අත්අඩංගුවට ගන්න කාර්ගෝ කරන්න ආරවුල්.'}}
+    ];
 
-    // ===== STATE =====
-    let lang='en';
-    const saved=localStorage.getItem('gl_lk_lang');
-    if(saved&&L[saved])lang=saved;
+    var QUASI=[
+      {icon:'🙌',name:{en:'Human Rights Commission',si:'මානව අයිතිවාසිකම් කොමිෂන් සභාව'},desc:{en:'Investigates HR violations, visits prisons, recommends compensation.',si:'මානව අයිතිවාසිකම් උල්ලංඝන පරීක්ෂා, සිරගෙවල් පරීක්ෂා වන්දි.'}},
+      {icon:'🔍',name:{en:'Ombudsman',si:'සාධාරණාධිකාරී'},desc:{en:'Investigates maladministration complaints against government bodies.',si:'රජයේ ආයතන ආයතන් වෙනස් වැරදිපලන පැමිණිල් පරීක්ෂා.'}},
+      {icon:'📢',name:{en:'Press Council',si:'මාධ්‍ය සභාව'},desc:{en:'Complaints against newspapers/journalists for ethical violations.',si:'පුවත්පත්/මාධ්‍යවේදීන්ට එරෙහිව ආචාර ධර් පැමිණිලි.'}},
+      {icon:'📋',name:{en:'National Police Commission',si:'ජාතික පොලිස් කොමිෂන් සභාව'},desc:{en:'Complaints against police officers, can order disciplinary action.',si:'පොලිස් නිලධාරීන්ට එරෙහිව පැමිණිලි, විනයිකිරික ක්‍රියාමාර්ග නියම කරයි.'}},
+      {icon:'⚖️',name:{en:'Judicial Service Commission',si:'විනිශ්චාරක සේවා කොමිෂන් සභාව'},desc:{en:'Appoints, transfers, promotes, disciplines judicial officers.',si:'විනිශ්චාරකයන් පත්, ස්ථානමාරු, උසසින්, විනයිකිරික පියවර.'}},
+      {icon:'🏛️',name:{en:'Public Service Commission',si:'පොදු සේවා කොමිෂන් සභාව'},desc:{en:'Public service appointments, promotions, disciplinary matters.',si:'පොදු සේවා පත්වීම්, උසසින්, විනයිකිරික කටයුතු.'}},
+      {icon:'📊',name:{en:'Election Commission',si:'මැතිවරණ කොමිෂන් සභාව'},desc:{en:'Conducts elections, investigates complaints, enforces election laws.',si:'මැතිවරණ පවත්වයින්, පැමිණිලි විමර්ශන වින්, මැතිවරණ නීති බලාත්මක.'}},
+      {icon:'🏦',name:{en:'Central Bank Dispute Resolution',si:'මහ බැංකු ආරවුල් විසඳීම'},desc:{en:'Banking disputes between customers and licensed financial institutions.',si:'පාරිභෝගිකයන් සහ බලපත්‍ර අතර බැංකු ආරවුල්.'}},
+      {icon:'💡',name:{en:'IP Tribunal',si:'බුද්ධිමය දේපළ අධිකරණය'},desc:{en:'Trademark oppositions, patent revocations, copyright infringement.',si:'වෙළඳ ලකුණු විරුද්ධ, පේටන්ට් අවලංගු ප්‍රකාශිය උල්ලංඝනයන්.'}},
+      {icon:'🌿',name:{en:'Central Environmental Authority',si:'මධ්‍යම පරිසර අධිකාරිය'},desc:{en:'Issues directives, imposes fines for environmental violations. Reviews EIA.',si:'පරිසර උල්ලංඝන සඳහාරන් සඳහාරන් දඩුවම්, EIA සමාලෝචනය.'}},
+      {icon:'📡',name:{en:'TRC (Telecom Regulator)',si:'විදුලි සංදේශන නියාමක කොමිෂන් සභාව'},desc:{en:'Consumer complaints against telecom operators, enforces licensing.',si:'ටෙලිකොම් පරිපාලකයන්ට එරෙහිව පාරිභෝගික පැමිණිලි, බලපත්‍ර කොන්දේසික බලාත්මක බලාත්මක කරයි.'}},
+      {icon:'💊',name:{en:'Drug Regulatory Authority',si:'ඖෂධ නියාමක අධිකාරිය'},desc:{en:'Regulates drugs, medical devices, cosmetics. Prosecutes safety violations.',si:'ඖෂධ නියාම, වෛද්‍යඩික නියාමන නීතිය, ආරක්ෂික විධින සඳහාරණ නීති නඩු පවරයි.'}},
+      {icon:'🏠',name:{en:'Sinhala/Tamil New Year Tribunal',si:'අලුත් අවුරුදු අධිකරණය'},desc:{en:'Quick resolution of festive season disputes — gambling, alcohol, noise.',si:'උත්සව සමයේදී ආරවුල් — ජූලා, මධ්‍යපානය, ශබ්ද ක්‍රියා ක්ෂණික්.'}},
+      {icon:'🚔',name:{en:'National Police Commission (Discipline)',si:'ජාතික පොලිස් කොමිෂන් සභාව (විනය)'},desc:{en:'Separate from police administration. Orders investigations into misconduct.',si:'පොලිස් පරිපාලනයෙන් වෙනස් වෙනස් විනයිකිරික විමර්ශන විනය කරයි.'}}
+    ];
 
-    // ===== APPLY TRANSLATIONS =====
-    function applyT(){
-      const d=L[lang]||L.en;
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const k=el.getAttribute('data-i18n');
-        if(d[k])el.textContent=d[k];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-        const k=el.getAttribute('data-i18n-placeholder');
-        if(d[k])el.placeholder=d[k];
-      });
-      document.documentElement.lang=lang==='si'?'si':'en';
-      document.querySelectorAll('.ld-opt').forEach(b=>{
-        const isEn=b.textContent.includes('English');
-        const chk=b.querySelector('.ld-chk');
-        if(chk){
-          if((isEn&&lang==='en')||(!isEn&&lang==='si'))chk.classList.remove('hidden');
-          else chk.classList.add('hidden');
-        }
-      });
-    }
+    var GLOSSARY=[
+      {term:'Bail',def:{en:'Release of accused from custody, usually on payment of money or surety, pending trial.',si:'නඩු විභාගය අතරන්නුවෙකු බන්ධනාගාරයෙන් මුදා හැරීම, සාමාන්යෙන්.'}},
+      {term:'Certiorari',def:{en:'Writ to quash a lower court decision that exceeded jurisdiction or acted illegally.',si:'අධිකරණයක් තම බලය ඉක්මවා කටයුතු කරන පහළ අධිකරණ තීන්දුවක් අවලංගු කරන ලෙස් විය.'}},
+      {term:'Habeas Corpus',def:{en:"'You shall have the body' — writ to produce a detained person before court to determine if detention is lawful.",si:'"සිරුර ලබාන්න්" — රඳවාගෙන්න අධිකරණයට ඉදිරිරිපත් කරන්න ලෙසන් නියම.'}},
+      {term:'Injunction',def:{en:'Court order to do or refrain from a specific act. Temporary or permanent.',si:'නිශ්චික්‍රිය ක්‍රියාවක් කරන්න හෝ නියෝගයක් අධිකරණ නියෝගය.'}},
+      {term:'Plaintiff',def:{en:'Person who files a civil lawsuit.',si:'සිවිවිල් නඩුවක් ගොනු කරන පුද්ගලයා (පැමිණිලිකරු).'}},
+      {term:'Defendant',def:{en:'Person against whom a lawsuit is filed or who is accused.',si:'නඩුවක් ගොනු කරන පුද්ගලයා වෙත්‍රසාන්ට චෝදනා ලබන පුද්ගලයා.'}},
+      {term:'Summon',def:{en:'Court order directing a person to appear before court on a specified date.',si:'නිශ්චිකිරන්න අධිකරණයට නියමයින්න ලෙස් නියම.'}},
+      {term:'Warrant',def:{en:'Court authorization for police to arrest, search, or seize property.',si:'පොලිසියට අත්අඩංගුවට ගන්න්න, පරීක්ෂා කරන්න අධිකරණ බලපත්‍ර අවසරය.'}},
+      {term:'Sub Judice',def:{en:'Matters before a court that cannot be publicly discussed to avoid influencing the case.',si:'දැනට අධිකරණයක් පවතින කාරණයන් නඩුවෙන් නියම නොහොඩ සාකච්ඡා නොහොඩ කරන්න නියම.'}},
+      {term:'Puisne Judge',def:{en:'Supreme Court judge other than the Chief Justice.',si:'ප්‍රධාන විනිශ්චාරකවරයා නොවන ශ්‍රේෂ්ඨාධිකරණ විනිශ්චාරකයෙකු.'}},
+      {term:'Prohibition',def:{en:'Writ to prevent a lower court from exceeding its jurisdiction.',si:'පහළ අධිකරණයක් තම බලය ඉක්මවා කිරීම වැළැක්වීම.'}},
+      {term:'Mandamus',def:{en:'Writ compelling a person or body to perform a public duty they are legally required to do.',si:'නීතිය ලෙසින පොදු වැලය වියම කරන ලෙස් බලය කරන ලෙස් නියම කරන ලෙස්.'}},
+      {term:'Quo Warranto',def:{en:'Writ challenging a person's authority to hold a public office.',si:'පුද්ගල තනතිය පවත්තිය දරන් බලය අධිකරණ බලය අභියාදනය අභියෝගනට අභියෝගන කරන writ.'}},
+      {term:'Remand',def:{en:'Court order to keep an accused in custody pending investigation or trial.',si:'විමර්ශන විභාගයක් බන්ධනාගාරය බන්ධනාගාරය තබන් අධිකරණය නියම.'}},
+      {term:'Certiorari',def:{en:'Writ issued by High Court or Supreme Court to quash a lower court decision.',si:'මහා අධිකරණය හෝ ශ්‍රේෂ්ඨාධිකරණය තීන්දුවක් අභියෝගන පහළ අධිකරණ තීන්දුව අවලංගු කරන writ.'}}
+    ];
 
-    // ===== LANGUAGE FUNCTIONS =====
-    function setLang(l){
-      lang=l;localStorage.setItem('gl_lk_lang',l);
-      document.getElementById('langLabel').textContent=l.toUpperCase();
-      applyT();toggleLangDD();
-    }
-    function toggleLangDD(){document.getElementById('langDD').classList.toggle('hidden')}
-
-    document.addEventListener('click',e=>{
-      if(!e.target.closest('#langBtn')&&!e.target.closest('#langDD'))
-        document.getElementById('langDD').classList.add('hidden');
-    });
-
-    // ===== DARK MODE =====
-    function toggleDark(){
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('gl_dark',document.documentElement.classList.contains('dark'));
-    }
-    if(localStorage.getItem('gl_dark')==='true'||(!localStorage.getItem('gl_dark')&&window.matchMedia('(prefers-color-scheme:dark)').matches))
-      document.documentElement.classList.add('dark');
-
-    // ===== MOBILE MENU =====
-    function toggleMob(){document.getElementById('mobMenu').classList.toggle('hidden')}
-
-    // ===== SEARCH =====
-    function doSearch(){
-      const v=document.getElementById('heroSearch').value.trim();
-      if(v)window.location.href='lk-categories.html?search='+encodeURIComponent(v);
-      else toast('Please enter a search term');
-    }
-    function qSearch(t){
-      document.getElementById('heroSearch').value=t;
-      window.location.href='lk-categories.html?search='+encodeURIComponent(t);
-    }
-
-    // ===== TOAST =====
-    let toastT=null;
-    function toast(m){
-      const b=document.getElementById('toastBox');
-      document.getElementById('toastMsg').textContent=m;
-      b.classList.remove('hidden');
-      if(toastT)clearTimeout(toastT);
-      toastT=setTimeout(()=>b.classList.add('hidden'),3000);
-    }
-
-    // ===== INIT =====
-    document.getElementById('langLabel').textContent=lang.toUpperCase();
-    applyT();
-    lucide.createIcons();
-  </script>
-
-</body>
-</html>
+    var FAQS=[
+      {q:{en:'What is the difference between civil and criminal cases?',si:'සිවිල් සහ අපරාධ නඩුවල අතර වෙනස් වෙනස් කුමක්ද?'},a:{en:'Civil cases are disputes between private parties (land, contracts, family). Criminal cases are offences against the state (theft, assault, murder) prosecuted by police. Civil → District Court. Criminal → Magistrate Court.',si:'සිවිල් නඩු = පෞද්ගලිකයන් අතරයේ (ඉඩම්, ගිවිසුම්, පවුල්). අපරාධ = රාජ්‍යවේ එරෙහින් වෙනස් (හොරකම්, පහරදීම්). සිවිල් = දිස්ත්‍රිකරණය, අපරාධ අපරාධ = මහේස්ත්‍රාත් අධිකරණය.'}},
+      {q:{en:'Can I file a case directly in the High Court?',si:'මම හුදෙකින්න්න හුදෙකින මහා අධිකරණයේ නඩුවක් ගොනු කළ හැකද?'},a:{en:'For most matters, no. High Court mainly handles serious criminal cases committed from Magistrate Court and appeals. For civil matters, go to District Court. Exceptions: election petitions and certain commercial disputes.',si:'බොහෝගත් අපරාධ කට්ම් විසයෙන් සඳහාරන වෙන් විත්‍රිකරණය. සිවිල් = දිස්ත්‍රිකරණය, අපරාධ = දිස්ත්‍රිකරණය.'}},
+      {q:{en:'How long does a typical court case take in Sri Lanka?',si:'ශ්‍රී ලංකාවේ සාමාන්යකට කොපමක් කාලයක් ගත්වෙන්න්න ගත්වය?'}},
+      {a:{en:'It varies widely: Magistrate summary — weeks/months. District Court civil — 2-5 years. High Court criminal — 1-3 years. Appeals — 1-3 years each level. Complex cases can take much longer.',si:'බොහෝගත් වෙනස් නඩුවෙන් — සතියලාන් මාසය. දිස්ත්‍රිකරණය — 2-5 වසර. මහා අධිකරණය — 1-3 වසර. අභියාදන — මට්ට්ටමට 1-3 වසර.'}},
+      {q:{en:'Do I need a lawyer to go to court?',si:'අධිකරණයට යන් නීතිඥයෙන්න් ඕහත්ත්න් ඕහත් ඕහත් නිතුරන්න නීතිඥයෙන්?'},a:{en:'Not always. In Magistrate Court, you can appear in person for minor matters. However, for complex cases, it is strongly recommended to have a lawyer. In High Court and above, legal representation is practically essential.',si:'මහේස්ත්‍රිකරණයේ සුළුණ පෙන්න්න් පෞද්ගලින් පෙන්න් පෙන් පුද්ගලයාන්. සංකීරණ නඩුවෙන්න් නීතිඥයෙන් නියම කරන්න්.'}},
+      {q:{en:'What happens if I cannot afford a lawyer?',si:'මට නීතිඥයෙන්න් නොහොත් නොහොඩ කරන්න්?'},a:{en:'You can get free legal aid from: Legal Aid Commission (government), Bar Association clinics, University law faculty clinics, and various NGOs. See "Free Legal Aid" section above for contacts.',si:'නොහගත් නොහඩ නීතිඥයෙන් නොහඩ නොහඩ නීතිඥයෙන්න් ලබා ගත් කරන්න්: නීතිඥ ආධිරණ කොමිෂන් සභාව, BASL ක්ලිනික්, විශ්විද්‍යාලය නීතිඥය.'}},
+      {q:{en:'Can court decisions be appealed multiple times?',si:'අධිකරණ තීන්දු කිහිපයක් අභියාදන් කළ හැකද?'}},
+      {a:{en:'Generally the path is: Magistrate → High Court → Court of Appeal → Supreme Court. Each level usually requires "leave to appeal" (permission). The Supreme Court is final — no further appeal except Presidential mercy petitions in very limited cases.',si:'සාමාන්‍ය පෙළ: මහේස්‍රාත් → මහා අධිකරණය → අභියාදන → ශ්‍රේෂ්ඨාධිකරණය. සෑම මට්ටමකට "අභියාදන අවසරය". ශ්‍රේෂ්ඨාධිකරණය = අවසාන්, තවදුර = නෙගහොඩම නියම කරන්න්.'}},
+      {q:{en:'What is the difference between a Tribunal and a Court?',si:'අධිකරණයක් සහ අධිකරණයක් අතරත්රත්න් වෙනස් වෙනස් වෙන් කුමක්ද?'},a:{en:'Courts are established under the Constitution/Judicature Act with general jurisdiction. Tribunals are created by specific statutes and only handle specific case types. Tribunal appeals usually go to the Court of Appeal.',si:'අධිකරණයක් = ව්‍යවස්ථ්තා වියම/විනිශ්චාරකය යටුතේ් පිහිට හිටය. ට්‍රිබියුනල = විශේෂ් පනත් යටත් යටුත් යටුවන් හිටය. ට්‍රිබියුනලයන් අභියාදනය → අභියාදන අධිකරණයට යයායන් යිය.'}},
+      {q:{en:'Does Sri Lanka have jury trials?',si:'ශ්‍රී ලංකාවක ජූරි විභාගය තියේද?'},a:{en:'Jury trials were suspended in 1978. Currently all trials are by judge alone. Minister of Justice can reinstate jury trials but has not done so.',si:'ජූරි විභාගය 1978 දී ජූරි විභාගය අත්හිටුවුණි. දැනට සියල් වියම වින් විනිශ්චාරකරණයේ විනිකිරිපාන් පමණයි.'}},
+      {q:{en:'What is a Fundamental Rights petition?',si:'මූලික අයිතිවාසිකරණයක් පෙත්සමක් කරන්න පෙත්සම් පන්.'},a:{en:'A petition filed directly in the Supreme Court under Article 126 of the Constitution alleging violation of a fundamental right. Must be filed within 30 days of the alleged violation. The court can grant compensation, declarations, and directives.',si:'ව්‍යවස්ථාත්‍රිකරණය යටුත් විනිශ්චාරකණයට 30 දවසේ අභියාදනන්. Supreme Court Article 126 යටින් ගොනු කරන පෙත්සම් කරන්න්. වන්දෙන් දෙනස් නියම කරයි, ප්‍රතිර වියම නියම.'}},
+      {q:{en:'What is a writ of Mandamus?',si:'Mandamus writ කෙන්න් කියන්න්ක්?'},a:{en:'Writ compelling a person or body to perform a public duty they are legally required to do. Used when a government officer refuses to do their duty.',si:'නීතිය ලෙසින බලය කරන පොදුවෙන් නියම කරන ලෙස් බලය කරන ලෙස් නියම කරන ලෙස
