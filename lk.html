@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlobalLaw Sri Lanka - Know Your Rights. Understand the Law.</title>
-  <meta name="description" content="Sri Lanka's laws explained simply in English and Sinhala. Browse cyber laws, criminal laws, civil laws and more.">
+  <meta name="description" content="Sri Lanka's laws explained simply in English and Sinhala. Browse 52 categories covering cyber, criminal, civil, tax, environmental laws and more.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -49,6 +49,12 @@
     .dot-bg{background-image:radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0);background-size:36px 36px}
     .read-more{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:#DC2626;transition:gap .2s}
     .read-more:hover{gap:8px}
+    .sit-card{transition:all .2s ease}
+    .sit-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(220,38,38,.08)}
+    @keyframes countUp{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+    .count-anim{animation:countUp .6s ease forwards}
+    .no-scrollbar::-webkit-scrollbar{display:none}
+    .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
   </style>
 </head>
 
@@ -56,7 +62,7 @@
 
   <!-- ============ ANNOUNCEMENT BANNER ============ -->
   <div id="announceBar" class="bg-brand-red text-white text-center py-2 px-4 text-xs md:text-sm font-medium relative z-[60]">
-    <span data-i18n="announce">🚀 GlobalLaw Sri Lanka is live! Browse laws simply and freely.</span>
+    <span data-i18n="announce">🚀 52 law categories now available! Browse Sri Lanka's complete legal guide.</span>
     <button onclick="document.getElementById('announceBar').style.display='none'" class="absolute right-3 top-1/2 -translate-y-1/2 hover:opacity-60 transition p-1" aria-label="Close">
       <i data-lucide="x" class="w-3.5 h-3.5"></i>
     </button>
@@ -67,7 +73,7 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between h-14 md:h-16">
 
-        <!-- Logo → back to country selector -->
+        <!-- Logo -->
         <a href="index.html" class="flex items-center gap-1.5 shrink-0" title="Change Country">
           <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span>
           <span class="text-base md:text-lg">🇱🇰</span>
@@ -83,12 +89,11 @@
 
         <!-- Right Controls -->
         <div class="flex items-center gap-1.5 md:gap-2.5">
-          <!-- Search icon (desktop) -->
           <button onclick="document.getElementById('heroSearch').focus()" class="hidden md:flex w-8 h-8 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Search">
             <i data-lucide="search" class="w-4 h-4 text-neutral-500"></i>
           </button>
 
-          <!-- Language Switch EN/SI -->
+          <!-- Language Switch -->
           <div class="relative">
             <button onclick="toggleLangDD()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
               <i data-lucide="globe" class="w-3 h-3"></i>
@@ -105,7 +110,7 @@
             </div>
           </div>
 
-          <!-- Dark/Light Toggle -->
+          <!-- Dark/Light -->
           <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Toggle theme">
             <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
             <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i>
@@ -113,7 +118,7 @@
 
           <!-- Mobile Hamburger -->
           <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Menu">
-            <i data-lucide="menu" class="w-5 h-5" id="mobIcon"></i>
+            <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
       </div>
@@ -142,7 +147,6 @@
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-red/[0.04] rounded-full blur-[80px]"></div>
 
     <div class="relative max-w-4xl mx-auto px-4 md:px-6 pt-14 pb-16 md:pt-20 md:pb-24 text-center">
-      <!-- Country Badge -->
       <div class="inline-flex items-center gap-2 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-4 py-1.5 text-xs font-medium mb-6 fu">
         <span>🇱🇰</span>
         <span class="text-neutral-500 dark:text-neutral-400" data-i18n="heroBadge">Sri Lanka</span>
@@ -155,7 +159,7 @@
       </h1>
 
       <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10 fu fu2" data-i18n="heroSub">
-        Sri Lanka's laws explained simply. Search, browse, and understand your legal rights in minutes.
+        52 categories. 200+ laws explained simply. Search, browse, and understand your legal rights in minutes.
       </p>
 
       <!-- Search Bar -->
@@ -171,6 +175,8 @@
           <button onclick="qSearch('Land Dispute')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">🏠 Land Dispute</button>
           <button onclick="qSearch('Workers Rights')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">💼 Workers Rights</button>
           <button onclick="qSearch('Online Safety Bill')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition">🛡️ Online Safety</button>
+          <button onclick="qSearch('Tax')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition hidden sm:inline-flex">💰 Tax Laws</button>
+          <button onclick="qSearch('Environmental')" class="text-[11px] sm:text-xs bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 text-neutral-500 hover:border-brand-red hover:text-brand-red transition hidden sm:inline-flex">🌿 Environment</button>
         </div>
       </div>
     </div>
@@ -186,6 +192,7 @@
         <a href="tel:1919" class="flex items-center gap-1 hover:underline"><i data-lucide="shield" class="w-3 h-3"></i><span data-i18n="emCERT">CERT - 1919</span></a>
         <a href="tel:1929" class="flex items-center gap-1 hover:underline"><i data-lucide="baby" class="w-3 h-3"></i><span data-i18n="emChild">Child Protection - 1929</span></a>
         <a href="tel:1990" class="flex items-center gap-1 hover:underline"><i data-lucide="heart-pulse" class="w-3 h-3"></i><span data-i18n="emAmb">Ambulance - 1990</span></a>
+        <a href="tel:1190" class="flex items-center gap-1 hover:underline"><i data-lucide="flame" class="w-3 h-3"></i><span data-i18n="emFire">Fire - 1190</span></a>
       </div>
     </div>
   </section>
@@ -198,30 +205,57 @@
       <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm text-center mb-6 md:mb-8" data-i18n="qsSub">Tap to find relevant laws instantly</p>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 md:gap-4">
-        <a href="lk-categories.html?cat=criminal" class="cat-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+        <!-- Row 1 -->
+        <a href="lk-categories.html?cat=criminal" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
           <div class="text-2xl sm:text-3xl mb-1.5">🚔</div>
           <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsArrest">Got Arrested?</div>
           <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsArrestS">Know your rights</div>
         </a>
-        <a href="lk-categories.html?cat=cyber" class="cat-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+        <a href="lk-categories.html?cat=cyber" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
           <div class="text-2xl sm:text-3xl mb-1.5">💬</div>
           <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsCyber">Cyber Bullying?</div>
           <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsCyberS">Report & protect</div>
         </a>
-        <a href="lk-categories.html?cat=property" class="cat-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+        <a href="lk-categories.html?cat=property" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
           <div class="text-2xl sm:text-3xl mb-1.5">🏠</div>
           <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsLand">Land Dispute?</div>
           <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsLandS">Property laws</div>
         </a>
-        <a href="lk-categories.html?cat=labor" class="cat-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+        <a href="lk-categories.html?cat=labor" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
           <div class="text-2xl sm:text-3xl mb-1.5">💼</div>
           <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsWork">Workplace Issue?</div>
           <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsWorkS">Labor rights</div>
         </a>
-        <a href="lk-categories.html?cat=family" class="cat-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group col-span-2 sm:col-span-1">
+        <a href="lk-categories.html?cat=family" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group col-span-2 sm:col-span-1">
           <div class="text-2xl sm:text-3xl mb-1.5">👨‍👩‍👧</div>
           <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsFam">Family Issue?</div>
           <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsFamS">Marriage & divorce</div>
+        </a>
+        <!-- Row 2 -->
+        <a href="lk-categories.html?cat=motor" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+          <div class="text-2xl sm:text-3xl mb-1.5">🚗</div>
+          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsMotor">Traffic Accident?</div>
+          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsMotorS">Vehicle laws</div>
+        </a>
+        <a href="lk-categories.html?cat=tax" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+          <div class="text-2xl sm:text-3xl mb-1.5">💰</div>
+          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsTax">Tax Problem?</div>
+          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsTaxS">Tax laws</div>
+        </a>
+        <a href="lk-categories.html?cat=environmental" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+          <div class="text-2xl sm:text-3xl mb-1.5">🌿</div>
+          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsEnv">Environmental Issue?</div>
+          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsEnvS">Protection laws</div>
+        </a>
+        <a href="lk-categories.html?cat=consumer" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group">
+          <div class="text-2xl sm:text-3xl mb-1.5">🛒</div>
+          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsCons">Consumer Complaint?</div>
+          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsConsS">Your rights</div>
+        </a>
+        <a href="lk-categories.html?cat=ip" class="sit-card bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 sm:p-4 text-center hover:border-brand-red group col-span-2 sm:col-span-1">
+          <div class="text-2xl sm:text-3xl mb-1.5">💡</div>
+          <div class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="qsIP">IP Infringement?</div>
+          <div class="text-[10px] sm:text-xs text-neutral-400 mt-0.5" data-i18n="qsIPS">Copyright & patents</div>
         </a>
       </div>
     </div>
@@ -234,10 +268,10 @@
       <div class="flex items-end justify-between mb-6 md:mb-8">
         <div>
           <h2 class="text-lg sm:text-xl md:text-2xl font-bold" data-i18n="catTitle">Browse Law Categories</h2>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-0.5" data-i18n="catSub">Explore Sri Lankan laws by topic</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-0.5" data-i18n="catSub">52 categories covering every aspect of Sri Lankan law</p>
         </div>
         <a href="lk-categories.html" class="hidden sm:flex items-center gap-1 text-xs sm:text-sm font-semibold text-brand-red hover:underline">
-          <span data-i18n="viewAll">View All</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          <span data-i18n="viewAll">View All 52 →</span>
         </a>
       </div>
 
@@ -254,17 +288,6 @@
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
-        <!-- Fundamental Rights -->
-        <a href="lk-categories.html?cat=fundamental" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
-          <div class="flex items-start justify-between mb-3">
-            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🛡️</div>
-            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
-          </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cFund">Fundamental Rights</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFundD">Constitutional rights, equality, freedom of speech, and human rights protections.</p>
-          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
-        </a>
-
         <!-- Criminal Laws -->
         <a href="lk-categories.html?cat=criminal" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
           <div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">🔥 POPULAR</div>
@@ -273,7 +296,18 @@
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">15 Laws</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCrim">Criminal Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCrimD">Fraud, theft, assault, penalties, and criminal procedure codes explained.</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCrimD">Fraud, theft, assault, penalties, weapons, and criminal procedure codes.</p>
+          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+        </a>
+
+        <!-- Fundamental Rights -->
+        <a href="lk-categories.html?cat=fundamental" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🛡️</div>
+            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cFund">Fundamental Rights</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFundD">Constitutional rights, equality, freedom of speech, and human rights.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
@@ -284,7 +318,7 @@
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">10 Laws</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCivil">Civil Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCivilD">Land disputes, contracts, civil procedure, and property-related matters.</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cCivilD">Land disputes, contracts, tort, compensation, and civil procedure.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
@@ -295,7 +329,30 @@
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">9 Laws</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cLab">Corporate / Labor Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cLabD">Employment rights, EPF, ETF, and workplace protections.</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cLabD">Employment rights, EPF, ETF, company registration, securities.</p>
+          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+        </a>
+
+        <!-- Tax Laws -->
+        <a href="lk-categories.html?cat=tax" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
+          <div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">🔥 POPULAR</div>
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💰</div>
+            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cTax">Tax Laws</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cTaxD">Income tax, VAT, customs, excise, and revenue regulations.</p>
+          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+        </a>
+
+        <!-- Environmental Laws -->
+        <a href="lk-categories.html?cat=environmental" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🌿</div>
+            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">9 Laws</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cEnv">Environmental Laws</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cEnvD">Wildlife, forestry, water, marine, mining, and pollution control.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
@@ -307,7 +364,7 @@
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">7 Laws</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cMotor">Motor Vehicle Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cMotorD">Traffic regulations, fines, license laws, and accident procedures.</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cMotorD">Traffic regulations, fines, license laws, railway, and aviation.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
@@ -318,25 +375,79 @@
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">6 Laws</span>
           </div>
           <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cFam">Family Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFamD">Marriage, divorce, child custody, inheritance, and domestic violence.</p>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cFamD">Marriage, divorce, child custody, inheritance, domestic violence.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
-        <!-- Property Laws -->
+        <!-- Property & Land -->
         <a href="lk-categories.html?cat=property" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
           <div class="flex items-start justify-between mb-3">
             <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🏠</div>
             <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">8 Laws</span>
           </div>
-          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cProp">Property Laws</h3>
-          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cPropD">Land ownership, transfers, leases, mortgages, and registration.</p>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cProp">Property & Land Laws</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cPropD">Land ownership, transfers, leases, mortgages, housing, construction.</p>
+          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+        </a>
+
+        <!-- Consumer Protection -->
+        <a href="lk-categories.html?cat=consumer" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block">
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">🛒</div>
+            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">6 Laws</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cCons">Consumer Protection</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cConsD">Consumer rights, contracts, insurance, cooperatives, tourism.</p>
+          <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+        </a>
+
+        <!-- Intellectual Property -->
+        <a href="lk-categories.html?cat=ip" class="cat-card bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 hover:border-brand-red group block relative overflow-hidden">
+          <div class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">NEW</div>
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-11 h-11 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-xl">💡</div>
+            <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">7 Laws</span>
+          </div>
+          <h3 class="font-bold text-sm sm:text-base mb-1 group-hover:text-brand-red transition" data-i18n="cIP">Intellectual Property</h3>
+          <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3" data-i18n="cIPD">Copyright, trademarks, patents, data protection, AI & tech laws.</p>
           <span class="read-more" data-i18n="readMore">Read More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
         </a>
 
       </div>
 
       <div class="mt-5 text-center sm:hidden">
-        <a href="lk-categories.html" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-red"><span data-i18n="viewAll">View All Categories</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+        <a href="lk-categories.html" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-red"><span data-i18n="viewAll">View All 52 Categories</span><i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+
+      <!-- More categories teaser -->
+      <div class="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
+        <a href="lk-categories.html?cat=health" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">🏥</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreHealth">Health</div>
+        </a>
+        <a href="lk-categories.html?cat=education" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">📚</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreEdu">Education</div>
+        </a>
+        <a href="lk-categories.html?cat=election" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">🗳️</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreElect">Elections</div>
+        </a>
+        <a href="lk-categories.html?cat=human-rights" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">🙌</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreHR">Human Rights</div>
+        </a>
+        <a href="lk-categories.html?cat=media" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">📢</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreMedia">Media</div>
+        </a>
+        <a href="lk-categories.html?cat=military" class="text-center py-2.5 px-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group text-[10px] sm:text-xs">
+          <div class="text-lg sm:text-xl mb-0.5">🎖️</div>
+          <div class="font-medium text-neutral-500 group-hover:text-brand-red transition" data-i18n="moreMil">Military</div>
+        </a>
+      </div>
+      <div class="text-center mt-3">
+        <a href="lk-categories.html" class="text-[11px] text-neutral-400 hover:text-brand-red transition font-medium" data-i18n="moreTeaser">+ 40 more categories including Agriculture, Banking, Maritime, Sports, Gambling & more →</a>
       </div>
     </div>
   </section>
@@ -429,6 +540,42 @@
           </div>
         </a>
 
+        <a href="lk-law-details.html?id=anti-corruption" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
+          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🔍</div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr7">Anti-Corruption Laws</h4>
+            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr7S">Bribery commission, asset declarations & penalties</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 shrink-0">
+            <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trHot">HOT</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
+          </div>
+        </a>
+
+        <a href="lk-law-details.html?id=ip-act" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
+          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">💡</div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr8">Intellectual Property Act</h4>
+            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr8S">Copyright, trademark registration & infringement penalties</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 shrink-0">
+            <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trRise">RISING</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
+          </div>
+        </a>
+
+        <a href="lk-law-details.html?id=environment-protection" class="trend-card flex items-start sm:items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3.5 sm:p-4 group">
+          <div class="w-10 h-10 rounded-lg bg-brand-red/10 flex items-center justify-center text-lg shrink-0">🌿</div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-semibold text-xs sm:text-sm group-hover:text-brand-red transition truncate" data-i18n="tr9">Environmental Protection</h4>
+            <p class="text-[11px] text-neutral-400 mt-0.5 line-clamp-1" data-i18n="tr9S">NEA regulations, EIA requirements & pollution controls</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 shrink-0">
+            <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[9px] font-bold px-1.5 py-0.5 rounded" data-i18n="trUpd">UPDATED</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red transition"></i>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -481,22 +628,22 @@
       <h2 class="text-lg sm:text-xl font-bold text-center mb-6" data-i18n="statTitle">GlobalLaw Sri Lanka in Numbers</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
         <a href="lk-categories.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red">75+</div>
+          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim">200+</div>
           <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statLaws">Laws Explained</div>
           <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statBrowse">Browse all →</div>
         </a>
         <a href="lk-categories.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red">8</div>
+          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.1s">52</div>
           <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statCat">Categories</div>
           <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statBrowse">Browse all →</div>
         </a>
         <a href="lk-about.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red">2</div>
+          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.2s">2</div>
           <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statLang">Languages</div>
-          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statLearn">Learn more →</div>
+          <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statLearn">EN / සිංහල →</div>
         </a>
         <a href="lk-about.html" class="text-center p-4 md:p-5 bg-neutral-50 dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition group">
-          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red">100%</div>
+          <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-red count-anim" style="animation-delay:.3s">100%</div>
           <div class="text-neutral-500 dark:text-neutral-400 text-[10px] sm:text-xs mt-1" data-i18n="statFree">Free Forever</div>
           <div class="text-[10px] text-brand-red mt-1 opacity-0 group-hover:opacity-100 transition" data-i18n="statLearn">Learn more →</div>
         </a>
@@ -505,8 +652,51 @@
   </section>
 
 
-  <!-- ============ REPORT CYBER CRIME ============ -->
+  <!-- ============ CATEGORY SPOTLIGHT (New Section) ============ -->
   <section class="py-10 md:py-14 bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-1.5" data-i18n="spotTitle">Explore by Domain</h2>
+        <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm" data-i18n="spotSub">52 categories organized into key legal areas</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+        <a href="lk-categories.html?filter=popular" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">🔥</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotPop">Popular</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotPopS">Most viewed</div>
+        </a>
+        <a href="lk-categories.html?filter=new" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">🆕</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotNew">Newly Added</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotNewS">Latest updates</div>
+        </a>
+        <a href="lk-categories.html?search=rights" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">🛡️</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotRights">Rights & Freedoms</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotRightsS">12 categories</div>
+        </a>
+        <a href="lk-categories.html?search=business" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">📊</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotBiz">Business & Trade</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotBizS">8 categories</div>
+        </a>
+        <a href="lk-categories.html?search=crime" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">⚖️</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotCrime">Crime & Enforcement</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotCrimeS">10 categories</div>
+        </a>
+        <a href="lk-categories.html?search=nature" class="group text-center p-4 bg-white dark:bg-brand-dark-card rounded-2xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          <div class="text-3xl mb-2">🌍</div>
+          <div class="font-bold text-xs sm:text-sm group-hover:text-brand-red transition" data-i18n="spotNature">Nature & Resources</div>
+          <div class="text-[10px] text-neutral-400 mt-0.5" data-i18n="spotNatureS">8 categories</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ REPORT CYBER CRIME ============ -->
+  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
     <div class="max-w-3xl mx-auto px-4 md:px-6 text-center">
       <div class="text-4xl sm:text-5xl mb-3">🚨</div>
       <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-2" data-i18n="rpTitle">Report a Cyber Crime</h2>
@@ -518,7 +708,7 @@
           <i data-lucide="shield" class="w-4 h-4"></i>
           <span data-i18n="rpCERT">Report to CERT (1919)</span>
         </a>
-        <a href="lk-contact.html#report" class="inline-flex items-center gap-2 bg-white dark:bg-brand-dark-card hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-semibold px-6 py-3 rounded-xl border border-neutral-200 dark:border-brand-dark-border transition w-full sm:w-auto justify-center">
+        <a href="lk-contact.html#report" class="inline-flex items-center gap-2 bg-neutral-50 dark:bg-brand-dark-card hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-semibold px-6 py-3 rounded-xl border border-neutral-200 dark:border-brand-dark-border transition w-full sm:w-auto justify-center">
           <i data-lucide="phone" class="w-4 h-4"></i>
           <span data-i18n="rpCID">Call CID</span>
         </a>
@@ -533,7 +723,7 @@
 
 
   <!-- ============ COURT HIERARCHY ============ -->
-  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
+  <section class="py-10 md:py-14 bg-neutral-50 dark:bg-brand-dark transition-colors">
     <div class="max-w-3xl mx-auto px-4 md:px-6">
       <div class="text-center mb-6 md:mb-8">
         <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-1" data-i18n="courtTitle">Sri Lanka's Court System</h2>
@@ -558,13 +748,13 @@
 
 
   <!-- ============ NEWSLETTER ============ -->
-  <section class="py-10 md:py-14 bg-neutral-50 dark:bg-brand-dark transition-colors">
+  <section class="py-10 md:py-14 bg-white dark:bg-brand-dark transition-colors">
     <div class="max-w-md mx-auto px-4 md:px-6 text-center">
       <i data-lucide="mail" class="w-8 h-8 text-brand-red mx-auto mb-3"></i>
       <h2 class="text-base sm:text-lg font-bold mb-1.5" data-i18n="nlTitle">Stay Updated</h2>
       <p class="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mb-5" data-i18n="nlDesc">Get new law explanations to your email. No spam.</p>
       <div class="flex flex-col sm:flex-row gap-2.5">
-        <input type="email" data-i18n-placeholder="nlPH" placeholder="Enter your email" class="flex-1 px-3.5 py-2.5 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition">
+        <input type="email" data-i18n-placeholder="nlPH" placeholder="Enter your email" class="flex-1 px-3.5 py-2.5 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition">
         <button onclick="toast('Thanks for subscribing! 🎉')" class="bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition shrink-0" data-i18n="nlBtn">Subscribe</button>
       </div>
       <p class="text-[10px] text-neutral-400 mt-2.5" data-i18n="nlPriv">We respect your privacy. Unsubscribe anytime.</p>
@@ -577,14 +767,12 @@
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
 
-        <!-- Brand -->
         <div class="col-span-2 md:col-span-1">
           <div class="text-xl font-extrabold tracking-tight mb-2.5"><span class="text-brand-red">Global</span>Law <span class="text-base">🇱🇰</span></div>
-          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone through simple explanations.</p>
+          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone through simple explanations across 52 categories.</p>
           <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-i18n="ftDisc">⚠️ Disclaimer: Educational platform only. Not official legal advice. Always consult a qualified lawyer.</div>
         </div>
 
-        <!-- Quick Links -->
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftQL">Quick Links</h4>
           <ul class="space-y-2 text-xs">
@@ -596,7 +784,6 @@
           </ul>
         </div>
 
-        <!-- Legal Links -->
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftLL">Legal Links</h4>
           <ul class="space-y-2 text-xs">
@@ -608,7 +795,6 @@
           </ul>
         </div>
 
-        <!-- Contact -->
         <div>
           <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftCon">Contact</h4>
           <ul class="space-y-2 text-xs">
@@ -620,7 +806,6 @@
 
       </div>
 
-      <!-- Bottom -->
       <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-neutral-500 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
         <p class="text-neutral-500 text-[11px]">Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a> <span class="text-neutral-600 mx-0.5">|</span> DMC Group</p>
@@ -653,24 +838,33 @@
     // ===== TRANSLATIONS =====
     const L={
       en:{
-        announce:'🚀 GlobalLaw Sri Lanka is live! Browse laws simply and freely.',
+        announce:'🚀 52 law categories now available! Browse Sri Lanka\'s complete legal guide.',
         navHome:'Home',navCat:'Categories',navAbout:'About Us',navContact:'Contact',navSupport:'Support',navCredits:'Credits',
         searchPH:'Try "Cyber Crime Act" or "Land Dispute"...',searchBtn:'Search',
         heroBadge:'Sri Lanka',heroT1:'Know Your Rights.',heroT2:'Understand the Law.',
-        heroSub:"Sri Lanka's laws explained simply. Search, browse, and understand your legal rights in minutes.",
-        emLabel:'🚨 Emergency:',emPolice:'Police - 119',emCERT:'CERT - 1919',emChild:'Child Protection - 1929',emAmb:'Ambulance - 1990',
+        heroSub:'52 categories. 200+ laws explained simply. Search, browse, and understand your legal rights in minutes.',
+        emLabel:'🚨 Emergency:',emPolice:'Police - 119',emCERT:'CERT - 1919',emChild:'Child Protection - 1929',emAmb:'Ambulance - 1990',emFire:'Fire - 1190',
         qsTitle:"What's your situation?",qsSub:'Tap to find relevant laws instantly',
         qsArrest:'Got Arrested?',qsArrestS:'Know your rights',qsCyber:'Cyber Bullying?',qsCyberS:'Report & protect',
         qsLand:'Land Dispute?',qsLandS:'Property laws',qsWork:'Workplace Issue?',qsWorkS:'Labor rights',qsFam:'Family Issue?',qsFamS:'Marriage & divorce',
-        catTitle:'Browse Law Categories',catSub:'Explore Sri Lankan laws by topic',viewAll:'View All',readMore:'Read More',
+        qsMotor:'Traffic Accident?',qsMotorS:'Vehicle laws',qsTax:'Tax Problem?',qsTaxS:'Tax laws',
+        qsEnv:'Environmental Issue?',qsEnvS:'Protection laws',qsCons:'Consumer Complaint?',qsConsS:'Your rights',
+        qsIP:'IP Infringement?',qsIPS:'Copyright & patents',
+        catTitle:'Browse Law Categories',catSub:'52 categories covering every aspect of Sri Lankan law',viewAll:'View All 52 →',readMore:'Read More',
         cCyber:'Cyber Laws',cCyberD:'Computer and internet laws, cyber crime, online safety, and digital privacy.',
-        cFund:'Fundamental Rights',cFundD:'Constitutional rights, equality, freedom of speech, and human rights protections.',
-        cCrim:'Criminal Laws',cCrimD:'Fraud, theft, assault, penalties, and criminal procedure codes explained.',
-        cCivil:'Civil Laws',cCivilD:'Land disputes, contracts, civil procedure, and property-related matters.',
-        cLab:'Corporate / Labor Laws',cLabD:'Employment rights, EPF, ETF, and workplace protections.',
-        cMotor:'Motor Vehicle Laws',cMotorD:'Traffic regulations, fines, license laws, and accident procedures.',
-        cFam:'Family Laws',cFamD:'Marriage, divorce, child custody, inheritance, and domestic violence.',
-        cProp:'Property Laws',cPropD:'Land ownership, transfers, leases, mortgages, and registration.',
+        cCrim:'Criminal Laws',cCrimD:'Fraud, theft, assault, penalties, weapons, and criminal procedure codes.',
+        cFund:'Fundamental Rights',cFundD:'Constitutional rights, equality, freedom of speech, and human rights.',
+        cCivil:'Civil Laws',cCivilD:'Land disputes, contracts, tort, compensation, and civil procedure.',
+        cLab:'Corporate / Labor Laws',cLabD:'Employment rights, EPF, ETF, company registration, securities.',
+        cTax:'Tax Laws',cTaxD:'Income tax, VAT, customs, excise, and revenue regulations.',
+        cEnv:'Environmental Laws',cEnvD:'Wildlife, forestry, water, marine, mining, and pollution control.',
+        cMotor:'Motor Vehicle Laws',cMotorD:'Traffic regulations, fines, license laws, railway, and aviation.',
+        cFam:'Family Laws',cFamD:'Marriage, divorce, child custody, inheritance, domestic violence.',
+        cProp:'Property & Land Laws',cPropD:'Land ownership, transfers, leases, mortgages, housing, construction.',
+        cCons:'Consumer Protection',cConsD:'Consumer rights, contracts, insurance, cooperatives, tourism.',
+        cIP:'Intellectual Property',cIPD:'Copyright, trademarks, patents, data protection, AI & tech laws.',
+        moreHealth:'Health',moreEdu:'Education',moreElect:'Elections',moreHR:'Human Rights',moreMedia:'Media',moreMil:'Military',
+        moreTeaser:'+ 40 more categories including Agriculture, Banking, Maritime, Sports, Gambling & more →',
         trTitle:'🔥 Trending Laws',trSub:'Most searched in Sri Lanka right now',
         tr1:'Online Safety Bill',tr1S:'New digital safety regulations affecting social media users',
         tr2:'Child Protection Laws',tr2S:'Child rights, abuse prevention & reporting procedures',
@@ -678,39 +872,55 @@
         tr4:'Cyber Crime Act',tr4S:'Hacking, online fraud, identity theft penalties',
         tr5:'Domestic Violence Act',tr5S:'Protection orders, rights & legal remedies',
         tr6:'EPF & ETF Regulations',tr6S:'Employee fund benefits, withdrawal & calculation',
+        tr7:'Anti-Corruption Laws',tr7S:'Bribery commission, asset declarations & penalties',
+        tr8:'Intellectual Property Act',tr8S:'Copyright, trademark registration & infringement penalties',
+        tr9:'Environmental Protection',tr9S:'NEA regulations, EIA requirements & pollution controls',
         trHot:'HOT',trRise:'RISING',trUpd:'UPDATED',
         lotwBadge:'LAW OF THE WEEK',lotwTitle:'Penal Code (No. 2 of 1883)',
         lotwDesc:"Sri Lanka's primary criminal law defining offences and punishments. Recently amended with cyber crime and online harassment provisions.",
         lotwBtn:'Read Full Explanation',lotwLink:'View full details →',
         lotwSec:'Sections',lotwYr:'Enacted',lotwUpd:'Last Amended',lotwTime:'Read Time',
         statTitle:'GlobalLaw Sri Lanka in Numbers',statLaws:'Laws Explained',statCat:'Categories',statLang:'Languages',statFree:'Free Forever',statBrowse:'Browse all →',statLearn:'Learn more →',
+        spotTitle:'Explore by Domain',spotSub:'52 categories organized into key legal areas',
+        spotPop:'Popular',spotPopS:'Most viewed',spotNew:'Newly Added',spotNewS:'Latest updates',
+        spotRights:'Rights & Freedoms',spotRightsS:'12 categories',spotBiz:'Business & Trade',spotBizS:'8 categories',
+        spotCrime:'Crime & Enforcement',spotCrimeS:'10 categories',spotNature:'Nature & Resources',spotNatureS:'8 categories',
         rpTitle:'Report a Cyber Crime',rpDesc:'Victim of cyber bullying, hacking, or online fraud? Don\'t wait — report it now.',
         rpCERT:'Report to CERT (1919)',rpCID:'Call CID',rpWarn:'For emergencies, call 119 immediately. GlobalLaw is educational, not law enforcement.',rpMore:'View all emergency contacts & reporting guide →',
         courtTitle:"Sri Lanka's Court System",courtSub:'How the legal system works, simplified',courtMore:'Learn how the court system works in detail',
         nlTitle:'Stay Updated',nlDesc:'Get new law explanations to your email. No spam.',nlPH:'Enter your email',nlBtn:'Subscribe',nlPriv:'We respect your privacy. Unsubscribe anytime.',
-        ftDesc:"Making Sri Lanka's law accessible to everyone through simple explanations.",
+        ftDesc:"Making Sri Lanka's law accessible to everyone through simple explanations across 52 categories.",
         ftDisc:'⚠️ Disclaimer: Educational platform only. Not official legal advice. Always consult a qualified lawyer.',
         ftQL:'Quick Links',ftLL:'Legal Links',ftCon:'Contact',ftPriv:'Privacy Policy',ftTerms:'Terms of Use',
       },
       si:{
-        announce:'🚀 GlobalLaw ශ්‍රී ලංකාව දැන් ක්‍රියාත්මකයි! නීති සරලව බලන්න.',
+        announce:'🚀 52 නීති කාණ්ඩ දැන් ලබා ගන්න! ශ්‍රී ලංකාවේ සම්පූර්ණ නීති මාර්ගෝපදේශය.',
         navHome:'මුල් පිටුව',navCat:'කාණ්ඩ',navAbout:'අප ගැන',navContact:'සම්බන්ධ කරගන්න',navSupport:'සහාය',navCredits:'ස්තුතිය',
         searchPH:'"සයිබර් අපරාධ" හෝ "ඉඩම් ආරවුල" උත්සාහ කරන්න...',searchBtn:'සොයන්න',
         heroBadge:'ශ්‍රී ලංකාව',heroT1:'ඔබේ අයිතිවාසිකම්',heroT2:'සරලව දන්න.',
-        heroSub:'ශ්‍රී ලංකාවේ නීති සරලව පැහැදිලි කරලා. මිනිත්තු කිහිපයකින් අයිතිවාසිකම් තේරුම් ගන්න.',
-        emLabel:'🚨 හදිසි:',emPolice:'පොලිසිය - 119',emCERT:'CERT - 1919',emChild:'ළමා ආරක්ෂාව - 1929',emAmb:'ඇම්බියුලන්ස් - 1990',
+        heroSub:'52 කාණ්ඩ. 200+ නීති සරලව පැහැදිලි කරලා. මිනිත්තු කිහිපයකින් අයිතිවාසිකම් තේරුම් ගන්න.',
+        emLabel:'🚨 හදිසි:',emPolice:'පොලිසිය - 119',emCERT:'CERT - 1919',emChild:'ළමා ආරක්ෂාව - 1929',emAmb:'ඇම්බියුලන්ස් - 1990',emFire:'ගිනි නිවන - 1190',
         qsTitle:'ඔබේ තත්ත්වය කුමක්ද?',qsSub:'ඔබ්බට ඔබන්න, අදාළ නීති හොයන්න',
         qsArrest:'අත්අඩංගුවට ගත්තොත්?',qsArrestS:'අයිතිවාසිකම්',qsCyber:'සයිබර් බුලියින්ග්?',qsCyberS:'වාර්තා කරන්න',
         qsLand:'ඉඩම් ආරවුලක්ද?',qsLandS:'දේපළ නීති',qsWork:'රැකියා ප්‍රශ්නයක්ද?',qsWorkS:'කම්කරු අයිතිවාසිකම්',qsFam:'පවුල් ප්‍රශ්නයක්ද?',qsFamS:'විවාහ & දික්කෙරීම',
-        catTitle:'නීති කාණ්ඩ බලන්න',catSub:'මාතෘකා අනුව ශ්‍රී ලංකාවේ නීති',viewAll:'සියල්ල බලන්න',readMore:'වැඩි කියවන්න',
+        qsMotor:'රථ වාහන අනතුරක්ද?',qsMotorS:'වාහන නීති',qsTax:'බදු ප්‍රශ්නයක්ද?',qsTaxS:'බදු නීති',
+        qsEnv:'පරිසර ප්‍රශ්නයක්ද?',qsEnvS:'ආරක්ෂණ නීති',qsCons:'පාරිභෝගික පැමිණිල්ලක්ද?',qsConsS:'ඔබේ අයිතිවාසිකම්',
+        qsIP:'බුද්ධිමය දේපළ උල්ලංඝනයක්ද?',qsIPS:'ප්‍රකාශන හා පේටන්ට්',
+        catTitle:'නීති කාණ්ඩ බලන්න',catSub:'ශ්‍රී ලංකාවේ නීතියේ සෑම අංශයක්ම ආවරණය කරන 52 කාණ්ඩ',viewAll:'සියල්ල 52 බලන්න →',readMore:'වැඩි කියවන්න',
         cCyber:'සයිබර් නීති',cCyberD:'පරිගණක සහ අන්තර්ජාල නීති, සයිබර් අපරාධ, මාර්ගගත ආරක්ෂාව.',
+        cCrim:'අපරාධ නීති',cCrimD:'වංචා, හොරකම්, පහරදීම්, දඬුවම්, ආයුධ, අපරාධ විධිවිධාන.',
         cFund:'මූලික අයිතිවාසිකම්',cFundD:'ව්‍යවස්ථාමූලික අයිතිවාසිකම්, සමානාත්මතාව, ප්‍රකාශන නිදහස.',
-        cCrim:'අපරාධ නීති',cCrimD:'වංචා, හොරකම්, පහරදීම්, දඬුවම් සහ අපරාධ විධිවිධාන.',
-        cCivil:'සිවිල් නීති',cCivilD:'ඉඩම් ආරවුල්, ගිවිසුම්, සිවිල් විධිවිධාන.',
-        cLab:'කෝපරේට් / කම්කරු නීති',cLabD:'රැකියා අයිතිවාසිකම්, EPF, ETF, සේවා ආරක්ෂාව.',
-        cMotor:'මෝටර් රථ නීති',cMotorD:'මාර්ග රීති, දඩ, බලපත්‍ර නීති.',
+        cCivil:'සිවිල් නීති',cCivilD:'ඉඩම් ආරවුල්, ගිවිසුම්, වැරදි ක්‍රියා, වන්දි, සිවිල් විධිවිධාන.',
+        cLab:'කෝපරේට් / කම්කරු නීති',cLabD:'රැකියා අයිතිවාසිකම්, EPF, ETF, සමාගම් ලියාපදිංචිය.',
+        cTax:'බදු නීති',cTaxD:'ආදායම් බද්ද, VAT, රේගු, බලපත්‍ර, ආදායම් රෙගුලාසි.',
+        cEnv:'පරිසර නීති',cEnvD:'වන සතුන්, වන, ජල, මුහුදු, ඛනිජ, දූෂණ පාලනය.',
+        cMotor:'මෝටර් රථ නීති',cMotorD:'මාර්ග රීති, දඩ, බලපත්‍ර, දුම්රිය, ගුවන් සේවා.',
         cFam:'පවුල් නීති',cFamD:'විවාහ, දික්කෙරීම, ළමා භාරකාරිත්වය, උරුමය.',
-        cProp:'දේපළ නීති',cPropD:'ඉඩම් හිමිකම්, හුවමාරු, බද්ද, බලපත්‍රකරණය.',
+        cProp:'දේපළ හා ඉඩම් නීති',cPropD:'ඉඩම් හිමිකම්, හුවමාරු, බද්ද, බලපත්‍රකරණය, නිවාස, ඉදිකිරීම්.',
+        cCons:'පාරිභෝගික ආරක්ෂණය',cConsD:'පාරිභෝගික අයිතිවාසිකම්, ගිවිසුම්, රක්ෂණ, සංගම්, සංචාරක.',
+        cIP:'බුද්ධිමය දේපළ',cIPD:'ප්‍රකාශන, වෙළඳ ලකුණු, පේටන්ට්, දත්ත ආරක්ෂණ, AI නීති.',
+        moreHealth:'සෞඛ්‍ය',moreEdu:'අධ්‍යාපන',moreElect:'මැතිවරණ',moreHR:'මානව අයිතිවාසිකම්',moreMedia:'මාධ්‍ය',moreMil:'හමුදා',
+        moreTeaser:'+ කෘෂිකර්ම, බැංකු, නාවික, ක්‍රීඩා, ජූලා ඇතුළු තවත් 40+ කාණ්ඩ →',
         trTitle:'🔥 ජනප්‍රිය නීති',trSub:'දැන් වැඩියෙන්ම සොයන නීති',
         tr1:'Online Safety Bill',tr1S:'සමාජ මාධ්‍ය පරිශීලකයන්ට බලපාන නව ඩිජිටල් ආරක්ෂණ රෙගුලාසි',
         tr2:'ළමා ආරක්ෂණ නීති',tr2S:'ළමා අයිතිවාසිකම්, අපචාර වැළැක්වීම සහ වාර්තා කිරීම',
@@ -718,17 +928,24 @@
         tr4:'සයිබර් අපරාධ පනත',tr4S:'හැකිං, මාර්ගගත වංචා, අනන්‍යතාවය සොරකම් දඬුවම්',
         tr5:'ගෘහස්ථ ප්‍රචණ්ඩත්වය පනත',tr5S:'ආරක්ෂා ආඥා, අයිතිවාසිකම් සහ නෛතික විසඳුම්',
         tr6:'EPF & ETF රෙගුලාසි',tr6S:'සේවක අරමුදල් ප්‍රතිලාභ, ආපසු ගැනීම සහ ගණනය',
+        tr7:'දූෂණ විරෝධී නීති',tr7S:'අල්ලස් කොමිසම, වත්කම් ප්‍රකාශයන් සහ දඬුවම්',
+        tr8:'බුද්ධිමය දේපළ පනත',tr8S:'ප්‍රකාශන, වෙළඳ ලකුණු ලියාපදිංචිය සහ උල්ලංඝන දඬුවම්',
+        tr9:'පරිසර ආරක්ෂණය',tr9S:'NEA රෙගුලාසි, EIA අවශ්‍යතා සහ දූෂණ පාලනය',
         trHot:'ජනප්‍රිය',trRise:'ඉහළ යන',trUpd:'යාවත්කාලීන',
         lotwBadge:'සතියේ නීතිය',lotwTitle:'දණ්ඩ නීති සංග්‍රහය (1883 අංක 2)',
         lotwDesc:'ශ්‍රී ලංකාවේ ප්‍රධාන අපරාධ නීතිය. මෑතකදී සයිබර් අපරාධ සඳහා අලුතින් සංශෝධනය කරලා.',
         lotwBtn:'සම්පූර්ණ පැහැදිලි කියවන්න',lotwLink:'සම්පූර්ණ විස්තර බලන්න →',
         lotwSec:'වගන්ති',lotwYr:'ස්ථාපිත',lotwUpd:'අවසාන සංශෝධනය',lotwTime:'කියවීමේ කාලය',
         statTitle:'GlobalLaw ශ්‍රී ලංකාව ඉලක්කම් වලින්',statLaws:'නීති පැහැදිලි කරලා',statCat:'කාණ්ඩ',statLang:'භාෂා',statFree:'සදහටම නොමිලේ',statBrowse:'සියල්ල බලන්න →',statLearn:'වැඩි දන්න →',
+        spotTitle:'අංශය අනුව ගවේෂණය කරන්න',spotSub:'ප්‍රධාන නීති ක්ෂේත්‍ර යටතේ සංවිධානය කළ 52 කාණ්ඩ',
+        spotPop:'ජනප්‍රිය',spotPopS:'වැඩියෙන්ම බලන',spotNew:'අලුතින් එකතු කළ',spotNewS:'නවතම යාවත්කාලීන',
+        spotRights:'අයිතිවාසිකම් හා නිදහස්',spotRightsS:'12 කාණ්ඩ',spotBiz:'ව්‍යාපාර හා වෙළඳාම',spotBizS:'8 කාණ්ඩ',
+        spotCrime:'අපරාධ හා බලාත්මක කිරීම',spotCrimeS:'10 කාණ්ඩ',spotNature:'ස්වභාවිකය හා සම්පත්',spotNatureS:'8 කාණ්ඩ',
         rpTitle:'සයිබර් අපරාධයක් වාර්තා කරන්න',rpDesc:'සයිබර් බුලියින්ග්, හැකිං හෝ මාර්ගගත වංචාවක් වුණොත් දැන්ම වාර්තා කරන්න.',
         rpCERT:'CERT වෙත වාර්තා කරන්න (1919)',rpCID:'CID ට කතා කරන්න',rpWarn:'හදිසි අවස්ථාවකදී 119 ට කතා කරන්න. GlobalLaw අධ්‍යාපනිකයි.',rpMore:'සියලු හදිසි අංක සහ වාර්තා මාර්ගෝපදේශය බලන්න →',
         courtTitle:'ශ්‍රී ලංකාවේ උසාවි පද්ධතිය',courtSub:'නීති පද්ධතිය ක්‍රියා කරන්නේ කොහොමද',courtMore:'උසාවි පද්ධතිය විස්තරව ඉගෙන ගන්න',
         nlTitle:'යාවත්කාලීන වෙන්න',nlDesc:'අලුත් නීති පැහැදිලි කිරීම් ඊමේල් එකට ගන්න. ස්පෑම් නෑ.',nlPH:'ඊමේල් ලිපිනය ඇතුළත් කරන්න',nlBtn:'දාන්න',nlPriv:'පෞද්ගලිකත්වය ආරක්ෂා කරනවා. ඕනම වෙලාවක නතර කරන්න.',
-        ftDesc:'සරල පැහැදිලි කිරීම් මගින් ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
+        ftDesc:'52 කාණ්ඩ පුරා සරල පැහැදිලි කිරීම් මගින් ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
         ftDisc:'⚠️ අවවාදයයි: අධ්‍යාපනික වේදිකාවක් පමණයි. නිල නීති උපදෙස් නොවේ. සුදුසුකම් ලත් නීතිඥයෙකු උපදෙස් ගන්න.',
         ftQL:'ඉක්මන් සබැඳි',ftLL:'නීතිමය සබැඳි',ftCon:'සම්බන්ධ කරගන්න',ftPriv:'පෞද්ගලිකත්ව ප්‍රතිපත්තිය',ftTerms:'භාවිතා කිරීමේ කොන්දේසි',
       }
@@ -751,7 +968,6 @@
         if(d[k])el.placeholder=d[k];
       });
       document.documentElement.lang=lang==='si'?'si':'en';
-      // Update checkmarks
       document.querySelectorAll('.ld-opt').forEach(b=>{
         const isEn=b.textContent.includes('English');
         const chk=b.querySelector('.ld-chk');
@@ -770,7 +986,6 @@
     }
     function toggleLangDD(){document.getElementById('langDD').classList.toggle('hidden')}
 
-    // Close lang dropdown on outside click
     document.addEventListener('click',e=>{
       if(!e.target.closest('#langBtn')&&!e.target.closest('#langDD'))
         document.getElementById('langDD').classList.add('hidden');
