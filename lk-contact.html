@@ -5,528 +5,932 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support - GlobalLaw Sri Lanka</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{red:'#DC2626','red-dark':'#B91C1C',dark:'#050505','dark-card':'#1A1A1A','dark-border':'#262626'}}}}}</script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#DC2626',
+              'red-dark': '#B91C1C',
+              'red-light': '#FEE2E2',
+              dark: '#050505',
+              'dark-2': '#0A0A0A',
+              card: '#141414',
+              'card-hover': '#1A1A1A',
+              border: '#1E1E1E',
+              'border-light': '#2A2A2A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    *{font-family:'Inter',sans-serif}
-    html{scroll-behavior:smooth}
-    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#DC2626;border-radius:9px}
-    .faq-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
-    .faq-item.open .faq-content{max-height:200px}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .fu{animation:fadeUp .4s ease forwards}.fu1{animation-delay:.06s;opacity:0}.fu2{animation-delay:.12s;opacity:0}
-    @keyframes slideR{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
-    .toast-in{animation:slideR .35s ease forwards}
-    @keyframes pulse-ring{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
-    .wa-pulse::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:#22C55E;animation:pulse-ring 2s ease-out infinite;z-index:-1}
-    @keyframes slideD{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-    .mob-menu{animation:slideD .25s ease forwards}
-    textarea:focus,input:focus,select:focus{outline:none;border-color:#DC2666 !important;box-shadow:0 0 0 2px rgba(220,38,38,.15)}
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 9px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.7); opacity: 0; } }
+    @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
+    @keyframes lineGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes countPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .anim { opacity: 0; }
+    .anim.visible { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .anim-scale.visible { animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .anim-slide.visible { animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.1s; } .d3 { animation-delay: 0.15s; }
+    .d4 { animation-delay: 0.2s; } .d5 { animation-delay: 0.25s; } .d6 { animation-delay: 0.3s; }
+    .d7 { animation-delay: 0.35s; } .d8 { animation-delay: 0.4s; } .d9 { animation-delay: 0.45s; }
+
+    .float-y { animation: floatY 5s ease-in-out infinite; }
+    .mob-menu-anim { animation: slideDown 0.25s ease forwards; }
+    .toast-in { animation: toastIn 0.35s ease forwards; }
+    .toast-out { animation: toastOut 0.3s ease forwards; }
+
+    .wa-pulse { position: relative; }
+    .wa-pulse::before {
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      background: #25D366; animation: pulseRing 2s ease-out infinite; z-index: -1;
+    }
+
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .faq-item.open .faq-content { max-height: 300px; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-arrow { transition: transform 0.3s ease; }
+
+    .card-lift { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .card-lift:hover { transform: translateY(-2px); }
+    .dark .card-lift:hover { box-shadow: 0 8px 25px rgba(220, 38, 38, 0.06); }
+    .card-lift:hover { box-shadow: 0 8px 25px rgba(220, 38, 38, 0.08); }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(220,38,38,0.06) 0%, transparent 40%, rgba(220,38,38,0.03) 100%);
+    }
+    .dark .hero-gradient {
+      background: linear-gradient(135deg, rgba(220,38,38,0.1) 0%, transparent 40%, rgba(220,38,38,0.05) 100%);
+    }
+
+    .cta-gradient {
+      background: linear-gradient(135deg, #DC2626 0%, #B91C1C 50%, #991B1B 100%);
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease infinite;
+    }
+
+    .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
+
+    textarea:focus, input:focus, select:focus {
+      outline: none;
+      border-color: #DC2626 !important;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+
+    .report-card { cursor: pointer; transition: all 0.25s ease; }
+    .report-card:hover { border-color: #DC2626; }
+    .report-card.selected { border-color: #DC2626; background: rgba(220, 38, 38, 0.04); }
+    .dark .report-card.selected { background: rgba(220, 38, 38, 0.08); }
+    .report-card.selected .report-check { display: flex; }
+
+    .stat-num { font-variant-numeric: tabular-nums; }
+
+    .checklist-item { transition: all 0.2s ease; }
+    .checklist-item.checked { text-decoration: line-through; opacity: 0.5; }
   </style>
 </head>
 <body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
 
-  <!-- NAV -->
-  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border">
+  <!-- ============ NAVBAR ============ -->
+  <nav class="sticky top-0 z-50 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-xl border-b border-neutral-100 dark:border-brand-border">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between h-14 md:h-16">
-        <a href="lk.html" class="flex items-center gap-1.5"><span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span><span class="text-base md:text-lg">🇱🇰</span></a>
-        <div class="hidden md:flex items-center gap-6 text-[13px] font-medium">
-          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navHome">Home</a>
-          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navCat">Categories</a>
-          <a href="lk-about.html" class="text-neutral-500 dark:text-contner-400 hover:text-brand-red transition" data-t="navAbout">About Us</a>
-          <a href="lk-contact.html" class="text-brand-red border-b-2 border-brand-red pb-0.5" data-t="navContact">Contact</a>
+        <a href="lk.html" class="flex items-center gap-1.5 group">
+          <span class="text-lg md:text-2xl font-extrabold tracking-tight">
+            <span class="text-brand-red">Global</span><span class="dark:text-white">Law</span>
+          </span>
+          <span class="text-base md:text-lg">🇱🇰</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 lg:gap-8 text-[13px] font-medium">
+          <a href="lk.html" class="text-neutral-400 dark:text-neutral-500 hover:text-brand-red transition-colors">Home</a>
+          <a href="lk-categories.html" class="text-neutral-400 dark:text-neutral-500 hover:text-brand-red transition-colors">Categories</a>
+          <a href="lk-about.html" class="text-neutral-400 dark:text-neutral-500 hover:text-brand-red transition-colors">About Us</a>
+          <a href="lk-contact.html" class="text-brand-red border-b-2 border-brand-red pb-0.5">Contact</a>
         </div>
         <div class="flex items-center gap-2">
           <div class="relative">
-            <button onclick="toggleLang()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition"><i data-lucide="globe" class="w-3 h-3"></i><span id="langLbl">EN</span><i data-lucide="chevron-down" class="w-2.5 h-2.5"></i></button>
-            <div id="langDD" class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg shadow-xl overflow-hidden z-50">
-              <button onclick="setLang('en')" class="ld-btn w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border text-left"><span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
-              <button onclick="setLang('si')" class="ld-btn w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border text-left"><span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+            <button onclick="toggleLang()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-border-light hover:border-brand-red/50 transition-colors">
+              <i data-lucide="globe" class="w-3 h-3"></i>
+              <span id="langLbl">EN</span>
+              <i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
+            </button>
+            <div id="langDD" class="hidden absolute right-0 mt-1.5 w-40 bg-white dark:bg-brand-card border border-neutral-200 dark:border-brand-border-light rounded-xl shadow-2xl overflow-hidden z-50">
+              <button onclick="setLang('en')" class="ld-btn w-full flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-border text-left transition-colors">
+                <span>🇬🇧</span><span>English</span><span class="ml-auto text-brand-red ld-chk hidden">✓</span>
+              </button>
+              <button onclick="setLang('si')" class="ld-btn w-full flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-border text-left transition-colors">
+                <span>🇱🇰</span><span>සිංහල</span><span class="ml-auto text-brand-red ld-chk hidden">✓</span>
+              </button>
             </div>
           </div>
-          <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition"><i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i><i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i></button>
-          <button onclick="document.getElementById('mobMenu').classList.toggle('hidden')" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-brand-border transition-colors">
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-400"></i>
+          </button>
+          <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-neutral-100 dark:hover:bg-brand-border transition-colors">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
         </div>
       </div>
-      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-brand-dark-border pt-3 mob-menu">
-        <div class="flex flex-col gap-2.5 text-sm font-medium">
-          <a href="lk.html" class="text-neutral-500 hover:text-brand-red py-1" data-t="navHome">Home</a>
-          <a href="lk-categories.html" class="text-neutral-500 hover:text-brand-red py-1" data-t="navCat">Categories</a>
-          <a href="lk-about.html" class="text-neutral-500 hover:text-brand-red py-1" data-t="navAbout">About Us</a>
-          <a href="lk-contact.html" class="text-brand-red py-1" data-t="navContact">Contact</a>
-          <a href="lk-credits.html" class="text-neutral-500 hover:text-brand-red py-1" data-t="navCredits">Credits</a>
+      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-100 dark:border-brand-border pt-3 mob-menu-anim">
+        <div class="flex flex-col gap-1 text-sm font-medium">
+          <a href="lk.html" class="text-neutral-400 hover:text-brand-red px-2 py-2 rounded-lg hover:bg-neutral-50 dark:hover:bg-brand-border transition-colors">Home</a>
+          <a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red px-2 py-2 rounded-lg hover:bg-neutral-50 dark:hover:bg-brand-border transition-colors">Categories</a>
+          <a href="lk-about.html" class="text-neutral-400 hover:text-brand-red px-2 py-2 rounded-lg hover:bg-neutral-50 dark:hover:bg-brand-border transition-colors">About Us</a>
+          <a href="lk-contact.html" class="text-brand-red px-2 py-2 rounded-lg bg-red-50 dark:bg-red-900/10">Contact</a>
+          <a href="lk-credits.html" class="text-neutral-400 hover:text-brand-red px-2 py-2 rounded-lg hover:bg-neutral-50 dark:hover:bg-brand-border transition-colors">Credits</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Breadcrumb -->
-  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
+  <!-- ============ BREADCRUMB ============ -->
+  <div class="bg-neutral-50 dark:bg-brand-dark-2 border-b border-neutral-100 dark:border-brand-border">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
-      <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
-        <a href="index.html" class="hover:text-brand-red transition">GlobalLaw</a><i data-lucide="chevron-right" class="w-3 h-3"></i><a href="lk.html" class="hover:text-brand-red transition">🇱🇰 Sri Lanka</a><i data-lucide="chevron-right" class="w-3 h-3"></i><span class="text-neutral-700 dark:text-neutral-200 font-medium" data-t="navContact">Support</span>
+      <nav class="flex items-center gap-1.5 text-[11px] text-neutral-400">
+        <a href="index.html" class="hover:text-brand-red transition-colors">GlobalLaw</a>
+        <i data-lucide="chevron-right" class="w-3 h-3 opacity-40"></i>
+        <a href="lk.html" class="hover:text-brand-red transition-colors">🇱🇰 Sri Lanka</a>
+        <i data-lucide="chevron-right" class="w-3 h-3 opacity-40"></i>
+        <span class="text-neutral-700 dark:text-neutral-200 font-medium">Support</span>
       </nav>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-16">
+  <!-- ============ HERO ============ -->
+  <section class="hero-gradient relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14 relative z-10">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="anim d1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 dark:bg-red-900/15 border border-red-100 dark:border-red-900/30 mb-5">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-red dot-pulse"></span>
+          <span class="text-[11px] font-semibold text-brand-red tracking-wide uppercase">Support Center</span>
+        </div>
+        <h1 class="anim d2 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-4">
+          Need <span class="text-brand-red">Help</span>?
+        </h1>
+        <p class="anim d3 text-base text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-md mx-auto">
+          We're here to help. Send us a message, find emergency contacts, or browse our FAQ below.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Page Title -->
-    <div class="text-center mb-10 md:mb-14 fu">
-      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-red-50 dark:bg-red-900/20 text-3xl mb-4">💬</div>
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-2 fu1" data-t="pageTitle">Need Help?</h1>
-      <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base max-w-lg mx-auto fu2" data-t="pageSub">We're here to help. Send us a message or find emergency contacts below.</p>
+  <!-- ============ RESPONSE STATS ============ -->
+  <div class="max-w-7xl mx-auto px-4 md:px-6 -mt-2 mb-8 md:mb-12 relative z-20">
+    <div class="anim d3 grid grid-cols-3 gap-3 max-w-lg mx-auto">
+      <div class="bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-xl p-3 text-center card-lift">
+        <div class="text-lg md:text-xl font-extrabold text-brand-red">~48h</div>
+        <div class="text-[10px] text-neutral-400 font-medium">Avg Response</div>
+      </div>
+      <div class="bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-xl p-3 text-center card-lift">
+        <div class="text-lg md:text-xl font-extrabold text-brand-red">24/7</div>
+        <div class="text-[10px] text-neutral-400 font-medium">WhatsApp</div>
+      </div>
+      <div class="bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-xl p-3 text-center card-lift">
+        <div class="text-lg md:text-xl font-extrabold text-brand-red">Free</div>
+        <div class="text-[10px] text-neutral-400 font-medium">Always</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <div class="max-w-7xl mx-auto px-4 md:px-6 pb-16">
+
+    <!-- ===== BEFORE YOU CONTACT CHECKLIST ===== -->
+    <div class="anim d4 max-w-2xl mx-auto mb-10 md:mb-14">
+      <div class="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/25 rounded-2xl p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i data-lucide="clipboard-check" class="w-4.5 h-4.5 text-blue-500"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-sm mb-3 text-blue-800 dark:text-blue-300">Before You Contact Us — Quick Checklist</h3>
+            <div class="space-y-2" id="checklist">
+              <label class="checklist-item flex items-center gap-2.5 cursor-pointer text-sm text-blue-700 dark:text-blue-400/70" onclick="toggleCheck(this)">
+                <div class="w-4.5 h-4.5 rounded border-2 border-blue-300 dark:border-blue-700 flex items-center justify-center flex-shrink-0 chk-box transition-colors">
+                  <i data-lucide="check" class="w-3 h-3 text-white hidden chk-icon"></i>
+                </div>
+                I've checked the <a href="lk-categories.html" class="underline font-semibold hover:text-blue-900 dark:hover:text-blue-200">Categories page</a> for my topic
+              </label>
+              <label class="checklist-item flex items-center gap-2.5 cursor-pointer text-sm text-blue-700 dark:text-blue-400/70" onclick="toggleCheck(this)">
+                <div class="w-4.5 h-4.5 rounded border-2 border-blue-300 dark:border-blue-700 flex items-center justify-center flex-shrink-0 chk-box transition-colors">
+                  <i data-lucide="check" class="w-3 h-3 text-white hidden chk-icon"></i>
+                </div>
+                I've read the FAQ section below
+              </label>
+              <label class="checklist-item flex items-center gap-2.5 cursor-pointer text-sm text-blue-700 dark:text-blue-400/70" onclick="toggleCheck(this)">
+                <div class="w-4.5 h-4.5 rounded border-2 border-blue-300 dark:border-blue-700 flex items-center justify-center flex-shrink-0 chk-box transition-colors">
+                  <i data-lucide="check" class="w-3 h-3 text-white hidden chk-icon"></i>
+                </div>
+                This is NOT a legal emergency (if yes, call <a href="tel:119" class="underline font-semibold">119</a> now)
+              </label>
+              <label class="checklist-item flex items-center gap-2.5 cursor-pointer text-sm text-blue-700 dark:text-blue-400/70" onclick="toggleCheck(this)">
+                <div class="w-4.5 h-4.5 rounded border-2 border-blue-300 dark:border-blue-700 flex items-center justify-center flex-shrink-0 chk-box transition-colors">
+                  <i data-lucide="check" class="w-3 h-3 text-white hidden chk-icon"></i>
+                </div>
+                I understand GlobalLaw is educational, not legal advice
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
 
-      <!-- LEFT: Contact Form -->
-      <div class="lg:col-span-2">
-        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-6 md:p-8">
-          <h2 class="text-lg font-bold mb-6 flex items-center gap-2" data-t="formTitle"><i data-lucide="send" class="w-5 h-5 text-brand-red"></i><span data-t="formTitleText">Send Us a Message</span></h2>
+      <!-- ============ LEFT COLUMN ============ -->
+      <div class="lg:col-span-2 space-y-6">
 
-          <!-- Warning -->
-          <div class="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-xl p-3 mb-6 text-[11px] text-red-600 dark:text-red-400 flex items-start gap-2">
-            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 mt-0.5"></i>
-            <span data-t="warnMsg">⚠️ For urgent legal emergencies, call 119 immediately. GlobalLaw is educational only — we are not law enforcement.</span>
+        <!-- CONTACT FORM -->
+        <div class="anim d4 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/15 flex items-center justify-center">
+              <i data-lucide="send" class="w-5 h-5 text-brand-red"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold">Send Us a Message</h2>
+              <p class="text-[11px] text-neutral-400">Fills directly into our WhatsApp — no data stored</p>
+            </div>
           </div>
 
-          <form id="contactForm" onsubmit="submitForm(event)">
-            <!-- Name -->
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5" data-t="labelName">Full Name <span class="text-brand-red">*</span></label>
-              <input type="text" id="cName" required maxlength="100" placeholder="Your full name" class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition">
-            </div>
-            <!-- Email -->
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5" data-t="labelEmail">Email <span class="text-brand-red">*</span></label>
-              <input type="email" id="cEmail" required placeholder="your@email.com" class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition">
-            </div>
-            <!-- Subject -->
-            <div class="mb-4">
-              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5" data-t="labelSubject">Subject <span class="text-brand-red">*</span></label>
-              <select id="cSubject" required class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition cursor-pointer">
-                <option value="" data-t="subjDefault">Select a subject...</option>
-                <option value="bug" data-t="subjBug">🐛 Report a Bug</option>
-                <option value="suggest" data-t="subjSuggest">💡 Suggest a Law</option>
-                <option value="feedback" data-t="subjFeedback">💬 Feedback</option>
-                <option value="partnership" data-t="subjPartner">🤝 Partnership Inquiry</option>
-                <option value="other" data-t="subjOther">📝 Other</option>
-              </select>
-            </div>
-            <!-- Message -->
-            <div class="mb-2">
-              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5" data-t="labelMsg">Message <span class="text-brand-red">*</span></label>
-              <textarea id="cMsg" required maxlength="1000" rows="5" placeholder="Describe your issue or question..." class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl text-sm focus:outline-none focus:border-brand-red transition resize-y-0" oninput="updateCharCount()"></textarea>
-              <div class="flex justify-between text-[10px] text-neutral-400 mt-1">
-                <span data-t="charLeft">Characters left:</span>
-                <span id="charCount">1000/1000</span>
+          <!-- Emergency Warning -->
+          <div class="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/30 rounded-xl p-3.5 mb-6 flex items-start gap-2.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-red-500 shrink-0 mt-0.5"></i>
+            <p class="text-[12px] text-red-600 dark:text-red-400 leading-relaxed">
+              <strong>For urgent legal emergencies, call 119 immediately.</strong> GlobalLaw is educational only — we are not law enforcement.
+            </p>
+          </div>
+
+          <form id="contactForm" onsubmit="return false;">
+            <!-- Report Type Selector -->
+            <div class="mb-5">
+              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2.5">What is this about?</label>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="reportTypes">
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '🐛 Bug Report')">
+                  <div class="text-xl mb-1">🐛</div>
+                  <span class="text-[11px] font-medium">Bug Report</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '💡 Suggest a Law')">
+                  <div class="text-xl mb-1">💡</div>
+                  <span class="text-[11px] font-medium">Suggest Law</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '💬 Feedback')">
+                  <div class="text-xl mb-1">💬</div>
+                  <span class="text-[11px] font-medium">Feedback</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '🤝 Partnership')">
+                  <div class="text-xl mb-1">🤝</div>
+                  <span class="text-[11px] font-medium">Partnership</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '⚖️ Legal Question')">
+                  <div class="text-xl mb-1">⚖️</div>
+                  <span class="text-[11px] font-medium">Legal Question</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
+                <div class="report-card border border-neutral-200 dark:border-brand-border rounded-xl p-3 text-center relative" onclick="selectReport(this, '📝 Other')">
+                  <div class="text-xl mb-1">📝</div>
+                  <span class="text-[11px] font-medium">Other</span>
+                  <div class="report-check hidden absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-brand-red items-center justify-center">
+                    <i data-lucide="check" class="w-2.5 h-2.5 text-white"></i>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Name + Email Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">Full Name <span class="text-brand-red">*</span></label>
+                <input type="text" id="cName" required maxlength="100" placeholder="Your full name" class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-200 dark:border-brand-border rounded-xl text-sm transition-all">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">Email</label>
+                <input type="email" id="cEmail" placeholder="your@email.com" class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-200 dark:border-brand-border rounded-xl text-sm transition-all">
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="mb-5">
+              <label class="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">Message <span class="text-brand-red">*</span></label>
+              <textarea id="cMsg" required maxlength="1000" rows="5" placeholder="Describe your issue or question in detail..." class="w-full px-4 py-2.5 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-200 dark:border-brand-border rounded-xl text-sm transition-all resize-none" oninput="updateCharCount()"></textarea>
+              <div class="flex justify-between mt-1.5">
+                <span class="text-[10px] text-neutral-400">Tip: Be specific for faster responses</span>
+                <span id="charCount" class="text-[10px] text-neutral-400 font-mono">0/1000</span>
+              </div>
+            </div>
+
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row gap-3">
-              <button type="submit" class="flex-1 flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-xl text-sm transition">
-                <i data-lucide="send" class="w-4 h-4"></i><span data-t="sendBtn">Send via WhatsApp</span>
+              <button type="button" onclick="handleSend()" class="flex-1 flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-red-500/20 active:scale-[0.98]">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                Send via WhatsApp
               </button>
-              <button type="reset" class="flex-1 flex items-center justify-center gap-2 bg-neutral-100 dark:bg-brand-dark-card hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-semibold px-6 py-3 rounded-xl text-sm transition">
-                <i data-lucide="rotate-ccw" class="w-4 h-4"></i><span data-t="resetBtn">Reset</span>
+              <button type="button" onclick="resetForm()" class="flex items-center justify-center gap-2 px-5 py-3 bg-neutral-100 dark:bg-brand-border hover:bg-neutral-200 dark:hover:bg-brand-border-light text-neutral-600 dark:text-neutral-400 font-semibold rounded-xl text-sm transition-all active:scale-[0.98]">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                Reset
               </button>
             </div>
           </form>
         </div>
+
+        <!-- FAQ SECTION -->
+        <div class="anim d6 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-900/15 flex items-center justify-center">
+              <i data-lucide="help-circle" class="w-5 h-5 text-amber-500"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold">Frequently Asked Questions</h2>
+              <p class="text-[11px] text-neutral-400">Quick answers to common questions</p>
+            </div>
+          </div>
+
+          <div class="space-y-2" id="faqList">
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Is this legal advice?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">No. GlobalLaw is an <strong>educational platform only</strong>. We explain laws in simple language — we do NOT provide legal advice. Always consult a qualified lawyer for legal matters.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Can I suggest a new law to add?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">Yes! Use the contact form above and select "Suggest Law". We review suggestions weekly and prioritize the most requested ones.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>How fast do you reply?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">We aim to respond within 48 hours via WhatsApp. Bug reports and partnership inquiries get priority. For emergencies, call 119 immediately.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Is my data safe?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">Yes. We don't store any data on our servers. The contact form opens WhatsApp directly — your information stays between you and WhatsApp.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Can I contribute as a lawyer?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">Absolutely! We welcome legal professionals to join our advisory team. Contact us via WhatsApp or email to discuss how you can help.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Is GlobalLaw really free?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">100% free. No paywalls, no premium plans, no ads. We believe legal knowledge should be accessible to everyone regardless of their financial situation.</p>
+              </div>
+            </div>
+
+            <div class="faq-item border border-neutral-100 dark:border-brand-border rounded-xl overflow-hidden">
+              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3.5 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-border/50 transition-colors">
+                <span>Will you add Tamil language?</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 faq-arrow flex-shrink-0 ml-2"></i>
+              </button>
+              <div class="faq-content">
+                <p class="px-4 pb-3.5 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">Yes, Tamil language support is on our roadmap. We're looking for Tamil-speaking legal volunteers to help with translations. Contact us if you can help!</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- RIGHT: Info Cards -->
-      <div class="flex flex-col gap-4 md:gap-6">
+      <!-- ============ RIGHT COLUMN ============ -->
+      <div class="space-y-4 md:space-y-5">
 
-        <!-- Emergency Contacts -->
-        <div class="bg-red-600 text-white rounded-2xl p-5 md:p-6">
-          <h3 class="font-bold text-sm mb-3 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4"></i><span data-t="emerTitle">Emergency Contacts</span></h3>
-          <div class="space-y-3 text-sm leading-relaxed">
-            <a href="tel:119" class="flex items-center gap-3 hover:underline"><span class="font-bold">🚔</span><span data-t="emerPolice">Police Emergency - 119</span></a>
-            <a href="tel:1919" class="flex items-center gap-3 hover:underline"><span class="font-bold">🛡</span><span data-t="emerCERT">CERT Sri Lanka - 1919</span></a>
-            <a href="tel:1929" class="flex items-center gap-3 hover:underline"><span class="font-bold">👶</span><span data-t="emerChild">Child Protection - 1929</span></a>
-            <a href="tel:1990" class="flex items-center gap-3 hover:underline"><span class="font-bold">🚑</span><span data-t="emerAmb">Ambulance - 1990</span></a>
+        <!-- EMERGENCY CONTACTS -->
+        <div class="anim d4 bg-gradient-to-br from-red-600 to-red-700 text-white rounded-2xl p-5 md:p-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <h3 class="font-bold text-sm mb-4 flex items-center gap-2 relative z-10">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            Emergency Contacts
+          </h3>
+          <div class="space-y-2 relative z-10">
+            <a href="tel:119" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 rounded-xl px-3.5 py-2.5 transition-colors text-sm">
+              <span class="text-base">🚔</span>
+              <div class="flex-1">
+                <div class="font-bold text-[13px]">Police</div>
+                <div class="text-[11px] text-red-200">Emergency</div>
+              </div>
+              <span class="font-extrabold text-lg">119</span>
+            </a>
+            <a href="tel:1919" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 rounded-xl px-3.5 py-2.5 transition-colors text-sm">
+              <span class="text-base">🛡️</span>
+              <div class="flex-1">
+                <div class="font-bold text-[13px]">CERT</div>
+                <div class="text-[11px] text-red-200">Cyber Crime</div>
+              </div>
+              <span class="font-extrabold text-lg">1919</span>
+            </a>
+            <a href="tel:1929" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 rounded-xl px-3.5 py-2.5 transition-colors text-sm">
+              <span class="text-base">👶</span>
+              <div class="flex-1">
+                <div class="font-bold text-[13px]">Child Protection</div>
+                <div class="text-[11px] text-red-200">NCPA</div>
+              </div>
+              <span class="font-extrabold text-lg">1929</span>
+            </a>
+            <a href="tel:1990" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 rounded-xl px-3.5 py-2.5 transition-colors text-sm">
+              <span class="text-base">🚑</span>
+              <div class="flex-1">
+                <div class="font-bold text-[13px]">Ambulance</div>
+                <div class="text-[11px] text-red-200">Suwasariya</div>
+              </div>
+              <span class="font-extrabold text-lg">1990</span>
+            </a>
+            <a href="tel:1190" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 rounded-xl px-3.5 py-2.5 transition-colors text-sm">
+              <span class="text-base">🔥</span>
+              <div class="flex-1">
+                <div class="font-bold text-[13px]">Fire</div>
+                <div class="text-[11px] text-red-200">Emergency</div>
+              </div>
+              <span class="font-extrabold text-lg">1190</span>
+            </a>
           </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 md:p-6">
-          <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-brand-red"></i><span data-t="quickTitle">Quick Actions</span></h3>
-          <div class="space-y-2.5">
-            <a href="lk-categories.html?cat=cyber" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 hover:border-brand-red transition text-sm">
-              <span>💻</span><span data-t="quickCyber">Report Cyber Crime →</span>
-            </a>
-            <a href="lk-categories.html?cat=fundamental" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 hover:border-brand-red transition text-sm">
-              <span>🛡️</span><span data-t="quickFund">Fundamental Rights →</span>
-            </a>
-            <a href="lk-categories.html?cat=criminal" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border rounded-xl p-3 hover:border-brand-red transition text-sm">
-              <span>🚔</span><span data-t="quickCrim">Criminal Laws →</span>
-            </a>
-            <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white border-0 rounded-xl p-3 transition text-sm font-semibold">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.36-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347z"/></svg>
-              <span>WhatsApp Chat</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 md:p-6">
-          <h3 class="font-bold text-sm mb-4 flex items-center gap-2"><i data-lucide="help-circle" class="w-4 h-4 text-brand-red"></i><span data-t="faqTitle">Frequently Asked Questions</span></h3>
-          <div class="space-y-2" id="faqList">
-
-            <div class="faq-item border border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">
-              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition">
-                <span data-t="faq1Q">Is this legal advice?</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform faq-arrow"></i>
-              </button>
-              <div class="faq-content">
-                <p class="px-4 pb-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" data-t="faq1A">No. GlobalLaw is an educational platform. We explain laws simply — we do NOT provide legal advice. Always consult a qualified lawyer for legal matters.</p>
-              </div>
+        <!-- OFFICE HOURS -->
+        <div class="anim d5 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <h3 class="font-bold text-sm mb-4 flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-brand-red"></i>
+            Office Hours
+          </h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-neutral-500 dark:text-neutral-400">Mon – Fri</span>
+              <span class="font-semibold">9:00 AM – 6:00 PM</span>
             </div>
-
-            <div class="faq-item border border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">
-              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition">
-                <span data-t="faq2Q">Can I suggest a new law to add?</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform faq-arrow"></i>
-              </button>
-              <div class="faq-content">
-                <p class="px-4 pb-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" data-t="faq2A">Yes! Use the Contact form to suggest laws we should add. We review suggestions weekly and add the most requested ones first.</p>
-              </div>
+            <div class="h-[1px] bg-neutral-100 dark:bg-brand-border"></div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-neutral-500 dark:text-neutral-400">Saturday</span>
+              <span class="font-semibold">9:00 AM – 1:00 PM</span>
             </div>
-
-            <div class="faq-item border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">
-              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition">
-                <span data-t="faq3Q">How fast do you reply?</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform faq-arrow"></i>
-              </button>
-              <div class="faq-content">
-                <p class="px-4 pb-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" data-t="faq3A">We aim to respond within 48 hours via WhatsApp. For emergencies, call 119 immediately.</p>
-              </div>
+            <div class="h-[1px] bg-neutral-100 dark:bg-brand-border"></div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-neutral-500 dark:text-neutral-400">Sunday</span>
+              <span class="font-semibold text-neutral-400">Closed</span>
             </div>
-
-            <div class="faq-item border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">
-              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition">
-                <span data-t="faq4Q">Is my data safe?</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform faq-arrow"></i>
-              </button>
-              <div class="faq-content">
-                <p class="px-4 pb-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" data-t="faq4A">Yes. We don't collect personal data. The contact form opens WhatsApp — we never see your email or phone in our servers.</p>
-              </div>
-            </div>
-
-            <div class="faq-item border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">
-              <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition">
-                <span data-t="faq5Q">Can I contribute as a lawyer?</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform faq-arrow"></i>
-              </button>
-              <div class="faq-content">
-                <p class="px-4 pb-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" data-t="faq5A">We welcome lawyer volunteers! Contact us at contact to join our advisory team. Credits page lists all contributors.</p>
-              </div>
+            <div class="h-[1px] bg-neutral-100 dark:bg-brand-border"></div>
+            <div class="flex items-center gap-2 pt-1">
+              <span class="w-2 h-2 rounded-full bg-green-500 dot-pulse"></span>
+              <span class="text-[11px] text-green-600 dark:text-green-400 font-medium" id="statusText">Checking status...</span>
             </div>
           </div>
         </div>
 
-        <!-- Official Email -->
-        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 md:p-6">
-          <h3 class="font-bold text-sm mb-3 flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-brand-red"></i><span data-t="emailTitle">Official Email</span></h3>
-          <a href="mailto:dmkaawya@gmail.com" class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-brand-red transition px-3 py-2.5 bg-neutral-50 dark:bg-brand-dark rounded-xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red">
-            <i data-lucide="external-link" class="w-4 h-4"></i>
-            <span>dmkaawya@gmail.com</span>
+        <!-- QUICK ACTIONS -->
+        <div class="anim d6 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <h3 class="font-bold text-sm mb-4 flex items-center gap-2">
+            <i data-lucide="zap" class="w-4 h-4 text-brand-red"></i>
+            Quick Actions
+          </h3>
+          <div class="space-y-2">
+            <a href="lk-categories.html?cat=cyber" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-100 dark:border-brand-border rounded-xl p-3 hover:border-brand-red/50 transition-all text-sm group">
+              <span>💻</span>
+              <span class="flex-1 text-neutral-600 dark:text-neutral-400 group-hover:text-brand-red transition-colors">Report Cyber Crime</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all"></i>
+            </a>
+            <a href="lk-categories.html?cat=fundamental" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-100 dark:border-brand-border rounded-xl p-3 hover:border-brand-red/50 transition-all text-sm group">
+              <span>🛡️</span>
+              <span class="flex-1 text-neutral-600 dark:text-neutral-400 group-hover:text-brand-red transition-colors">Fundamental Rights</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all"></i>
+            </a>
+            <a href="lk-categories.html?cat=criminal" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-100 dark:border-brand-border rounded-xl p-3 hover:border-brand-red/50 transition-all text-sm group">
+              <span>🚔</span>
+              <span class="flex-1 text-neutral-600 dark:text-neutral-400 group-hover:text-brand-red transition-colors">Criminal Laws</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all"></i>
+            </a>
+            <a href="lk-categories.html?cat=consumer" class="flex items-center gap-3 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-100 dark:border-brand-border rounded-xl p-3 hover:border-brand-red/50 transition-all text-sm group">
+              <span>🛒</span>
+              <span class="flex-1 text-neutral-600 dark:text-neutral-400 group-hover:text-brand-red transition-colors">Consumer Protection</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-neutral-300 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- WHATSAPP DIRECT -->
+        <div class="anim d7">
+          <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-2xl p-5 transition-all hover:shadow-lg hover:shadow-green-500/20 active:scale-[0.98] group">
+            <div class="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-bold text-sm">Chat on WhatsApp</div>
+              <div class="text-[11px] text-green-100">+94 77 504 8455 — Usually replies fast</div>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </a>
         </div>
 
-        <!-- Developer -->
-        <div class="bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 md:p-6">
-          <h3 class="font-bold text-sm mb-3 flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-brand-red"></i><span data-t="devTitle">Developer</span></h3>
+        <!-- EMAIL CARD -->
+        <div class="anim d8 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <h3 class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i data-lucide="mail" class="w-4 h-4 text-brand-red"></i>
+            Official Email
+          </h3>
+          <a href="mailto:dmkaawya@gmail.com" class="flex items-center gap-2.5 text-sm text-neutral-600 dark:text-neutral-400 hover:text-brand-red transition-colors px-3.5 py-2.5 bg-neutral-50 dark:bg-brand-dark-2 rounded-xl border border-neutral-100 dark:border-brand-border hover:border-brand-red/30">
+            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0"></i>
+            <span class="truncate">dmkaawya@gmail.com</span>
+          </a>
+          <p class="text-[10px] text-neutral-400 mt-2 px-1">For partnerships, legal inquiries, and official matters</p>
+        </div>
+
+        <!-- PHONE CARD -->
+        <div class="anim d8 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <h3 class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i data-lucide="phone" class="w-4 h-4 text-brand-red"></i>
+            Phone
+          </h3>
+          <a href="tel:+94775048455" class="flex items-center gap-2.5 text-sm text-neutral-600 dark:text-neutral-400 hover:text-brand-red transition-colors px-3.5 py-2.5 bg-neutral-50 dark:bg-brand-dark-2 rounded-xl border border-neutral-100 dark:border-brand-border hover:border-brand-red/30">
+            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0"></i>
+            <span>+94 77 504 8455</span>
+          </a>
+          <p class="text-[10px] text-neutral-400 mt-2 px-1">Available during office hours</p>
+        </div>
+
+        <!-- DEVELOPER CARD -->
+        <div class="anim d9 bg-white dark:bg-brand-card border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <h3 class="font-bold text-sm mb-3 flex items-center gap-2">
+            <i data-lucide="code-2" class="w-4 h-4 text-brand-red"></i>
+            Developer
+          </h3>
           <div class="flex items-center gap-3 mb-3">
-            <img src="https://placehold.co/100x100/100/b7f6a8e-4d8e-4d68-a756-e05d5-4a6a-9e6a-8e9d-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000" alt="Kaawya Chandrasekara" class="w-12 h-12 rounded-full object-cover border-2 border-neutral-200 dark:border-brand-dark">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">KC</div>
             <div>
               <div class="font-bold text-sm">Kaawya Chandrasekara</div>
-              <div class="text-[10px] text-neutral-400">Lead Developer</div>
+              <div class="text-[10px] text-neutral-400">Lead Developer & Founder</div>
             </div>
-          </a>
-          <a href="https://vezlo.dev" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-brand-red px-3 py-2.5 bg-neutral-50 dark:bg-brand-dark rounded-xl border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+          </div>
+          <a href="https://vezlo-web.vercel.app" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-brand-red hover:text-brand-red-dark transition-colors px-3.5 py-2.5 bg-red-50 dark:bg-red-900/10 rounded-xl border border-red-100 dark:border-red-900/20 hover:border-brand-red/40">
             <span class="font-bold">Vezlo</span>
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
         </div>
+
+        <!-- PRIVACY NOTE -->
+        <div class="anim d9 bg-neutral-50 dark:bg-brand-dark-2 border border-neutral-100 dark:border-brand-border rounded-2xl p-5">
+          <div class="flex items-start gap-2.5">
+            <i data-lucide="lock" class="w-4 h-4 text-neutral-400 mt-0.5 flex-shrink-0"></i>
+            <div>
+              <h4 class="font-bold text-[12px] mb-1">Privacy Note</h4>
+              <p class="text-[11px] text-neutral-400 leading-relaxed">This form sends data directly to WhatsApp. We do not collect, store, or process any personal information on our servers. Your privacy is fully protected.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ PARTNERSHIP CTA ============ -->
+    <div class="anim mt-10 md:mt-14">
+      <div class="cta-gradient rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+          <div class="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
+        </div>
+        <div class="relative z-10">
+          <div class="text-3xl mb-4">🤝</div>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">Want to Partner With Us?</h2>
+          <p class="text-red-100 text-sm mb-6 max-w-md mx-auto leading-relaxed">
+            We're open to partnerships with law firms, universities, government bodies, and NGOs who share our vision of accessible legal education.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="https://wa.me/94775048455?text=Hi%2C%20I%27m%20interested%20in%20partnering%20with%20GlobalLaw." target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-brand-red rounded-xl font-bold text-sm hover:bg-neutral-100 transition-colors shadow-lg">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Discuss Partnership
+            </a>
+            <a href="mailto:dmkaawya@gmail.com?subject=Partnership%20Inquiry" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold text-sm hover:bg-white/20 transition-colors backdrop-blur-sm">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              Send Email
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800">
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-neutral-900 dark:bg-black border-t border-neutral-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
         <div class="col-span-2 md:col-span-1">
-          <div class="text-xl font-extrabold tracking-tight mb-2"><span class="text-brand-red">Global</span>Law <span class="text-lg">🇱🇰</span></div>
-          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-t="ftDesc">Making Sri Lanka's law accessible to everyone through simple explanations.</p>
-          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-t="ftDisc">⚠️ Disclaimer: Educational platform only. Not legal advice.</div>
+          <div class="text-xl font-extrabold tracking-tight mb-2.5">
+            <span class="text-brand-red">Global</span>Law <span class="text-lg">🇱🇰</span>
+          </div>
+          <p class="text-neutral-500 text-xs leading-relaxed mb-3">Making Sri Lanka's law accessible to everyone through simple explanations.</p>
+          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-500/80 leading-relaxed">
+            ⚠️ Disclaimer: Educational platform only. Not legal advice.
+          </div>
         </div>
         <div>
-          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-t="ftQL">Quick Links</h4>
-          <ul class="space-y-2 text-xs">
-            <li><a href="lk.html" class="text-neutral-400 hover:text-brand-red transition">Home</a></li>
-            <li><a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red transition">Categories</a></li>
-            <li><a href="lk-about.html" class="text-neutral-400 hover:text-brand-red transition">About Us</a></li>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider text-neutral-400 mb-3">Quick Links</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="lk.html" class="text-neutral-500 hover:text-brand-red transition-colors">Home</a></li>
+            <li><a href="lk-categories.html" class="text-neutral-500 hover:text-brand-red transition-colors">Categories</a></li>
+            <li><a href="lk-about.html" class="text-neutral-500 hover:text-brand-red transition-colors">About Us</a></li>
             <li><a href="lk-contact.html" class="text-brand-red">Support</a></li>
-            <li><a href="lk-credits.html" class="text-neutral-400 hover:text-brand-red transition">Credits</a></li>
+            <li><a href="lk-credits.html" class="text-neutral-500 hover:text-brand-red transition-colors">Credits</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-t="ftLL">Legal Links</h4>
-          <ul class="space-y-2 text-xs">
-            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-t="ftPriv">Privacy Policy</a></li>
-            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition" data-t="ftTerms">Terms of Use</a></li>
-            <li><a href="https://www.justice.gov.lk" target="_blank" class="text-neutral-400 hover:text-brand-red">Ministry of Justice ↗</a></li>
-            <li><a href="https://www.cert.gov.lk" target="_blank" class="text-neutral-400 hover:text-brand-red">CERT Sri Lanka ↗</a></li>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider text-neutral-400 mb-3">Legal Links</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="#" class="text-neutral-500 hover:text-brand-red transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="text-neutral-500 hover:text-brand-red transition-colors">Terms of Use</a></li>
+            <li><a href="https://www.justice.gov.lk" target="_blank" rel="noopener" class="text-neutral-500 hover:text-brand-red transition-colors">Ministry of Justice ↗</a></li>
+            <li><a href="https://www.cert.gov.lk" target="_blank" rel="noopener" class="text-neutral-500 hover:text-brand-red transition-colors">CERT Sri Lanka ↗</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-t="ftCon">Contact</h4>
-          <ul class="space-y-2 text-xs">
-            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i><a href="mailto:dmkaawya@gmail.com" class="hover:text-brand-red transition">dmkaawya@gmail.com</a></li>
-            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="message-circle" class="w-3.5 h-3.5 shrink-0"></i><a href="https://wa.me/94775048455" target="_blank" class="hover:text-brand-red transition">WhatsApp</a></li>
-            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i><span>+94 77 504 8455</span></li>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider text-neutral-400 mb-3">Contact</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li>
+              <a href="mailto:dmkaawya@gmail.com" class="flex items-center gap-2 text-neutral-500 hover:text-brand-red transition-colors">
+                <i data-lucide="mail" class="w-3.5 h-3.5 flex-shrink-0"></i>dmkaawya@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="flex items-center gap-2 text-neutral-500 hover:text-brand-red transition-colors">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>WhatsApp
+              </a>
+            </li>
+            <li class="flex items-center gap-2 text-neutral-500">
+              <i data-lucide="phone" class="w-3.5 h-3.5 flex-shrink-0"></i>+94 77 504 8455
+            </li>
           </ul>
         </div>
       </div>
       <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-neutral-500 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
-        <p class="text-neutral-500 text-[11px]">Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a> <span class="text-neutral-600 mx-0.5">|</span> DMC Group</p>
+        <p class="text-neutral-600 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
+        <p class="text-neutral-600 text-[11px]">
+          Powered by <a href="https://vezlo-web.vercel.app" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a>
+          <span class="text-neutral-700 mx-1">|</span> DMC Group
+        </p>
       </div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp -->
+  <!-- ============ FLOATING WHATSAPP ============ -->
   <div class="fixed bottom-5 right-5 z-50">
-    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse relative flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:50px;height:50px" aria-label="WhatsApp"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.018-.458.13-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.885 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.448-.694.248-.57-.347z"/></svg></a>
+    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse flex items-center justify-center bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all duration-200" style="width:52px;height:52px" aria-label="WhatsApp">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
   </div>
 
-  <!-- Toast -->
-  <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-4 py-3 toast-in max-w-xs">
-    <div class="flex items-center gap-2.5"><div id="toastIcon" class="w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i></div><p id="toastMsg" class="text-xs font-medium"></p></div>
+  <!-- ============ TOAST ============ -->
+  <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-card border border-neutral-200 dark:border-brand-border-light rounded-xl shadow-2xl px-4 py-3 max-w-xs">
+    <div class="flex items-center gap-2.5">
+      <div id="toastIcon" class="w-7 h-7 rounded-full bg-green-50 dark:bg-green-900/15 flex items-center justify-center flex-shrink-0">
+        <i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i>
+      </div>
+      <p id="toastMsg" class="text-xs font-medium"></p>
+    </div>
   </div>
 
+  <!-- ============ SCRIPTS ============ -->
   <script>
+    // Init Lucide
     lucide.createIcons();
 
-    // =============================================
-    // TRANSLATIONS
-    // =============================================
-    const T = {
-      en: {
-        navHome:'Home',navCat:'Categories',navAbout:'About Us',navContact:'Contact',navCredits:'Credits',navSupport:'Support',
-        pageTitle:'Need Help?',
-        pageSub:'We are here to help. Send a message or find emergency contacts below.',
-        formTitle:'Send Us a Message',formTitleText:'Fill the form below and it sends directly to our WhatsApp',
-        labelName:'Full Name',labelEmail:'Email',labelSubject:'Subject',labelMsg:'Message',
-        warnMsg:'⚠️ For urgent legal emergencies, call 119 immediately. GlobalLaw is educational — we are not law enforcement.',
-        sendBtn:'Send via WhatsApp',resetBtn:'Reset',charLeft:'Characters left:',warnTitle:'Emergency Contacts',
-        emPol:'Police - 119',emCERT:'CERT - 1919',emChild:'Child Protection - 1929',emAmb:'Ambulance - 1990',
-        faqTitle:'Frequently Asked Questions',
-        faq1Q:'Is this legal advice?',faq1A:'No. GlobalLaw is an educational platform. We explain laws simply — we do NOT provide legal advice. Always consult a qualified lawyer.',
-        faq2Q:'Can I suggest a law to add?',faq2A:'Yes! Use the Contact form to suggest laws. We review weekly and add the most requested ones first.',
-        faq3Q:'How fast do you reply?',faq3A:'We aim to respond within 48 hours via WhatsApp. For emergencies, call 119.',
-        faq4Q:'Is my data safe?',faq4:'Yes. We don\'t collect data. The contact form opens WhatsApp — we never see your email or phone.',
-        faq5Q:'Can I contribute as a lawyer?',faq5A:'We welcome lawyer volunteers! Contact us to join our advisory team.',
-        emailTitle:'Official Email',emailTitle:'Official Email',devTitle:'Developer',
-        ftDesc:'Making Sri Lanka\'s law accessible to everyone.',
-        ftDisc:'⚠️ Disclaimer: Educational platform only. Not legal advice.',
-        ftQL:'Quick Links',ftLL:'Legal Links',ftCon:'Contact',ftPriv:'Privacy Policy',ftTerms:'Terms of Use',
-      },
-      si: {
-        navHome:'මුල් පිටුව',navCat:'කාණ්ඩ',navAbout:'අප ග ගැන',navContact:'සම්බන්ධ කරන්න්ත්',navCredits:'ස්තුත්',
-        pageTitle:'උදාන්න් උදාන්ලත් ප්ත්න්ත්?',
-        pageSub:'අපට උදාන්ලත් වලාවුන් ගෙන්න්ත්ත් වලාවුන්',
-        formTitle:'අන්ත්ත් පන්ත් දෙන්ත් ප්ත් දාන්න්',
-        formTitleText:'පහස්ත් ප්ත් දෙන්ත් ප්ත්න්',
-        labelName:'පුන',labelEmail:'ඊම්ල',labelSubject:'විරක්ර',labelMsg:'පන්ත් ව් ප්ත්න්',
-        warnMsg:'⚠️ හදිසි නීතිම ගන් ගන්ත් ගන්ත් න්ත් න්ත් න්ත් වලාවුන් න්ත් න්ත් න්ත් වලාවට එන්න් න්ත් වලාවට යන්න්ත් න්ත් න්ත් න්ත්',
-        sendBtn:'WhatsApp එන්න් පන්න්ම්',resetBtn:'නැවන් න්න් ප්ත් න්න්',charLeft:'ඉතර න් න්්:',
-        warnTitle:'හදිසි නීතිම න්න්ත් න්ත් - 119',
-        emPol:'පොලිසියය - 119',emCERT:'CERT - 1919',emChild:'ළපචාරය ආරක්ෂව - 1929',emAmb:'සැක්රත් - 1990',
-        faqTitle:'නියවන්ත් න් න්න් න්න්?',faq1A:'නිව්ාය වෙන් සයියායම ව් න්යයක් න්යක් න්යක් න්යක්.',
-        faq2Q:'අලුත් න්න්න් න්න් න්න් දාන්න්?',faq2A:'නිව්ායයට න්න් වලාවුන් න්න් න් න්න් න්න් වෙන් න්න් න්න් න්න්්, වැඩින් න්න් න්න් වෙන් න්න් න්න් න්න්.',
-        faq3Q:'ඔබට ප්රට් ප්ත්් කෙන්ටන්න් ප්ත් න්න් න්න්?',faq3A:'අන් න්න් න්න් වලාවුන් 48 පැයින්් න්න්න් WhatsApp එන්න්. හදිසි න්න් ව් කියන්න්ටටන් කියන්.',
-        faq4Q:'මගේ න්න් න් න් න්න් න්න් න්න් න්න්?',faq4:'න්න් න් න් න්න් න්න් න්න් න්න් න්න් ව් න්න් න්න් න්න් න්න්.',
-        faq5Q:'න්න්ත්ට ලයන් න්න්් ක්රයෙන් වලාව්න් න්න් න්න්?',faq5A:'න්න්ත් න්ටන් ව් න්න් න්න් න් න්න්න් ඊන්න් ඊන් න්න් ඊන් න්න් න්න් ඊන් න්න් න් ඊ ඊන් න්න් ඊ ඊ ඊ රව් ඊන් ඊ ඊර් ඊ ඊන් ඊ ඊ ර් ඊර් ඊ් ඊ ඊ ර් ඊ ඊ ඊ් ඊ.',
-        emailTitle:'නිය්ල් න්ල්',emailTitle:'නිය්ල් න්ල්',
-        devTitle:'සන්න්ට්',
-        ftDesc:'ශ්‍රී ලංක් න් න්න් න් න් ඊ න්න් ඊ ඊඊ ඊ ඊ ර් ඊ ව් ඊ.',
-        ftDisc:'⚠️ අධ්‍යාපනය ව් වලය ව්රම ් ව් න් න් න් න්. නිලය න්ල න් න්ල.',
-        ftQL:'ඉක්න් සබැඳ්',ftLL:'නිය්ල් සබ්',ftCon:'සම්බන්ධර්ට්',ftPriv:'ප්‍රව්ව් ප්‍රව්',
-        ftTerms:'භයව් කරන්රටිරය ක්',
-      },
-      si: {
-        navHome:'මුල් ප්',navCat:'ක්ණඩ',navAbout:'අප ගන්',navContact:'සම්බන්ධරට් කරන්',navCredits:'ස්තුත්',
-        pageTitle:'උදාන්න්න් න්න්?',
-        pageSub:'අපට උන්න්ටන් න් න්න් න්න් ඊඊ ඊ ඊ ඊ ඊ ර් ඊ ඊ ර්.',
-        formTitle:'අන්ත්ත් න් ඊන් ඊන් ඊඊන්',
-        formTitle:'පහස්ත් න්න්ඊන් ඊඊ ඊඊ ඊ ඊ.',
-        formTitleText:'පහස්ත් න්න්',
-        labelName:'නම',labelEmail:'ඊල',labelSubject:'ව්රක්',labelMsg:'ප්ත් ව්',
-        warnMsg:'⚠️ හදිසි න්න්න් න්න් ඊන් ඊන් න් ඊලය ඊ ඊ් ඊ ඊ ඊ ඊඊ ඊ ර් ඊ ඊ ඊ ර් ඊ ඊ ඊ ඊ ඊ ඊ ඊ.',
-        sendBtn:'WhatsApp එන්න්',resetBtn:'නැවන් න් ඊන්',
-        charLeft:'ඉතර න් න්:',
-        warnTitle:'හදිසි න් න් න් - 119',
-        emPol:'පොලියය - 119',emCERT:'CERT - 1919',emChild:'ළපචාරය ආරක් - 1929',emAmb:'සයන් - 1990',
-        faqTitle:'සාම් න්න් න්න්?',faq1A:'නිව්ය ව් ව් සයියායම ව් ව් න් න් ඊ ඊ ඊ ඊ ඊ ඊ ඊ. න් ඊ.',
-        faq2Q:'අල් න්න් න්න් න්න් ඊන් ඊ ඊ ඊ ඊ.',faq2A:'නිවයායට න්න් ඊඊ ඊලය ඊ ඊ ඊ. න් ඊ ඊඊ ඊ ඊ ඊ. ව් ඊන් වලාව් න් ඊ ඊ ඊ.',
-        faq3Q:'ඔබට ප්රට ප්ත් ක්ටන් ප්ත් ඊ?',
-        faq3A:'අන් න්න් න්න් ව් වලාවුන් 48 පැයින් න්ඊ ් ව් ඊඊ. හදිසි ඊ ඊඊ ඊ. ව් ඊ.',
-        faq4Q:'මක් න් ඊ න් ඊ ඊ ඊ ඊ ඊ ඊ?',faq4:'න්න් ඊ ඊ න් ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ. ඊ ඊ.',
-        faq5Q:'න්ත්ටන් ලන් ඊ ඊන් ඊ ඊ?',
-        faq5A:'න්ත්ටන් ව් වලාව් න් ඊ න් ඊන් ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ ඊ.',
-        emailTitle:'නිඊල්',emailTitle:'න්ල්',
-        devTitle:'සන්ට්',
-        ftDesc:'ශ්‍රී ලංකය ඊ ඊ ඊ ඊ ඊ.',
-        ftDisc:'⚠️ අධ්‍යාපය ව් ව් වල් ව් ඊ ඊ. න් ඊ.',
-        ftQL:'ඉක්න් සබ්',ftLL:'න්ල් සබ්',ftCon:'සම්බන්ධට්',
-        ftPriv:'ප්‍රව්් ප්',
-        ftTerms:'හරව් කරය් ක්රය',
-      },
-    };
+    // ===== STATE =====
+    let selectedReportType = '';
+    let lang = localStorage.getItem('gl_lk_lang') || 'en';
 
-    // =============================================
-    // STATE
-    // =============================================
-    let lang = 'en';
-    const saved = localStorage.getItem('gl_lk_lang');
-    if (saved && T[saved]) lang = saved;
-
-    document.getElementById('langLbl').textContent = lang.toUpperCase();
-
-    // Dark mode
-    if (localStorage.getItem('gl_dark') === 'true' ||
-      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme:dark)').matches))
-      document.documentElement.classList.add('dark');
-
-    // Init
-    document.addEventListener('DOMContentLoaded', function() {
-      lucide.createIcons();
-      applyT();
-      initForm();
-    });
-
-    // =============================================
-    // FORM
-    // =============================================
-    function initForm() {
-      const form = document.getElementById('contactForm');
-      const submitBtn = form.querySelector('button[type="submit"]');
-      // Disable native submit
-      submitBtn.addEventListener('click', function(e) { e.preventDefault(); handleSend(); });
-      // Reset button resets native
-      form.querySelector('button[type="reset"]').addEventListener('click', function() { form.reset(); updateCharCount(); });
-
-      // Auto-resize textarea
-      document.getElementById('cMsg').addEventListener('input', updateCharCount);
-    }
-
-    function updateCharCount() {
-      const msg = document.getElementById('cMsg');
-      const count = msg.value.length;
-      document.getElementById('charCount').textContent = count + '/' + msg.maxLength;
-    }
-
-    function handleSend() {
-      const name = document.getElementById('cName').value.trim();
-      const email = document.getElementById('cEmail').value.trim();
-      const subject = document.getElementById('cSubject').value;
-      const message = document.getElementById('cMsg').value.trim();
-
-      if (!name || !message) {
-        showToast('Please fill in your name and message', false);
-        return;
-      }
-
-      const waMsg =
-        '*GlobalLaw - Contact Form*\n\n\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + (email || 'Not provided') + '\n' +
-        'Subject: ' + subject + '\n' +
-        'Country: Sri Lanka\n' +
-        'Message:\n' + message;
-
-      const url = 'https://wa.me/94775048455?text=' + encodeURIComponent(waMsg);
-      window.open(url, '_blank', 'width=600,height=400');
-      showToast('Message sent to WhatsApp! ✅', true);
-    }
-
-    // =============================================
-    // DARK MODE
-    // =============================================
+    // ===== DARK MODE =====
     function toggleDark() {
       document.documentElement.classList.toggle('dark');
       localStorage.setItem('gl_dark', document.documentElement.classList.contains('dark'));
+      showToast(document.documentElement.classList.contains('dark') ? 'Dark mode enabled' : 'Light mode enabled', true);
+    }
+    if (localStorage.getItem('gl_dark') === 'true' ||
+      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme:dark)').matches)) {
+      document.documentElement.classList.add('dark');
     }
 
-    // =============================================
-    // LANGUAGE
-    // =============================================
-    function applyT() {
-      const d = T[lang] || T.en;
-      document.querySelectorAll('[data-t]').forEach(function(el) {
-        var k = el.getAttribute('data-t');
-        if (d[k]) el.textContent = d[k];
-      });
-      document.documentElement.lang = lang === 'si' ? 'si' : 'en';
-      document.querySelectorAll('.ld-btn').forEach(function(b) {
-        var isEn = b.textContent.includes('English');
-        var chk = b.querySelector('.ld-chk');
-        if (chk) {
-          if ((isEn && lang === 'en') || (!isEn && lang === 'si')) chk.classList.remove('hidden');
-          else chk.classList.add('hidden');
-        }
-      });
-    }
-
+    // ===== LANGUAGE =====
+    function toggleLang() { document.getElementById('langDD').classList.toggle('hidden'); }
     function setLang(l) {
       lang = l;
       localStorage.setItem('gl_lk_lang', l);
       document.getElementById('langLbl').textContent = l.toUpperCase();
-      applyT();
-      initForm();
-      toggleLang();
+      document.getElementById('langDD').classList.add('hidden');
+      document.querySelectorAll('.ld-chk').forEach(el => el.classList.add('hidden'));
+      event.currentTarget.querySelector('.ld-chk').classList.remove('hidden');
+      showToast(l === 'en' ? 'Language: English' : 'භාෂාව: සිංහල', true);
     }
-
-    function toggleLang() {
-      document.getElementById('langDD').classList.toggle('hidden');
-    }
-    document.addEventListener('click', function(e) {
+    document.getElementById('langLbl').textContent = lang.toUpperCase();
+    document.querySelectorAll('.ld-btn').forEach(btn => {
+      const l = btn.getAttribute('onclick')?.match(/'(\w+)'/)?.[1];
+      if (l === lang) btn.querySelector('.ld-chk')?.classList.remove('hidden');
+    });
+    document.addEventListener('click', (e) => {
       if (!e.target.closest('#langBtn') && !e.target.closest('#langDD'))
         document.getElementById('langDD').classList.add('hidden');
     });
 
-    // Mobile Menu
-    document.querySelector('#mobMenu button').addEventListener('click', function() {
-      document.getElementById('mobMenu').classList.toggle('hidden');
-    });
-  }
+    // ===== MOBILE MENU =====
+    function toggleMob() { document.getElementById('mobMenu').classList.toggle('hidden'); }
 
-    // =============================================
-    // TOAST
-    // =============================================
-    let toastTimer = null;
-    function showToast(msg, success) {
-      var box = document.getElementById('toastBox');
-      var icon = document.getElementById('toastIcon');
-      document.getElementById('toastMsg').textContent = msg;
-      icon.className = 'w-7 h-7 rounded-full flex items-center justify-center shrink-0 ' +
-        (success ? 'bg-green-100 dark:bg-green-900/30' : 'bg-yellow-100 dark:bg-yellow-900/30');
-      icon.innerHTML = success
-        ? '<i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i>'
-        : '<i data-lucide="info" class="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400"></i>';
-      box.classList.remove('hidden');
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(function() { box.classList.add('hidden'); }, 2500);
+    // ===== REPORT TYPE SELECTOR =====
+    function selectReport(el, type) {
+      document.querySelectorAll('.report-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedReportType = type;
       lucide.createIcons();
     }
-  </script>
 
+    // ===== CHECKLIST =====
+    function toggleCheck(label) {
+      label.classList.toggle('checked');
+      const box = label.querySelector('.chk-box');
+      const icon = label.querySelector('.chk-icon');
+      if (label.classList.contains('checked')) {
+        box.classList.add('bg-brand-red', 'border-brand-red');
+        box.classList.remove('border-blue-300', 'dark:border-blue-700');
+        icon.classList.remove('hidden');
+      } else {
+        box.classList.remove('bg-brand-red', 'border-brand-red');
+        box.classList.add('border-blue-300', 'dark:border-blue-700');
+        icon.classList.add('hidden');
+      }
+    }
+
+    // ===== CHAR COUNT =====
+    function updateCharCount() {
+      const msg = document.getElementById('cMsg');
+      const count = msg.value.length;
+      const el = document.getElementById('charCount');
+      el.textContent = count + '/1000';
+      el.classList.toggle('text-brand-red', count > 900);
+    }
+
+    // ===== FORM SUBMIT =====
+    function handleSend() {
+      const name = document.getElementById('cName').value.trim();
+      const email = document.getElementById('cEmail').value.trim();
+      const message = document.getElementById('cMsg').value.trim();
+
+      if (!name) { showToast('Please enter your name', false); document.getElementById('cName').focus(); return; }
+      if (!message) { showToast('Please enter your message', false); document.getElementById('cMsg').focus(); return; }
+
+      const subject = selectedReportType || 'General Inquiry';
+      const waMsg =
+        '📋 *GlobalLaw — Contact Form*\n\n' +
+        '👤 Name: ' + name + '\n' +
+        '📧 Email: ' + (email || 'Not provided') + '\n' +
+        '📌 Subject: ' + subject + '\n' +
+        '🇱🇰 Country: Sri Lanka\n\n' +
+        '💬 Message:\n' + message;
+
+      window.open('https://wa.me/94775048455?text=' + encodeURIComponent(waMsg), '_blank');
+      showToast('Opening WhatsApp... ✅', true);
+    }
+
+    function resetForm() {
+      document.getElementById('cName').value = '';
+      document.getElementById('cEmail').value = '';
+      document.getElementById('cMsg').value = '';
+      document.querySelectorAll('.report-card').forEach(c => c.classList.remove('selected'));
+      selectedReportType = '';
+      updateCharCount();
+      showToast('Form cleared', true);
+    }
+
+    // ===== FAQ =====
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ===== TOAST =====
+    let toastTimer;
+    function showToast(msg, success) {
+      const box = document.getElementById('toastBox');
+      const icon = document.getElementById('toastIcon');
+      document.getElementById('toastMsg').textContent = msg;
+      icon.className = 'w-7 h-7 rounded-full flex items-center justify-center shrink-0 ' +
+        (success ? 'bg-green-50 dark:bg-green-900/15' : 'bg-amber-50 dark:bg-amber-900/15');
+      icon.innerHTML = success
+        ? '<i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i>'
+        : '<i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400"></i>';
+      box.classList.remove('hidden', 'toast-out');
+      box.classList.add('toast-in');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.remove('toast-in');
+        box.classList.add('toast-out');
+        setTimeout(() => box.classList.add('hidden'), 300);
+      }, 2500);
+      lucide.createIcons();
+    }
+
+    // ===== OFFICE HOURS STATUS =====
+    function updateStatus() {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+      const time = hour + min / 60;
+      const el = document.getElementById('statusText');
+      let isOpen = false;
+
+      if (day >= 1 && day <= 5 && time >= 9 && time < 18) isOpen = true;
+      if (day === 6 && time >= 9 && time < 13) isOpen = true;
+
+      if (isOpen) {
+        el.textContent = 'Currently Online — Ready to help';
+        el.classList.remove('text-neutral-400');
+        el.classList.add('text-green-600', 'dark:text-green-400');
+        el.previousElementSibling.classList.remove('bg-neutral-400');
+        el.previousElementSibling.classList.add('bg-green-500');
+      } else {
+        el.textContent = 'Currently Offline — Leave a message';
+        el.classList.remove('text-green-600', 'dark:text-green-400');
+        el.classList.add('text-neutral-400');
+        el.previousElementSibling.classList.remove('bg-green-500');
+        el.previousElementSibling.classList.add('bg-neutral-400');
+      }
+    }
+    updateStatus();
+    setInterval(updateStatus, 60000);
+
+    // ===== SCROLL ANIMATIONS =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+    // Re-init icons
+    setTimeout(() => lucide.createIcons(), 100);
+  </script>
 </body>
+</html>
