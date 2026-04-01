@@ -71,6 +71,9 @@
     .cat-card.soon:hover { transform: none; box-shadow: none; }
     .cat-card.soon::before { display: none; }
 
+    /* Hidden by filter */
+    .cat-card.hidden-card { display: none; }
+
     /* WhatsApp pulse */
     @keyframes pulse-ring { 0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0} }
     .wa-pulse::before { content:'';position:absolute;inset:-5px;border-radius:50%;background:#22C55E;animation:pulse-ring 2s ease-out infinite;z-index:-1; }
@@ -92,6 +95,13 @@
 
     /* Dot pattern */
     .dot-bg { background-image: radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0); background-size: 36px 36px; }
+
+    /* No results shake */
+    @keyframes shake { 0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)} }
+    .shake { animation: shake 0.4s ease; }
+
+    /* Filter pill active */
+    .fpill.active { background: #DC2626; color: white; border-color: #DC2626; }
   </style>
 </head>
 
@@ -171,6 +181,55 @@
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-10 pb-8 md:pt-14 md:pb-10">
       <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-2 fu" data-i18n="pgTitle">Law Categories</h1>
       <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base max-w-xl fu fu1" data-i18n="pgSub">Select a category to browse related laws explained in simple language.</p>
+      <!-- Stats bar -->
+      <div class="flex items-center gap-4 mt-4 fu fu2">
+        <div class="flex items-center gap-1.5 text-xs text-neutral-400">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-red"></i>
+          <span id="totalCount" class="font-semibold text-neutral-600 dark:text-neutral-200">52</span>
+          <span data-i18n="totalCat">Categories</span>
+        </div>
+        <div class="w-px h-3.5 bg-neutral-200 dark:bg-brand-dark-border"></div>
+        <div class="flex items-center gap-1.5 text-xs text-neutral-400">
+          <i data-lucide="check-circle" class="w-3.5 h-3.5 text-green-500"></i>
+          <span id="activeCount" class="font-semibold text-green-600 dark:text-green-400">6</span>
+          <span data-i18n="activeCat">Active</span>
+        </div>
+        <div class="w-px h-3.5 bg-neutral-200 dark:bg-brand-dark-border"></div>
+        <div class="flex items-center gap-1.5 text-xs text-neutral-400">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-yellow-500"></i>
+          <span id="soonCount" class="font-semibold text-yellow-600 dark:text-yellow-400">46</span>
+          <span data-i18n="soonCat">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SEARCH & FILTER BAR ============ -->
+  <section class="sticky top-14 md:top-16 z-40 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-100 dark:border-brand-dark-border transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400"></i>
+          <input id="searchInput" type="text" placeholder="Search categories..." data-i18n-placeholder="searchPH" class="w-full pl-10 pr-10 py-2.5 text-sm bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red/20 transition placeholder:text-neutral-400 dark:placeholder:text-neutral-500" oninput="filterCards()">
+          <button id="clearSearch" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-200 dark:bg-brand-dark-border flex items-center justify-center hover:bg-brand-red hover:text-white transition text-neutral-500">
+            <i data-lucide="x" class="w-3 h-3"></i>
+          </button>
+        </div>
+        <!-- Filter Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
+          <button onclick="setFilter('all')" class="fpill active shrink-0 text-[11px] font-semibold px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-brand-dark-border transition hover:border-brand-red" data-i18n="filterAll">All</button>
+          <button onclick="setFilter('active')" class="fpill shrink-0 text-[11px] font-semibold px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-brand-dark-border text-neutral-500 dark:text-neutral-400 transition hover:border-brand-red" data-i18n="filterActive">✅ Active</button>
+          <button onclick="setFilter('soon')" class="fpill shrink-0 text-[11px] font-semibold px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-brand-dark-border text-neutral-500 dark:text-neutral-400 transition hover:border-brand-red" data-i18n="filterSoon">🕐 Coming Soon</button>
+          <button onclick="setFilter('popular')" class="fpill shrink-0 text-[11px] font-semibold px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-brand-dark-border text-neutral-500 dark:text-neutral-400 transition hover:border-brand-red" data-i18n="filterPopular">🔥 Popular</button>
+          <button onclick="setFilter('new')" class="fpill shrink-0 text-[11px] font-semibold px-3.5 py-2 rounded-lg border border-neutral-200 dark:border-brand-dark-border text-neutral-500 dark:text-neutral-400 transition hover:border-brand-red" data-i18n="filterNew">🆕 New</button>
+        </div>
+      </div>
+      <!-- Result count -->
+      <div id="resultInfo" class="mt-2 text-[11px] text-neutral-400 hidden">
+        <span data-i18n="showing">Showing</span> <span id="resultCount" class="font-semibold text-neutral-600 dark:text-neutral-200">52</span> <span data-i18n="ofWord">of</span> <span id="resultTotal">52</span> <span data-i18n="results">results</span>
+      </div>
     </div>
   </section>
 
@@ -178,8 +237,15 @@
   <!-- ============ CATEGORY CARDS GRID ============ -->
   <section class="py-8 md:py-12 bg-white dark:bg-brand-dark transition-colors">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div id="cardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+      <div id="cardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
         <!-- Cards rendered by JavaScript -->
+      </div>
+      <!-- No Results -->
+      <div id="noResults" class="hidden py-16 text-center">
+        <div class="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-brand-dark-card flex items-center justify-center text-3xl mx-auto mb-4 shake">🔍</div>
+        <h3 class="font-bold text-lg mb-1" data-i18n="noResults">No categories found</h3>
+        <p class="text-neutral-400 text-sm mb-4" data-i18n="noResultsSub">Try a different search term or filter.</p>
+        <button onclick="clearSearch(); setFilter('all');" class="text-brand-red text-sm font-semibold hover:underline" data-i18n="clearAll">Clear filters</button>
       </div>
     </div>
   </section>
@@ -261,11 +327,12 @@
     //     file    → HTML file to link to (e.g. 'lk-cyber.html')
     //                ⚡ Set to: null → Shows "Coming Soon"
     //                ⚡ Set to: 'lk-xxxx.html' → Clickable card
-    //     tag     → (optional) 'popular', 'new', or remove it
+    //     tag     → (optional) 'popular', 'new', or remove it/null
     //
     // =============================================================
     const CATEGORIES = [
 
+      // ──────────────── EXISTING ACTIVE CATEGORIES ────────────────
       {
         icon: '💻',
         title: { en: 'Cyber Laws', si: 'සයිබර් නීති' },
@@ -308,18 +375,20 @@
         file: 'lk-motor.html',
         tag: 'new'
       },
+
+      // ──────────────── EXISTING COMING SOON ────────────────
       {
         icon: '👨‍👩‍👧',
         title: { en: 'Family Laws', si: 'පවුල් නීති' },
         laws: 6,
-        file: 'lk-family.html',
+        file: null,
         tag: null
       },
       {
         icon: '🏠',
         title: { en: 'Property Laws', si: 'දේපළ නීති' },
         laws: 8,
-        file: 'lk-property.html',
+        file: null,
         tag: null
       },
       {
@@ -338,7 +407,7 @@
       },
       {
         icon: '🏦',
-        title: { en: 'Banking & Finance', si: 'බැංකු හා මූල්‍ය ධන' },
+        title: { en: 'Banking & Finance', si: 'බැංකු හා මූල්‍ය නීති' },
         laws: 3,
         file: null,
         tag: null
@@ -349,11 +418,584 @@
         laws: 3,
         file: null,
         tag: null
+      },
+
+      // ──────────────── 🆕 NEW CATEGORIES (13-52) ────────────────
+
+      // ── Land & Real Estate ──
+      {
+        icon: '🗺️',
+        title: { en: 'Land Laws', si: 'ඉඩම් නීති' },
+        laws: 11,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏘️',
+        title: { en: 'Housing & Shelter Laws', si: 'නිවාස නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏗️',
+        title: { en: 'Construction & Building Laws', si: 'ඉදිකිරීම් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+
+      // ── Tax & Revenue ──
+      {
+        icon: '💰',
+        title: { en: 'Tax Laws', si: 'බදු නීති' },
+        laws: 8,
+        file: null,
+        tag: 'popular'
+      },
+      {
+        icon: '🧾',
+        title: { en: 'Customs & Excise', si: 'රේගු හා බලපත්‍ර නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+
+      // ── Intellectual Property ──
+      {
+        icon: '💡',
+        title: { en: 'Intellectual Property', si: 'බුද්ධිමය දේපළ නීති' },
+        laws: 7,
+        file: null,
+        tag: 'new'
+      },
+      {
+        icon: '©️',
+        title: { en: 'Copyright Laws', si: 'ප්‍රකාශන අයිතිය නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '™️',
+        title: { en: 'Trademark & Patent Laws', si: 'වෙළඳ ලකුණු හා පේටන්ට් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+
+      // ── Environment & Nature ──
+      {
+        icon: '🌿',
+        title: { en: 'Environmental Laws', si: 'පරිසර නීති' },
+        laws: 9,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🐘',
+        title: { en: 'Wildlife & Biodiversity', si: 'වන සතුන් හා ජෛව විවිධත්ව නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🌲',
+        title: { en: 'Forestry Laws', si: 'වන නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '💧',
+        title: { en: 'Water Resources Laws', si: 'ජල සම්පත් නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '⛏️',
+        title: { en: 'Mining & Mineral Laws', si: 'ඛනිජ නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🌊',
+        title: { en: 'Marine & Coastal Laws', si: 'මුහුදු හා වෙරළබඩ නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+
+      // ── Transport & Infrastructure ──
+      {
+        icon: '🚂',
+        title: { en: 'Railway Laws', si: 'දුම්රිය නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🚢',
+        title: { en: 'Maritime & Shipping Laws', si: 'නාවික හා නැව් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '✈️',
+        title: { en: 'Aviation Laws', si: 'ගුවන් සේවා නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🛣️',
+        title: { en: 'Road & Highway Laws', si: 'මාර්ග නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+
+      // ── Digital & Technology ──
+      {
+        icon: '📡',
+        title: { en: 'Telecommunication Laws', si: 'විදුලි සංදේශන නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔒',
+        title: { en: 'Data Protection & Privacy', si: 'දත්ත ආරක්ෂණ නීති' },
+        laws: 4,
+        file: null,
+        tag: 'new'
+      },
+      {
+        icon: '🤖',
+        title: { en: 'AI & Emerging Tech Laws', si: 'කෘතිම බුද්ධිය හා නව තාක්ෂණ නීති' },
+        laws: 3,
+        file: null,
+        tag: 'new'
+      },
+
+      // ── Health & Safety ──
+      {
+        icon: '🏥',
+        title: { en: 'Health & Medical Laws', si: 'සෞඛ්‍ය හා වෛද්‍ය නීති' },
+        laws: 7,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '💊',
+        title: { en: 'Food & Drugs Laws', si: 'ආහාර හා ඖෂධ නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🧪',
+        title: { en: 'Narcotics & Dangerous Drugs', si: 'මත්ද්‍රව්‍ය නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '⛑️',
+        title: { en: 'Occupational Safety Laws', si: 'වෘත්තීය ආරක්ෂිත නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🦠',
+        title: { en: 'Pandemic & Epidemic Laws', si: 'වසංගත නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+
+      // ── Education & Culture ──
+      {
+        icon: '📚',
+        title: { en: 'Education Laws', si: 'අධ්‍යාපන නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎭',
+        title: { en: 'Cultural Heritage Laws', si: 'සංස්කෘතික උරුම නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🛕',
+        title: { en: 'Buddhist Temporalities', si: 'බෞද්ධ දේවාල නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🕌',
+        title: { en: 'Religious & Shrine Laws', si: 'ආගමික හා දේවාල නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+
+      // ── Consumer & Commerce ──
+      {
+        icon: '🛒',
+        title: { en: 'Consumer Protection', si: 'පාරිභෝගික ආරක්ෂණ නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📋',
+        title: { en: 'Contract Laws', si: 'ගිවිසුම් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🛡️',
+        title: { en: 'Insurance Laws', si: 'රක්ෂණ නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏪',
+        title: { en: 'Cooperative Societies Laws', si: 'සංගම් නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📊',
+        title: { en: 'Company & Securities Laws', si: 'සමාගම් හා ත්‍රිපත්ති නීති' },
+        laws: 7,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎟️',
+        title: { en: 'Tourism Laws', si: 'සංචාරක නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+
+      // ── Governance & Elections ──
+      {
+        icon: '🗳️',
+        title: { en: 'Election Laws', si: 'මැතිවරණ නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏛️',
+        title: { en: 'Local Government Laws', si: 'පළාත් පාලන නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔍',
+        title: { en: 'Anti-Corruption Laws', si: 'දූෂණ විරෝධී නීති' },
+        laws: 4,
+        file: null,
+        tag: 'popular'
+      },
+      {
+        icon: '📋',
+        title: { en: 'Right to Information', si: 'තොරතුරු දැනගැනීමේ අයිතිය නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📢',
+        title: { en: 'Media & Press Laws', si: 'මාධ්‍ය හා මුද්‍රණ නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏴',
+        title: { en: 'Public Security Laws', si: 'පොදු ආරක්ෂිත නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+
+      // ── Human Rights & Social ──
+      {
+        icon: '🙌',
+        title: { en: 'Human Rights Laws', si: 'මානව අයිතිවාසිකම් නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '👧',
+        title: { en: "Women's Rights Laws", si: 'ස්ත්‍රී අයිතිවාසිකම් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🧒',
+        title: { en: "Children's Rights Laws", si: 'ළමා අයිතිවාසිකම් නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '♿',
+        title: { en: 'Disability Rights Laws', si: 'ආබාධිත අයිතිවාසිකම් නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '👴',
+        title: { en: 'Elderly Rights Laws', si: 'වැඩිහිටි අයිතිවාසිකම් නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🤝',
+        title: { en: 'Social Security & Welfare', si: 'සමාජ ආරක්ෂණ නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+
+      // ── Criminal & Enforcement ──
+      {
+        icon: '🔫',
+        title: { en: 'Weapons & Firearms Laws', si: 'ආයුධ හා ගිනි අවි නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔍',
+        title: { en: 'Evidence Laws', si: 'සාක්ෂි නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '⚖️',
+        title: { en: 'Tort & Compensation Laws', si: 'වැරදි ක්‍රියා හා වන්දි නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔗',
+        title: { en: 'Succession & Inheritance', si: 'උරුමය පිළිබඳ නීති' },
+        laws: 6,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏢',
+        title: { en: 'Arbitration & Mediation', si: 'මධ්‍යස්ථ නිරීක්ෂණ නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔒',
+        title: { en: 'Prisons & Corrections', si: 'සිරගෙවල් හා නිදහස් අහිමි කිරීම් නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎖️',
+        title: { en: 'Military & Defense Laws', si: 'හමුදා හා ආරක්ෂක නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+
+      // ── Energy & Utilities ──
+      {
+        icon: '⚡',
+        title: { en: 'Energy & Electricity Laws', si: 'ශක්ති හා විදුලි නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🛢️',
+        title: { en: 'Petroleum & Fuel Laws', si: 'ඛනිජ තෙල් හා ඉන්ධන නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '💧',
+        title: { en: 'Water Supply & Sanitation', si: 'ජලසම්පාදන හා සනීපාරක්ෂක නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+
+      // ── Immigration & Nationality ──
+      {
+        icon: '✈️',
+        title: { en: 'Immigration & Passport Laws', si: 'සංක්‍රමණ හා ගමන් බලපත්‍ර නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🛂',
+        title: { en: 'Citizenship Laws', si: 'පුරවැසිභාවය නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🏠',
+        title: { en: 'Refugee & Asylum Laws', si: 'සරණාගතයින් පිළිබඳ නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+
+      // ── Agriculture & Fisheries ──
+      {
+        icon: '🌾',
+        title: { en: 'Agriculture Laws', si: 'කෘෂිකර්ම නීති' },
+        laws: 5,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🐟',
+        title: { en: 'Fisheries & Aquatic Laws', si: 'ධීවර හා ජලජ නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🐄',
+        title: { en: 'Animal Welfare Laws', si: 'සත්ව සුභසාධන නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🌱',
+        title: { en: 'Plant & Pesticide Laws', si: 'ශාක හා කෘමිනාශක නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+
+      // ── Sports, Entertainment & Misc ──
+      {
+        icon: '⚽',
+        title: { en: 'Sports Laws', si: 'ක්‍රීඩා නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎬',
+        title: { en: 'Entertainment & Gaming Laws', si: 'විනෝදාස්වාද හා ක්‍රීඩා නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎲',
+        title: { en: 'Gambling & Betting Laws', si: 'ජූලා හා තරඟ නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '⚰️',
+        title: { en: 'Cremation & Burial Laws', si: 'අවමංගල්‍ය නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📬',
+        title: { en: 'Postal Laws', si: 'තැපැල් නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📊',
+        title: { en: 'Statistics & Census Laws', si: 'සංඛ්‍යාලේඛන නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '☢️',
+        title: { en: 'Atomic Energy & Radiation', si: 'පරමාණුක ශක්ති නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🎨',
+        title: { en: 'Anti-Dumping & Trade Laws', si: 'ආන්තික රේගු හා වෙළඳ නීති' },
+        laws: 4,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🔬',
+        title: { en: 'Medical Ethics & Liability', si: 'වෛද්‍ය ආචාර ධර්ම හා වගකීම් නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '📞',
+        title: { en: 'Telecom Consumer Protection', si: 'විදුලි සංදේශන පාරිභෝගික ආරක්ෂණ නීති' },
+        laws: 2,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '🖨️',
+        title: { en: 'Stamp & Notary Laws', si: 'මුද්‍රා හා නොට්ටි නීති' },
+        laws: 3,
+        file: null,
+        tag: null
+      },
+      {
+        icon: '⚖️',
+        title: { en: 'Legal Profession Laws', si: 'නීතීඥ වෘත්තීය නීති' },
+        laws: 3,
+        file: null,
+        tag: null
       }
 
       // ================================================
       // 📌 ADD MORE CARDS HERE
-      // Just copy the block below, paste it, and edit:
+      // Just copy the block below, paste it above, and edit:
       //
       // {
       //   icon: '📝',
@@ -375,6 +1017,21 @@
         navHome: 'Home', navCat: 'Categories', navAbout: 'About Us', navContact: 'Contact', navSupport: 'Support', navCredits: 'Credits',
         pgTitle: 'Law Categories',
         pgSub: 'Select a category to browse related laws explained in simple language.',
+        totalCat: 'Categories',
+        activeCat: 'Active',
+        soonCat: 'Coming Soon',
+        searchPH: 'Search categories...',
+        filterAll: 'All',
+        filterActive: '✅ Active',
+        filterSoon: '🕐 Coming Soon',
+        filterPopular: '🔥 Popular',
+        filterNew: '🆕 New',
+        showing: 'Showing',
+        ofWord: 'of',
+        results: 'results',
+        noResults: 'No categories found',
+        noResultsSub: 'Try a different search term or filter.',
+        clearAll: 'Clear filters',
         lawsWord: 'Laws',
         viewDetails: 'View Laws →',
         comingSoon: 'Coming Soon',
@@ -388,6 +1045,21 @@
         navHome: 'මුල් පිටුව', navCat: 'කාණ්ඩ', navAbout: 'අප ගැන', navContact: 'සම්බන්ධ කරගන්න', navSupport: 'සහාය', navCredits: 'ස්තුතිය',
         pgTitle: 'නීති කාණ්ඩ',
         pgSub: 'සරල භාෂාවෙන් පැහැදිලි කළ අදාළ නීති බැලීමට කාණ්ඩයක් තෝරන්න.',
+        totalCat: 'කාණ්ඩ',
+        activeCat: 'සක්‍රීය',
+        soonCat: 'මේ තවම එනවා',
+        searchPH: 'කාණ්ඩ සොයන්න...',
+        filterAll: 'සියල්ල',
+        filterActive: '✅ සක්‍රීය',
+        filterSoon: '🕐 එනවා',
+        filterPopular: '🔥 ජනප්‍රිය',
+        filterNew: '🆕 අලුත',
+        showing: 'පෙන්වනවා',
+        ofWord: 'මුළු',
+        results: 'ප්‍රතිඵල',
+        noResults: 'කාණ්ඩ හමු නැත',
+        noResultsSub: 'වෙනත් වචනයකින් හෝ filter එකකින් උත්සාහ කරන්න.',
+        clearAll: 'පෙරහර ඉවත් කරන්න',
         lawsWord: 'නීති',
         viewDetails: 'නීති බලන්න →',
         comingSoon: 'මේ තවම එනවා',
@@ -404,60 +1076,135 @@
     // STATE
     // =============================================================
     let lang = 'en';
+    let currentFilter = 'all';
     const saved = localStorage.getItem('gl_lk_lang');
     if (saved && T[saved]) lang = saved;
+
+
+    // =============================================================
+    // UPDATE STATS
+    // =============================================================
+    function updateStats() {
+      var total = CATEGORIES.length;
+      var active = CATEGORIES.filter(function(c) { return c.file !== null; }).length;
+      var soon = total - active;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('activeCount').textContent = active;
+      document.getElementById('soonCount').textContent = soon;
+    }
 
 
     // =============================================================
     // RENDER CARDS
     // =============================================================
     function renderCards() {
-      const d = T[lang] || T.en;
-      const grid = document.getElementById('cardGrid');
-      let html = '';
+      var d = T[lang] || T.en;
+      var grid = document.getElementById('cardGrid');
+      var searchTerm = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      var html = '';
+      var visibleCount = 0;
 
       CATEGORIES.forEach(function(cat, index) {
-        const name = cat.title[lang] || cat.title.en;
-        const isSoon = (cat.file === null);
+        var name = cat.title[lang] || cat.title.en;
+        var nameEn = cat.title.en || '';
+        var nameSi = cat.title.si || '';
+        var isSoon = (cat.file === null);
+
+        // Filter logic
+        var matchSearch = !searchTerm || name.toLowerCase().includes(searchTerm) || nameEn.toLowerCase().includes(searchTerm) || nameSi.includes(searchTerm);
+        var matchFilter = true;
+        if (currentFilter === 'active') matchFilter = !isSoon;
+        else if (currentFilter === 'soon') matchFilter = isSoon;
+        else if (currentFilter === 'popular') matchFilter = cat.tag === 'popular';
+        else if (currentFilter === 'new') matchFilter = cat.tag === 'new';
+
+        if (!matchSearch || !matchFilter) return;
+        visibleCount++;
 
         // Tag badge
-        let tagHTML = '';
+        var tagHTML = '';
         if (cat.tag === 'popular') {
-          tagHTML = '<div class="absolute top-2.5 right-2.5 bg-yellow-400 text-yellow-900 text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagPopular + '</div>';
+          tagHTML = '<div class="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-yellow-400 text-yellow-900 text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagPopular + '</div>';
         } else if (cat.tag === 'new') {
-          tagHTML = '<div class="absolute top-2.5 right-2.5 bg-brand-red text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagNew + '</div>';
+          tagHTML = '<div class="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-brand-red text-white text-[7px] sm:text-[8px] font-bold px-1.5 py-0.5 rounded-full z-10">' + d.tagNew + '</div>';
         }
 
         // Coming Soon overlay
-        let soonHTML = '';
+        var soonHTML = '';
         if (isSoon) {
           soonHTML = '<div class="absolute inset-0 bg-white/60 dark:bg-brand-dark/60 backdrop-blur-[1px] rounded-2xl z-20 flex items-center justify-center">' +
-            '<div class="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-bold px-3 py-1.5 rounded-lg">🚧 ' + d.comingSoon + '</div>' +
+            '<div class="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[9px] sm:text-[10px] font-bold px-2.5 py-1.5 rounded-lg">🚧 ' + d.comingSoon + '</div>' +
             '</div>';
         }
 
         // Click handler
-        const clickAttr = isSoon
+        var clickAttr = isSoon
           ? 'onclick="showToast(\'' + d.comingSoon + '\')"'
           : 'onclick="window.location.href=\'' + cat.file + '\'"';
 
-        // Delay class for stagger animation
-        const delayClass = index < 4 ? ' fu fu' + (index + 1) : ' fu';
-
-        html += '<div ' + clickAttr + ' class="cat-card' + (isSoon ? ' soon' : '') + ' bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 sm:p-6 text-center' + delayClass + '">' +
+        html += '<div ' + clickAttr + ' class="cat-card' + (isSoon ? ' soon' : '') + ' bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-4 sm:p-5 md:p-6 text-center fu">' +
           soonHTML +
           tagHTML +
-          '<div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-3xl sm:text-4xl mx-auto mb-3 sm:mb-4">' + cat.icon + '</div>' +
-          '<h3 class="font-bold text-sm sm:text-base mb-1">' + name + '</h3>' +
-          '<p class="text-brand-red text-xs font-semibold mb-3">' + cat.laws + ' ' + d.lawsWord + '</p>' +
-          '<div class="inline-flex items-center gap-1 text-[11px] font-semibold ' + (isSoon ? 'text-neutral-400' : 'text-brand-red hover:gap-2') + ' transition-all">' +
+          '<div class="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl mx-auto mb-2 sm:mb-3 md:mb-4">' + cat.icon + '</div>' +
+          '<h3 class="font-bold text-[11px] sm:text-sm md:text-base mb-0.5 sm:mb-1 leading-snug">' + name + '</h3>' +
+          '<p class="text-brand-red text-[10px] sm:text-xs font-semibold mb-2 sm:mb-3">' + cat.laws + ' ' + d.lawsWord + '</p>' +
+          '<div class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold ' + (isSoon ? 'text-neutral-400' : 'text-brand-red hover:gap-2') + ' transition-all">' +
           '<span>' + (isSoon ? '🔒' : '') + ' ' + d.viewDetails + '</span>' +
-          '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>' +
+          '<svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>' +
           '</div>' +
           '</div>';
       });
 
       grid.innerHTML = html;
+
+      // Show/hide no results
+      var noRes = document.getElementById('noResults');
+      if (visibleCount === 0) {
+        noRes.classList.remove('hidden');
+      } else {
+        noRes.classList.add('hidden');
+      }
+
+      // Update result info
+      var resultInfo = document.getElementById('resultInfo');
+      var totalCount = CATEGORIES.length;
+      if (searchTerm || currentFilter !== 'all') {
+        resultInfo.classList.remove('hidden');
+        document.getElementById('resultCount').textContent = visibleCount;
+        document.getElementById('resultTotal').textContent = totalCount;
+      } else {
+        resultInfo.classList.add('hidden');
+      }
+
+      // Clear button visibility
+      var clearBtn = document.getElementById('clearSearch');
+      if (searchTerm) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+    }
+
+
+    // =============================================================
+    // SEARCH & FILTER
+    // =============================================================
+    function filterCards() {
+      renderCards();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      renderCards();
+    }
+
+    function setFilter(f) {
+      currentFilter = f;
+      // Update pill styles
+      document.querySelectorAll('.fpill').forEach(function(pill) {
+        pill.classList.remove('active');
+        pill.classList.add('text-neutral-500', 'dark:text-neutral-400');
+      });
+      event.target.classList.add('active');
+      event.target.classList.remove('text-neutral-500', 'dark:text-neutral-400');
+      renderCards();
     }
 
 
@@ -465,16 +1212,21 @@
     // TRANSLATION ENGINE
     // =============================================================
     function applyT() {
-      const d = T[lang] || T.en;
+      var d = T[lang] || T.en;
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
-        const k = el.getAttribute('data-i18n');
+        var k = el.getAttribute('data-i18n');
         if (d[k]) el.textContent = d[k];
+      });
+      // Placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n-placeholder');
+        if (d[k]) el.placeholder = d[k];
       });
       document.documentElement.lang = lang === 'si' ? 'si' : 'en';
       // Update language dropdown checkmarks
       document.querySelectorAll('.ld-opt').forEach(function(b) {
-        const isEn = b.textContent.includes('English');
-        const chk = b.querySelector('.ld-chk');
+        var isEn = b.textContent.includes('English');
+        var chk = b.querySelector('.ld-chk');
         if (chk) {
           if ((isEn && lang === 'en') || (!isEn && lang === 'si')) chk.classList.remove('hidden');
           else chk.classList.add('hidden');
@@ -522,7 +1274,7 @@
     // =============================================================
     // TOAST NOTIFICATION
     // =============================================================
-    let toastTimer = null;
+    var toastTimer = null;
     function showToast(msg) {
       var box = document.getElementById('toastBox');
       document.getElementById('toastMsg').textContent = msg;
@@ -536,6 +1288,7 @@
     // INITIALIZE
     // =============================================================
     document.getElementById('langLabel').textContent = lang.toUpperCase();
+    updateStats();
     applyT();
     renderCards();
 
