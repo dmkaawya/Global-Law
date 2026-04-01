@@ -532,70 +532,367 @@
   </div>
 
   <!-- ============ JAVASCRIPT ============ -->
-  <script>
+   <script>
     lucide.createIcons();
 
     // ===== DATA =====
     var TRIBUNALS=[
       {icon:'💼',name:{en:'Labor Tribunal',si:'කම්කරු අධිකරණය'},law:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},desc:{en:'Handles unfair dismissal, wrongful termination, employment disputes. Can order reinstatement or compensation.',si:'අසාධාරණ ලෙස ඉවත් කිරීම්, රැකියා ආරවුල් සමත් කරයි.'}},
-      {icon:'🏭',name:{en:'Industrial Court',si:'කාර්මික අධිකරණය'},law:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},desc:{en:'Hears appeals from Labor Tribunal decisions. Higher authority in industrial disputes.',si:'කම්කරු අධිකරණ තීන්දුවලින් අභියාදන. කාර්මික ආරවුල්වල ඉහළ අධිකාරන.'}},
-      {icon:'🛒',name:{en:'Consumer Affairs Authority',si:'පාරිභෝගික අධිකාරිය'},law:{en:'CAA Act',si:'CAA පනත'},desc:{en:'Consumer complaints, defective goods, unfair trade practices, price control violations.',si:'පාරිභෝගික පැමිණිල්, දෝෂ සහිතිත් භාණ්ඩ, වෙළඳ පාලිත් උල්ලංඝනයන්.'}},
-      {icon:'🏠',name:{en:'Rent Board',si:'කුලි මණ්ඩලය'},law:{en:'Rent Act No. 7 of 1972',si:'කුලි පනත අංක 7 ක්‍ර. 1972'},desc:{en:'Rent disputes between landlords and tenants of controlled premises.',si:'කුලිකරුවන් සහ අධිකරණ පාලිත් රැකියා අතර කුලි ආරවුල්.'}},
-      {icon:'🏗️',name:{en:'UDA Tribunal',si:'නාගරික සංවර්ධන අධිකරණය'},law:{en:'UDA Act',si:'UDA පනත'},desc:{en:'Unauthorized construction, building code violations, development plan objections.',si:'අනුමත ඉදිකිරීම්, ගොඩනැගිලි විධිවිධින් උල්ලංඝනයන්.'}},
-      {icon:'🌾',name:{en:'Agricultural Tribunal',si:'කෘෂිකර්ම අධිකරණය'},law:{en:'Agricultural Lands Act',si:'කෘෂිකර්ම ඉඩම් පනත'},desc:{en:'Agricultural land tenure, cultivation rights, landlord-tenant agricultural relations.',si:'කෘෂිකර්ම ඉඩම් භාවිතය, වගාකිරීම් අයිතිවාසිකම් පිළිබවෙන කරන්න.'}},
+      {icon:'🏭',name:{en:'Industrial Court',si:'කාර්මික අධිකරණය'},law:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},desc:{en:'Hears appeals from Labor Tribunal decisions. Higher authority in industrial disputes.',si:'කම්කරු අධිකරණ තීන්දුවලින් අභියාදන. කාර්මික ආරවුල්වල ඉහළ අධිකාරිය.'}},
+      {icon:'🛒',name:{en:'Consumer Affairs Authority',si:'පාරිභෝගික අධිකාරිය'},law:{en:'CAA Act',si:'CAA පනත'},desc:{en:'Consumer complaints, defective goods, unfair trade practices, price control violations.',si:'පාරිභෝගික පැමිණිලි, දෝෂ සහිත භාණ්ඩ, වෙළඳ පාලන උල්ලංඝනයන්.'}},
+      {icon:'🏠',name:{en:'Rent Board',si:'කුලි මණ්ඩලය'},law:{en:'Rent Act No. 7 of 1972',si:'කුලි පනත අංක 7 ක්‍ර. 1972'},desc:{en:'Rent disputes between landlords and tenants of controlled premises.',si:'කුලිකරුවන් සහ අධිකාරි පාලිත රැකියා අතර කුලි ආරවුල්.'}},
+      {icon:'🏗️',name:{en:'UDA Tribunal',si:'නාගරික සංවර්ධන අධිකරණය'},law:{en:'UDA Act',si:'UDA පනත'},desc:{en:'Unauthorized construction, building code violations, development plan objections.',si:'අනුමත නොකළ ඉදිකිරීම්, ගොඩනැගිලි විධිවිධින් උල්ලංඝනයන්.'}},
+      {icon:'🌾',name:{en:'Agricultural Tribunal',si:'කෘෂිකර්ම අධිකරණය'},law:{en:'Agricultural Lands Act',si:'කෘෂිකර්ම ඉඩම් පනත'},desc:{en:'Agricultural land tenure, cultivation rights, landlord-tenant agricultural relations.',si:'කෘෂිකර්ම ඉඩම් භාවිතය, වගාකිරීම් අයිතිවාසිකම්.'}},
       {icon:'🏦',name:{en:'Financial Crimes Tribunal',si:'මූල්‍ය අපරාධ අධිකරණය'},law:{en:'Financial Crimes Act',si:'මූල්‍ය අපරාධ පනත'},desc:{en:'Money laundering, large-scale banking fraud, market manipulation.',si:'මුදල් විශුද්ධිකරණය, බැංකු වංචා, වෙළඳපොළ මැඩීම්.'}},
-      {icon:'🗳️',name:{en:'Election Petition Court',si:'මැතිවරණ පෙත්සම් අධිකරණය'},law:{en:'Parliamentary Elections Act',si:'පාර්ලිමේන්තු මැතිවරණ පනත'},desc:{en:'Election petitions challenging parliamentary and provincial council results.',si:'පාර්ලිමේන්තු සහ පළාත් සභාවාරණ මැතිවරණ ප්‍රතිඵල අභියෝගය.'}},
+      {icon:'🗳️',name:{en:'Election Petition Court',si:'මැතිවරණ පෙත්සම් අධිකරණය'},law:{en:'Parliamentary Elections Act',si:'පාර්ලිමේන්තු මැතිවරණ පනත'},desc:{en:'Election petitions challenging parliamentary and provincial council results.',si:'පාර්ලිමේන්තු සහ පළාත් සභා මැතිවරණ ප්‍රතිඵල අභියෝගය.'}},
       {icon:'⚖️',name:{en:'Bribery Commission',si:'අල්ලස් කොමිෂන් සභාව'},law:{en:'Bribery Act',si:'අල්ලස් පනත'},desc:{en:'Investigates bribery and corruption allegations. Can prosecute.',si:'අල්ලස් හෝ දූෂණ චෝදනා පරීක්ෂා කරයි, නඩු පවරයි.'}},
-      {icon:'📝',name:{en:'Board of Quotation',si:'උද්ධෘත මණ්ඩලය'},law:{en:'Board of Quotation Act',si:'උද්ධෘත මණ්ඩල පනත'},desc:{en:'Determines fair market value of government-acquired property.',si:'රජය ලබාගන්නා දේපළවලවලස් සාධාරණ වට්ටම තීරණය කරයි.'}},
-      {icon:'🔄',name:{en:'Land Claims Tribunal',si:'ඉඩම් හිමිකම් අධිකරණය'},law:{en:'Land Claims Act',si:'ඉඩම් හිමිකම් පනත'},desc:{en:'Resolves disputed land titles due to historical or administrative reasons.',si:'ඓතිහාසික හෝ පරිපාලන හේතූන් මත ඉඩම් හිමිකම් ආරවුල්.'}},
-      {icon:'🚢',name:{en:'Admiralty Jurisdiction',si:'අධිරාජ අධිකරණ බලය'},law:{en:'Admiralty Jurisdiction Act',si:'අධිරාජ අධිකරණ බලය පනත'},desc:{en:'Maritime claims, ship arrests, cargo disputes via Commercial Court.',si:'නාවික ඉල්ලීම්, නැව් අත්අඩංගුවට ගන්න කාර්ගෝ කරන්න ආරවුල්.'}}
+      {icon:'📝',name:{en:'Board of Quotation',si:'උද්ධෘත මණ්ඩලය'},law:{en:'Board of Quotation Act',si:'උද්ධෘත මණ්ඩල පනත'},desc:{en:'Determines fair market value of government-acquired property.',si:'රජය ලබාගන්නා දේපළවල සාධාරණ වට්ටම තීරණය කරයි.'}},
+      {icon:'🔄',name:{en:'Land Claims Tribunal',si:'ඉඩම් හිමිකම් අධිකරණය'},law:{en:'Land Claims Act',si:'ඉඩම් හිමිකම් පනත'},desc:{en:'Resolves disputed land titles due to historical or administrative reasons.',si:'ඓතිහාසික හෝ පරිපාලන හේතූන් මත ඉඩම් හිමිකම් ආරවුල් විසඳයි.'}},
+      {icon:'🚢',name:{en:'Admiralty Jurisdiction',si:'අධිරාජ අධිකරණ බලය'},law:{en:'Admiralty Jurisdiction Act',si:'අධිරාජ අධිකරණ බලය පනත'},desc:{en:'Maritime claims, ship arrests, cargo disputes via Commercial Court.',si:'නාවික ඉල්ලීම්, නැව් අත්අඩංගුවට ගැනීම, කාර්ගෝ ආරවුල්.'}}
     ];
 
     var QUASI=[
-      {icon:'🙌',name:{en:'Human Rights Commission',si:'මානව අයිතිවාසිකම් කොමිෂන් සභාව'},desc:{en:'Investigates HR violations, visits prisons, recommends compensation.',si:'මානව අයිතිවාසිකම් උල්ලංඝන පරීක්ෂා, සිරගෙවල් පරීක්ෂා වන්දි.'}},
-      {icon:'🔍',name:{en:'Ombudsman',si:'සාධාරණාධිකාරී'},desc:{en:'Investigates maladministration complaints against government bodies.',si:'රජයේ ආයතන ආයතන් වෙනස් වැරදිපලන පැමිණිල් පරීක්ෂා.'}},
-      {icon:'📢',name:{en:'Press Council',si:'මාධ්‍ය සභාව'},desc:{en:'Complaints against newspapers/journalists for ethical violations.',si:'පුවත්පත්/මාධ්‍යවේදීන්ට එරෙහිව ආචාර ධර් පැමිණිලි.'}},
-      {icon:'📋',name:{en:'National Police Commission',si:'ජාතික පොලිස් කොමිෂන් සභාව'},desc:{en:'Complaints against police officers, can order disciplinary action.',si:'පොලිස් නිලධාරීන්ට එරෙහිව පැමිණිලි, විනයිකිරික ක්‍රියාමාර්ග නියම කරයි.'}},
-      {icon:'⚖️',name:{en:'Judicial Service Commission',si:'විනිශ්චාරක සේවා කොමිෂන් සභාව'},desc:{en:'Appoints, transfers, promotes, disciplines judicial officers.',si:'විනිශ්චාරකයන් පත්, ස්ථානමාරු, උසසින්, විනයිකිරික පියවර.'}},
-      {icon:'🏛️',name:{en:'Public Service Commission',si:'පොදු සේවා කොමිෂන් සභාව'},desc:{en:'Public service appointments, promotions, disciplinary matters.',si:'පොදු සේවා පත්වීම්, උසසින්, විනයිකිරික කටයුතු.'}},
-      {icon:'📊',name:{en:'Election Commission',si:'මැතිවරණ කොමිෂන් සභාව'},desc:{en:'Conducts elections, investigates complaints, enforces election laws.',si:'මැතිවරණ පවත්වයින්, පැමිණිලි විමර්ශන වින්, මැතිවරණ නීති බලාත්මක.'}},
-      {icon:'🏦',name:{en:'Central Bank Dispute Resolution',si:'මහ බැංකු ආරවුල් විසඳීම'},desc:{en:'Banking disputes between customers and licensed financial institutions.',si:'පාරිභෝගිකයන් සහ බලපත්‍ර අතර බැංකු ආරවුල්.'}},
-      {icon:'💡',name:{en:'IP Tribunal',si:'බුද්ධිමය දේපළ අධිකරණය'},desc:{en:'Trademark oppositions, patent revocations, copyright infringement.',si:'වෙළඳ ලකුණු විරුද්ධ, පේටන්ට් අවලංගු ප්‍රකාශිය උල්ලංඝනයන්.'}},
-      {icon:'🌿',name:{en:'Central Environmental Authority',si:'මධ්‍යම පරිසර අධිකාරිය'},desc:{en:'Issues directives, imposes fines for environmental violations. Reviews EIA.',si:'පරිසර උල්ලංඝන සඳහාරන් සඳහාරන් දඩුවම්, EIA සමාලෝචනය.'}},
-      {icon:'📡',name:{en:'TRC (Telecom Regulator)',si:'විදුලි සංදේශන නියාමක කොමිෂන් සභාව'},desc:{en:'Consumer complaints against telecom operators, enforces licensing.',si:'ටෙලිකොම් පරිපාලකයන්ට එරෙහිව පාරිභෝගික පැමිණිලි, බලපත්‍ර කොන්දේසික බලාත්මක බලාත්මක කරයි.'}},
-      {icon:'💊',name:{en:'Drug Regulatory Authority',si:'ඖෂධ නියාමක අධිකාරිය'},desc:{en:'Regulates drugs, medical devices, cosmetics. Prosecutes safety violations.',si:'ඖෂධ නියාම, වෛද්‍යඩික නියාමන නීතිය, ආරක්ෂික විධින සඳහාරණ නීති නඩු පවරයි.'}},
-      {icon:'🏠',name:{en:'Sinhala/Tamil New Year Tribunal',si:'අලුත් අවුරුදු අධිකරණය'},desc:{en:'Quick resolution of festive season disputes — gambling, alcohol, noise.',si:'උත්සව සමයේදී ආරවුල් — ජූලා, මධ්‍යපානය, ශබ්ද ක්‍රියා ක්ෂණික්.'}},
-      {icon:'🚔',name:{en:'National Police Commission (Discipline)',si:'ජාතික පොලිස් කොමිෂන් සභාව (විනය)'},desc:{en:'Separate from police administration. Orders investigations into misconduct.',si:'පොලිස් පරිපාලනයෙන් වෙනස් වෙනස් විනයිකිරික විමර්ශන විනය කරයි.'}}
+      {icon:'🙌',name:{en:'Human Rights Commission',si:'මානව අයිතිවාසිකම් කොමිෂන් සභාව'},desc:{en:'Investigates HR violations, visits prisons, recommends compensation.',si:'මානව අයිතිවාසිකම් උල්ලංඝනයන් පරීක්ෂා කරයි, සිරගෙවල් පරීක්ෂා කරයි, වන්දි නියම කරයි.'}},
+      {icon:'🔍',name:{en:'Ombudsman',si:'සාධාරණාධිකාරී'},desc:{en:'Investigates maladministration complaints against government bodies.',si:'රජයේ ආයතන වල වැරදි පරිපාලනය පිළිබඳ පැමිණිලි පරීක්ෂා කරයි.'}},
+      {icon:'📢',name:{en:'Press Council',si:'මාධ්‍ය සභාව'},desc:{en:'Complaints against newspapers/journalists for ethical violations.',si:'පුවත්පත්/මාධ්‍යවේදීන්ට එරෙහිව වෘත්තීය සදාචාර උල්ලංඝනයන් පිළිබඳ පැමිණිලි.'}},
+      {icon:'📋',name:{en:'National Police Commission',si:'ජාතික පොලිස් කොමිෂන් සභාව'},desc:{en:'Complaints against police officers, can order disciplinary action.',si:'පොලිස් නිලධාරීන්ට එරෙහිව පැමිණිලි, විනයාධිකරණ ක්‍රියාමාර්ග නියම කරයි.'}},
+      {icon:'⚖️',name:{en:'Judicial Service Commission',si:'විනිශ්චාරක සේවා කොමිෂන් සභාව'},desc:{en:'Appoints, transfers, promotes, disciplines judicial officers.',si:'විනිශ්චාරකයන් පත් කිරීම, ස්ථානමාරු, උසස් කිරීම, විනයාධිකරණ කටයුතු.'}},
+      {icon:'🏛️',name:{en:'Public Service Commission',si:'පොදු සේවා කොමිෂන් සභාව'},desc:{en:'Public service appointments, promotions, disciplinary matters.',si:'පොදු සේවා පත්වීම්, උසස් කිරීම්, විනයාධිකරණ කටයුතු.'}},
+      {icon:'📊',name:{en:'Election Commission',si:'මැතිවරණ කොමිෂන් සභාව'},desc:{en:'Conducts elections, investigates complaints, enforces election laws.',si:'මැතිවරණ පවත්වයි, පැමිණිලි විමර්ශනය කරයි, මැතිවරණ නීති බලාත්මක කරයි.'}},
+      {icon:'🏦',name:{en:'Central Bank Dispute Resolution',si:'මහ බැංකු ආරවුල් විසඳීම'},desc:{en:'Banking disputes between customers and licensed financial institutions.',si:'පාරිභෝගිකයන් සහ බලපත්‍ර ලත් මූල්‍ය ආයතන අතර බැංකු ආරවුල්.'}},
+      {icon:'💡',name:{en:'IP Tribunal',si:'බුද්ධිමය දේපළ අධිකරණය'},desc:{en:'Trademark oppositions, patent revocations, copyright infringement.',si:'වෙළඳ ලකුණු විරෝධතා, පේටන්ට් අවලංගු කිරීම්, ප්‍රකාශන අයිතිය උල්ලංඝනයන්.'}},
+      {icon:'🌿',name:{en:'Central Environmental Authority',si:'මධ්‍යම පරිසර අධිකාරිය'},desc:{en:'Issues directives, imposes fines for environmental violations. Reviews EIA.',si:'පරිසර උල්ලංඝනයන් සඳහා නියෝග නිකුත් කරයි, දඩ නියම කරයි, EIA සමාලෝචනය කරයි.'}},
+      {icon:'📡',name:{en:'TRC (Telecom Regulator)',si:'විදුලි සංදේශන නියාමක කොමිෂන් සභාව'},desc:{en:'Consumer complaints against telecom operators, enforces licensing.',si:'ටෙලිකොම් පරිපාලකයන්ට එරෙහිව පාරිභෝගික පැමිණිලි, බලපත්‍ර කොන්දේසි බලාත්මක කරයි.'}},
+      {icon:'💊',name:{en:'Drug Regulatory Authority',si:'ඖෂධ නියාමක අධිකාරිය'},desc:{en:'Regulates drugs, medical devices, cosmetics. Prosecutes safety violations.',si:'ඖෂධ, වෛද්‍ය උපකරණ, සෞන්දර්ය ද්‍රව්‍ය නියාමනය කරයි. ආරක්ෂිතභාවය උල්ලංඝනය සඳහා නඩු පවරයි.'}},
+      {icon:'🏠',name:{en:'Conciliation Board',si:'සමථ මණ්ඩලය'},desc:{en:'Pre-litigation mediation for minor civil and family disputes at village level.',si:'ගම්මට්ටමේ සුළු සිවිල් සහ පවුල් ආරවුල් නඩුවට පෙර සමථ කිරීම.'}},
+      {icon:'🚔',name:{en:'National Police Commission (Discipline)',si:'ජාතික පොලිස් කොමිෂන් සභාව (විනය)'},desc:{en:'Separate from police administration. Orders investigations into misconduct.',si:'පොලිස් පරිපාලනයෙන් වෙනස්. වැරදි හැසිරීම් පිළිබඳ විමර්ශන නියම කරයි.'}}
     ];
 
     var GLOSSARY=[
-      {term:'Bail',def:{en:'Release of accused from custody, usually on payment of money or surety, pending trial.',si:'නඩු විභාගය අතරන්නුවෙකු බන්ධනාගාරයෙන් මුදා හැරීම, සාමාන්යෙන්.'}},
-      {term:'Certiorari',def:{en:'Writ to quash a lower court decision that exceeded jurisdiction or acted illegally.',si:'අධිකරණයක් තම බලය ඉක්මවා කටයුතු කරන පහළ අධිකරණ තීන්දුවක් අවලංගු කරන ලෙස් විය.'}},
-      {term:'Habeas Corpus',def:{en:"'You shall have the body' — writ to produce a detained person before court to determine if detention is lawful.",si:'"සිරුර ලබාන්න්" — රඳවාගෙන්න අධිකරණයට ඉදිරිරිපත් කරන්න ලෙසන් නියම.'}},
-      {term:'Injunction',def:{en:'Court order to do or refrain from a specific act. Temporary or permanent.',si:'නිශ්චික්‍රිය ක්‍රියාවක් කරන්න හෝ නියෝගයක් අධිකරණ නියෝගය.'}},
-      {term:'Plaintiff',def:{en:'Person who files a civil lawsuit.',si:'සිවිවිල් නඩුවක් ගොනු කරන පුද්ගලයා (පැමිණිලිකරු).'}},
-      {term:'Defendant',def:{en:'Person against whom a lawsuit is filed or who is accused.',si:'නඩුවක් ගොනු කරන පුද්ගලයා වෙත්‍රසාන්ට චෝදනා ලබන පුද්ගලයා.'}},
-      {term:'Summon',def:{en:'Court order directing a person to appear before court on a specified date.',si:'නිශ්චිකිරන්න අධිකරණයට නියමයින්න ලෙස් නියම.'}},
-      {term:'Warrant',def:{en:'Court authorization for police to arrest, search, or seize property.',si:'පොලිසියට අත්අඩංගුවට ගන්න්න, පරීක්ෂා කරන්න අධිකරණ බලපත්‍ර අවසරය.'}},
-      {term:'Sub Judice',def:{en:'Matters before a court that cannot be publicly discussed to avoid influencing the case.',si:'දැනට අධිකරණයක් පවතින කාරණයන් නඩුවෙන් නියම නොහොඩ සාකච්ඡා නොහොඩ කරන්න නියම.'}},
+      {term:'Bail',def:{en:'Release of accused from custody, usually on payment of money or surety, pending trial.',si:'නඩු විභාගය අතරතුර බන්ධනාගාරයෙන් මුදා හැරීම, සාමාන්යයෙන් මුදල් හෝ වගකීම මත.'}},
+      {term:'Certiorari',def:{en:'Writ to quash a lower court decision that exceeded jurisdiction or acted illegally.',si:'පහළ අධිකරණයක් තම බලය ඉක්මවා කටයුතු කළ තීන්දුවක් අවලංගු කරන ලිපිනය.'}},
+      {term:'Habeas Corpus',def:{en:"'You shall have the body' — writ to produce a detained person before court to check if detention is lawful.",si:'"සිරුර ලබාගන්න" — රඳවාගෙන සිටින පුද්ගලයෙකු අධිකරණයට ඉදිරිපත් කරන ලෙස නියම කරන ලිපිනය.'}},
+      {term:'Injunction',def:{en:'Court order to do or refrain from a specific act. Can be temporary or permanent.',si:'නිශ්චිත ක්‍රියාවක් කරන්න හෝ නොකරන්න අධිකරණයෙන් නියම කිරීම. තාවකාලික හෝ ස්ථිර.'}},
+      {term:'Plaintiff',def:{en:'Person who files a civil lawsuit.',si:'සිවිල් නඩුවක් ගොනු කරන පුද්ගලයා (පැමිණිලිකරු).'}},
+      {term:'Defendant',def:{en:'Person against whom a lawsuit is filed or who is accused of a crime.',si:'නඩුවක් ගොනු කර ඇති පුද්ගලයා හෝ අපරාධයකට චෝදනා ලබන පුද්ගලයා.'}},
+      {term:'Summons',def:{en:'Court order directing a person to appear before court on a specified date.',si:'නිශ්චිත දිනයක අධිකරණයට පෙනී සිටින ලෙස පුද්ගලයෙකුට නිකුත් කරන අධිකරණ නියෝගය.'}},
+      {term:'Warrant',def:{en:'Court authorization for police to arrest, search, or seize property.',si:'පොලිසියට අත්අඩංගුවට ගැනීමට, සෝදිසි කිරීමට හෝ දේපළ අත්අඩංගුවට ගැනීමට අධිකරණ බලපත්‍රය.'}},
+      {term:'Sub Judice',def:{en:'Matters before a court that cannot be publicly discussed to avoid influencing the case.',si:'දැනට අධිකරණයක් ඉදිරියේ පවතින කාරණයක් නඩුවට බලපෑමක් වැළැක්වීමට පොදුවේ සාකච්ඡා නොකළ යුතු තත්ත්වය.'}},
       {term:'Puisne Judge',def:{en:'Supreme Court judge other than the Chief Justice.',si:'ප්‍රධාන විනිශ්චාරකවරයා නොවන ශ්‍රේෂ්ඨාධිකරණ විනිශ්චාරකයෙකු.'}},
-      {term:'Prohibition',def:{en:'Writ to prevent a lower court from exceeding its jurisdiction.',si:'පහළ අධිකරණයක් තම බලය ඉක්මවා කිරීම වැළැක්වීම.'}},
-      {term:'Mandamus',def:{en:'Writ compelling a person or body to perform a public duty they are legally required to do.',si:'නීතිය ලෙසින පොදු වැලය වියම කරන ලෙස් බලය කරන ලෙස් නියම කරන ලෙස්.'}},
-      {term:'Quo Warranto',def:{en:'Writ challenging a person's authority to hold a public office.',si:'පුද්ගල තනතිය පවත්තිය දරන් බලය අධිකරණ බලය අභියාදනය අභියෝගනට අභියෝගන කරන writ.'}},
-      {term:'Remand',def:{en:'Court order to keep an accused in custody pending investigation or trial.',si:'විමර්ශන විභාගයක් බන්ධනාගාරය බන්ධනාගාරය තබන් අධිකරණය නියම.'}},
-      {term:'Certiorari',def:{en:'Writ issued by High Court or Supreme Court to quash a lower court decision.',si:'මහා අධිකරණය හෝ ශ්‍රේෂ්ඨාධිකරණය තීන්දුවක් අභියෝගන පහළ අධිකරණ තීන්දුව අවලංගු කරන writ.'}}
+      {term:'Prohibition',def:{en:'Writ to prevent a lower court from exceeding its jurisdiction.',si:'පහළ අධිකරණයක් තම බලය ඉක්මවා කටයුතු කිරීම වැළැක්වීමට නිකුත් කරන ලිපිනය.'}},
+      {term:'Mandamus',def:{en:'Writ compelling a person or body to perform a public duty they are legally required to do.',si:'නීතියෙන් බැඳී ඇති පොදු වැඩකරුණාවක් සිදු කරන ලෙස බල කරන ලිපිනය.'}},
+      {term:'Quo Warranto',def:{en:"Writ challenging a person's legal authority to hold a public office.",si:'පුද්ගලයෙකුගේ පොදු තනතුරක් දැරීමට ඇති නීතිමය බලය අභියෝගය කරන ලිපිනය.'}},
+      {term:'Remand',def:{en:'Court order to keep an accused in custody pending investigation or trial.',si:'විමර්ශනයක් හෝ විභාගයක් අතරතුර චෝදනා ලාභීයා බන්ධනාගාරයේ තබන ලෙස අධිකරණ නියෝගය.'}},
+      {term:'Leave to Appeal',def:{en:'Permission from a higher court to file an appeal. Not all cases get this automatically.',si:'ඉහළ අධිකරණයකින් අභියාදනයක් ගොනු කිරීමට ලබා දෙන අවසරය. සියලු නඩුවලට ස්වයංක්‍රීයව නොලැබේ.'}}
     ];
 
     var FAQS=[
-      {q:{en:'What is the difference between civil and criminal cases?',si:'සිවිල් සහ අපරාධ නඩුවල අතර වෙනස් වෙනස් කුමක්ද?'},a:{en:'Civil cases are disputes between private parties (land, contracts, family). Criminal cases are offences against the state (theft, assault, murder) prosecuted by police. Civil → District Court. Criminal → Magistrate Court.',si:'සිවිල් නඩු = පෞද්ගලිකයන් අතරයේ (ඉඩම්, ගිවිසුම්, පවුල්). අපරාධ = රාජ්‍යවේ එරෙහින් වෙනස් (හොරකම්, පහරදීම්). සිවිල් = දිස්ත්‍රිකරණය, අපරාධ අපරාධ = මහේස්ත්‍රාත් අධිකරණය.'}},
-      {q:{en:'Can I file a case directly in the High Court?',si:'මම හුදෙකින්න්න හුදෙකින මහා අධිකරණයේ නඩුවක් ගොනු කළ හැකද?'},a:{en:'For most matters, no. High Court mainly handles serious criminal cases committed from Magistrate Court and appeals. For civil matters, go to District Court. Exceptions: election petitions and certain commercial disputes.',si:'බොහෝගත් අපරාධ කට්ම් විසයෙන් සඳහාරන වෙන් විත්‍රිකරණය. සිවිල් = දිස්ත්‍රිකරණය, අපරාධ = දිස්ත්‍රිකරණය.'}},
-      {q:{en:'How long does a typical court case take in Sri Lanka?',si:'ශ්‍රී ලංකාවේ සාමාන්යකට කොපමක් කාලයක් ගත්වෙන්න්න ගත්වය?'}},
-      {a:{en:'It varies widely: Magistrate summary — weeks/months. District Court civil — 2-5 years. High Court criminal — 1-3 years. Appeals — 1-3 years each level. Complex cases can take much longer.',si:'බොහෝගත් වෙනස් නඩුවෙන් — සතියලාන් මාසය. දිස්ත්‍රිකරණය — 2-5 වසර. මහා අධිකරණය — 1-3 වසර. අභියාදන — මට්ට්ටමට 1-3 වසර.'}},
-      {q:{en:'Do I need a lawyer to go to court?',si:'අධිකරණයට යන් නීතිඥයෙන්න් ඕහත්ත්න් ඕහත් ඕහත් නිතුරන්න නීතිඥයෙන්?'},a:{en:'Not always. In Magistrate Court, you can appear in person for minor matters. However, for complex cases, it is strongly recommended to have a lawyer. In High Court and above, legal representation is practically essential.',si:'මහේස්ත්‍රිකරණයේ සුළුණ පෙන්න්න් පෞද්ගලින් පෙන්න් පෙන් පුද්ගලයාන්. සංකීරණ නඩුවෙන්න් නීතිඥයෙන් නියම කරන්න්.'}},
-      {q:{en:'What happens if I cannot afford a lawyer?',si:'මට නීතිඥයෙන්න් නොහොත් නොහොඩ කරන්න්?'},a:{en:'You can get free legal aid from: Legal Aid Commission (government), Bar Association clinics, University law faculty clinics, and various NGOs. See "Free Legal Aid" section above for contacts.',si:'නොහගත් නොහඩ නීතිඥයෙන් නොහඩ නොහඩ නීතිඥයෙන්න් ලබා ගත් කරන්න්: නීතිඥ ආධිරණ කොමිෂන් සභාව, BASL ක්ලිනික්, විශ්විද්‍යාලය නීතිඥය.'}},
-      {q:{en:'Can court decisions be appealed multiple times?',si:'අධිකරණ තීන්දු කිහිපයක් අභියාදන් කළ හැකද?'}},
-      {a:{en:'Generally the path is: Magistrate → High Court → Court of Appeal → Supreme Court. Each level usually requires "leave to appeal" (permission). The Supreme Court is final — no further appeal except Presidential mercy petitions in very limited cases.',si:'සාමාන්‍ය පෙළ: මහේස්‍රාත් → මහා අධිකරණය → අභියාදන → ශ්‍රේෂ්ඨාධිකරණය. සෑම මට්ටමකට "අභියාදන අවසරය". ශ්‍රේෂ්ඨාධිකරණය = අවසාන්, තවදුර = නෙගහොඩම නියම කරන්න්.'}},
-      {q:{en:'What is the difference between a Tribunal and a Court?',si:'අධිකරණයක් සහ අධිකරණයක් අතරත්රත්න් වෙනස් වෙනස් වෙන් කුමක්ද?'},a:{en:'Courts are established under the Constitution/Judicature Act with general jurisdiction. Tribunals are created by specific statutes and only handle specific case types. Tribunal appeals usually go to the Court of Appeal.',si:'අධිකරණයක් = ව්‍යවස්ථ්තා වියම/විනිශ්චාරකය යටුතේ් පිහිට හිටය. ට්‍රිබියුනල = විශේෂ් පනත් යටත් යටුත් යටුවන් හිටය. ට්‍රිබියුනලයන් අභියාදනය → අභියාදන අධිකරණයට යයායන් යිය.'}},
-      {q:{en:'Does Sri Lanka have jury trials?',si:'ශ්‍රී ලංකාවක ජූරි විභාගය තියේද?'},a:{en:'Jury trials were suspended in 1978. Currently all trials are by judge alone. Minister of Justice can reinstate jury trials but has not done so.',si:'ජූරි විභාගය 1978 දී ජූරි විභාගය අත්හිටුවුණි. දැනට සියල් වියම වින් විනිශ්චාරකරණයේ විනිකිරිපාන් පමණයි.'}},
-      {q:{en:'What is a Fundamental Rights petition?',si:'මූලික අයිතිවාසිකරණයක් පෙත්සමක් කරන්න පෙත්සම් පන්.'},a:{en:'A petition filed directly in the Supreme Court under Article 126 of the Constitution alleging violation of a fundamental right. Must be filed within 30 days of the alleged violation. The court can grant compensation, declarations, and directives.',si:'ව්‍යවස්ථාත්‍රිකරණය යටුත් විනිශ්චාරකණයට 30 දවසේ අභියාදනන්. Supreme Court Article 126 යටින් ගොනු කරන පෙත්සම් කරන්න්. වන්දෙන් දෙනස් නියම කරයි, ප්‍රතිර වියම නියම.'}},
-      {q:{en:'What is a writ of Mandamus?',si:'Mandamus writ කෙන්න් කියන්න්ක්?'},a:{en:'Writ compelling a person or body to perform a public duty they are legally required to do. Used when a government officer refuses to do their duty.',si:'නීතිය ලෙසින බලය කරන පොදුවෙන් නියම කරන ලෙස් බලය කරන ලෙස් නියම කරන ලෙස
+      {q:{en:'What is the difference between civil and criminal cases?',si:'සිවිල් සහ අපරාධ නඩුවල අතර වෙනස කුමක්ද?'},a:{en:'Civil cases are disputes between private parties (land, contracts, family). Criminal cases are offences against the state (theft, assault, murder) prosecuted by police. Civil → District Court. Criminal → Magistrate Court.',si:'සිවිල් නඩු = පෞද්ගලික පාර්ශ්ව අතර ආරවුල් (ඉඩම්, ගිවිසුම්, පවුල්). අපරාධ නඩු = රාජ්‍යයට එරෙහිව සිදු වන වැරදි (හොරකම, පහරදීම, මනුෂ්‍ය ඝාතනය). සිවිල් → දිස්ත්‍රික් අධිකරණය. අපරාධ → මහේස්ත්‍රාත් අධිකරණය.'}},
+      {q:{en:'Can I file a case directly in the High Court?',si:'මම සෘජුවම මහා අධිකරණයේ නඩුවක් ගොනු කළ හැකද?'},a:{en:'For most matters, no. High Court mainly handles serious criminal cases committed from Magistrate Court and appeals. For civil matters, go to District Court. Exceptions: election petitions and certain commercial disputes.',si:'බොහෝ කටයුතු සඳහා නැත. මහා අධිකරණය ප්‍රධාන වශයෙන් මහේස්ත්‍රාත් අධිකරණයෙන් යොමු කරන ලද බරපතල අපරාධ සහ අභියාදන නඩු බලයෙන් කරයි. සිවිල් කටයුතු → දිස්ත්‍රික් අධිකරණය.'}},
+      {q:{en:'How long does a typical court case take in Sri Lanka?',si:'ශ්‍රී ලංකාවේ සාමාන්‍ය නඩුවක් කොපමණ කාලයක් ගතවේද?'},a:{en:'It varies widely: Magistrate summary — weeks/months. District Court civil — 2-5 years. High Court criminal — 1-3 years. Appeals — 1-3 years each level. Complex cases can take much longer.',si:'බෙහෙවින් වෙනස් වේ: මහේස්ත්‍රාත් සාරාංශ නඩු — සති/මාස. දිස්ත්‍රික් අධිකරණ සිවිල් — 2-5 වසර. මහා අධිකරණ අපරාධ — 1-3 වසර. අභියාදන — මට්ටමකට 1-3 වසර.'}},
+      {q:{en:'Do I need a lawyer to go to court?',si:'අධිකරණයට යන්න නීතිඥයෙකු අවශ්‍යද?'},a:{en:'Not always. In Magistrate Court, you can appear in person for minor matters. However, for complex cases, it is strongly recommended to have a lawyer. In High Court and above, legal representation is practically essential.',si:'සෑම විටම නැත. මහේස්ත්‍රාත් අධිකරණයේ සුළු කාරණා සඳහා පෞද්ගලිකව පෙනී සිටිය හැක. සංකීර්ණ නඩු සඳහා නීතිඥයෙකු තියෙනවා වඩාත් හොඳයි. මහා අධිකරණයේ සහ ඉහළින් නීති නියෝජිතයෙකු අත්‍යවශ්‍යයෙන්ම අවශ්‍යයි.'}},
+      {q:{en:'What happens if I cannot afford a lawyer?',si:'මට නීතිඥයෙකුගේ ගාස්තු දීමට නොහැකි නම් කුමක් කරන්නද?'},a:{en:'You can get free legal aid from: Legal Aid Commission (government), Bar Association clinics, University law faculty clinics, and various NGOs. See the "Free Legal Aid" section above for contacts.',si:'මෙම ආයතනවලින් නොමිලේ නීති උපකාර ලබා ගත හැක: නීති ආධාර කොමිෂන් සභාව (රජය), BASL ක්ලිනික්, විශ්වවිද්‍යාල නීති පීඨ ක්ලිනික්, විවිධ NGO. සම්බන්ධතා සඳහා "නොමිලේ නීති ආධාර" කොටස බලන්න.'}},
+      {q:{en:'Can court decisions be appealed multiple times?',si:'අධිකරණ තීන්දු කිහිප වතාවක් අභියාදනය කළ හැකද?'},a:{en:'Generally the path is: Magistrate → High Court → Court of Appeal → Supreme Court. Each level usually requires "leave to appeal" (permission). The Supreme Court is final — no further appeal except Presidential mercy petitions in very limited cases.',si:'සාමාන්‍ය පෙළ: මහේස්ත්‍රාත් → මහා අධිකරණය → අභියාදන අධිකරණය → ශ්‍රේෂ්ඨාධිකරණය. සෑම මට්ටමකටම සාමාන්‍යයෙන් "අභියාදන අවසරය" අවශ්‍යයි. ශ්‍රේෂ්ඨාධිකරණය = අවසාන, ඉන් ඔබ්බට ඉතා සීමිත අවස්ථාවලදී පමණක් ජනාධිපති සමාව ඉල්ලීමක්.'}},
+      {q:{en:'What is the difference between a Tribunal and a Court?',si:'අධිකරණයක් සහ ට්‍රිබියුනලයක් අතර වෙනස කුමක්ද?'},a:{en:'Courts are established under the Constitution/Judicature Act with general jurisdiction. Tribunals are created by specific statutes and only handle specific case types. Tribunal appeals usually go to the Court of Appeal.',si:'අධිකරණ = ව්‍යවස්ථාව/විනිශ්චාරක පනත යටතේ පිහිටුවා ඇති පොදු බලසහිතය. ට්‍රිබියුනල = විශේෂිත පනත් යටතේ නිර්මාණය කළ, නිශ්චිත නඩු වර්ග පමණක් සමත් කරන. ට්‍රිබියුනල අභියාදන සාමාන්‍යයෙන් අභියාදන අධිකරණයට යයි.'}},
+      {q:{en:'Does Sri Lanka have jury trials?',si:'ශ්‍රී ලංකාවේ ජූරි විභාග තිබේද?'},a:{en:'Jury trials were suspended in 1978. Currently all trials are by judge alone. The Minister of Justice can reinstate jury trials but has not done so.',si:'ජූරි විභාග 1978 දී අත්හිටුවන ලදී. දැනට සියලුම විභාග විනිශ්චාරකවරයෙකු පමණක් විසින් සිදු කරයි. යුක්ති අමාත්‍යවරයාට ජූරි විභාග යථා තත්ත්වයට පත් කිරීමට හැකියාව ඇතත් එය සිදු කර නැත.'}},
+      {q:{en:'What is a Fundamental Rights petition?',si:'මූලික අයිතිවාසිකම් පෙත්සමක් යනු කුමක්ද?'},a:{en:'A petition filed directly in the Supreme Court under Article 126 of the Constitution alleging violation of a fundamental right. Must be filed within 30 days of the alleged violation. The court can grant compensation, declarations, and directives.',si:'ව්‍යවස්ථාවේ 126 වන ව්‍යවස්ථාව යටතේ මූලික අයිතිවාසිකමක් උල්ලංඝනය වී ඇති බව කියමින් ශ්‍රේෂ්ඨාධිකරණයේ සෘජුවම ගොනු කරන පෙත්සමකි. උල්ලංඝනයෙන් දින 30ක් ඇතුළත ගොනු කළ යුතුය. අධිකරණය වන්දි, ප්‍රකාශන සහ නියෝග නියම කළ හැක.'}},
+      {q:{en:'What is a writ of Mandamus?',si:'Mandamus ලිපිනයක් යනු කුමක්ද?'},a:{en:'A writ compelling a person or public body to perform a duty they are legally required to do. Used when a government officer or institution refuses to do their lawful duty.',si:'නීතියෙන් බැඳී ඇති රාජකාරියක් සිදු කරන ලෙස පුද්ගලයෙකුට හෝ පොදු ආයතනයකට බල කරන ලිපිනයකි. රාජ්‍ය නිලධාරියෙකු හෝ ආයතනයක් තම නීතිමය වගකීම ඉටු නොකරන විට භාවිතා කරයි.'}},
+      {q:{en:'Can I sue the government?',si:'මම රජයට එරෙහිව නඩු පවරන්න පුළුවන්ද?'},a:{en:'Yes, but with limitations. The State Liability Act allows claims for torts (negligence, wrongful acts) by government servants. However, sovereign immunity applies to some functions. Fundamental Rights petitions are another route.',si:'ඔව්, නමුත් සීමාවලින් යුක්ත වේ. රාජ්‍ය වගකීම් පනත යටතේ රාජ්‍ය සේවකයන්ගේ වැරදි ක්‍රියා සඳහා පැමිණිලි කළ හැක. නමුත් සමහර කාර්යයන් සඳහා රාජ්‍ය ප්‍රතිශක්තිය බලපායි. මූලික අයිතිවාසිකම් පෙත්සම් තවත් මාර්ගයකි.'}},
+      {q:{en:'What happens if I miss a court date?',si:'මම අධිකරණ දිනයක් මඟ හැරුණොත් කුමක් වේද?'},a:{en:'The court may issue a warrant for your arrest (in criminal cases) or proceed ex-parte (in civil cases, without you). If you have a valid reason, file a motion to set aside the order as soon as possible with a lawyer.',si:'අධිකරණය ඔබව අත්අඩංගුවට ගැනීමේ වරෙන්තුවක් නිකුත් කරයි (අපරාධ) හෝ ඔබ නොමැතිවම නඩුව ඉදිරියට කරයි (සිවිල්). වලංගු හේතුවක් ඇත්නම්, ඉක්මනින් නීතිඥයෙකු සමඟ නියෝගය අවලංගු කරන ලෙස ඉල්ලීමක් කරන්න.'}}
+    ];
+
+    // ===== STATE =====
+    var currentLang = localStorage.getItem('gl-lang') || 'en';
+    var langDDOpen = false;
+
+    // ===== LANGUAGE =====
+    var I18N = {
+      en: {
+        navHome:'Home', navCat:'Categories', navCourt:'Court System', navAbout:'About Us', navContact:'Contact',
+        heroBadge:'Judicial System Guide', pgTitle:"Sri Lanka's Court System", pgSub:'Complete guide to every court, tribunal, and quasi-judicial body — explained in simple language.',
+        qHierarchy:'📜 Hierarchy', qSupreme:'🏛️ Supreme', qAppeal:'⚖️ Appeal', qHigh:'🔨 High Court',
+        qDistrict:'📋 District', qMagistrate:'📌 Magistrate', qSpecial:'⭐ Special', qQuasi:'🏢 Quasi-Judicial',
+        qGlossary:'📖 Glossary', qFAQ:'❓ FAQ',
+        sCourts:'Main Courts', sSpecial:'Special Tribunals', sQuasi:'Quasi-Judicial Bodies', sDistricts:'District Courts', sMagistrate:'Magistrate Courts',
+        hTitle:'📜 Court Hierarchy', hSub:"Sri Lanka's courts are arranged in a strict hierarchy.",
+        hSup:'Supreme Court', hSupS:'Highest court • Final appeals • Constitutional matters',
+        hAppeal:'Court of Appeal', hAppealS:'Appellate jurisdiction • Reviews lower courts',
+        hHigh:'High Court', hHighS:'Serious crimes • Original jurisdiction • Bail',
+        hDistrict:'District Court', hDistrictS:'Civil cases • Land • Family',
+        hMagistrate:'Magistrate Court', hMagistrateS:'Minor crimes • Summary offences',
+        hDir:'Appeals go up ↑',
+        hNoteT:'⚠️ Important Note', hNoteD:'Besides these 5 main courts, Sri Lanka has 12+ Special Tribunals and 15+ Quasi-Judicial Bodies that handle specific types of cases. Scroll down to learn about each one.',
+        tabOverview:'Overview', tabJurisdiction:'Jurisdiction', tabProcess:'Process', tabJudges:'Judges', tabTypes:'Case Types', tabCases:'Case Types', tabFees:'Court Fees', tabBail:'Bail Rules',
+        scTitle:'Supreme Court', scSub:'ශ්‍රේෂ්ඨාධිකරණය • Article 105',
+        scEst:'Established', scJudges:'No. of Judges', scLoc:'Location',
+        scJHeadR:'Appointed by President',
+        caTitle:'Court of Appeal', caSub:'අභියාදන උසාවිය • Article 136',
+        caEst:'Established', caJudges:'No. of Judges', caPres:'President', caPresR:'President of CoA',
+        hcTitle:'High Court', hcSub:'මහා අධිකරණය • Article 138',
+        dcTitle:'District Court', dcSub:'දිස්ත්‍රික් අධිකරණය • One per district',
+        mcTitle:'Magistrate Court', mcSub:'මහේස්ත්‍රාත් අධිකරණය • Entry-level criminal court',
+        spTitle:'⭐ Special Courts & Tribunals', spSub:'Specialized bodies created by specific legislation to handle particular types of disputes',
+        qjTitle:'🏢 Quasi-Judicial Bodies', qjSub:'Bodies with powers similar to courts but established under specific statutes',
+        cfTitle:'🔄 How a Case Flows', cfSub:'Visual guide to the journey of a typical case',
+        cfCrimT:'Criminal Case Flow', cfC1:'Police Investigation / FIR Filed', cfC2:'Produced before Magistrate Court',
+        cfC3:'Minor → Magistrate tries | Serious → Committed to High Court', cfC4:'Trial & Judgment',
+        cfC5:'Appeal: Magistrate → High Court → Court of Appeal → Supreme Court',
+        cfCivilT:'Civil Case Flow', cfV1:'Plaint filed in District Court', cfV2:'Summons issued to defendant',
+        cfV3:'Written submissions, evidence, trial', cfV4:'Judgment by District Court',
+        cfV5:'Appeal: District Court → Court of Appeal → Supreme Court',
+        laTitle:'🆓 Free Legal Aid Services', laSub:'If you can\'t afford a lawyer, these services can help',
+        glTitle:'📖 Legal Glossary', glSub:'Common court terms explained simply',
+        faqTitle:'❓ Frequently Asked Questions', faqSub:"Common questions about Sri Lanka's court system",
+        ftDesc:"Making Sri Lanka's law accessible to everyone.",
+        ftDisc:'⚠️ Disclaimer: Educational platform only. Not legal advice.',
+        ftQL:'Quick Links', ftLL:'Legal Links', ftCon:'Contact',
+        toastLang:'Language changed to English'
+      },
+      si: {
+        navHome:'මුල් පිටුව', navCat:'ප්‍රවර්ග', navCourt:'අධිකරණ පද්ධතිය', navAbout:'අප ගැන', navContact:'සම්බන්ධ කරගන්න',
+        heroBadge:'විනිශ්චාරක පද්ධති මාර්ගෝපදේශය', pgTitle:'ශ්‍රී ලංකාවේ අධිකරණ පද්ධතිය', pgSub:'සෑම අධිකරණයක්, ට්‍රිබියුනලයක් සහ අර්ධ-විනිශ්චාරක ආයතනයක්ම සරල භාෂාවෙන් පැහැදිලි කරන සම්පූර්ණ මාර්ගෝපදේශය.',
+        qHierarchy:'📜 ධුරාවලිය', qSupreme:'🏛️ ශ්‍රේෂ්ඨාධිකරණය', qAppeal:'⚖️ අභියාදනය', qHigh:'🔨 මහා අධිකරණය',
+        qDistrict:'📋 දිස්ත්‍රික්', qMagistrate:'📌 මහේස්ත්‍රාත්', qSpecial:'⭐ විශේෂ', qQuasi:'🏢 අර්ධ-විනිශ්චාරක',
+        qGlossary:'📖 ශබ්දකෝෂය', qFAQ:'❓ නිතර අසන ප්‍රශ්න',
+        sCourts:'ප්‍රධාන අධිකරණ', sSpecial:'විශේෂ ට්‍රිබියුනල', sQuasi:'අර්ධ-විනිශ්චාරක ආයතන', sDistricts:'දිස්ත්‍රික් අධිකරණ', sMagistrate:'මහේස්ත්‍රාත් අධිකරණ',
+        hTitle:'📜 අධිකරණ ධුරාවලිය', hSub:'ශ්‍රී ලංකාවේ අධිකරණ දැඩි ධුරාවලියකට සකසා ඇත.',
+        hSup:'ශ්‍රේෂ්ඨාධිකරණය', hSupS:'ඉහළම අධිකරණය • අවසාන අභියාදන • ව්‍යවස්ථාමය කාරණා',
+        hAppeal:'අභියාදන අධිකරණය', hAppealS:'අභියාදන බලය • පහළ අධිකරණ සමාලෝචනය',
+        hHigh:'මහා අධිකරණය', hHighS:'බරපතල අපරාධ • මූලික බලය • ඇප',
+        hDistrict:'දිස්ත්‍රික් අධිකරණය', hDistrictS:'සිවිල් නඩු • ඉඩම් • පවුල්',
+        hMagistrate:'මහේස්ත්‍රාත් අධිකරණය', hMagistrateS:'සුළු අපරාධ • සාරාංශ නඩු',
+        hDir:'අභියාදන ඉහළට යයි ↑',
+        hNoteT:'⚠️ වැදගත් සටහන', hNoteD:'මෙම ප්‍රධාන අධිකරණ 5 ට අමතරව, ශ්‍රී ලංකාවේ නිශ්චිත නඩු වර්ග සමත් කරන විශේෂ ට්‍රිබියුනල 12+ ක් සහ අර්ධ-විනිශ්චාරක ආයතන 15+ ක් ඇත. පහතින් සෑම එකක්ම ගැන දැනගන්න.',
+        tabOverview:'දළ විශ්ලේෂණය', tabJurisdiction:'බලය', tabProcess:'ක්‍රියාවලිය', tabJudges:'විනිශ්චාරකයෝ', tabTypes:'නඩු වර්ග', tabCases:'නඩු වර්ග', tabFees:'අධිකරණ ගාස්තු', tabBail:'ඇප නීති',
+        scTitle:'ශ්‍රේෂ්ඨාධිකරණය', scSub:'ශ්‍රේෂ්ඨාධිකරණය • ව්‍යවස්ථාව 105',
+        scEst:'ස්ථාපිත', scJudges:'විනිශ්චාරක සංඛ්‍යාව', scLoc:'ස්ථානය',
+        scJHeadR:'ජනාධිපති විසින් පත් කරනු ලබයි',
+        caTitle:'අභියාදන අධිකරණය', caSub:'අභියාදන උසාවිය • ව්‍යවස්ථාව 136',
+        caEst:'ස්ථාපිත', caJudges:'විනිශ්චාරක සංඛ්‍යාව', caPres:'සභාපති', caPresR:'අභියාදන අධිකරණ සභාපති',
+        hcTitle:'මහා අධිකරණය', hcSub:'මහා අධිකරණය • ව්‍යවස්ථාව 138',
+        dcTitle:'දිස්ත්‍රික් අධිකරණය', dcSub:'දිස්ත්‍රික් අධිකරණය • දිස්ත්‍රික්කයට එකක්',
+        mcTitle:'මහේස්ත්‍රාත් අධිකරණය', mcSub:'මහේස්ත්‍රාත් අධිකරණය • මූලික අපරාධ අධිකරණය',
+        spTitle:'⭐ විශේෂ අධිකරණ සහ ට්‍රිබියුනල', spSub:'නිශ්චිත නඩු වර්ග සමත් කිරීමට විශේෂිත පනත් යටතේ ස්ථාපිත ආයතන',
+        qjTitle:'🏢 අර්ධ-විනිශ්චාරක ආයතන', qjSub:'අධිකරණ වගේම බලත් ඇති නමුත් විශේෂිත පනත් යටතේ ස්ථාපිත ආයතන',
+        cfTitle:'🔄 නඩුවක් කොහොමද ගමන් කරන්නේ', cfSub:'සාමාන්‍ය නඩුවක ගමන් මඟ දෘශ්‍යමාන මාර්ගෝපදේශය',
+        cfCrimT:'අපරාධ නඩු ගමන් මඟ', cfC1:'පොලිස් විමර්ශනය / FIR ගොනු කිරීම', cfC2:'මහේස්ත්‍රාත් අධිකරණයට ඉදිරිපත් කිරීම',
+        cfC3:'සුළු → මහේස්ත්‍රාත් විභාග කරයි | බරපතල → මහා අධිකරණයට යොමු කරයි', cfC4:'විභාගය සහ තීන්දුව',
+        cfC5:'අභියාදනය: මහේස්ත්‍රාත් → මහා අධිකරණය → අභියාදන අධිකරණය → ශ්‍රේෂ්ඨාධිකරණය',
+        cfCivilT:'සිවිල් නඩු ගමන් මඟ', cfV1:'දිස්ත්‍රික් අධිකරණයේ පැමිණිල්ල ගොනු කිරීම', cfV2:'විත්තිකරුට සමාරංශය නිකුත් කිරීම',
+        cfV3:'ලිඛිත ඉදිරිපාර, සාක්ෂි, විභාගය', cfV4:'දිස්ත්‍රික් අධිකරණයේ තීන්දුව',
+        cfV5:'අභියාදනය: දිස්ත්‍රික් → අභියාදන අධිකරණය → ශ්‍රේෂ්ඨාධිකරණය',
+        laTitle:'🆓 නොමිලේ නීති ආධාර සේවා', laSub:'නීතිඥයෙකුගේ ගාස්තු දීමට නොහැකි නම් මෙම සේවා උපකාර කරයි',
+        glTitle:'📖 නීති ශබ්දකෝෂය', glSub:'පොදු අධිකරණ පද සරලව පැහැදිලි කිරීම',
+        faqTitle:'❓ නිතර අසන ප්‍රශ්න', faqSub:'ශ්‍රී ලංකාවේ අධිකරණ පද්ධතිය පිළිබඳ පොදු ප්‍රශ්න',
+        ftDesc:'ශ්‍රී ලංකාවේ නීතිය සෑමදෙනාටම ප්‍රවේශය කිරීම.',
+        ftDisc:'⚠️ ප්‍රකාශය: අධ්‍යාපන වේදිකාව පමණයි. නීති උපදෙස් නොවේ.',
+        ftQL:'ඉක්මන් සබැඳි', ftLL:'නීති සබැඳි', ftCon:'සම්බන්ධතා',
+        toastLang:'භාෂාව සිංහල වෙත වෙනස් කරන ලදී'
+      }
+    };
+
+    function getVal(obj, lang) {
+      if (!obj) return '';
+      if (typeof obj === 'string') return obj;
+      return obj[lang] || obj.en || '';
+    }
+
+    function applyLang() {
+      var dict = I18N[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+      document.getElementById('langLabel').textContent = currentLang.toUpperCase();
+      document.querySelectorAll('.ld-chk').forEach(function(el) { el.classList.add('hidden'); });
+      document.querySelectorAll('.ld-opt').forEach(function(el) {
+        var lang = el.getAttribute('onclick').match(/'(\w+)'/);
+        if (lang && lang[1] === currentLang) {
+          el.querySelector('.ld-chk').classList.remove('hidden');
+        }
+      });
+      renderTribunals();
+      renderQuasi();
+      renderGlossary();
+      renderFAQ();
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('gl-lang', lang);
+      langDDOpen = false;
+      document.getElementById('langDD').classList.add('hidden');
+      applyLang();
+      showToast(I18N[lang].toastLang);
+    }
+
+    function toggleLangDD() {
+      langDDOpen = !langDDOpen;
+      document.getElementById('langDD').classList.toggle('hidden', !langDDOpen);
+    }
+
+    // Close lang dropdown on outside click
+    document.addEventListener('click', function(e) {
+      if (langDDOpen && !e.target.closest('#langBtn') && !e.target.closest('#langDD')) {
+        langDDOpen = false;
+        document.getElementById('langDD').classList.add('hidden');
+      }
+    });
+
+    // ===== DARK MODE =====
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('gl-dark', document.documentElement.classList.contains('dark') ? '1' : '0');
+      lucide.createIcons();
+    }
+    if (localStorage.getItem('gl-dark') === '1' || (!localStorage.getItem('gl-dark') && window.matchMedia('(prefers-color-scheme:dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // ===== MOBILE MENU =====
+    function toggleMob() {
+      document.getElementById('mobMenu').classList.toggle('hidden');
+    }
+
+    // ===== TABS =====
+    function switchTab(tabGroup, panelName) {
+      document.querySelectorAll('.tab-btn[data-tab="'+tabGroup+'"]').forEach(function(btn) {
+        btn.classList.remove('active');
+        btn.classList.add('text-neutral-500');
+        btn.style.borderBottomColor = 'transparent';
+      });
+      document.querySelectorAll('.tab-panel[data-tab="'+tabGroup+'"]').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      var activeBtn = document.querySelector('.tab-btn[data-tab="'+tabGroup+'"][data-panel="'+panelName+'"]');
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.classList.remove('text-neutral-500');
+        activeBtn.style.borderBottomColor = '#DC2626';
+      }
+      var activePanel = document.querySelector('.tab-panel[data-tab="'+tabGroup+'"][data-panel="'+panelName+'"]');
+      if (activePanel) activePanel.classList.add('active');
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+      var box = document.getElementById('toastBox');
+      document.getElementById('toastMsg').textContent = msg;
+      box.classList.remove('hidden');
+      box.style.animation = 'none';
+      box.offsetHeight; // reflow
+      box.style.animation = 'slideR .35s ease forwards';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(function() {
+        box.classList.add('hidden');
+      }, 2500);
+    }
+
+    // ===== RENDER TRIBUNALS =====
+    function renderTribunals() {
+      var container = document.getElementById('tribunalsGrid');
+      if (!container) return;
+      var html = '';
+      TRIBUNALS.forEach(function(t) {
+        html += '<div class="bg-neutral-800/80 border border-neutral-700/50 rounded-2xl p-4 md:p-5 hover:border-brand-red/50 transition group">' +
+          '<div class="flex items-center gap-3 mb-3">' +
+            '<span class="text-2xl">'+t.icon+'</span>' +
+            '<div>' +
+              '<h3 class="font-bold text-sm text-white group-hover:text-brand-red-light transition">'+getVal(t.name,currentLang)+'</h3>' +
+              '<p class="text-[10px] text-neutral-500">'+getVal(t.law,currentLang)+'</p>' +
+            '</div>' +
+          '</div>' +
+          '<p class="text-xs text-neutral-400 leading-relaxed">'+getVal(t.desc,currentLang)+'</p>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    // ===== RENDER QUASI-JUDICIAL =====
+    function renderQuasi() {
+      var container = document.getElementById('quasiGrid');
+      if (!container) return;
+      var html = '';
+      QUASI.forEach(function(q) {
+        html += '<div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-4 md:p-5 hover:border-brand-red/40 transition group">' +
+          '<div class="flex items-center gap-3 mb-3">' +
+            '<span class="text-2xl">'+q.icon+'</span>' +
+            '<h3 class="font-bold text-sm group-hover:text-brand-red transition">'+getVal(q.name,currentLang)+'</h3>' +
+          '</div>' +
+          '<p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">'+getVal(q.desc,currentLang)+'</p>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    // ===== RENDER GLOSSARY =====
+    function renderGlossary() {
+      var container = document.getElementById('glossaryList');
+      if (!container) return;
+      var html = '';
+      GLOSSARY.forEach(function(g) {
+        html += '<div class="gloss-item flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 px-4 py-3 rounded-xl cursor-default">' +
+          '<span class="font-bold text-sm text-brand-red shrink-0 sm:w-40">'+g.term+'</span>' +
+          '<span class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">'+getVal(g.def,currentLang)+'</span>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    // ===== RENDER FAQ =====
+    function renderFAQ() {
+      var container = document.getElementById('faqList');
+      if (!container) return;
+      var html = '';
+      FAQS.forEach(function(f, i) {
+        html += '<div class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl overflow-hidden">' +
+          '<button onclick="toggleFaq('+i+')" class="w-full flex items-center justify-between gap-3 px-4 py-3.5 text-left hover:bg-neutral-100 dark:hover:bg-brand-dark-border/50 transition">' +
+            '<span class="font-semibold text-sm leading-snug">'+getVal(f.q,currentLang)+'</span>' +
+            '<i data-lucide="chevron-down" class="w-4 h-4 shrink-0 text-neutral-400 transition-transform duration-200" id="faqIcon'+i+'"></i>' +
+          '</button>' +
+          '<div class="hidden px-4 pb-3.5" id="faqBody'+i+'">' +
+            '<p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">'+getVal(f.a,currentLang)+'</p>' +
+          '</div>' +
+        '</div>';
+      });
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function toggleFaq(i) {
+      var body = document.getElementById('faqBody'+i);
+      var icon = document.getElementById('faqIcon'+i);
+      if (!body) return;
+      var isHidden = body.classList.contains('hidden');
+      // Close all
+      document.querySelectorAll('[id^="faqBody"]').forEach(function(el) { el.classList.add('hidden'); });
+      document.querySelectorAll('[id^="faqIcon"]').forEach(function(el) { el.style.transform = 'rotate(0deg)'; });
+      // Open clicked
+      if (isHidden) {
+        body.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // ===== SCROLL ANIMATIONS =====
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fu');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('section > div, section > .relative').forEach(function(el) {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+
+    // ===== INIT =====
+    applyLang();
+  </script>
+  </body>
+</html>
