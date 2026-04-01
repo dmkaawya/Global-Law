@@ -13,18 +13,21 @@
       theme: {
         extend: {
           colors: {
-            navy: {
-              950: '#0a0f1e',
-              900: '#0d1526',
-              800: '#111d35',
-              700: '#162544',
-              600: '#1c2e54',
+            black: {
+              950: '#050505',
+              900: '#0a0a0a',
+              850: '#0e0e0e',
+              800: '#141414',
+              700: '#1c1c1c',
+              600: '#262626',
+              500: '#333333',
             },
-            gold: {
-              300: '#fcd34d',
-              400: '#fbbf24',
-              500: '#f59e0b',
-              600: '#d97706',
+            red: {
+              400: '#f87171',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+              800: '#991b1b',
             },
           },
           fontFamily: {
@@ -36,8 +39,8 @@
   </script>
   <style>
     @keyframes pulse-glow {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px 2px rgba(251, 191, 36, 0.5); }
-      50% { opacity: 0.5; box-shadow: 0 0 16px 6px rgba(251, 191, 36, 0.25); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px 2px rgba(239, 68, 68, 0.6); }
+      50% { opacity: 0.4; box-shadow: 0 0 14px 5px rgba(239, 68, 68, 0.2); }
     }
     @keyframes progress-shimmer {
       0% { background-position: -200% 0; }
@@ -45,102 +48,143 @@
     }
     @keyframes subtle-float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes logo-ring-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     .pulse-dot { animation: pulse-glow 2s ease-in-out infinite; }
     .progress-bar-shimmer {
-      background: linear-gradient(90deg, #d97706 0%, #fbbf24 30%, #fcd34d 50%, #fbbf24 70%, #d97706 100%);
+      background: linear-gradient(90deg, #991b1b 0%, #ef4444 30%, #f87171 50%, #ef4444 70%, #991b1b 100%);
       background-size: 200% 100%;
       animation: progress-shimmer 2.5s ease-in-out infinite;
     }
     .float-subtle { animation: subtle-float 6s ease-in-out infinite; }
-    .gold-glow {
-      text-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
-    }
+    .red-glow { text-shadow: 0 0 50px rgba(239, 68, 68, 0.12); }
     .badge-glow {
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .logo-glow {
+      filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.25));
     }
     .bg-grid {
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
       background-size: 60px 60px;
     }
     .bg-radial-glow {
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(239, 68, 68, 0.07) 0%, transparent 70%);
+    }
+    .logo-ring {
+      animation: logo-ring-spin 20s linear infinite;
     }
   </style>
 </head>
 <body class="font-sans antialiased">
 
-  <div class="min-h-screen bg-navy-950 bg-grid relative flex flex-col items-center justify-center px-6 overflow-hidden">
+  <div class="min-h-screen bg-black-950 bg-grid relative flex flex-col items-center justify-center px-6 overflow-hidden">
 
-    <!-- Radial Gold Glow at Top -->
+    <!-- Radial Red Glow -->
     <div class="bg-radial-glow absolute inset-0 pointer-events-none"></div>
 
-    <!-- Subtle Top Border Accent -->
-    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent"></div>
+    <!-- Top Red Line -->
+    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-600/50 to-transparent"></div>
 
     <!-- Main Content -->
     <div class="relative z-10 max-w-2xl w-full text-center">
 
-      <!-- Brand Header -->
-      <div class="float-subtle mb-12">
-        <div class="inline-flex items-center gap-3 mb-2">
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg">
-            <svg class="w-5 h-5 text-navy-950" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 7v10l10 4 10-4V7L12 3z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 12l10-5M12 12v9M12 12L2 7" />
+      <!-- Logo + Brand Header -->
+      <div class="float-subtle mb-14">
+        <div class="inline-flex items-center gap-4">
+          <!-- SVG Logo Mark -->
+          <div class="relative logo-glow">
+            <!-- Outer ring -->
+            <svg class="w-16 h-16 md:w-[72px] md:h-[72px]" viewBox="0 0 80 80" fill="none">
+              <!-- Rotating dashed ring -->
+              <circle class="logo-ring origin-center" cx="40" cy="40" r="37" stroke="rgba(239,68,68,0.15)" stroke-width="1" stroke-dasharray="4 6" fill="none" />
+              <!-- Solid ring -->
+              <circle cx="40" cy="40" r="33" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" fill="none" />
+              <!-- Inner fill -->
+              <circle cx="40" cy="40" r="30" fill="#141414" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+              <!-- Globe lines - horizontal -->
+              <ellipse cx="40" cy="40" rx="18" ry="30" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none" />
+              <ellipse cx="40" cy="40" rx="8" ry="30" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" fill="none" />
+              <!-- Globe lines - vertical -->
+              <ellipse cx="40" cy="40" rx="30" ry="10" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none" />
+              <ellipse cx="40" cy="40" rx="30" ry="18" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" fill="none" />
+              <!-- Scale of Justice -->
+              <line x1="40" y1="22" x2="40" y2="46" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" />
+              <!-- Top pillar -->
+              <line x1="34" y1="24" x2="46" y2="24" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" />
+              <!-- Left pan arm -->
+              <line x1="40" y1="28" x2="26" y2="36" stroke="#ffffff" stroke-width="1" stroke-linecap="round" />
+              <!-- Right pan arm -->
+              <line x1="40" y1="28" x2="54" y2="36" stroke="#ffffff" stroke-width="1" stroke-linecap="round" />
+              <!-- Left pan -->
+              <path d="M22 36 Q26 40 30 36" stroke="#ffffff" stroke-width="0.8" fill="none" stroke-linecap="round" />
+              <line x1="23" y1="36" x2="29" y2="36" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" />
+              <!-- Right pan -->
+              <path d="M50 36 Q54 40 58 36" stroke="#ffffff" stroke-width="0.8" fill="none" stroke-linecap="round" />
+              <line x1="51" y1="36" x2="57" y2="36" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" />
+              <!-- Base -->
+              <line x1="35" y1="46" x2="45" y2="46" stroke="#ef4444" stroke-width="1.2" stroke-linecap="round" />
+              <rect x="33" y="46" width="14" height="2" rx="0.5" fill="#ef4444" opacity="0.4" />
             </svg>
           </div>
-          <span class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-            Global<span class="text-gold-400">Law</span>
-          </span>
+          <!-- Brand Name -->
+          <div class="text-left">
+            <span class="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-none">
+              Global<span class="text-red-500">Law</span>
+            </span>
+            <div class="h-[2px] w-0 mt-1.5 bg-gradient-to-r from-red-500/60 to-transparent md:w-20 transition-all"></div>
+          </div>
         </div>
       </div>
 
       <!-- Construction Badge -->
       <div class="flex justify-center mb-10">
-        <div class="badge-glow inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold-500/20 bg-navy-800/60 backdrop-blur-sm">
+        <div class="badge-glow inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-red-500/15 bg-black-800/60 backdrop-blur-sm">
           <span class="relative flex h-2.5 w-2.5">
-            <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-gold-400"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-400"></span>
+            <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-red-500"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
           </span>
-          <span class="text-xs md:text-sm font-semibold tracking-widest uppercase text-gold-300">
+          <span class="text-xs md:text-sm font-semibold tracking-widest uppercase text-red-400/90">
             System Under Construction
           </span>
         </div>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-white gold-glow mb-8">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-white red-glow mb-8">
         Demystifying the Law<br class="hidden sm:block" />
-        <span class="text-gold-400">for Everyone.</span>
+        <span class="text-red-500">for Everyone.</span>
       </h1>
 
       <!-- Progress Bar -->
       <div class="max-w-xs mx-auto mb-10">
-        <div class="h-1 w-full rounded-full bg-navy-700 overflow-hidden">
+        <div class="h-[3px] w-full rounded-full bg-black-600 overflow-hidden">
           <div class="progress-bar-shimmer h-full rounded-full w-[62%]"></div>
         </div>
-        <p class="mt-2.5 text-[11px] font-medium tracking-wider uppercase text-white/30">Active Development — 62%</p>
+        <p class="mt-3 text-[11px] font-medium tracking-wider uppercase text-white/25">Active Development — 62%</p>
       </div>
 
       <!-- Description -->
-      <p class="text-base md:text-lg font-light leading-relaxed text-white/60 max-w-lg mx-auto mb-14">
+      <p class="text-base md:text-lg font-light leading-relaxed text-white/50 max-w-lg mx-auto mb-14">
         We are currently building a comprehensive, multi-language platform to make global and local laws accessible, easy to understand, and completely free for the general public. We will be launching soon.
       </p>
 
       <!-- Divider -->
-      <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mx-auto mb-14"></div>
+      <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-red-500/30 to-transparent mx-auto mb-14"></div>
 
       <!-- Contact Section -->
-      <div class="bg-navy-800/40 border border-white/[0.06] rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm">
-        <p class="text-xs font-semibold tracking-widest uppercase text-gold-400/80 mb-3">Official Inquiries</p>
-        <p class="text-sm md:text-base font-light text-white/50 leading-relaxed mb-4">
+      <div class="bg-black-800/50 border border-white/[0.05] rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm">
+        <p class="text-xs font-semibold tracking-widest uppercase text-red-500/70 mb-3">Official Inquiries</p>
+        <p class="text-sm md:text-base font-light text-white/40 leading-relaxed mb-4">
           For official authorities, partnerships, and inquiries, please contact:
         </p>
-        <a href="mailto:dmkaawya@gmail.com" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors duration-200 font-medium text-sm md:text-base">
+        <a href="mailto:dmkaawya@gmail.com" class="inline-flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors duration-200 font-medium text-sm md:text-base">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
           </svg>
@@ -149,14 +193,14 @@
       </div>
 
       <!-- Footer -->
-      <p class="text-[11px] font-medium tracking-wider uppercase text-white/20">
-        Powered by <span class="text-white/30">Vezlo</span>
+      <p class="text-[11px] font-medium tracking-wider uppercase text-white/15">
+        Powered by <span class="text-white/25">Vezlo</span>
       </p>
 
     </div>
 
-    <!-- Subtle Bottom Border Accent -->
-    <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"></div>
+    <!-- Bottom Line -->
+    <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent"></div>
 
   </div>
 
