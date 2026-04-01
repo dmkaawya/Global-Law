@@ -149,6 +149,244 @@
     <i data-lucide="arrow-up" class="w-4 h-4"></i>
   </button>
 
+<script>
+lucide.createIcons();
+
+// ========== LAW DATABASE ==========
+var LAWS = {
+  'penal-code': {
+    icon:'⚖️',
+    badge:{en:'Criminal Law',si:'අපරාධ නීතිය'},
+    name:{en:'Penal Code (No. 2 of 1883)',si:'දණ්ඩ නීති සංග්‍රහය (අංක 2 ක්‍ර. 1883)'},
+    shortName:{en:'Penal Code',si:'දණ්ඩ නීති සංග්‍රහය'},
+    tagline:{en:"Sri Lanka's primary criminal law defining offences and punishments.",si:'ශ්‍රී ලංකාවේ ප්‍රාථමික අපරාධ නීතිය වන අපරාධ සහ දඬුවම් අර්ථ දක්වන නීතිය.'},
+    enacted:1883,
+    lastAmended:2024,
+    sections:511,
+    readTime:'~8 min',
+    category:'criminal',
+    overview:{
+      en:'<p>The Penal Code of Sri Lanka (Ordinance No. 2 of 1883) is the <strong>principal criminal statute</strong> of the country. Originally enacted during British colonial rule, it has been extensively amended to address modern crimes including cyber offences, sexual harassment, and organized crime.</p><p>The Code defines all major offences — from murder and theft to assault and fraud — and prescribes punishments for each. It applies to <strong>all persons</strong> within Sri Lanka regardless of nationality.</p><p>The most significant recent amendments were in <strong>2023-2024</strong>, which introduced provisions for cyber crime, online harassment, revenge pornography, and data theft under Part VIA (Sections 363A to 363L).</p>',
+      si:'<p>ශ්‍රී ලංකාවේ දණ්ඩ නීති සංග්‍රහය (අධිකාර අංක 2 ක්‍ර. 1883) යනු රටේ <strong>ප්‍රධාන අපරාධ පනත</strong> ය. මුලින් බ්‍රිතාන්‍ය යටත් විජිත පාලන සමයේදී සම්මත කරන ලද මෙය, සයිබර් අපරාධ, මාර්ගගත ලිංගික අතින්ගුණනය සහ සංවිධානාත්මක අපරාධ ඇතුළු නවීන අපරාධ සඳහා විශාල ලෙස සංශෝධනය කර ඇත.</p><p>මෙම සංග්‍රහය මනුෂ්‍ය ඝාතනය සහ හොරකම් සිට පහරදීම සහ වංචා දක්වා සියලුම ප්‍රධාන අපරාධ අර්ථ දක්වා සෑම එකක් සඳහාම දඬුවම් නියම කරයි. ජාතිකත්වය නොසලකා <strong>ශ්‍රී ලංකාව තුළ සිටින සියලු පුද්ගලයන්ට</strong> මෙය අදාළ වේ.</p><p>වඩාත්ම වැදගත් මෑත සංශෝධන <strong>2023-2024</strong> දී සිදු කරන ලද අතර, ඒවා මගින් Part VIA (ව්‍යවස්ථා 363A සිට 363L දක්වා) යටතේ සයිබර් අපරාධ, මාර්ගගත අතින්ගුණනය, ප්‍රතිකාර අශ්ලීල ඡායාරූප සහ දත්ත හොරකම් සඳහා විධිවිධි හඳුන්වා දුන්නේය.</p>'
+    },
+    keySections:[
+      {sec:'293',title:{en:'Murder',si:'මනුෂ්‍ය ඝාතනය'},punishment:{en:'Death penalty or life imprisonment',si:'මරණ දඬුවම හෝ ආජීව සිරදඬුවම'},desc:{en:'Causing death with intent to cause death or with knowledge that the act is likely to cause death.',si:'මරණය සිදු කිරීමට අදහසකින් හෝ එම ක්‍රියාව මරණය සිදු කිරීමට ඉඩ ඇති බව දැන සිටියදී මරණය සිදු කිරීම.'}},
+      {sec:'294',title:{en:'Culpable Homicide',si:'දූෂිත මනුෂ්‍ය ඝාතනය'},punishment:{en:'Up to life imprisonment',si:'ආජීව සිරදඬුවම දක්වා'},desc:{en:'Causing death without murder intent but with knowledge that death would likely result.',si:'මනුෂ්‍ය ඝාතන අදහසකින් තොරව නමුත් මරණය සිදුවීමට ඉඩ ඇති බව දැන මරණය සිදු කිරීම.'}},
+      {sec:'345',title:{en:'Kidnapping',si:'පැහැරගැනීම'},punishment:{en:'Up to 10 years imprisonment and/or fine',si:'වසර 10 ක් දක්වා සිරදඬුවම සහ/හෝ දඩ'},desc:{en:'Conveying any person beyond the limits of Sri Lanka without their consent.',si:'ඕනෑම පුද්ගලයෙකුගේ අනුමැතියකින් තොරව ශ්‍රී ලංකාවේ සීමාවන් ඔබ්බට රැගෙන යාම.'}},
+      {sec:'353',title:{en:'Robbery',si:'මංකොල්ලකෑම'},punishment:{en:'Up to 20 years rigorous imprisonment and whipping',si:'වසර 20 ක් දක්වා දැඩි සිරදඬුවම සහ කසුපහර'},desc:{en:'Theft committed using force, violence, or threat of instant hurt.',si:'බලය, ප්‍රචණ්ඩත්වය හෝ ක්ෂණික හානියක් තර්ජනය කරමින් සිදු කරන හොරකම.'}},
+      {sec:'365',title:{en:'Theft',si:'හොරකම'},punishment:{en:'Up to 3 years imprisonment and/or fine',si:'වසර 3 ක් දක්වා සිරදඬුවම සහ/හෝ දඩ'},desc:{en:'Dishonestly taking movable property out of the possession of any person without their consent.',si:'ඕනෑම පුද්ගලයෙකුගේ අනුමැතියකින් තොරව අනියම ලෙස එහි ඇති චලනය කළ හැකි දේපළ පැහැර ගැනීම.'}},
+      {sec:'365A',title:{en:'Misappropriation',si:'වියමන භාවිතය'},punishment:{en:'Up to 2 years imprisonment and/or fine',si:'වසර 2 ක් දක්වා සිරදඬුවම සහ/හෝ දඩ'},desc:{en:'Dishonestly using or disposing of property entrusted to you.',si:'ඔබට භාර දුන් දේපළ අනියම ලෙස භාවිතා කිරීම හෝ බෙදා හැරීම.'}},
+      {sec:'363A',title:{en:'Cyber Harassment',si:'සයිබර් අතින්ගුණනය'},punishment:{en:'Up to 5 years imprisonment and/or fine up to Rs. 500,000',si:'වසර 5 ක් දක්වා සිරදඬුවම සහ/හෝ රු. 500,000 දක්වා දඩ'},desc:{en:'[2024 Amendment] Using electronic means to harass, threaten, or humiliate another person.',si:'[2024 සංශෝධනය] ඉලෙක්ට්‍රොනික සාධනයන් භාවිතා කරමින් අනෙක් පුද්ගලයෙකුට අතින්ගුණනය, තර්ජනය හෝ නිග්‍රහ කිරීම.'}},
+      {sec:'363C',title:{en:'Revenge Pornography',si:'ප්‍රතිකාර අශ්ලීල ඡායාරූප'},punishment:{en:'Up to 5 years imprisonment and fine up to Rs. 1,000,000',si:'වසර 5 ක් දක්වා සිරදඬුවම සහ රු. 1,000,000 දක්වා දඩ'},desc:{en:'[2024 Amendment] Distributing intimate images without consent.',si:'[2024 සංශෝධනය] අනුමැතියකින් තොරව අන්තරංග ඡායාරූප බෙදා හැරීම.'}},
+      {sec:'375',title:{en:'Rape',si:'බලාත්මක ලිංගික සංසර්ගය'},punishment:{en:'Minimum 15 years rigorous imprisonment',si:'අවම වශයෙන් වසර 15 ක දැඩි සිරදඬුවම'},desc:{en:'Sexual intercourse by a man with a woman without her consent, or with a girl under 16 (statutory rape).',si:'කාන්තාවක් සමඟ ඇයගේ අනුමැතියකින් තොරව හෝ 16 ට අඩු දැරියක් සමඟ ලිංගික සංසර්ගය.'}},
+      {sec:'345B',title:{en:'Domestic Violence',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වය'},punishment:{en:'Referenced in Domestic Violence Act',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වය පනතේ යොමු කර ඇත'},desc:{en:'Physical or emotional abuse by a family member. Primarily handled under the Prevention of Domestic Violence Act.',si:'පවුලේ සාමාජිකයෙකු විසින් සිදු කරන ශාරීරික හෝ මානසික ප්‍රචණ්ඩත්වය.'}}
+    ],
+    amendments:[
+      {year:1883,desc:{en:'Original enactment as Ordinance No. 2 of 1883',si:'මුල් සම්මත කිරීම අධිකාර අංක 2 ක්‍ර. 1883'}},
+      {year:1895,desc:{en:'Amended to include offences related to counterfeit currency',si:'ව්‍යාජ මුදල් සම්බන්ධ අපරාධ ඇතුළත් කිරීමට සංශෝධනය'}},
+      {year:1995,desc:{en:'Major reforms: rape law reforms, sexual offences, changed minimum rape sentence to 10 years',si:'ප්‍රධාන ප්‍රතිසංස්කරණ: බලාත්මක ලිංගික සංසර්ග නීති ප්‍රතිසංස්කරණ, අවම සිරදඬුවම වසර 10 දක්වා වැඩි කිරීම'}},
+      {year:2006,desc:{en:'Amended to raise minimum rape sentence to 15 years',si:'අවම බලාත්මක ලිංගික සංසර්ග සිරදඬුවම වසර 15 දක්වා වැඩි කිරීමට සංශෝධනය'}},
+      {year:2023,desc:{en:'Introduction of cyber crime provisions (Part VIA)',si:'සයිබර් අපරාධ විධිවිධි හඳුන්වා දීම (Part VIA)'}},
+      {year:2024,desc:{en:'Expanded cyber provisions: revenge pornography, data theft, online harassment enhanced penalties',si:'සයිබර් විධිවිධි පුළුල් කිරීම: ප්‍රතිකාර අශ්ලීල ඡායාරූප, දත්ත හොරකම, වැඩි දඬුවම්'}}
+    ],
+    faq:[
+      {q:{en:'Is the death penalty actually carried out in Sri Lanka?',si:'ශ්‍රී ලංකාවේ මරණ දඬුවම සැබවින්ම ක්‍රියාත්මක කරන්නේද?'},a:{en:'While the death penalty exists in law for murder and certain drug offences, Sri Lanka has maintained a moratorium on executions since 1976. No executions have been carried out since then, though death sentences continue to be passed by courts.',si:'මනුෂ්‍ය ඝාතනය සහ නිශ්චිත මත්ද්‍රව්‍ය අපරාධ සඳහා මරණ දඬුවම නීතියේ පවතින නමුත්, 1976 සිට ශ්‍රී ලංකාව මරණ දඬුවම් ක්‍රියාත්මක නොකිරීමේ ප්‍රතිපත්තියක් පවත්වාගෙන යයි.'}},
+      {q:{en:'What is the difference between theft and robbery?',si:'හොරකම සහ මංකොල්ලකෑම අතර වෙනස කුමක්ද?'},a:{en:'Theft (Section 365) is taking property dishonestly. Robbery (Section 353) is theft PLUS use of force, violence, or threat. Robbery carries a much heavier penalty (up to 20 years vs 3 years for theft).',si:'හොරකම (ව්‍යවස්ථාව 365) යනු දේපළ අනියම ලෙස පැහැර ගැනීමයි. මංකොල්ලකෑම (ව්‍යවස්ථාව 353) යනු හොරකමක් PLUS බලය, ප්‍රචණ්ඩත්වය හෝ තර්ජනය භාවිතා කිරීමයි. මංකොල්ලකෑමට බරපතල දඬුවම් ඇත (වසර 20 දක්වා vs හොරකමට වසර 3).'}},
+      {q:{en:'Can online harassment be reported under the Penal Code?',si:'මාර්ගගත අතින්ගුණනය දණ්ඩ නීති සංග්‍රහය යටතේ වාර්තා කළ හැකද?'},a:{en:'Yes, since the 2023-2024 amendments, cyber harassment, revenge pornography, and online threats are specifically covered under Sections 363A-363L of the Penal Code. You can file a complaint at the nearest police station or to CERT.',si:'ඔව්, 2023-2024 සංශෝධනවලින් පසු, සයිබර් අතින්ගුණනය, ප්‍රතිකාර අශ්ලීල ඡායාරූප සහ මාර්ගගත තර්ජන දණ්ඩ නීති සංග්‍රහයේ ව්‍යවස්ථා 363A-363L යටතේ විශේෂයෙන් ආවරණය වේ.'}},
+      {q:{en:'What court handles Penal Code offences?',si:'දණ්ඩ නීති සංග්‍රහයේ අපරාධ කුමන අධිකරණයක් සමත් කරයිද?'},a:{en:'Minor offences (punishment ≤ 7 years) → Magistrate Court. Serious offences (murder, rape, robbery, cyber crimes with heavy penalties) → High Court. Appeals go to Court of Appeal then Supreme Court.',si:'සුළු අපරාධ (දඬුවම ≤ 7 වසර) → මහේස්ත්‍රාත් අධිකරණය. බරපතල අපරාධ (මනුෂ්‍ය ඝාතනය, බලාත්මක ලිංගික සංසර්ගය, මංකොල්ලකෑම) → මහා අධිකරණය. අභියාදන → අභියාදන අධිකරණය → ශ්‍රේෂ්ඨාධිකරණය.'}}
+    ],
+    relatedLaws:['criminal-procedure-code','evidence-ordinance','computer-crimes-act','dangerous-drugs-act','prevention-of-terrorism-act']
+  },
+
+  'criminal-procedure-code': {
+    icon:'📋',
+    badge:{en:'Criminal Procedure',si:'අපරාධ නඩු විධාන'},
+    name:{en:'Code of Criminal Procedure (Act No. 15 of 1979)',si:'අපරාධ නඩු විධාන සංග්‍රහය (පනත අංක 15 ක්‍ර. 1979)'},
+    shortName:{en:'Criminal Procedure Code',si:'අපරාධ නඩු විධාන සංග්‍රහය'},
+    tagline:{en:'Governs how criminal cases are investigated, charged, and tried in Sri Lanka.',si:'ශ්‍රී ලංකාවේ අපරාධ නඩු පරීක්ෂා, චෝදනා ලබා දීම සහ විභාග කිරීම පාලනය කරයි.'},
+    enacted:1979,
+    lastAmended:2024,
+    sections:458,
+    readTime:'~10 min',
+    category:'criminal',
+    overview:{
+      en:'<p>The Code of Criminal Procedure (No. 15 of 1979) is the <strong>procedural law</strong> that governs how criminal cases are handled from investigation to judgment. While the Penal Code defines <em>what</em> a crime is, the CrPC defines <em>how</em> it is prosecuted.</p><p>It covers police powers of arrest, search and seizure, bail procedures, filing of charges, trial procedures, evidence presentation, sentencing, and appeals.</p><p>The CrPC applies to all criminal courts — Magistrate Courts, High Courts, and appellate courts.</p>',
+      si:'<p>අපරාධ නඩු විධාන සංග්‍රහය (අංක 15 ක්‍ර. 1979) යනු විමර්ශනයේ සිට තීන්දුව දක්වා අපරාධ නඩු සැලකිල්ලට ගන්නා ආකාරය පාලනය කරන <strong>ක්‍රියාවලි නීතිය</strong> ය. දණ්ඩ නීති සංග්‍රහය <em>අපරාධය කුමක්ද</em> යන්න අර්ථ දක්වන අතර, CrPC <em>එය කොහොමද නඩු පවරන්නේ</em> යන්න අර්ථ දක්වයි.</p>'
+    },
+    keySections:[
+      {sec:'32-41',title:{en:'Arrest Without Warrant',si:'වරෙන්තුවකින් තොරව අත්අඩංගුවට ගැනීම'},punishment:{en:'Police power (procedure)',si:'පොලිස් බලය (ක්‍රියාවලිය)'},desc:{en:'Circumstances under which police may arrest without a warrant — cognizable offences, reasonable suspicion.',si:'පොලිසියට වරෙන්තුවකින් තොරව අත්අඩංගුවට ගත හැකි තත්ත්ව — දැනුම්දීම් අපරාධ, සාධාරණ සැකය.'}},
+      {sec:'117-125',title:{en:'Bail',si:'ඇප'},punishment:{en:'Procedural provision',si:'ක්‍රියාවලි විධිවිධිය'},desc:{en:'Bail provisions — bailable offences, non-bailable offences, conditions for bail, cancellation of bail.',si:'ඇප විධිවිධි — ඇප දිය හැකි අපරාධ, ඇප දිය නොහැකි අපරාධ, ඇප කොන්දේසි.'}},
+      {sec:'173-196',title:{en:'Investigation',si:'විමර්ශනය'},punishment:{en:'Procedural provision',si:'ක්‍රියාවලි විධිවිධිය'},desc:{en:'Police investigation powers — recording statements, search, seizure, sending report to Magistrate.',si:'පොලිස් විමර්ශන බලත් — ප්‍රකාශයන් පටිගත කිරීම, සෝදිසිය, අත්අඩංගුවට ගැනීම, වාර්තා මහේස්ත්‍රාත්ට යැවීම.'}},
+      {sec:'200-236',title:{en:'Committal Proceedings',si:'යොමු කිරීම් විධාන'},punishment:{en:'Procedural provision',si:'ක්‍රියාවලි විධිවිධිය'},desc:{en:'Process of committing cases from Magistrate to High Court for serious offences.',si:'බරපතල අපරාධ සඳහා මහේස්ත්‍රාත් සිට මහා අධිකරණයට නඩු යොමු කිරීමේ ක්‍රියාවලිය.'}},
+      {sec:'397-405',title:{en:'Reference & Revision',si:'යොමු කිරීම සහ සංශෝධනය'},punishment:{en:'Appellate provision',si:'අභියාදන විධිවිධිය'},desc:{en:'High Court and Sessions Court powers to call for records, revise orders, and correct errors.',si:'මහා අධිකරණය සහ සැසි අධිකරණ බලත් වාර්තා කැඳවීම, නියෝග සංශෝධනය, වැරැදි නිවැරදි කිරීම.'}}
+    ],
+    amendments:[
+      {year:1979,desc:{en:'Original enactment replacing the 1898 Criminal Procedure Code',si:'1898 අපරාධ නඩු විධාන සංග්‍රහය ප්‍රතිස්ථාපනය කරමින් මුල් සම්මත කිරීම'}},
+      {year:2024,desc:{en:'Updated cyber crime investigation procedures',si:'සයිබර් අපරාධ විමර්ශන ක්‍රියාවලි යාවත්කාලීන කිරීම'}}
+    ],
+    faq:[
+      {q:{en:'Can police arrest me without a warrant?',si:'පොලිසියට වරෙන්තුවකින් තොරව මාව අත්අඩංගුවට ගත හැකද?'},a:{en:'Yes, for cognizable offences (where police can investigate without court permission) and if they have reasonable suspicion. They must inform you of the reason for arrest.',si:'ඔව්, දැනුම්දීම් අපරාධ සඳහා (පොලිසියට අධිකරණ අවසරයකින් තොරව විමර්ශනය කළ හැකි) සහ සාධාරණ සැකයක් ඇත්නම්. අත්අඩංගුවට ගැනීමට හේතුව ඔබට දැනුම් දිය යුතුය.'}},
+      {q:{en:'What is a committal proceeding?',si:'යොමු කිරීම් විධානයක් කුමක්ද?'},a:{en:'A preliminary hearing in Magistrate Court to determine if there is enough evidence to send a case to the High Court for trial. The Magistrate examines prosecution evidence but does not decide guilt.',si:'මහා අධිකරණයට විභාගයක් සඳහා යැවීමට ප්‍රමාණවත් සාක්ෂි ඇත්ද යන්න තීරණය කිරීමට මහේස්ත්‍රාත් අධිකරණයේ පෙර විභාගයකි.'}}
+    ],
+    relatedLaws:['penal-code','evidence-ordinance','magistrates-court-procedure']
+  },
+
+  'evidence-ordinance': {
+    icon:'📜',
+    badge:{en:'Evidence Law',si:'සාක්ෂි නීතිය'},
+    name:{en:'Evidence Ordinance (No. 14 of 1895)',si:'සාක්ෂි ආඥාපනත (අංක 14 ක්‍ර. 1895)'},
+    shortName:{en:'Evidence Ordinance',si:'සාක්ෂි ආඥාපනත'},
+    tagline:{en:'Defines what evidence is admissible in court and how it should be evaluated.',si:'අධිකරණයකට ඉදිරිපත් කළ හැකි සාක්ෂි කුමක්ද සහ ඒවා ඇගැයීම කොහොමද කරන්නේ යන්න අර්ථ දක්වයි.'},
+    enacted:1895,
+    lastAmended:2023,
+    sections:170,
+    readTime:'~7 min',
+    category:'criminal',
+    overview:{en:'<p>The Evidence Ordinance governs <strong>what evidence can be presented in court</strong> and how it should be evaluated. Based on Indian Evidence Act of 1872, it covers oral evidence, documentary evidence, burden of proof, confessions, and expert testimony.</p><p>Key principles include: relevance of facts, admissibility of confessions (must be voluntary), hearsay rule, privilege against self-incrimination, and the burden of proof standard.</p>',si:'<p>සාක්ෂි ආඥාපනත <strong>අධිකරණයකට කුමන සාක්ෂි ඉදිරිපත් කළ හැකිද</strong> සහ ඒවා ඇගැයීම කොහොමද කරන්නේ යන්න පාලනය කරයි. 1872 ඉන්දීය සාක්ෂි පනත මත පදනම් වූ මෙය මුඛ සාක්ෂි, ලිඛිත සාක්ෂි, සාක්ෂි භාරය, පාපෝක්කරණ සහ විශේෂඥ සාක්ෂි ආවරණය කරයි.</p>'},
+    keySections:[
+      {sec:'3-55',title:{en:'Relevancy of Facts',si:'කරුණුවල ප්‍රායෝගිකත්වය'},punishment:{en:'Evidentiary rule',si:'සාක්ෂි නීතිය'},desc:{en:'What facts are relevant — facts in issue, relevant facts, admissions, confessions, statements by persons who cannot be called as witnesses.',si:'කුමන කරුණු ප්‍රායෝගික ද — ප්‍රශ්නයට අදාළ කරුණු, ප්‍රායෝගික කරුණු, පාපෝක්කරණ, සාක්ෂිකරුවන් ලෙස කැඳවිය නොහැකි පුද්ගලයන්ගේ ප්‍රකාශ.'}},
+      {sec:'56-100',title:{en:'Burden of Proof',si:'සාක්ෂි භාරය'},punishment:{en:'Evidentiary rule',si:'සාක්ෂි නීතිය'},desc:{en:'Who must prove what — prosecution bears burden in criminal cases (beyond reasonable doubt), plaintiff in civil cases (balance of probabilities).',si:'කවුද කුමක් සාධාරණීකරණය කළ යුතුද — අපරාධ නඩුවල පාපොච්චාරක පාර්ශ්වයට භාරය (සාධාරණ සැකයකට ඔබ්බෙන්).'}},
+      {sec:'101-120',title:{en:'Estoppel',si:'ප්‍රතිෂේධය'},punishment:{en:'Evidentiary rule',si:'සාක්ෂි නීතිය'},desc:{en:'Preventing a person from contradicting their previous statement or conduct when another has relied on it.',si:'අනෙක් පුද්ගලයෙකු එය මත විශ්වාස කළ විට පුද්ගලයෙකුගේ පෙර ප්‍රකාශයක් හෝ හැසිරීමක් ප්‍රතික්ෂේප කිරීම වැළැක්වීම.'}}
+    ],
+    amendments:[{year:1895,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'},{year:2023,desc:{en:'Updated for electronic evidence and digital records',si:'ඉලෙක්ට්‍රොනික සාක්ෂි සහ ඩිජිටල් වාර්තා සඳහා යාවත්කාලීන කිරීම'}}],
+    faq:[{q:{en:'Can hearsay evidence be used in court?',si:'අසන ලද සාක්ෂි අධිකරණයේ භාවිතා කළ හැකද?'},a:{en:'Generally no. Hearsay (statement by someone not present in court) is not admissible unless it falls under specific exceptions like dying declarations, statements made in ordinary course of business, or admissions.',si:'සාමාන්‍යයෙන් නැත. අසන ලද සාක්ෂි (අධිකරණයේ නොමැති පුද්ගලයෙකුගේ ප්‍රකාශය) නිශ්චිත ව්‍යතිරේක වලට යටත් නොවන්නේ නම් පිළිගත නොහැක.'}}],
+    relatedLaws:['penal-code','criminal-procedure-code']
+  },
+
+  'computer-crimes-act': {
+    icon:'💻',
+    badge:{en:'Cyber Law',si:'සයිබර් නීතිය'},
+    name:{en:'Computer Crimes Act (No. 24 of 2007)',si:'පරිගණක අපරාධ පනත (අංක 24 ක්‍ර. 2007)'},
+    shortName:{en:'Computer Crimes Act',si:'පරිගණක අපරාධ පනත'},
+    tagline:{en:'Sri Lanka\'s dedicated cyber crime legislation covering hacking, data theft, and online fraud.',si:'හැකිං, දත්ත හොරකම සහ මාර්ගගත වංචා ආවරණය කරන ශ්‍රී ලංකාවේ විශේෂිත සයිබර් අපරාධ නීතිය.'},
+    enacted:2007,
+    lastAmended:2024,
+    sections:42,
+    readTime:'~6 min',
+    category:'cyber',
+    overview:{en:'<p>The Computer Crimes Act is Sri Lanka\'s <strong>primary cyber crime legislation</strong>. It criminalizes unauthorized access to computers, data interference, system interference, and the use of illegal devices.</p><p>Note: The Penal Code was amended in 2023-2024 to add cyber harassment, revenge pornography, and online threat provisions. So some cyber offences may now fall under <strong>both</strong> the Computer Crimes Act and the Penal Code.</p>',si:'<p>පරිගණක අපරාධ පනත ශ්‍රී ලංකාවේ <strong>ප්‍රාථමික සයිබර් අපරාධ නීතිය</strong> ය. අනුමත නොකළ පරිගණක ප්‍රවේශය, දත්ත නිරෝධය, පද්ධති නිරෝධය සහ නීති විරෝධී උපාංග භාවිතය අපරාධ ලෙස තහනම් කරයි.</p>'},
+    keySections:[
+      {sec:'3',title:{en:'Illegal Access',si:'නීති විරෝධී ප්‍රවේශය'},punishment:{en:'Up to 3 years imprisonment and/or fine up to Rs. 300,000',si:'වසර 3 ක් දක්වා සිරදඬුවම සහ/හෝ රු. 300,000 දක්වා දඩ'},desc:{en:'Intentionally accessing a computer, computer system, or computer network without authorization.',si:'අනුමත කිරීමකින් තොරව විශේෂයෙන්ම පරිගණකයක්, පරිගණක පද්ධතියක් හෝ පරිගණක ජාලයක් ප්‍රවේශ කිරීම.'}},
+      {sec:'4',title:{en:'Illegal Interception',si:'නීති විරෝධී අතපත්තු කිරීම'},punishment:{en:'Up to 3 years and/or fine',si:'වසර 3 ක් දක්වා සහ/හෝ දඩ'},desc:{en:'Intercepting any data from a computer, system, or network without authorization.',si:'අනුමත කිරීමකින් තොරව පරිගණකයකින්, පද්ධතියකින් හෝ ජාලයකින් කිසියම් දත්ත අතපත්තු කිරීම.'}},
+      {sec:'5',title:{en:'Data Interference',si:'දත්ත නිරෝධය'},punishment:{en:'Up to 3 years and/or fine',si:'වසර 3 ක් දක්වා සහ/හෝ දඩ'},desc:{en:'Damaging, deleting, or altering data without authorization.',si:'අනුමත කිරීමකින් තොරව දත්ත හානි කිරීම, මකා දැමීම හෝ වෙනස් කිරීම.'}},
+      {sec:'6',title:{en:'System Interference',si:'පද්ධති නිරෝධය'},punishment:{en:'Up to 3 years and/or fine',si:'වසර 3 ක් දක්වා සහ/හෝ දඩ'},desc:{en:'Interfering with a computer system to cause obstruction, denial of service, or harm.',si:'බාධාවක්, සේවා ප්‍රතික්ෂේපයක් හෝ හානියක් සිදු කිරීමට පරිගණක පද්ධතියකට මැදිහත් වීම.'}},
+      {sec:'8',title:{en:'Illegal Device',si:'නීති විරෝධී උපාංගය'},punishment:{en:'Up to 2 years and/or fine',si:'වසර 2 ක් දක්වා සහ/හෝ දඩ'},desc:{en:'Creating, distributing, or possessing devices/tools for committing computer crimes.',si:'පරිගණක අපරාධ සිදු කිරීම සඳහා උපාංග/මෙවලම් නිර්මාණය, බෙදාහැරීම හෝ පැවතුම් කිරීම.'}},
+      {sec:'9',title:{en:'Computer Fraud',si:'පරිගණක වංචාව'},punishment:{en:'Up to 5 years and/or fine',si:'වසර 5 ක් දක්වා සහ/හෝ දඩ'},desc:{en:'Using a computer to commit fraud — false representation to obtain property or financial gain.',si:'වංචාවක් සිදු කිරීමට පරිගණකයක් භාවිතා කිරීම — දේපළ හෝ මූල්‍ය ලාභ ලබා ගැනීමට ව්‍යාජ නියෝජනය.'}}
+    ],
+    amendments:[{year:2007,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'},{year:2024,desc:{en:'Enhanced penalties and coordination with Penal Code cyber provisions',si:'වැඩි දඬුවම් සහ දණ්ඩ නීති සංග්‍රහයේ සයිබර් විධිවිධි සමඟ සම්බන්ධතා'}}],
+    faq:[{q:{en:'Should I report cyber crime to police or CERT?',si:'සයිබර් අපරාධ පොලිසියටද හෝ CERT වෙතද වාර්තා කළ යුතුද?'},a:{en:'Both. File a complaint at the nearest police station (they have a Cyber Crimes Unit). Also report to Sri Lanka CERT (cert.gov.lk) for technical investigation support. For online harassment, the 2024 Penal Code amendments also apply.',si:'දෙකම. ආසන්නතම පොලිස් ස්ථානයේ පැමිණිල්ලක් ගොනු කරන්න (ඔවුන්ට සයිබර් අපරාධ ඒකකයක් ඇත). තාක්ෂණික විමර්ශන සහාය සඳහා ශ්‍රී ලංකා CERT (cert.gov.lk) වෙතද වාර්තා කරන්න.'}}],
+    relatedLaws:['penal-code','data-protection-act','online-safety-act']
+  },
+
+  'dangerous-drugs-act': {
+    icon:'💊',
+    badge:{en:'Drug Law',si:'මත්ද්‍රව්‍ය නීතිය'},
+    name:{en:'Dangerous Drugs Act (No. 11 of 2021)',si:'භයානක මත්ද්‍රව්‍ය පනත (අංක 11 ක්‍ර. 2021)'},
+    shortName:{en:'Dangerous Drugs Act',si:'භයානක මත්ද්‍රව්‍ය පනත'},
+    tagline:{en:'Comprehensive drug control law with severe penalties for trafficking and possession.',si:'ජාවාරම්කරණය සහ පැවතුම් කිරීම සඳහා බරපතල දඬුවම් ඇති සමස්ත මත්ද්‍රව්‍ය පාලන නීතිය.'},
+    enacted:2021,
+    lastAmended:2021,
+    sections:80,
+    readTime:'~6 min',
+    category:'criminal',
+    overview:{en:'<p>The Dangerous Drugs Act No. 11 of 2021 replaced the older Poisons, Opium and Dangerous Drugs Ordinance. It provides a <strong>modern framework</strong> for controlling dangerous drugs with enhanced penalties.</p><p>Key features: mandatory death penalty for trafficking large quantities, presumption of trafficking based on possession thresholds, asset forfeiture provisions, and a dedicated enforcement framework through the Police Narcotics Bureau.</p>',si:'<p>භයානක මත්ද්‍රව්‍ය පනත අංක 11 ක්‍ර. 2021 පැරණි විෂ විෂ සහ භයානක මත්ද්‍රව්‍ය ආඥාපනත ප්‍රතිස්ථාපනය කළේය. එය වැඩි දඬුවම් සමඟ <strong>නවීන රාමුවක්</strong> සපයයි.</p>'},
+    keySections:[
+      {sec:'5',title:{en:'Trafficking',si:'ජාවාරම්කරණය'},punishment:{en:'Mandatory death penalty for large quantities',si:'විශාල ප්‍රමාණ සඳහා අනිවාර්ය මරණ දඬුවම'},desc:{en:'Importing, exporting, selling, transporting, or distributing dangerous drugs above specified thresholds.',si:'නිශ්චිත උපරිමයන්ට ඉහළින් භයානක මත්ද්‍රව්‍ය ආනයනය, අපනයනය, විකිණීම, පරිවහනය හෝ බෙදාහැරීම.'}},
+      {sec:'6',title:{en:'Possession',si:'පැවතුම් කිරීම'},punishment:{en:'Up to life imprisonment based on quantity',si:'ප්‍රමාණය මත පදනම්ව ආජීව සිරදඬුවම දක්වා'},desc:{en:'Possessing dangerous drugs. Penalty depends on quantity — small amounts for personal use vs. amounts suggesting trafficking.',si:'භයානක මත්ද්‍රව්‍ය පැවතුම් කිරීම. දඬුවම ප්‍රමාණය මත රඳා පවතී — පෞද්ගලික භාවිතය සඳහා පුළුන් ප්‍රමාණ vs. ජාවාරම්කරණය යෝජනා කරන ප්‍රමාණ.'}},
+      {sec:'54-60',title:{en:'Asset Forfeiture',si:'දේපළ රාජසන්තක කිරීම'},punishment:{en:'Confiscation of assets',si:'දේපළ රාජසන්තක කිරීම'},desc:{en:'Court can order confiscation of property acquired through or used for drug trafficking.',si:'අධිකරණයට මත්ද්‍රව්‍ය ජාවාරම්කරණය හරහා ලබාගත් හෝ භාවිතා කළ දේපළ රාජසන්තක කරන ලෙස නියම කළ හැක.'}}
+    ],
+    amendments:[{year:2021,desc:{en:'Original enactment replacing the 1929 Ordinance',si:'1929 ආඥාපනත ප්‍රතිස්ථාපනය කරමින් මුල් සම්මත කිරීම'}],
+    faq:[{q:{en:'What quantities trigger the death penalty?',si:'කුමන ප්‍රමාණ වලදී මරණ දඬුවම ක්‍රියාත්මක වේද?'},a:{en:'Specific thresholds are defined in the Act for each drug type. For heroin, it is 2 grams or more. For cannabis, 50 grams or more. These thresholds may be updated by gazette.',si:'සෑම මත්ද්‍රව්‍ය වර්ගයක් සඳහාම නිශ්චිත උපරිමයන් පනතේ අර්ථ දක්වා ඇත. හෙරොයින් සඳහා ග්‍රෑම් 2 හෝ ඊට වැඩි. කණ්නබිස් සඳහා ග්‍රෑම් 50 හෝ ඊට වැඩි.'}}],
+    relatedLaws:['penal-code','criminal-procedure-code','prevention-of-terrorism-act']
+  },
+
+  'prevention-of-terrorism-act': {
+    icon:'🛡️',
+    badge:{en:'National Security',si:'ජාතික ආරක්ෂාව'},
+    name:{en:'Prevention of Terrorism Act (No. 48 of 1979)',si:'ත්‍රස්තවාදය වැළැක්වීමේ පනත (අංක 48 ක්‍ර. 1979)'},
+    shortName:{en:'PTA',si:'ත්‍රස්ත පනත'},
+    tagline:{en:'Anti-terrorism legislation with extraordinary detention and investigation powers.',si:'විශේෂ රඳවාගැනීමේ සහ විමර්ශන බලත් ඇති ප්‍රති-ත්‍රස්තවාදී නීතිය.'},
+    enacted:1979,
+    lastAmended:2022,
+    sections:31,
+    readTime:'~7 min',
+    category:'criminal',
+    overview:{en:'<p>The PTA is Sri Lanka\'s primary <strong>counter-terrorism law</strong>. Originally enacted to address the separatist conflict, it grants extraordinary powers for detention without charge, admissibility of confessions, and restrictions on association.</p><p>The Act was <strong>significantly reformed in 2022</strong> following domestic and international criticism. Key reforms include: limiting detention without charge to 14 days (previously 18 months), requiring judicial oversight, and narrowing the definition of terrorism.</p>',si:'<p>PTA යනු ශ්‍රී ලංකාවේ ප්‍රාථමික <strong>ප්‍රති-ත්‍රස්තවාදී නීතිය</strong> ය. වෙන්වීම්වාදී ගැටුම සමත් කිරීමට මුලින් සම්මත කරන ලද මෙය චෝදනා නැතුව රඳවාගැනීමේ, පාපෝක්කරණ පිළිගැනීමේ සහ සංගම් සීමා කිරීමේ විශේෂ බලත් ලබා දේ.</p><p>දේශීය සහ ජාත්‍යන්තර විවේචන පසුව <strong>2022 දී සැලකිය යුතු ලෙස ප්‍රතිසංස්කරණය</strong> කරන ලදී.</p>'},
+    keySections:[
+      {sec:'2',title:{en:'Definition of Terrorism',si:'ත්‍රස්තවාදයේ අර්ථ දැක්වීම'},punishment:{en:'—',si:'—'},desc:{en:'Acts intended to cause death, serious injury, or fear to achieve political, religious, or ideological objectives.',si:'දේශපාලන, ආගමික හෝ චින්තනමය අරමුණු සාක්ෂාත් කර ගැනීමට මරණය, බරපතල තුවාල හෝ භීතිය සිදු කිරීමට අදහස් කළ ක්‍රියා.'}},
+      {sec:'6',title:{en:'Unlawful Activities',si:'නීති විරෝධී ක්‍රියාකාරකම්'},punishment:{en:'Up to 10 years imprisonment',si:'වසර 10 ක් දක්වා සිරදඬුවම'},desc:{en:'Planning, training, fundraising, or facilitating terrorist acts.',si:'ත්‍රස්ත ක්‍රියා සැලසුම් කිරීම, පුහුණුව, අරමුදල් සොයා ගැනීම හෝ පහසු කිරීම.'}},
+      {sec:'9',title:{en:'Detention Without Charge',si:'චෝදනා නැතුව රඳවාගැනීම'},punishment:{en:'Up to 14 days (reformed)',si:'දින 14 ක් දක්වා (ප්‍රතිසංස්කරණය කළ)'},desc:{en:'[2022 Reform] Previously 18 months, now limited to maximum 14 days with judicial oversight. Police must produce before Magistrate.',si:'[2022 ප්‍රතිසංස්කරණය] මීට පෙර මාස 18, දැන් විනිශ්චාරක අධීක්ෂණය සමඟ උපරිම දින 14 ක් දක්වා සීමා කර ඇත.'}}
+    ],
+    amendments:[{year:1979,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'},{year:2022,desc:{en:'Major reform: detention limited to 14 days, judicial oversight, narrowed terrorism definition',si:'ප්‍රධාන ප්‍රතිසංස්කරණය: රඳවාගැනීම දින 14 දක්වා සීමා, විනිශ්චාරක අධීක්ෂණය, ත්‍රස්තවාදය අර්ථ දැක්වීම අවුලු කිරීම'}}],
+    faq:[{q:{en:'Can I be detained without charge under the PTA?',si:'PTA යටතේ මට චෝදනා නැතුව රඳවාගත හැකද?'},a:{en:'After the 2022 reforms, maximum detention without charge is 14 days, and judicial oversight is required. The police must produce the detainee before a Magistrate who can extend detention in 7-day increments. You have the right to legal representation.',si:'2022 ප්‍රතිසංස්කරණවලින් පසු, චෝදනා නැතුව උපරිම රඳවාගැනීම දින 14 ක් වන අතර විනිශ්චාරක අධීක්ෂණය අවශ්‍ය වේ.'}}],
+    relatedLaws:['penal-code','criminal-procedure-code','dangerous-drugs-act']
+  },
+
+  'domestic-violence-act': {
+    icon:'🏠',
+    badge:{en:'Family Law',si:'පවුල් නීතිය'},
+    name:{en:'Prevention of Domestic Violence Act (No. 34 of 2005)',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වය වැළැක්වීමේ පනත (අංක 34 ක්‍ර. 2005)'},
+    shortName:{en:'Domestic Violence Act',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වය පනත'},
+    tagline:{en:'Protects victims of domestic abuse through protection orders and counseling.',si:'ආරක්ෂිත නියෝග සහ උපදේශනය මගින් ගෘහස්ථ ප්‍රචණ්ඩත්වයෙන් පීඩාවට පත් වන්නන් ආරක්ෂා කරයි.'},
+    enacted:2005,
+    lastAmended:2005,
+    sections:32,
+    readTime:'~5 min',
+    category:'family',
+    overview:{en:'<p>This Act provides <strong>civil remedies</strong> for victims of domestic violence. It focuses on protection rather than punishment — victims can obtain protection orders, residence orders, and monetary relief.</p><p>Covered acts include: physical abuse, emotional/verbal abuse, economic abuse, sexual abuse, and threats. Applies to all family relationships including married couples, cohabiting partners, and relatives.</p><p>The Magistrate Court handles applications. Emergency protection orders can be issued within 24 hours.</p>',si:'<p>මෙම පනත ගෘහස්ථ ප්‍රචණ්ඩත්වයෙන් පීඩාවට පත් වන්නන් සඳහා <strong>සිවිල් ප්‍රතිකාර</strong> සපයයි. දඬුවමට වඩා ආරක්ෂාව කෙරෙහි අවධානය යොමු කරයි.</p>'},
+    keySections:[
+      {sec:'4-5',title:{en:'Definition of Domestic Violence',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වයේ අර්ථ දැක්වීම'},punishment:{en:'Civil remedy',si:'සිවිල් ප්‍රතිකාර'},desc:{en:'Physical, emotional, verbal, economic, or sexual abuse by a family member or former partner.',si:'පවුලේ සාමාජිකයෙකු හෝ හිටපු සහකරුවෙකු විසින් ශාරීරික, මානසික, වාචික, ආර්ථික හෝ ලිංගික ප්‍රචණ්ඩත්වය.'}},
+      {sec:'8-12',title:{en:'Protection Orders',si:'ආරක්ෂිත නියෝග'},punishment:{en:'Civil order (violation = criminal offence)',si:'සිවිල් නියෝග (උල්ලංඝනය = අපරාධයක්)'},desc:{en:'Court order restricting the abuser from contacting, approaching, or harming the victim. Can include residence orders and monetary relief.',si:'ප්‍රචණ්ඩකරුට හිංසනයට ලක්වූ පුද්ගලයා සම්බන්ධ කිරීම, ආසන්න වීම හෝ හානි කිරීම සීමා කරන අධිකරණ නියෝගය.'}},
+      {sec:'14',title:{en:'Emergency Protection',si:'හදිසි ආරක්ෂාව'},punishment:{en:'Ex-parte order within 24 hours',si:'පැය 24 ක් ඇතුළත විරුද්ධ පාර්ශ්වයකින් තොර නියෝගය'},desc:{en:'Magistrate can issue emergency protection order without notice to the abuser in urgent cases.',si:'අධිකරණයට ප්‍රචණ්ඩකරුට දැනුම් දීමකින් තොරව හදිසි ආරක්ෂිත නියෝගයක් නිකුත් කළ හැක.'}}
+    ],
+    amendments:[{year:2005,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'}],
+    faq:[{q:{en:'Do I need a lawyer to get a protection order?',si:'ආරක්ෂිත නියෝගයක් ලබා ගැනීමට මට නීතිඥයෙකු අවශ්‍යද?'},a:{en:'No, you can apply directly to the Magistrate Court. However, having a lawyer helps present your case more effectively. Free legal aid is available through the Legal Aid Commission and NGOs.',si:'නැත, ඔබට සෘජුවම මහේස්ත්‍රාත් අධිකරණයට ඉල්ලීමක් කළ හැක. කෙසේ වෙතත්, නීතිඥයෙකු ඇත්නම් ඔබේ නඩුව වඩාත් ඵලදායී ලෙස ඉදිරිපත් කිරීමට උපකාර වේ.'}}],
+    relatedLaws:['penal-code','women-s-rights-act','children-and-young-persons-ordinance']
+  },
+
+  'labor-act': {
+    icon:'💼',
+    badge:{en:'Labor Law',si:'කම්කරු නීතිය'},
+    name:{en:'Shop and Office Employees Act (No. 19 of 1954)',si:'සාප්පු සහ කාර්යාල සේවක පනත (අංක 19 ක්‍ර. 1954)'},
+    shortName:{en:'Shops & Offices Act',si:'සාප්පු හා කාර්යාල පනත'},
+    tagline:{en:'Regulates working hours, leave, holidays, and conditions for shop and office employees.',si:'සාප්පු සහ කාර්යාල සේවකයන්ගේ වැඩ කෙරෙන පැය, නිවාඩු, නිවාඩු දින සහ කොන්දේසි පාලනය කරයි.'},
+    enacted:1954,
+    lastAmended:2023,
+    sections:52,
+    readTime:'~5 min',
+    category:'labor',
+    overview:{en:'<p>The Shops and Offices Employees Act is the <strong>primary labor law</strong> regulating employment conditions for non-industrial workers — shop assistants, office workers, and service sector employees.</p><p>It covers working hours (max 9 hours/day, 45 hours/week), rest intervals, annual leave (14 days), sick leave (7 days), maternity leave (84 days), public holidays, and employment termination notice periods.</p>',si:'<p>සාප්පු සහ කාර්යාල සේවක පනත යනු නො-කාර්මික සේවකයන්ගේ රැකියා කොන්දේසි පාලනය කරන <strong>ප්‍රාථමික කම්කරු නීතිය</strong> ය.</p>'},
+    keySections:[
+      {sec:'18-20',title:{en:'Working Hours',si:'වැඩ කරන පැය'},punishment:{en:'Employer obligation',si:'සේවා යෝජකයාගේ යුතුකම'},desc:{en:'Maximum 9 hours per day, 45 hours per week for adults. Overtime must be paid at 1.5x rate.',si:'වැඩිහිටියන් සඳහා දිනකට උපරිම 9 පැය, සතියකට 45 පැය. අධිකාර වේලාව 1.5ගුණ අනුපාතයකින් ගෙවිය යුතුය.'}},
+      {sec:'23-25',title:{en:'Annual Leave',si:'වාර්ෂික නිවාඩු'},punishment:{en:'Employer obligation',si:'සේවා යෝජකයාගේ යුතුකම'},desc:{en:'14 working days of paid annual leave after completing 12 months of service.',si:'12 මසක් සේවය සම්පූර්ණ කිරීමෙන් පසු වැටුප් සහිත වාර්ෂික නිවාඩු 14 ක්.'}},
+      {sec:'28-30',title:{en:'Maternity Leave',si:'මාතෘකා නිවාඩු'},punishment:{en:'Employer obligation',si:'සේවා යෝජකයාගේ යුතුකම'},desc:{en:'84 days of paid maternity leave. Cannot dismiss during pregnancy or maternity leave.',si:'වැටුප් සහිත මාතෘකා නිවාඩු 84 ක්. ගර්භණී සමයේදී හෝ මාතෘකා නිවාඩු තුළ අස් කළ නොහැක.'}},
+      {sec:'31',title:{en:'Sick Leave',si:'රෝග නිවාඩු'},punishment:{en:'Employer obligation',si:'සේවා යෝජකයාගේ යුතුකම'},desc:{en:'7 working days of paid sick leave per year with medical certificate.',si:'වෛද්‍ය සහතිකයක් සමඟ වසරකට වැටුප් සහිත රෝග නිවාඩු 7 ක්.'}}
+    ],
+    amendments:[{year:1954,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'},{year:2023,desc:{en:'Updated penalty provisions for non-compliance',si:'අනුපාලනය නොකිරීම සඳහා දඬුවම් විධිවිධි යාවත්කාලීන කිරීම'}}],
+    faq:[{q:{en:'Can my employer force me to work on a public holiday?',si:'මගේ සේවා යෝජකයාට මට පොදු නිවාඩු දිනයක වැඩ කරන්න බල කළ හැකද?'},a:{en:'Generally no, unless the nature of work requires it (essential services). If you do work on a public holiday, you must be paid at double the normal rate. You can also request an alternate day off.',si:'සාමාන්‍යයෙන් නැත, වැඩයේ ස්වභාවය අවශ්‍ය නම් (අත්‍යවශ්‍ය සේවා) හැර. පොදු නිවාඩු දිනයක වැඩ කළොත් සාමාන්‍ය අනුපාතයෙන් දෙගුණයක් ගෙවිය යුතුය.'}}],
+    relatedLaws:['industrial-disputes-act','labor-tribunal','maternity-benefits-ordinance']
+  },
+
+  'industrial-disputes-act': {
+    icon:'🏭',
+    badge:{en:'Labor Law',si:'කම්කරු නීතිය'},
+    name:{en:'Industrial Disputes Act (No. 43 of 1950)',si:'කාර්මික ආරවුල් පනත (අංක 43 ක්‍ර. 1950)'},
+    shortName:{en:'Industrial Disputes Act',si:'කාර්මික ආරවුල් පනත'},
+    tagline:{en:'Governs dispute resolution between employers and employees including unfair dismissal.',si:'සේවා යෝජකයන් සහ සේවකයන් අතර ආරවුල් විසඳීම ඇතුළුව අසාධාරණ ලෙස ඉවත් කිරීම පාලනය කරයි.'},
+    enacted:1950,
+    lastAmended:2011,
+    sections:101,
+    readTime:'~6 min',
+    category:'labor',
+    overview:{en:'<p>The Industrial Disputes Act provides the <strong>framework for resolving employment disputes</strong>. It establishes the Labor Tribunal system and covers unfair dismissal, wrongful termination, redundancy, and industrial action.</p><p>Key feature: Workers who believe they were unfairly dismissed can file a complaint at the Labor Tribunal within <strong>6 months</strong> of dismissal. The Tribunal can order reinstatement, back-pay, or compensation.</p>',si:'<p>කාර්මික ආරවුල් පනත <strong>රැකියා ආරවුල් විසඳීමේ රාමුව</strong> සපයයි. එය කම්කරු අධිකරණ පද්ධතිය ස්ථාපිත කරයි.</p>'},
+    keySections:[
+      {sec:'20-21',title:{en:'Unfair Dismissal',si:'අසාධාරණ ලෙස ඉවත් කිරීම'},punishment:{en:'Reinstatement or compensation',si:'යථා පත් කිරීම හෝ වන්දි'},desc:{en:'Employer cannot dismiss without valid reason or proper inquiry. Worker can appeal to Labor Tribunal within 6 months.',si:'සේවා යෝජකයාට වලංගු හේතුවකින් හෝ නිසිපතා විමර්ශනයකින් තොරව ඉවත් කළ නොහැක.'}},
+      {sec:'31-40',title:{en:'Labor Tribunal',si:'කම්කරු අධිකරණය'},punishment:{en:'Tribunal remedies',si:'අධිකරණ ප්‍රතිකාර'},desc:{en:'Tribunal can order reinstatement, back-pay (up to 2 years), or compensation (up to 2 years salary).',si:'අධිකරණයට යථා පත් කිරීම, පසුගෙවීම් (වසර 2 දක්වා) හෝ වන්දි (වසර 2 ක වැටුප දක්වා) නියම කළ හැක.'}},
+      {sec:'47-51',title:{en:'Industrial Action',si:'කාර්මික ක්‍රියාමාර්ග'},punishment:{en:'Regulated procedure',si:'පාලිත ක්‍රියාවලිය'},desc:{en:'Workers can strike after following proper dispute resolution procedures. Essential services have restrictions.',si:'නිසි ආරවුල් විසඳීමේ ක්‍රියාවලි අනුගමනය කිරීමෙන් පසු සේවකයන්ට වැඩ වර්ජනය කළ හැක.'}}
+    ],
+    amendments:[{year:1950,desc:{en:'Original enactment',si:'මුල් සම්මත කිරීම'},{year:2011,desc:{en:'Enhanced compensation limits',si:'වැඩි කළ වන්දි සීමාවන්'}}],
+    faq:[{q:{en:'How long do I have to file an unfair dismissal claim?',si:'�
+
     faq:[{q:{en:'How long do I have to file an unfair dismissal claim?',si:'අසාධාරණ ලෙස ඉවත් කිරීමේ පැමිණිල්ලක් ගොනු කිරීමට මට කොපමක් කාලයක් ඇත්තේද?'},a:{en:'You must file within 6 months of the date of dismissal. This is a strict deadline — late applications may be rejected. File at the nearest Labor Tribunal office or through a lawyer.',si:'ඔබ ඉවත් කිරීමේ දිනයේ සිට මාස 6 ක් ඇතුළත ගොනු කළ යුතුය. මෙය දැඩි කාල සීමාවකි — ප්‍රමාදව ඉල්ලීම් ප්‍රතික්ෂේප විය හැක.'}}],
     relatedLaws:['labor-act','shop-and-office-act','wages-board-ordinance']
   },
