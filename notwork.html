@@ -1,336 +1,164 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
-  <!-- =============================================
-       GlobalLaw - Country Selector (Landing Page)
-       When user selects a country → redirects to that country's file
-       e.g., Sri Lanka → lk.html
-       ============================================= -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalLaw - Select Your Country</title>
-  <meta name="description" content="Know Your Rights. Understand the Law. Select your country to browse local laws.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobalLaw — Coming Soon</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            brand: {
-              red: '#DC2626',
-              'red-light': '#EF4444',
-              'red-dark': '#B91C1C',
-              dark: '#050505',
-              'dark-card': '#1A1A1A',
-              'dark-border': '#262626',
-            }
-          }
-        }
-      }
+            navy: {
+              950: '#0a0f1e',
+              900: '#0d1526',
+              800: '#111d35',
+              700: '#162544',
+              600: '#1c2e54',
+            },
+            gold: {
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    * { font-family: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
-
-    .country-card {
-      transition: all 0.3s ease;
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px 2px rgba(251, 191, 36, 0.5); }
+      50% { opacity: 0.5; box-shadow: 0 0 16px 6px rgba(251, 191, 36, 0.25); }
     }
-    .country-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.15);
+    @keyframes progress-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
-    .country-card.available {
-      cursor: pointer;
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
-    .country-card.available:hover {
-      border-color: #DC2626;
+    .pulse-dot { animation: pulse-glow 2s ease-in-out infinite; }
+    .progress-bar-shimmer {
+      background: linear-gradient(90deg, #d97706 0%, #fbbf24 30%, #fcd34d 50%, #fbbf24 70%, #d97706 100%);
+      background-size: 200% 100%;
+      animation: progress-shimmer 2.5s ease-in-out infinite;
     }
-    .country-card.soon {
-      cursor: not-allowed;
-      opacity: 0.6;
+    .float-subtle { animation: subtle-float 6s ease-in-out infinite; }
+    .gold-glow {
+      text-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
     }
-    .country-card.soon:hover {
-      transform: none;
-      box-shadow: none;
+    .badge-glow {
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
     }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
-    .fade-in { animation: fadeInUp 0.6s ease forwards; }
-    .fade-in-d1 { animation-delay: 0.1s; opacity: 0; }
-    .fade-in-d2 { animation-delay: 0.2s; opacity: 0; }
-    .fade-in-d3 { animation-delay: 0.3s; opacity: 0; }
-
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .toast-slide { animation: slideInRight 0.4s ease forwards; }
-
-    /* Background dot pattern */
-    .dot-bg {
-      background-image: radial-gradient(circle at 1px 1px, #DC2626 1px, transparent 0);
-      background-size: 40px 40px;
+    .bg-radial-glow {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
     }
   </style>
 </head>
+<body class="font-sans antialiased">
 
-<body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300 min-h-screen flex flex-col">
+  <div class="min-h-screen bg-navy-950 bg-grid relative flex flex-col items-center justify-center px-6 overflow-hidden">
 
-  <!-- =============================================
-       TOP BAR: Logo + Dark/Light Toggle
-       ============================================= -->
-  <header class="sticky top-0 z-50 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-md border-b border-neutral-200 dark:border-brand-dark-border">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="index.html" class="text-xl md:text-2xl font-extrabold tracking-tight">
-        <span class="text-brand-red">Global</span><span class="dark:text-white text-neutral-900">Law</span>
-      </a>
+    <!-- Radial Gold Glow at Top -->
+    <div class="bg-radial-glow absolute inset-0 pointer-events-none"></div>
 
-      <!-- Dark/Light Toggle -->
-      <button onclick="toggleDarkMode()" class="flex items-center justify-center w-9 h-9 rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" title="Toggle Theme">
-        <i data-lucide="sun" class="w-[18px] h-[18px] hidden dark:block text-yellow-400"></i>
-        <i data-lucide="moon" class="w-[18px] h-[18px] block dark:hidden text-neutral-600"></i>
-      </button>
-    </div>
-  </header>
+    <!-- Subtle Top Border Accent -->
+    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent"></div>
 
+    <!-- Main Content -->
+    <div class="relative z-10 max-w-2xl w-full text-center">
 
-  <!-- =============================================
-       MAIN CONTENT: Country Selector
-       ============================================= -->
-  <main class="flex-1 flex items-center justify-center relative overflow-hidden">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 dot-bg opacity-[0.02] dark:opacity-[0.04]"></div>
-    <!-- Red Glow -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-red/5 dark:bg-brand-red/3 rounded-full blur-[100px]"></div>
+      <!-- Brand Header -->
+      <div class="float-subtle mb-12">
+        <div class="inline-flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg">
+            <svg class="w-5 h-5 text-navy-950" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3L2 7v10l10 4 10-4V7L12 3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 12l10-5M12 12v9M12 12L2 7" />
+            </svg>
+          </div>
+          <span class="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            Global<span class="text-gold-400">Law</span>
+          </span>
+        </div>
+      </div>
 
-    <div class="relative w-full max-w-3xl mx-auto px-4 md:px-6 py-12 md:py-16 text-center">
+      <!-- Construction Badge -->
+      <div class="flex justify-center mb-10">
+        <div class="badge-glow inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold-500/20 bg-navy-800/60 backdrop-blur-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-gold-400"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-400"></span>
+          </span>
+          <span class="text-xs md:text-sm font-semibold tracking-widest uppercase text-gold-300">
+            System Under Construction
+          </span>
+        </div>
+      </div>
 
-      <!-- Headline -->
-      <div class="mb-10">
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4 fade-in">
-          <span>Know Your Rights.</span><br>
-          <span class="text-brand-red">Understand the Law.</span>
-        </h1>
-        <p class="text-neutral-500 dark:text-neutral-400 text-base md:text-lg max-w-md mx-auto fade-in fade-in-d1">
-          Select your country to browse local laws explained simply
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-white gold-glow mb-8">
+        Demystifying the Law<br class="hidden sm:block" />
+        <span class="text-gold-400">for Everyone.</span>
+      </h1>
+
+      <!-- Progress Bar -->
+      <div class="max-w-xs mx-auto mb-10">
+        <div class="h-1 w-full rounded-full bg-navy-700 overflow-hidden">
+          <div class="progress-bar-shimmer h-full rounded-full w-[62%]"></div>
+        </div>
+        <p class="mt-2.5 text-[11px] font-medium tracking-wider uppercase text-white/30">Active Development — 62%</p>
+      </div>
+
+      <!-- Description -->
+      <p class="text-base md:text-lg font-light leading-relaxed text-white/60 max-w-lg mx-auto mb-14">
+        We are currently building a comprehensive, multi-language platform to make global and local laws accessible, easy to understand, and completely free for the general public. We will be launching soon.
+      </p>
+
+      <!-- Divider -->
+      <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mx-auto mb-14"></div>
+
+      <!-- Contact Section -->
+      <div class="bg-navy-800/40 border border-white/[0.06] rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm">
+        <p class="text-xs font-semibold tracking-widest uppercase text-gold-400/80 mb-3">Official Inquiries</p>
+        <p class="text-sm md:text-base font-light text-white/50 leading-relaxed mb-4">
+          For official authorities, partnerships, and inquiries, please contact:
         </p>
+        <a href="mailto:dmkaawya@gmail.com" class="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors duration-200 font-medium text-sm md:text-base">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          dmkaawya@gmail.com
+        </a>
       </div>
 
-      <!-- Country Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 fade-in fade-in-d2">
-
-        <!-- 🇱🇰 Sri Lanka — AVAILABLE -->
-        <button onclick="goToCountry('lk.html')" class="country-card available bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center group">
-          <div class="text-3xl md:text-4xl mb-2">🇱🇰</div>
-          <div class="font-semibold text-sm md:text-base">Sri Lanka</div>
-          <div class="text-xs text-neutral-400 mt-1">ශ්‍රී ලංකාව</div>
-          <div class="mt-2 text-[10px] font-bold text-brand-red bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded-full inline-block">✓ Available</div>
-        </button>
-
-        <!-- 🇺🇸 United States — COMING SOON -->
-        <button onclick="comingSoon('United States')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇺🇸</div>
-          <div class="font-semibold text-sm md:text-base">United States</div>
-          <div class="text-xs text-neutral-400 mt-1">USA</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇬🇧 United Kingdom — COMING SOON -->
-        <button onclick="comingSoon('United Kingdom')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇬🇧</div>
-          <div class="font-semibold text-sm md:text-base">United Kingdom</div>
-          <div class="text-xs text-neutral-400 mt-1">UK</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇮🇳 India — COMING SOON -->
-        <button onclick="comingSoon('India')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇮🇳</div>
-          <div class="font-semibold text-sm md:text-base">India</div>
-          <div class="text-xs text-neutral-400 mt-1">भारत</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇰🇷 South Korea — COMING SOON -->
-        <button onclick="comingSoon('South Korea')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇰🇷</div>
-          <div class="font-semibold text-sm md:text-base">South Korea</div>
-          <div class="text-xs text-neutral-400 mt-1">대한민국</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇯🇵 Japan — COMING SOON -->
-        <button onclick="comingSoon('Japan')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇯🇵</div>
-          <div class="font-semibold text-sm md:text-base">Japan</div>
-          <div class="text-xs text-neutral-400 mt-1">日本</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇦🇺 Australia — COMING SOON -->
-        <button onclick="comingSoon('Australia')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇦🇺</div>
-          <div class="font-semibold text-sm md:text-base">Australia</div>
-          <div class="text-xs text-neutral-400 mt-1">AU</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇨🇦 Canada — COMING SOON -->
-        <button onclick="comingSoon('Canada')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇨🇦</div>
-          <div class="font-semibold text-sm md:text-base">Canada</div>
-          <div class="text-xs text-neutral-400 mt-1">CA</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇩🇪 Germany — COMING SOON -->
-        <button onclick="comingSoon('Germany')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇩🇪</div>
-          <div class="font-semibold text-sm md:text-base">Germany</div>
-          <div class="text-xs text-neutral-400 mt-1">Deutschland</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🇫🇷 France — COMING SOON -->
-        <button onclick="comingSoon('France')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center">
-          <div class="text-3xl md:text-4xl mb-2">🇫🇷</div>
-          <div class="font-semibold text-sm md:text-base">France</div>
-          <div class="text-xs text-neutral-400 mt-1">FR</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-        <!-- 🌍 Other — COMING SOON -->
-        <button onclick="comingSoon('Other countries')" class="country-card soon bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 md:p-5 text-center col-span-2 sm:col-span-1">
-          <div class="text-3xl md:text-4xl mb-2">🌍</div>
-          <div class="font-semibold text-sm md:text-base">Other</div>
-          <div class="text-xs text-neutral-400 mt-1">More countries</div>
-          <div class="mt-2 text-[10px] font-bold text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-full inline-block">Coming Soon</div>
-        </button>
-
-      </div>
-
-      <!-- Info text -->
-      <p class="text-neutral-400 text-xs mt-8 fade-in fade-in-d3">
-        More countries being added regularly. Currently available: <span class="text-brand-red font-semibold">Sri Lanka</span>
+      <!-- Footer -->
+      <p class="text-[11px] font-medium tracking-wider uppercase text-white/20">
+        Powered by <span class="text-white/30">Vezlo</span>
       </p>
+
     </div>
-  </main>
 
+    <!-- Subtle Bottom Border Accent -->
+    <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"></div>
 
-  <!-- =============================================
-       FOOTER (Simple)
-       ============================================= -->
-  <footer class="bg-neutral-900 dark:bg-black border-t border-neutral-800">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="text-2xl font-extrabold tracking-tight">
-        <span class="text-brand-red">Global</span><span class="text-white">Law</span>
-      </div>
-      <p class="text-neutral-500 text-xs text-center">
-        Copyright © 2026 GlobalLaw. All Rights Reserved.
-      </p>
-      <p class="text-neutral-500 text-xs">
-        Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a>
-      </p>
-    </div>
-  </footer>
-
-
-  <!-- =============================================
-       TOAST NOTIFICATION
-       ============================================= -->
-  <div id="toast" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-5 py-3.5 toast-slide max-w-sm">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center shrink-0">
-        <i data-lucide="clock" class="w-4 h-4 text-yellow-600 dark:text-yellow-400"></i>
-      </div>
-      <p id="toastMessage" class="text-sm font-medium"></p>
-    </div>
   </div>
-
-
-  <!-- =============================================
-       JAVASCRIPT
-       ============================================= -->
-  <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
-
-    // =============================================
-    // DARK MODE
-    // =============================================
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
-      const isDark = document.documentElement.classList.contains('dark');
-      localStorage.setItem('gl_dark', isDark);
-    }
-
-    // Apply saved dark mode preference
-    if (localStorage.getItem('gl_dark') === 'true' ||
-        (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    }
-
-    // =============================================
-    // COUNTRY NAVIGATION
-    // =============================================
-
-    /**
-     * Navigate to a country's file
-     * @param {string} file - The HTML file to navigate to (e.g., 'lk.html')
-     *
-     * DEVELOPER NOTE:
-     * When you create a new country file (e.g., 'us.html'),
-     * change that country's button from:
-     *   onclick="comingSoon('United States')"
-     * to:
-     *   onclick="goToCountry('us.html')"
-     * And remove the 'soon' class, add 'available' class instead.
-     */
-    function goToCountry(file) {
-      window.location.href = file;
-    }
-
-    /**
-     * Show "Coming Soon" toast for countries without files yet
-     * @param {string} countryName - Name of the country to display in toast
-     */
-    function comingSoon(countryName) {
-      showToast(countryName + ' is coming soon! 🚧');
-    }
-
-    // =============================================
-    // TOAST NOTIFICATION
-    // =============================================
-    let toastTimeout = null;
-
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const msg = document.getElementById('toastMessage');
-      msg.textContent = message;
-      toast.classList.remove('hidden');
-
-      // Clear previous timeout
-      if (toastTimeout) clearTimeout(toastTimeout);
-
-      // Auto hide after 3 seconds
-      toastTimeout = setTimeout(function() {
-        toast.classList.add('hidden');
-      }, 3000);
-    }
-  </script>
 
 </body>
 </html>
