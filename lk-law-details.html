@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Details - GlobalLaw LK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { brand: { red: '#DC2626', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' } } } }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="lk-laws-db.js"></script>
+
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .law-header-bg { background: linear-gradient(to right, #DC2626, #991B1B); }
+        #content-body { font-size: 16px; transition: font-size 0.2s; }
+    </style>
+</head>
+<body class="bg-neutral-50 dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors">
+
+    <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
+            <a href="lk.html" class="font-extrabold text-xl md:text-2xl tracking-tighter"><span class="text-brand-red">Global</span>Law 🇱🇰</a>
+            <div class="flex items-center gap-2">
+                <button onclick="changeLang('en')" class="text-[10px] font-bold px-2 py-1 border rounded">EN</button>
+                <button onclick="changeLang('si')" class="text-[10px] font-bold px-2 py-1 border rounded">සිං</button>
+                <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card">
+                    <i data-lucide="moon" class="w-4 h-4 text-neutral-500 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 text-yellow-400 hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="law-page" class="hidden pb-20">
+        <header class="law-header-bg text-white py-12 md:py-16">
+            <div class="max-w-7xl mx-auto px-4 md:px-6">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-80 mb-4">
+                    <span id="txt-type">LAW</span> • <span id="txt-actNo">ACT NO</span>
+                </div>
+                <h1 id="txt-title" class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">Law Title</h1>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div class="flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-full text-xs">
+                        <i data-lucide="clock" class="w-4 h-4"></i> <span data-lang-en="5 Min Read" data-lang-si="විනාඩි 5ක කියවීමක්">5 Min Read</span>
+                    </div>
+                    <div class="flex gap-1">
+                        <button onclick="adjustFont(-1)" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center text-sm font-bold">A-</button>
+                        <button onclick="adjustFont(1)" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center text-sm font-bold">A+</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 md:px-6 -mt-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="bg-white dark:bg-brand-dark-card p-6 rounded-2xl shadow-xl shadow-black/5 border-l-4 border-brand-red">
+                        <h2 class="text-brand-red font-bold text-sm uppercase tracking-wider mb-2" data-lang-en="Quick Summary (TL;DR)" data-lang-si="කෙටි සාරාංශය">Quick Summary</h2>
+                        <p id="txt-tldr" class="text-neutral-700 dark:text-neutral-300 font-medium leading-relaxed">Summary...</p>
+                    </div>
+
+                    <article id="content-body" class="bg-white dark:bg-brand-dark-card p-6 md:p-8 rounded-2xl shadow-xl shadow-black/5 text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4" id="txt-longDescTitle">Detailed Explanation</h2>
+                        <div id="txt-longDesc">Explanation here...</div>
+                    </article>
+
+                    <div class="bg-neutral-100 dark:bg-brand-dark-card p-6 rounded-2xl border border-neutral-200 dark:border-brand-dark-border">
+                        <h2 class="font-bold text-lg mb-4" data-lang-en="How to Complain & Process" data-lang-si="පැමිණිලි කිරීමේ ක්‍රියාවලිය">Process</h2>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-brand-red shrink-0"></i> <div><b>Step 1:</b> <span id="txt-p-step1"></span></div></div>
+                            <div class="flex gap-3"><i data-lucide="user" class="w-5 h-5 text-blue-500 shrink-0"></i> <div><b>Meet:</b> <span id="txt-p-meet"></span></div></div>
+                            <div class="flex gap-3"><i data-lucide="file-text" class="w-5 h-5 text-purple-500 shrink-0"></i> <div><b>Docs:</b> <span id="txt-p-docs"></span></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-brand-red text-white p-6 rounded-2xl shadow-2xl shadow-brand-red/20">
+                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="gavel"></i> <span data-lang-en="Punishments" data-lang-si="දඬුවම් සහ දඩ">Punishments</span></h3>
+                        <div class="space-y-4">
+                            <div class="bg-black/10 p-3 rounded-lg"><span class="text-[10px] uppercase font-bold opacity-70">Jail</span> <p id="txt-jail" class="font-bold">...</p></div>
+                            <div class="bg-black/10 p-3 rounded-lg"><span class="text-[10px] uppercase font-bold opacity-70">Fine</span> <p id="txt-fine" class="font-bold">...</p></div>
+                            <div class="bg-black/10 p-3 rounded-lg border-t border-white/10 mt-2"><span class="text-[10px] uppercase font-bold opacity-70">Court Type</span> <p id="txt-court" class="text-xs">...</p></div>
+                        </div>
+                    </div>
+
+                    <div id="lawyer-card" class="bg-white dark:bg-brand-dark-card p-6 rounded-2xl border border-neutral-200 dark:border-brand-dark-border">
+                        <h3 class="font-bold mb-4" data-lang-en="Expert Consultants" data-lang-si="ප්‍රවීණ උපදේශකයින්">Consultants</h3>
+                        <div id="experts-list" class="space-y-4"></div>
+                    </div>
+
+                    <button onclick="window.open('https://wa.me/94775048455')" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
+                        <i data-lucide="message-circle"></i> <span data-lang-en="Get Legal Support" data-lang-si="නෛතික සහාය ලබාගන්න">Get Help</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="error-404" class="hidden py-40 text-center">
+        <h2 class="text-4xl font-bold text-brand-red mb-4">404</h2>
+        <p class="text-neutral-500 mb-8">Law Details Not Found.</p>
+        <a href="lk-categories.html" class="text-brand-red font-bold hover:underline">Back to Categories</a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        let lang = localStorage.getItem('gl_lk_lang') || 'en';
+        let currentLaw = null;
+        let fontSize = 16;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const lawId = urlParams.get('id');
+
+        if (lawId && typeof LAWS_DB !== 'undefined') {
+            currentLaw = LAWS_DB.find(l => l.id === lawId);
+        }
+
+        function render() {
+            if (!currentLaw) { document.getElementById('error-404').classList.remove('hidden'); return; }
+            document.getElementById('law-page').classList.remove('hidden');
+
+            document.getElementById('txt-title').textContent = currentLaw.title[lang];
+            document.getElementById('txt-actNo').textContent = currentLaw.actNo[lang];
+            document.getElementById('txt-type').textContent = currentLaw.type[lang];
+            document.getElementById('txt-tldr').textContent = currentLaw.tldr[lang];
+            document.getElementById('txt-longDesc').innerHTML = currentLaw.longDesc[lang];
+            document.getElementById('txt-longDescTitle').textContent = lang === 'en' ? 'Detailed Explanation' : 'සවිස්තරාත්මක පැහැදිලි කිරීම';
+            
+            // Penalties
+            document.getElementById('txt-jail').textContent = currentLaw.penalties.jail[lang];
+            document.getElementById('txt-fine').textContent = currentLaw.penalties.fine[lang];
+            document.getElementById('txt-court').textContent = currentLaw.courtDetails.courtType[lang];
+
+            // Process
+            document.getElementById('txt-p-step1').textContent = currentLaw.process.step1[lang];
+            document.getElementById('txt-p-meet').textContent = currentLaw.process.whoToMeet[lang];
+            document.getElementById('txt-p-docs').textContent = currentLaw.process.docs[lang];
+
+            // UI Elements
+            document.querySelectorAll('[data-lang-' + lang + ']').forEach(el => {
+                el.textContent = el.getAttribute('data-lang-' + lang);
+            });
+
+            // Experts
+            let expHtml = '';
+            currentLaw.experts.forEach(ex => {
+                expHtml += `
+                    <div class="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-brand-dark rounded-xl">
+                        <div class="text-3xl">${ex.photo}</div>
+                        <div>
+                            <h4 class="text-sm font-bold">${ex.name}</h4>
+                            <p class="text-[10px] text-neutral-400">${ex.role[lang]}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('experts-list').innerHTML = expHtml;
+        }
+
+        function changeLang(l) { lang = l; localStorage.setItem('gl_lk_lang', l); render(); }
+        function toggleDark() { document.documentElement.classList.toggle('dark'); }
+        function adjustFont(v) { fontSize += v; document.getElementById('content-body').style.fontSize = fontSize + 'px'; }
+
+        render();
+    </script>
+</body>
+</html>
