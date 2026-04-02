@@ -263,22 +263,309 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script>
-    // Initialize Icons
-    lucide.createIcons();
     
-    // Dark Mode Toggle Logic (Standalone for this file)
-    // In production, this might be in a shared script
-    const toggleBtn = document.querySelector('button[aria-label="Theme"]');
-    if(toggleBtn){
-      toggleBtn.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('gl_dark', document.documentElement.classList.contains('dark'));
-      });
+  /**
+   * GLOBAL STATE & CONFIGURATION
+   */
+  let currentLang = localStorage.getItem('gl_lk_lang') || 'en';
+  let currentLaw = null;
+
+  // Helper to get translated text safely
+  function getTrans(obj) {
+    if (!obj) return '';
+    return obj[currentLang] || obj['en'] || '';
+  }
+
+  // Helper to safely set text content
+  function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  // Helper to safely set inner HTML
+  function setHtml(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+
+  /**
+   * INITIALIZATION
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lawId = urlParams.get('id');
+
+    // Check if DB is loaded
+    if (typeof LAWS_DB === 'undefined') {
+      renderError('Database Error', 'The legal database could not be loaded. Please refresh the page.');
+      return;
     }
-    if (localStorage.getItem('gl_dark') === 'true' ||
-      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
+
+    // Find Law
+    if (!lawId) {
+      renderError('Missing ID', 'No law ID specified in the URL.');
+      return;
     }
+
+    currentLaw = LAWS_DB.find(l => l.id === lawId);
+
+    if (!currentLaw) {
+      renderError('Not Found', `We could not find a law with the ID: ${lawId}`);
+    } else {
+      renderPage();
+      // Inject Language Toggle Button dynamically if needed
+      injectLangToggle();
+    }
+  });
+
+  /**
+   * MAIN RENDER FUNCTION
+   */
+  function renderPage() {
+    // 1. Breadcrumbs
+    setText('breadcrumbCategory', getTrans(currentLaw.category));
+    setText('breadcrumbTitle', getTrans(currentLaw.title));
+
+    // 2. Hero Section
+    // Extract Year from Act Name using Regex (e.g., "of 2007")
+    const yearMatch = getTrans(currentLaw.officialActName).match(/of\s(\d{4})/);
+    const yearText = yearMatch ? yearMatch[1] : 'N/A';
+    
+    setText('heroYear', yearText);
+    setText('heroBadge', `<i data-lucide="scale" class="w-3 h-3"></i> ${getTrans(currentLaw.isLawOrRule)}`);
+    setText('heroTitle', getTrans(currentLaw.title));
+    setText('heroOfficialName', getTrans(currentLaw.officialActName));
+    setText('heroTldr', getTrans(currentLaw.tldr));
+
+    // 3. Long Description
+    setHtml('longDescriptionContainer', getTrans(currentLaw.longDescription));
+
+    // 4. Penalties Section
+    renderPenalties();
+
+    // 5. Process Section
+    renderProcess();
+
+    // 6. Incidents Section
+    renderIncidents();
+
+    // 7. Lawyers Section
+    renderLawyers();
+
+    // Re-initialize icons for newly added elements
+    lucide.createIcons();
+  }
+
+  /**
+   * RENDER PENALTIES
+   */
+  function renderPenalties() {
+    const p = currentLaw.penalties;
+    if (!p) return;
+
+    const html = `
+      <div class="space-y-3">
+        <div class="flex items-start gap-3">
+          <i data-lucide="lock" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Jail Time</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.jailTime)}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i data-lucide="banknote" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Fine Amount</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.fineAmount)}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i data-lucide="gavel" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Court Type</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.courtType)}</p>
+          </div>
+        </div>
+        <div class="pt-2 border-t border-neutral-200 dark:border-brand-dark-border">
+             <p class="text-[11px] text-neutral-500"><span class="font-bold">Duration:</span> ${getTrans(p.averageCaseDuration)}</p>
+        </div>
+      </div>
+    `;
+    setHtml('penaltiesContainer', html);
+  }
+
+  /**
+   * RENDER PROCESS (COMPLAINT)
+   */
+  function renderProcess() {
+    const proc = currentLaw.complaintProcess;
+    if (!proc) return;
+
+    let docsHtml = '';
+    if (proc.requiredDocuments) {
+      docsHtml = `<ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+        ${proc.requiredDocuments.map(d => `<li>${getTrans(d)}</li>`).join('')}
+      </ul>`;
+    }
+
+    let contactsHtml = '';
+    if (proc.contactNumbers) {
+      contactsHtml = `<div class="mt-3 flex flex-wrap gap-2">
+        ${proc.contactNumbers.map(c => `
+          <a href="tel:${c.number}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-bold border border-green-100 dark:border-green-900/30 hover:bg-green-100 transition">
+            <i data-lucide="phone" class="w-3 h-3"></i> ${c.org}
+          </a>
+        `).join('')}
+      </div>`;
+    }
+
+    const html = `
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <!-- Step Dot -->
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">1. First Step</h4>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.firstStep)}</p>
+      </div>
+
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">2. Authority to Contact</h4>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.whoToMeet)}</p>
+        ${contactsHtml}
+      </div>
+
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">3. Required Documents</h4>
+        ${docsHtml}
+      </div>
+    `;
+    setHtml('processContainer', html);
+  }
+
+  /**
+   * RENDER INCIDENTS
+   */
+  function renderIncidents() {
+    const incs = currentLaw.incidents;
+    if (!incs || incs.length === 0) {
+      setHtml('incidentsContainer', '<p class="text-sm text-neutral-500 pl-8">No recent incidents recorded.</p>');
+      return;
+    }
+
+    const html = incs.map((inc, index) => `
+      <div class="relative pl-8 pb-8 last:pb-0">
+        <!-- Timeline Dot -->
+        <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600 z-10 ring-4 ring-white dark:ring-brand-dark"></div>
+        
+        <div class="bg-neutral-50 dark:bg-brand-dark-card rounded-xl p-4 border border-neutral-100 dark:border-brand-dark-border">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] font-mono font-bold text-brand-red bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">${inc.incidentDate}</span>
+            <span class="text-[10px] font-bold text-neutral-400 uppercase">Case #${index + 100}</span>
+          </div>
+          <p class="text-sm text-neutral-700 dark:text-neutral-200 font-medium mb-2">${getTrans(inc.description)}</p>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 bg-white dark:bg-brand-dark p-2 rounded border border-neutral-100 dark:border-brand-dark-border">
+            <strong>Outcome:</strong> ${getTrans(inc.outcome)}
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    setHtml('incidentsContainer', html);
+  }
+
+  /**
+   * RENDER LAWYERS
+   */
+  function renderLawyers() {
+    const lawyers = currentLaw.lawyers;
+    if (!lawyers || lawyers.length === 0) {
+      setHtml('lawyersContainer', '<p class="text-xs text-neutral-500 text-center py-4">No expert data available.</p>');
+      return;
+    }
+
+    const html = lawyers.map(law => `
+      <div class="bg-white dark:bg-brand-dark-card border border-neutral-100 dark:border-brand-dark-border rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition cursor-pointer group">
+        <div class="relative shrink-0">
+          <img src="${law.photoUrl || 'https://via.placeholder.com/150'}" alt="${getTrans(law.name)}" class="w-12 h-12 rounded-full object-cover border-2 border-neutral-100 dark:border-brand-dark-border group-hover:border-brand-red transition">
+          <div class="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-brand-dark-card ${law.isAvailable ? 'bg-green-500' : 'bg-neutral-400'}" title="${law.isAvailable ? 'Available' : 'Busy'}"></div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-sm font-bold text-neutral-900 dark:text-white truncate">${getTrans(law.name)}</h4>
+          <p class="text-[11px] text-brand-red font-medium mb-1 truncate">${getTrans(law.jobRole)}</p>
+          <p class="text-[10px] text-neutral-500 dark:text-neutral-400 line-clamp-2">${getTrans(law.shortDesc)}</p>
+        </div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-300 group-hover:text-brand-red transition shrink-0"></i>
+      </div>
+    `).join('');
+
+    setHtml('lawyersContainer', html);
+  }
+
+  /**
+   * LANGUAGE TOGGLE LOGIC
+   */
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'si' : 'en';
+    localStorage.setItem('gl_lk_lang', currentLang);
+    
+    // Re-render text content
+    renderPage();
+    
+    // Update button text if it exists
+    const btn = document.getElementById('langToggleBtn');
+    if(btn) {
+        btn.innerHTML = `<span class="text-xs font-bold">${currentLang === 'en' ? 'SWITCH TO SINHALA' : 'SWITCH TO ENGLISH'}</span>`;
+    }
+  }
+
+  // Inject a toggle button if one doesn't exist in the skeleton
+  function injectLangToggle() {
+    if (document.getElementById('langToggleBtn')) return; // Already exists
+
+    const hero = document.querySelector('section.bg-neutral-50.dark\\:bg-brand-dark .max-w-7xl');
+    if (hero) {
+      const btn = document.createElement('button');
+      btn.id = 'langToggleBtn';
+      btn.onclick = toggleLanguage;
+      btn.className = 'mt-6 inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg text-xs font-bold text-neutral-600 dark:text-neutral-300 hover:border-brand-red hover:text-brand-red transition shadow-sm';
+      btn.innerHTML = `<i data-lucide="languages" class="w-3.5 h-3.5"></i> <span>SWITCH TO SINHALA</span>`;
+      hero.appendChild(btn);
+      lucide.createIcons();
+    }
+  }
+
+  /**
+   * ERROR HANDLING (404)
+   */
+  function renderError(title, message) {
+    // Hide main sections
+    document.getElementById('heroTitle').parentElement.parentElement.parentElement.style.display = 'none';
+    document.querySelector('.lg\\:col-span-8').style.display = 'none';
+    document.querySelector('.lg\\:col-span-4').style.display = 'none';
+
+    // Inject Error UI
+    const errorContainer = document.createElement('div');
+    errorContainer.className = 'max-w-2xl mx-auto text-center py-20';
+    errorContainer.innerHTML = `
+      <div class="w-20 h-20 bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="file-question" class="w-10 h-10 text-red-500"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">404</h1>
+      <h2 class="text-xl font-bold text-neutral-700 dark:text-neutral-200 mb-4">${title}</h2>
+      <p class="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md mx-auto">${message}</p>
+      <a href="lk-categories.html" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red hover:bg-brand-red-dark text-white font-bold rounded-xl transition shadow-lg shadow-red-500/20">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Categories
+      </a>
+    `;
+    
+    document.querySelector('section.py-8.md\\:py-12 .max-w-7xl').appendChild(errorContainer);
+    lucide.createIcons();
+  }
+
   </script>
 
 </body>
