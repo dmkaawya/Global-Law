@@ -1,5 +1,13 @@
+/**
+ * lk-laws-db.js
+ * 
+ * Comprehensive Legal Database for GlobalLaw Sri Lanka.
+ * Contains detailed objects for Sri Lankan laws with full English (en) and Sinhala (si) translations.
+ */
+
+const LAWS_DB = [
   // =============================================================
-  // 3. Evidence (Special Provisions) Act No. 14 of 1995
+  // 1. Computer Crime Act No. 24 of 2007
   // =============================================================
   {
     id: 'esp-1995',
