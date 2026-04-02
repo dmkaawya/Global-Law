@@ -10,7 +10,7 @@ const LAWS_DB = [
   // 1. Computer Crime Act No. 24 of 2007
   // =============================================================
   {
-    id: 'esp-1995',
+    id: 'cca-2007',
     category: {
       en: 'Procedural Law',
       si: 'පියවර ගැනීමේ නීති'
