@@ -155,7 +155,100 @@ const LAWS_DB = [
       si: 'පාර්ලිමේන්තු පනත'
     },
     meaning: {
-      en: 'Establishes the Online Safety Commission to regulate online content. Defines "Prohibited Statements" including false news against state officials and cyber-harassment.',
-      si: 'අන්තර්ජාල අන්තර්ගතයන් නියාමනය කිරීම සඳහා අන්තර්ජාල ආරක්ෂණ කොමිසම ස්ථාපිත කරයි. රාජ්‍ය නිලධාරීන්ට එරෙහිව ව්‍යාජ ආරංචි සහ සයිබර් ප්‍රහාර ඇතුළත් "තහනම් කළ ප්‍රකාශ" අර්ථ දක්වයි.'
+            en: 'A powerful law designed to regulate online content, curb fake news, and prevent cyber-harassment. It establishes the Online Safety Commission.',
+      si: 'අන්තර්ජාල අන්තර්ගතයන් නියාමනය කිරීම, බොරු ආරංචි සහ සයිබර් ප්‍රහාර වැළැක්වීම සඳහා නිර්මාණය කරන ලද බලගතු නීතියකි. මෙය අන්තර්ජාල ආරක්ෂණ කොමිසම ස්ථාපිත කරයි.'
     },
-    tldr: {
+    longDesc: {
+      en: `
+        <div class="prose dark:prose-invert max-w-none">
+          <p class="mb-4">The <strong>Online Safety Act No. 1 of 2024</strong> was enacted to combat the spread of false statements and online harassment. It established a 5-member commission appointed by the President.</p>
+          <h3 class="text-xl font-bold mb-2 text-brand-red">Prohibited Content</h3>
+          <ul class="list-disc pl-5 space-y-2 mb-4">
+            <li><strong>False Statements:</strong> Against the President, Judiciary, or Public Service.</li>
+            <li><strong>Cyber Harassment:</strong> Stalking, bullying, or humiliating individuals online.</li>
+          </ul>
+          <h3 class="text-xl font-bold mb-2">Powers of the Commission</h3>
+          <p>The Commission can order the removal of prohibited content from social media platforms.</p>
+        </div>
+      `,
+      si: `
+        <div class="prose dark:prose-invert max-w-none" dir="ltr">
+          <p class="mb-4"><strong>අන්තර්ජාල ආරක්ෂිත භාවය පනත අංක 1 දරණ 2024</strong> අසත්‍ය ප්‍රකාශ සහ අන්තර්ජාලය හරහා හිරිහැර කිරීම වැළැක්වීම සඳහා සම්මත කරන ලදී. ජනාධිපතිවරයා විසින් පත් කරන ලද සාමාජිකයින් 5 දෙනෙකුගෙන් සමන්විත කොමිසමක් මෙමඟින් ස්ථාපිත කරන ලදී.</p>
+          <h3 class="text-xl font-bold mb-2 text-brand-red">තහනම් කළ අන්තර්ගතයන්</h3>
+          <ul class="list-disc pl-5 space-y-2 mb-4">
+            <li><strong>අසත්‍ය ප්‍රකාශ:</strong> ජනාධිපතිවරයා, අධිකරණය හෝ මහජන සේවයට එරෙහිව.</li>
+            <li><strong>සයිබර් හිරිහැර:</strong> පසුපස ගැටීම, ප්‍රහාර එල්ල කිරීම හෝ පුද්ගලයින් අපහාස කිරීම.</li>
+          </ul>
+          <h3 class="text-xl font-bold mb-2">කොමිසමේ බලතල</h3>
+          <p>කොමිසමට සමාජ මාධ්‍ය වේදිකාවලින් තහනම් කළ අන්තර්ගතයන් ඉවත් කිරීමට නියෝග කළ හැක.</p>
+        </div>
+      `
+    },
+    penalties: {
+      jail: {
+        en: 'Up to 5 years of rigorous imprisonment for publishing prohibited statements.',
+        si: 'තහනම් කළ ප්‍රකාශ ප්‍රකාශයට පත් කිරීම සඳහා වසර 5 දක්වා දැඩි සිර දඬුවම.'
+      },
+      fine: {
+        en: 'Fines ranging from LKR 500,000 to LKR 5,000,000.',
+        si: 'රු. 500,000 සිට රු. 5,000,000 දක්වා වූ දඩ මුදල්.'
+      },
+      compensation: {
+        en: 'Compensation may be awarded to victims of cyber harassment.',
+        si: 'සයිබර් ප්‍රහාරවලට ගොදුරු වූවන්ට වන්දි ගෙවිය හැක.'
+      },
+      courtType: {
+        en: 'Magistrate Court (Summary Trial) or High Court.',
+        si: 'මහේස්ත්‍රාත් අධිකරණය (සාරාංශ විභාග) හෝ මහාධිකරණය.'
+      },
+      duration: {
+        en: '6 months to 1.5 years (New law, backlog is currently low).',
+        si: 'මාස 6 සිට 1.5 වසර දක්වා (අලුත් නීතියකි, මේ වන විට පසුගිය නඩු අඩුය).'
+      }
+    },
+    process: {
+      step1: {
+        en: 'Take screenshots of the offending post immediately. Report the content to the social media platform (Facebook, X, etc.).',
+        si: 'වහාම අපහාසාත්මක පළ කිරීමේ තිර රූප ගන්න. සමාජ මාධ්‍ය වේදිකාව (Facebook, X, ආදිය) හරහා අන්තර්ගතය වාර්තා කරන්න.'
+      },
+      whoToMeet: {
+        en: 'File a complaint with the Online Safety Commission (OSC) or the nearest Police Station.',
+        si: 'අන්තර්ජාල ආරක්ෂණ කොමිසම (OSC) හෝ ළඟම ඇති පොලිස් ස්ථානය වෙත පැමිණිල්ලක් ඉදිරිපත් කරන්න.'
+      },
+      docs: [
+        { en: 'NIC of the complainant.', si: 'පැමිණිලිකරුගේ NIC.' },
+        { en: 'URL of the specific post/account.', si: 'විශේෂිත පළ කිරීම/ගිණුමේ URL.' },
+        { en: 'Screenshot evidence with timestamps.', si: 'වේලා මුද්‍රා සහිත තිර රූප සාක්ෂි.' }
+      ],
+      contact: [
+        { org: 'Online Safety Commission', number: '011-XXXXXXX' },
+        { org: 'Police', number: '119' }
+      ]
+    },
+    incidents: [
+      {
+        date: '2024-02-10',
+        desc: {
+          en: 'A social media influencer posted a fake news article claiming a new tax on daily wages, causing public unrest.',
+          si: 'සමාජ මාධ්‍ය බලධාරියෙකු දෛනික වැටුප් සඳහා නව බද්දක් ඇති බවට බොරු පුවත් පත්‍ර ලිපියක් පළ කළ අතර එය පොදු අසහනයක් ඇති කළේය.'
+        },
+        outcome: {
+          en: 'OSC ordered the takedown. The influencer was fined and issued a warning.',
+          si: 'OSC විසින් ඉවත් කිරීමට නියෝග කළේය. බලධාරියාට දඩ නියම වූ අතර අවවාදයක් ලැබුණි.'
+        }
+      }
+    ],
+    experts: [
+      {
+        name: { en: 'Kasun Silva', si: 'කසුන් සිල්වා' },
+        role: { en: 'Human Rights Lawyer', si: 'මානව හිමිකම් නීතීඥ' },
+        photo: 'https://randomuser.me/api/portraits/men/85.jpg',
+        desc: {
+          en: 'Specializes in constitutional law and defending freedom of expression cases.',
+          si: 'ආණ්ඩුක්‍රම ව්‍යවස්ථා නීතිය සහ ප්‍රකාශන නිදහස් නඩු විභාගයන්ට විශේෂඥ.'
+        },
+        wa_number: '94777654321'
+      }
+    ]
+  }
+];
