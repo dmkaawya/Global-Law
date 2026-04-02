@@ -1,175 +1,662 @@
 <!DOCTYPE html>
 <html lang="en" class="">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Law Details - GlobalLaw LK</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: { extend: { colors: { brand: { red: '#DC2626', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' } } } }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Law Details - GlobalLaw Sri Lanka</title>
+  <meta name="description" content="Detailed explanation of Sri Lankan laws.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 
+              red: '#DC2626', 
+              'red-light': '#EF4444', 
+              'red-dark': '#B91C1C', 
+              dark: '#050505', 
+              'dark-card': '#1A1A1A', 
+              'dark-border': '#262626' 
+            }
+          }
         }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+      }
+    }
+  </script>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Database Link -->
+  <script src="lk-laws-db.js"></script>
+
+  <style>
+    * { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 9px; }
     
-    <script src="lk-laws-db.js"></script>
-
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        .law-header-bg { background: linear-gradient(to right, #DC2626, #991B1B); }
-        #content-body { font-size: 16px; transition: font-size 0.2s; }
-    </style>
+    /* Dot pattern background */
+    .dot-bg { background-image: radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0); background-size: 32px 32px; }
+    
+    /* Timeline Line */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 15px;
+      width: 2px;
+      background: #E5E7EB;
+      z-index: 0;
+    }
+    .dark .timeline-line::before { background: #262626; }
+  </style>
 </head>
-<body class="bg-neutral-50 dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors">
 
-    <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
-            <a href="lk.html" class="font-extrabold text-xl md:text-2xl tracking-tighter"><span class="text-brand-red">Global</span>Law 🇱🇰</a>
-            <div class="flex items-center gap-2">
-                <button onclick="changeLang('en')" class="text-[10px] font-bold px-2 py-1 border rounded">EN</button>
-                <button onclick="changeLang('si')" class="text-[10px] font-bold px-2 py-1 border rounded">සිං</button>
-                <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card">
-                    <i data-lucide="moon" class="w-4 h-4 text-neutral-500 dark:hidden"></i>
-                    <i data-lucide="sun" class="w-4 h-4 text-yellow-400 hidden dark:block"></i>
-                </button>
-            </div>
+<body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+  <!-- =============================================
+       NAVBAR (Fully Coded)
+       ============================================= -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="flex items-center justify-between h-14 md:h-16">
+        
+        <!-- Logo -->
+        <a href="lk.html" class="flex items-center gap-1.5 shrink-0 group">
+          <span class="text-lg md:text-2xl font-extrabold tracking-tight">
+            <span class="text-brand-red group-hover:scale-105 transition-transform origin-left inline-block">Global</span><span class="dark:text-white">Law</span>
+          </span>
+          <span class="text-base md:text-lg">🇱🇰</span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-6 text-[13px] font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition">Home</a>
+          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition">Contact</a>
         </div>
-    </nav>
 
-    <div id="law-page" class="hidden pb-20">
-        <header class="law-header-bg text-white py-12 md:py-16">
-            <div class="max-w-7xl mx-auto px-4 md:px-6">
-                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-80 mb-4">
-                    <span id="txt-type">LAW</span> • <span id="txt-actNo">ACT NO</span>
-                </div>
-                <h1 id="txt-title" class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">Law Title</h1>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <div class="flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-full text-xs">
-                        <i data-lucide="clock" class="w-4 h-4"></i> <span data-lang-en="5 Min Read" data-lang-si="විනාඩි 5ක කියවීමක්">5 Min Read</span>
-                    </div>
-                    <div class="flex gap-1">
-                        <button onclick="adjustFont(-1)" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center text-sm font-bold">A-</button>
-                        <button onclick="adjustFont(1)" class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center text-sm font-bold">A+</button>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <!-- Right Side Controls -->
+        <div class="flex items-center gap-2 md:gap-3">
+          <!-- Language Switcher -->
+          <button onclick="toggleLang()" id="langBtn" class="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red dark:hover:border-brand-red transition text-neutral-600 dark:text-neutral-300">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            <span id="currentLangLabel">EN</span>
+          </button>
 
-        <main class="max-w-7xl mx-auto px-4 md:px-6 -mt-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <div class="lg:col-span-2 space-y-8">
-                    <div class="bg-white dark:bg-brand-dark-card p-6 rounded-2xl shadow-xl shadow-black/5 border-l-4 border-brand-red">
-                        <h2 class="text-brand-red font-bold text-sm uppercase tracking-wider mb-2" data-lang-en="Quick Summary (TL;DR)" data-lang-si="කෙටි සාරාංශය">Quick Summary</h2>
-                        <p id="txt-tldr" class="text-neutral-700 dark:text-neutral-300 font-medium leading-relaxed">Summary...</p>
-                    </div>
+          <!-- Dark/Light Toggle -->
+          <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition text-neutral-500 dark:text-yellow-400" aria-label="Toggle Theme">
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          </button>
 
-                    <article id="content-body" class="bg-white dark:bg-brand-dark-card p-6 md:p-8 rounded-2xl shadow-xl shadow-black/5 text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4" id="txt-longDescTitle">Detailed Explanation</h2>
-                        <div id="txt-longDesc">Explanation here...</div>
-                    </article>
+          <!-- Mobile Menu Button -->
+          <button onclick="document.getElementById('mobMenu').classList.toggle('hidden')" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition text-neutral-600 dark:text-neutral-300">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-100 dark:border-brand-dark-border pt-3">
+        <div class="flex flex-col gap-2.5 text-sm font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1">Home</a>
+          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-                    <div class="bg-neutral-100 dark:bg-brand-dark-card p-6 rounded-2xl border border-neutral-200 dark:border-brand-dark-border">
-                        <h2 class="font-bold text-lg mb-4" data-lang-en="How to Complain & Process" data-lang-si="පැමිණිලි කිරීමේ ක්‍රියාවලිය">Process</h2>
-                        <div class="space-y-4 text-sm">
-                            <div class="flex gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-brand-red shrink-0"></i> <div><b>Step 1:</b> <span id="txt-p-step1"></span></div></div>
-                            <div class="flex gap-3"><i data-lucide="user" class="w-5 h-5 text-blue-500 shrink-0"></i> <div><b>Meet:</b> <span id="txt-p-meet"></span></div></div>
-                            <div class="flex gap-3"><i data-lucide="file-text" class="w-5 h-5 text-purple-500 shrink-0"></i> <div><b>Docs:</b> <span id="txt-p-docs"></span></div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="bg-brand-red text-white p-6 rounded-2xl shadow-2xl shadow-brand-red/20">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="gavel"></i> <span data-lang-en="Punishments" data-lang-si="දඬුවම් සහ දඩ">Punishments</span></h3>
-                        <div class="space-y-4">
-                            <div class="bg-black/10 p-3 rounded-lg"><span class="text-[10px] uppercase font-bold opacity-70">Jail</span> <p id="txt-jail" class="font-bold">...</p></div>
-                            <div class="bg-black/10 p-3 rounded-lg"><span class="text-[10px] uppercase font-bold opacity-70">Fine</span> <p id="txt-fine" class="font-bold">...</p></div>
-                            <div class="bg-black/10 p-3 rounded-lg border-t border-white/10 mt-2"><span class="text-[10px] uppercase font-bold opacity-70">Court Type</span> <p id="txt-court" class="text-xs">...</p></div>
-                        </div>
-                    </div>
-
-                    <div id="lawyer-card" class="bg-white dark:bg-brand-dark-card p-6 rounded-2xl border border-neutral-200 dark:border-brand-dark-border">
-                        <h3 class="font-bold mb-4" data-lang-en="Expert Consultants" data-lang-si="ප්‍රවීණ උපදේශකයින්">Consultants</h3>
-                        <div id="experts-list" class="space-y-4"></div>
-                    </div>
-
-                    <button onclick="window.open('https://wa.me/94775048455')" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
-                        <i data-lucide="message-circle"></i> <span data-lang-en="Get Legal Support" data-lang-si="නෛතික සහාය ලබාගන්න">Get Help</span>
-                    </button>
-                </div>
-            </div>
-        </main>
+  <!-- =============================================
+       MAIN CONTENT WRAPPER
+       ============================================= -->
+  <main class="flex-grow">
+    
+    <!-- BREADCRUMB -->
+    <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
+        <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
+          <a href="lk.html" class="hover:text-brand-red transition">GlobalLaw</a>
+          <i data-lucide="chevron-right" class="w-3 h-3"></i>
+          <a href="lk-categories.html" class="hover:text-brand-red transition">Categories</a>
+          <i data-lucide="chevron-right" class="w-3 h-3"></i>
+          <span id="bcCat" class="hover:text-brand-red transition font-medium">Category</span>
+          <i data-lucide="chevron-right" class="w-3 h-3"></i>
+          <span id="bcTitle" class="text-neutral-700 dark:text-neutral-200 font-medium truncate max-w-[150px]">Law Title</span>
+        </nav>
+      </div>
     </div>
 
-    <div id="error-404" class="hidden py-40 text-center">
-        <h2 class="text-4xl font-bold text-brand-red mb-4">404</h2>
-        <p class="text-neutral-500 mb-8">Law Details Not Found.</p>
-        <a href="lk-categories.html" class="text-brand-red font-bold hover:underline">Back to Categories</a>
+    <!-- 404 ERROR CONTAINER (Hidden by default) -->
+    <div id="errorContainer" class="hidden max-w-2xl mx-auto text-center py-24 px-4">
+      <div class="w-20 h-20 bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="file-question" class="w-10 h-10 text-brand-red"></i>
+      </div>
+      <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-2">404</h1>
+      <h2 class="text-xl font-bold text-neutral-700 dark:text-neutral-200 mb-4">Law Not Found</h2>
+      <p id="errorMsg" class="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md mx-auto">We couldn't find the law you are looking for. It might have been moved or deleted.</p>
+      <a href="lk-categories.html" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red hover:bg-brand-red-dark text-white font-bold rounded-xl transition shadow-lg shadow-red-500/20">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Categories
+      </a>
     </div>
 
-    <script>
-        lucide.createIcons();
-        let lang = localStorage.getItem('gl_lk_lang') || 'en';
-        let currentLaw = null;
-        let fontSize = 16;
+    <!-- CONTENT CONTAINER -->
+    <div id="contentContainer" class="hidden">
+      
+      <!-- HERO SECTION -->
+      <section class="relative overflow-hidden bg-neutral-50 dark:bg-brand-dark pt-8 pb-10 md:pt-12 md:pb-14 transition-colors">
+        <div class="absolute inset-0 dot-bg opacity-[0.03] dark:opacity-[0.05]"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+          
+          <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-3">
+                <!-- Tag -->
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 text-brand-red text-[10px] font-bold uppercase tracking-wider">
+                  <i data-lucide="scale" class="w-3 h-3"></i>
+                  <span id="heroType">Loading...</span>
+                </span>
+                <!-- Year -->
+                <span id="heroYear" class="text-[11px] font-mono text-neutral-400 bg-white dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border px-2 py-1 rounded-md shadow-sm">
+                  2024
+                </span>
+              </div>
+              
+              <h1 id="heroTitle" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.1] mb-2">
+                Loading Law Title...
+              </h1>
+              <p id="heroActNo" class="text-sm md:text-base text-neutral-500 dark:text-neutral-400 font-medium">
+                Loading official act name...
+              </p>
+            </div>
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const lawId = urlParams.get('id');
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="sharePage()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border text-neutral-600 dark:text-neutral-300 hover:text-brand-red hover:border-brand-red transition shadow-sm text-sm font-semibold">
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+                <span id="lblShare">Share</span>
+              </button>
+            </div>
+          </div>
 
-        if (lawId && typeof LAWS_DB !== 'undefined') {
-            currentLaw = LAWS_DB.find(l => l.id === lawId);
-        }
+          <!-- TL;DR Box -->
+          <div class="bg-white dark:bg-brand-dark-card rounded-2xl p-5 md:p-6 border border-neutral-200 dark:border-brand-dark-border shadow-sm relative overflow-hidden group">
+            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-red"></div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+                <i data-lucide="lightbulb" class="w-5 h-5 text-brand-red"></i>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1" id="lblTldr">TL;DR Summary</h3>
+                <p id="heroTldr" class="text-sm md:text-base text-neutral-700 dark:text-neutral-200 leading-relaxed font-medium">
+                  Loading summary...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        function render() {
-            if (!currentLaw) { document.getElementById('error-404').classList.remove('hidden'); return; }
-            document.getElementById('law-page').classList.remove('hidden');
-
-            document.getElementById('txt-title').textContent = currentLaw.title[lang];
-            document.getElementById('txt-actNo').textContent = currentLaw.actNo[lang];
-            document.getElementById('txt-type').textContent = currentLaw.type[lang];
-            document.getElementById('txt-tldr').textContent = currentLaw.tldr[lang];
-            document.getElementById('txt-longDesc').innerHTML = currentLaw.longDesc[lang];
-            document.getElementById('txt-longDescTitle').textContent = lang === 'en' ? 'Detailed Explanation' : 'සවිස්තරාත්මක පැහැදිලි කිරීම';
+      <!-- 2-COLUMN GRID LAYOUT -->
+      <section class="py-8 md:py-12 bg-white dark:bg-brand-dark transition-colors">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
             
-            // Penalties
-            document.getElementById('txt-jail').textContent = currentLaw.penalties.jail[lang];
-            document.getElementById('txt-fine').textContent = currentLaw.penalties.fine[lang];
-            document.getElementById('txt-court').textContent = currentLaw.courtDetails.courtType[lang];
+            <!-- LEFT COLUMN: Main Content (8 cols) -->
+            <div class="lg:col-span-8 space-y-12">
+              
+              <!-- Long Description -->
+              <article>
+                <div id="longDescContainer" class="prose dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-brand-red prose-p:text-neutral-600 dark:prose-p:text-neutral-400 prose-strong:text-neutral-900 dark:prose-strong:text-neutral-200">
+                  <!-- JS Injected Content -->
+                </div>
+              </article>
 
-            // Process
-            document.getElementById('txt-p-step1').textContent = currentLaw.process.step1[lang];
-            document.getElementById('txt-p-meet').textContent = currentLaw.process.whoToMeet[lang];
-            document.getElementById('txt-p-docs').textContent = currentLaw.process.docs[lang];
+              <!-- Process Section -->
+              <div>
+                <div class="flex items-center gap-2 mb-6">
+                  <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+                    <i data-lucide="list-ordered" class="w-5 h-5"></i>
+                  </div>
+                  <h2 class="text-xl font-bold" id="lblProcess">Process & How to Complain</h2>
+                </div>
+                
+                <div id="processContainer" class="space-y-0">
+                  <!-- JS Injected Steps -->
+                </div>
+              </div>
 
-            // UI Elements
-            document.querySelectorAll('[data-lang-' + lang + ']').forEach(el => {
-                el.textContent = el.getAttribute('data-lang-' + lang);
-            });
+              <!-- Incidents Section -->
+              <div>
+                <div class="flex items-center gap-2 mb-6">
+                  <div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600 dark:text-orange-400">
+                    <i data-lucide="history" class="w-5 h-5"></i>
+                  </div>
+                  <h2 class="text-xl font-bold" id="lblIncidents">Related Incidents & Cases</h2>
+                </div>
 
-            // Experts
-            let expHtml = '';
-            currentLaw.experts.forEach(ex => {
-                expHtml += `
-                    <div class="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-brand-dark rounded-xl">
-                        <div class="text-3xl">${ex.photo}</div>
-                        <div>
-                            <h4 class="text-sm font-bold">${ex.name}</h4>
-                            <p class="text-[10px] text-neutral-400">${ex.role[lang]}</p>
-                        </div>
-                    </div>
-                `;
-            });
-            document.getElementById('experts-list').innerHTML = expHtml;
+                <div id="incidentsContainer" class="timeline-line relative space-y-8 pl-2">
+                  <!-- JS Injected Timeline -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Sidebar (4 cols) -->
+            <aside class="lg:col-span-4 space-y-8">
+              
+              <!-- Red Box: Penalties -->
+              <div class="bg-red-50/50 dark:bg-red-900/10 rounded-2xl border border-red-100 dark:border-red-900/30 p-5 md:p-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-4 text-red-600 dark:text-red-400">
+                  <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                  <h3 class="font-bold text-sm uppercase tracking-wide" id="lblPenalties">Penalties & Fines</h3>
+                </div>
+                
+                <div id="penaltiesContainer" class="space-y-4">
+                  <!-- JS Injected -->
+                </div>
+                
+                <div class="mt-5 pt-4 border-t border-red-200 dark:border-red-900/30 text-xs text-red-600/80 dark:text-red-400/80">
+                  <p><strong>Note:</strong> <span id="lblNote">Penalties may vary based on court discretion.</span></p>
+                </div>
+              </div>
+
+              <!-- Expert Lawyers -->
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-bold text-lg" id="lblExperts">Expert Lawyers</h3>
+                  <span class="text-[10px] font-semibold bg-neutral-100 dark:bg-brand-dark-border px-2 py-1 rounded text-neutral-500">Verified</span>
+                </div>
+
+                <div id="lawyersContainer" class="grid gap-4">
+                   <!-- JS Injected -->
+                </div>
+              </div>
+
+              <!-- Sticky WhatsApp CTA -->
+              <div class="hidden lg:block sticky top-24">
+                <a href="https://wa.me/94775048455" target="_blank" class="block w-full text-center py-3.5 rounded-xl bg-green-600 hover:bg-green-700 text-white text-sm font-bold transition shadow-lg shadow-green-500/20 flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  Get Help on WhatsApp
+                </a>
+              </div>
+
+            </aside>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- =============================================
+       FOOTER (Fully Coded)
+       ============================================= -->
+  <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+        <!-- Brand -->
+        <div class="col-span-2 md:col-span-1">
+          <div class="text-2xl font-extrabold tracking-tight mb-4 flex items-center gap-2">
+             <span class="text-brand-red">Global</span><span>Law</span> <span class="text-lg">🇱🇰</span>
+          </div>
+          <p class="text-neutral-400 text-xs leading-relaxed mb-4">
+            Making Sri Lanka's complex legal framework accessible to everyone. Empowering citizens with knowledge.
+          </p>
+          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-3 text-[10px] text-yellow-400 leading-relaxed">
+            ⚠️ <strong>Disclaimer:</strong> This is an educational platform. The information provided is not legal advice.
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-4 text-neutral-300">Quick Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="lk.html" class="text-neutral-400 hover:text-brand-red transition">Home</a></li>
+            <li><a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red transition">Categories</a></li>
+            <li><a href="lk-about.html" class="text-neutral-400 hover:text-brand-red transition">About Us</a></li>
+            <li><a href="lk-contact.html" class="text-neutral-400 hover:text-brand-red transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal Links -->
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-4 text-neutral-300">Resources</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition">Privacy Policy</a></li>
+            <li><a href="#" class="text-neutral-400 hover:text-brand-red transition">Terms of Use</a></li>
+            <li><a href="https://www.justice.gov.lk" target="_blank" class="text-neutral-400 hover:text-brand-red transition">Ministry of Justice ↗</a></li>
+            <li><a href="https://www.cert.gov.lk" target="_blank" class="text-neutral-400 hover:text-brand-red transition">CERT Sri Lanka ↗</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-4 text-neutral-300">Contact</h4>
+          <ul class="space-y-3 text-xs">
+            <li class="flex items-center gap-2 text-neutral-400">
+              <i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i>
+              <a href="mailto:support@globallaw.lk" class="hover:text-brand-red transition">support@globallaw.lk</a>
+            </li>
+            <li class="flex items-center gap-2 text-neutral-400">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0"></i>
+              <span>Colombo 03, Sri Lanka</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-neutral-500 text-[11px]">© 2026 GlobalLaw. All Rights Reserved.</p>
+        <div class="flex items-center gap-4">
+           <a href="#" class="text-neutral-500 hover:text-white transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+           <a href="#" class="text-neutral-500 hover:text-white transition"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+           <a href="#" class="text-neutral-500 hover:text-white transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============================================
+       JAVASCRIPT LOGIC
+       ============================================= -->
+  <script>
+    // --- CONFIG & STATE ---
+    let currentLang = localStorage.getItem('gl_lk_lang') || 'en';
+    let currentLaw = null;
+
+    // --- UTILS ---
+    function getTrans(obj) {
+      if (!obj) return '';
+      return obj[currentLang] || obj['en'] || '';
+    }
+
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function setHtml(id, html) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    // --- INIT ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Theme
+      if (localStorage.getItem('gl_dark') === 'true' || 
+         (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+
+      // Initialize Lang Button
+      document.getElementById('currentLangLabel').textContent = currentLang.toUpperCase();
+
+      // Get ID
+      const urlParams = new URLSearchParams(window.location.search);
+      const lawId = urlParams.get('id');
+
+      // Check DB
+      if (typeof LAWS_DB === 'undefined') {
+        showError('Database Error', 'The legal database (lk-laws-db.js) failed to load.');
+        return;
+      }
+
+      if (!lawId) {
+        showError('Missing ID', 'No law ID specified in the URL (?id=...).');
+        return;
+      }
+
+      currentLaw = LAWS_DB.find(l => l.id === lawId);
+
+      if (!currentLaw) {
+        showError('Not Found', `We could not find a law with the ID: ${lawId}`);
+      } else {
+        renderPage();
+      }
+
+      lucide.createIcons();
+    });
+
+    // --- RENDER FUNCTIONS ---
+    function renderPage() {
+      // Labels
+      const uiLabels = {
+        en: {
+          share: 'Share', tldr: 'TL;DR Summary', process: 'Process & How to Complain',
+          incidents: 'Related Incidents & Cases', penalties: 'Penalties & Fines',
+          experts: 'Expert Lawyers', note: 'Penalties may vary based on court discretion.'
+        },
+        si: {
+          share: 'බෙදාගන්න', tldr: 'සාරාංශය', process: 'පැමිණිලි කිරීමේ ක්‍රියාවලිය',
+          incidents: 'සම්බන්ධ නඩු සහ සිදුවීම්', penalties: 'දඩ සහ දඬුවම්',
+          experts: 'විශේෂඥ නීතීඥවරු', note: 'අධිකරණ තීරණය අනුව දඩ වෙනස් විය හැක.'
         }
+      };
+      const t = uiLabels[currentLang];
+      
+      setText('lblShare', t.share);
+      setText('lblTldr', t.tldr);
+      setText('lblProcess', t.process);
+      setText('lblIncidents', t.incidents);
+      setText('lblPenalties', t.penalties);
+      setText('lblExperts', t.experts);
+      setText('lblNote', t.note);
 
-        function changeLang(l) { lang = l; localStorage.setItem('gl_lk_lang', l); render(); }
-        function toggleDark() { document.documentElement.classList.toggle('dark'); }
-        function adjustFont(v) { fontSize += v; document.getElementById('content-body').style.fontSize = fontSize + 'px'; }
+      // 1. Breadcrumbs
+      setText('bcCat', getTrans(currentLaw.category));
+      setText('bcTitle', getTrans(currentLaw.title));
 
-        render();
-    </script>
+      // 2. Hero
+      // Extract Year
+      const yearMatch = getTrans(currentLaw.actNo).match(/of\s(\d{4})/);
+      const yearText = yearMatch ? yearMatch[1] : 'N/A';
+      setText('heroYear', yearText);
+      setText('heroType', getTrans(currentLaw.type));
+      setText('heroTitle', getTrans(currentLaw.title));
+      setText('heroActNo', getTrans(currentLaw.actNo));
+      setText('heroTldr', getTrans(currentLaw.tldr));
+
+      // 3. Long Desc
+      setHtml('longDescContainer', getTrans(currentLaw.longDesc));
+
+      // 4. Penalties
+      renderPenalties();
+
+      // 5. Process
+      renderProcess();
+
+      // 6. Incidents
+      renderIncidents();
+
+      // 7. Lawyers
+      renderLawyers();
+
+      // Show Content
+      document.getElementById('contentContainer').classList.remove('hidden');
+      
+      // Re-run icons for new content
+      lucide.createIcons();
+    }
+
+    function renderPenalties() {
+      const p = currentLaw.penalties;
+      if (!p) return;
+
+      const html = `
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <i data-lucide="lock" class="w-4 h-4 text-brand-red mt-0.5 shrink-0"></i>
+            <div>
+              <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Jail Time</p>
+              <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.jail)}</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i data-lucide="banknote" class="w-4 h-4 text-brand-red mt-0.5 shrink-0"></i>
+            <div>
+              <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Fine Amount</p>
+              <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.fine)}</p>
+            </div>
+          </div>
+           <div class="flex items-start gap-3">
+            <i data-lucide="gavel" class="w-4 h-4 text-brand-red mt-0.5 shrink-0"></i>
+            <div>
+              <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Court Type</p>
+              <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.courtType)}</p>
+            </div>
+          </div>
+           <div class="pt-2 border-t border-red-200 dark:border-red-900/30">
+             <p class="text-[11px] text-neutral-500"><span class="font-bold">Duration:</span> ${getTrans(p.duration)}</p>
+          </div>
+        </div>
+      `;
+      setHtml('penaltiesContainer', html);
+    }
+
+    function renderProcess() {
+      const proc = currentLaw.process;
+      if (!proc) return;
+
+      let docsHtml = '';
+      if (proc.docs) {
+        docsHtml = `<ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+          ${proc.docs.map(d => `<li>${getTrans(d)}</li>`).join('')}
+        </ul>`;
+      }
+
+      let contactsHtml = '';
+      if (proc.contact) {
+        contactsHtml = `<div class="mt-3 flex flex-wrap gap-2">
+          ${proc.contact.map(c => `
+            <a href="tel:${c.number}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-bold border border-green-100 dark:border-green-900/30 hover:bg-green-100 transition">
+              <i data-lucide="phone" class="w-3 h-3"></i> ${c.org}
+            </a>
+          `).join('')}
+        </div>`;
+      }
+
+      const html = `
+        <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+          <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">1. First Step</h4>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.step1)}</p>
+        </div>
+
+        <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+          <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">2. Authority to Contact</h4>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.whoToMeet)}</p>
+          ${contactsHtml}
+        </div>
+
+        <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+          <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">3. Required Documents</h4>
+          ${docsHtml}
+        </div>
+      `;
+      setHtml('processContainer', html);
+    }
+
+    function renderIncidents() {
+      const incs = currentLaw.incidents;
+      if (!incs || incs.length === 0) {
+        setHtml('incidentsContainer', '<p class="text-sm text-neutral-500 pl-8">No recent incidents recorded.</p>');
+        return;
+      }
+
+      const html = incs.map((inc, index) => `
+        <div class="relative pl-8 pb-8 last:pb-0">
+          <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600 z-10 ring-4 ring-white dark:ring-brand-dark"></div>
+          <div class="bg-neutral-50 dark:bg-brand-dark-card rounded-xl p-4 border border-neutral-100 dark:border-brand-dark-border">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[10px] font-mono font-bold text-brand-red bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">${inc.date}</span>
+              <span class="text-[10px] font-bold text-neutral-400 uppercase">Case #${index + 100}</span>
+            </div>
+            <p class="text-sm text-neutral-700 dark:text-neutral-200 font-medium mb-2">${getTrans(inc.desc)}</p>
+            <div class="text-xs text-neutral-500 dark:text-neutral-400 bg-white dark:bg-brand-dark p-2 rounded border border-neutral-100 dark:border-brand-dark-border">
+              <strong>Outcome:</strong> ${getTrans(inc.outcome)}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      setHtml('incidentsContainer', html);
+    }
+
+    function renderLawyers() {
+      const lawyers = currentLaw.experts;
+      if (!lawyers || lawyers.length === 0) {
+        setHtml('lawyersContainer', '<p class="text-xs text-neutral-500 text-center py-4">No expert data available.</p>');
+        return;
+      }
+
+      const html = lawyers.map(law => `
+        <div class="bg-white dark:bg-brand-dark-card border border-neutral-100 dark:border-brand-dark-border rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition cursor-pointer group">
+          <div class="relative shrink-0">
+            <img src="${law.photo}" alt="${getTrans(law.name)}" class="w-12 h-12 rounded-full object-cover border-2 border-neutral-100 dark:border-brand-dark-border group-hover:border-brand-red transition">
+            <div class="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-brand-dark-card bg-green-500"></div>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-sm font-bold text-neutral-900 dark:text-white truncate">${getTrans(law.name)}</h4>
+            <p class="text-[11px] text-brand-red font-medium mb-1 truncate">${getTrans(law.role)}</p>
+            <p class="text-[10px] text-neutral-500 dark:text-neutral-400 line-clamp-2">${getTrans(law.desc)}</p>
+          </div>
+          <a href="https://wa.me/${law.wa_number}" target="_blank" class="shrink-0 text-green-600 dark:text-green-400 hover:scale-110 transition">
+             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      `).join('');
+
+      setHtml('lawyersContainer', html);
+    }
+
+    // --- ACTIONS ---
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('gl_dark', isDark);
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'si' : 'en';
+      localStorage.setItem('gl_lk_lang', currentLang);
+      document.getElementById('currentLangLabel').textContent = currentLang.toUpperCase();
+      if (currentLaw) {
+        renderPage();
+      }
+    }
+
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: getTrans(currentLaw.title),
+          text: getTrans(currentLaw.tldr),
+          url: window.location.href
+        });
+      } else {
+        alert('Link copied to clipboard: ' + window.location.href);
+      }
+    }
+
+    function showError(title, msg) {
+      document.getElementById('contentContainer').classList.add('hidden');
+      const errBox = document.getElementById('errorContainer');
+      errBox.classList.remove('hidden');
+      errBox.querySelector('h2').textContent = title;
+      document.getElementById('errorMsg').textContent = msg;
+    }
+  </script>
 </body>
 </html>
