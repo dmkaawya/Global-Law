@@ -2,19 +2,10 @@
 <html lang="en" class="">
 <head>
   <!-- =============================================
-       GlobalLaw - Law Details Page (lk-law-details.html)
+       GlobalLaw - Law Details Page (law-details.html)
        
-       URL: lk-law-details.html?id=penal-code
-       
-       🔧 HOW IT WORKS:
-       - Reads the ?id= parameter from URL
-       - Finds matching law in LAWS data object below
-       - Renders full details dynamically
-       
-       🔧 HOW TO ADD A NEW LAW:
-       - Add a new entry to the LAWS object below
-       - id must match what's linked from categories page
-       - That's it! No new HTML file needed
+       UI Skeleton Structure. 
+       Data will be injected via JavaScript from 'laws-db.js'.
        
        ============================================= -->
   <meta charset="UTF-8">
@@ -27,259 +18,240 @@
       theme: {
         extend: {
           colors: {
-            brand: { red: '#DC2626', 'red-dark': '#B91C1C', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' }
+            brand: { red: '#DC2626', 'red-light': '#EF4444', 'red-dark': '#B91C1C', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' }
           }
         }
       }
     }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- =============================================
+       LINK DATA SOURCE
+       ============================================= -->
+  <script src="lk-laws-db.js"></script>
+
   <style>
-    *{font-family:'Inter',sans-serif}
-    html{scroll-behavior:smooth}
-    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#DC2626;border-radius:9px}
+    * { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 9px; }
+
+    /* Utilities */
+    .dot-bg { background-image: radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0); background-size: 32px 32px; }
     
-    /* TOC */
-    .toc-link{transition:all .15s;border-left:2px solid transparent;padding-left:12px}
-    .toc-link:hover,.toc-link.active{border-left-color:#DC2626;color:#DC2626}
-    
-    /* Penalty box */
-    .penalty-box{background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%)}
-    .dark .penalty-box{background:linear-gradient(135deg,#450a0a 0%,#7f1d1d 100%)}
-    
-    /* Section animation */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .fu{animation:fadeUp .4s ease forwards}
-    
-    /* Toast */
-    @keyframes slideR{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
-    .toast-in{animation:slideR .35s ease forwards}
-    
-    /* Mobile menu */
-    @keyframes slideD{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-    .mob-menu{animation:slideD .25s ease forwards}
-    
-    /* WhatsApp */
-    @keyframes pulse-ring{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
-    .wa-pulse::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:#22C55E;animation:pulse-ring 2s ease-out infinite;z-index:-1}
-    
-    /* Print styles */
-    @media print{
-      nav,footer,.no-print,#floatingTools,#tocPanel,.share-bar,.font-resizer{display:none!important}
-      body{background:white!important;color:black!important}
-      .penalty-box{background:#fee2e2!important}
+    /* Timeline line */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 15px;
+      width: 2px;
+      background: #E5E7EB;
+      z-index: 0;
     }
+    .dark .timeline-line::before { background: #262626; }
   </style>
 </head>
 
 <body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
 
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border no-print">
+  <!-- ============ NAVIGATION BAR ============ -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border transition-colors">
     <div class="max-w-7xl mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between h-14 md:h-16">
         <a href="lk.html" class="flex items-center gap-1.5 shrink-0">
           <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span>
           <span class="text-base md:text-lg">🇱🇰</span>
         </a>
-        <div class="hidden md:flex items-center gap-6 text-[13px] font-medium">
-          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navHome">Home</a>
-          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navCat">Categories</a>
-          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navAbout">About Us</a>
-          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-t="navContact">Contact</a>
-        </div>
-        <div class="flex items-center gap-2">
-          <div class="relative">
-            <button onclick="toggleLang()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
-              <i data-lucide="globe" class="w-3 h-3"></i><span id="langLbl">EN</span><i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
-            </button>
-            <div id="langDD" class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg shadow-xl overflow-hidden z-50">
-              <button onclick="setLang('en')" class="ld-btn w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border text-left"><span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
-              <button onclick="setLang('si')" class="ld-btn w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border text-left"><span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
-            </div>
-          </div>
-          <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition">
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+        <!-- Right Side: Lang & Theme -->
+        <div class="flex items-center gap-1.5 md:gap-2.5">
+          <button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Theme">
             <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i>
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
           </button>
-          <button onclick="document.getElementById('mobMenu').classList.toggle('hidden')" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition"><i data-lucide="menu" class="w-5 h-5"></i></button>
-        </div>
-      </div>
-      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-brand-dark-border pt-3 mob-menu">
-        <div class="flex flex-col gap-2.5 text-sm font-medium">
-          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-t="navHome">Home</a>
-          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-t="navCat">Categories</a>
-          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-t="navAbout">About Us</a>
-          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-t="navContact">Contact</a>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- ============ BREADCRUMB ============ -->
-  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border no-print">
+  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
-      <nav id="breadcrumb" class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400 flex-wrap"></nav>
+      <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
+        <a href="lk.html" class="hover:text-brand-red transition">GlobalLaw</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <a href="lk-categories.html" class="hover:text-brand-red transition">Categories</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <span id="breadcrumbCategory" class="hover:text-brand-red transition">Category</span>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <span id="breadcrumbTitle" class="text-neutral-700 dark:text-neutral-200 font-medium truncate max-w-[150px]">Law Title</span>
+      </nav>
     </div>
   </div>
 
-  <!-- ============ 404 MESSAGE (hidden by default) ============ -->
-  <div id="notFound" class="hidden py-20 text-center">
-    <div class="text-5xl mb-4">😕</div>
-    <h2 class="text-xl font-bold mb-2" data-t="notFoundTitle">Law not found</h2>
-    <p class="text-neutral-500 text-sm mb-6" data-t="notFoundDesc">The law you're looking for doesn't exist or has been moved.</p>
-    <a href="lk-categories.html" class="inline-flex items-center gap-2 bg-brand-red hover:bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-xl text-sm transition">
-      <i data-lucide="arrow-left" class="w-4 h-4"></i><span data-t="backToCats">Back to Categories</span>
-    </a>
-  </div>
-
-  <!-- ============ LAW CONTENT (hidden until data loads) ============ -->
-  <div id="lawContent" class="hidden">
-
-    <!-- HERO: Title + Meta -->
-    <section class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
-      <div class="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
-        <!-- Category badge -->
-        <a id="catLink" href="#" class="inline-flex items-center gap-1.5 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-full px-3 py-1 text-[11px] font-medium text-neutral-600 dark:text-neutral-400 hover:border-brand-red transition mb-4">
-          <span id="catIcon"></span>
-          <span id="catName"></span>
-          <i data-lucide="chevron-right" class="w-3 h-3"></i>
-        </a>
-
-        <h1 id="lawTitle" class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-3 fu"></h1>
-
-        <!-- Meta row -->
-        <div class="flex flex-wrap items-center gap-3 md:gap-4 text-[11px] sm:text-xs text-neutral-500 mb-6">
-          <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i><span id="metaYear"></span></span>
-          <span class="flex items-center gap-1"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i><span id="metaUpdated"></span></span>
-          <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i><span id="metaReadTime"></span></span>
+  <!-- ============ HERO SECTION ============ -->
+  <section class="relative overflow-hidden bg-neutral-50 dark:bg-brand-dark pt-8 pb-10 md:pt-12 md:pb-14 transition-colors">
+    <div class="absolute inset-0 dot-bg opacity-[0.03] dark:opacity-[0.05]"></div>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      
+      <!-- Header Row -->
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+        <div class="flex-1">
+          <div class="flex flex-wrap items-center gap-3 mb-3">
+            <!-- JS Inject: Tag/Badge -->
+            <span id="heroBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 text-brand-red text-[10px] font-bold uppercase tracking-wider">
+              <i data-lucide="scale" class="w-3 h-3"></i>
+              <span>Loading...</span>
+            </span>
+            <!-- JS Inject: Year -->
+            <span id="heroYear" class="text-[11px] font-mono text-neutral-400 bg-neutral-100 dark:bg-brand-dark border border-neutral-200 dark:border-brand-dark-border px-2 py-1 rounded-md">
+              2024
+            </span>
+          </div>
+          
+          <!-- JS Inject: Title -->
+          <h1 id="heroTitle" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.1] mb-2">
+            Loading Law Title...
+          </h1>
+          
+          <!-- JS Inject: Official Name -->
+          <p id="heroOfficialName" class="text-sm md:text-base text-neutral-500 dark:text-neutral-400 font-medium">
+            Loading official act name...
+          </p>
         </div>
 
-        <!-- Share buttons -->
-        <div class="share-bar flex items-center gap-2 no-print">
-          <span class="text-[11px] text-neutral-400 font-medium" data-t="shareLabel">Share:</span>
-          <button onclick="shareLaw('whatsapp')" class="flex items-center gap-1.5 bg-green-500 hover:bg-green-600 text-white text-[11px] font-semibold px-3 py-1.5 rounded-lg transition">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            WhatsApp
-          </button>
-          <button onclick="shareLaw('facebook')" class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-lg transition">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Facebook
-          </button>
-          <button onclick="shareLaw('twitter')" class="flex items-center gap-1.5 bg-neutral-800 dark:bg-neutral-700 hover:bg-neutral-900 text-white text-[11px] font-semibold px-3 py-1.5 rounded-lg transition">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            X
-          </button>
-          <button onclick="copyLink()" class="flex items-center gap-1.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-200 text-[11px] font-semibold px-3 py-1.5 rounded-lg transition">
-            <i data-lucide="link" class="w-3.5 h-3.5"></i><span data-t="copyLink">Copy Link</span>
-          </button>
+        <!-- Share Button -->
+        <button class="shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border text-neutral-600 dark:text-neutral-300 hover:text-brand-red hover:border-brand-red transition shadow-sm">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+          <span class="text-xs font-semibold">Share</span>
+        </button>
+      </div>
+
+      <!-- JS Inject: TLDR Box -->
+      <div class="bg-white dark:bg-brand-dark-card rounded-2xl p-5 md:p-6 border border-neutral-200 dark:border-brand-dark-border shadow-sm relative overflow-hidden group">
+        <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-red"></div>
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+            <i data-lucide="lightbulb" class="w-5 h-5 text-brand-red"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1">TL;DR Summary</h3>
+            <p id="heroTldr" class="text-sm md:text-base text-neutral-700 dark:text-neutral-200 leading-relaxed">
+              Loading summary...
+            </p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- MAIN CONTENT AREA -->
-    <div class="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
-
-      <div class="flex gap-8 md:gap-12">
-
-        <!-- LEFT: Sticky TOC (Desktop only) -->
-        <aside id="tocPanel" class="hidden lg:block w-56 shrink-0 no-print">
-          <div class="sticky top-24">
-            <h4 class="text-[11px] font-bold uppercase tracking-wider text-neutral-400 mb-3" data-t="tocTitle">Contents</h4>
-            <nav id="tocNav" class="flex flex-col gap-1.5 text-[12px]"></nav>
+  <!-- ============ MAIN CONTENT GRID ============ -->
+  <section class="py-8 md:py-12 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+        
+        <!-- LEFT COLUMN: Main Content (8 cols) -->
+        <div class="lg:col-span-8 space-y-12">
+          
+          <!-- SECTION: Long Description -->
+          <div id="longDescriptionContainer" class="prose dark:prose-invert max-w-none">
+            <!-- JS will inject full HTML content here -->
+            <h2 class="text-xl font-bold mb-4">About this Law</h2>
+            <p class="text-neutral-500 animate-pulse">Loading detailed explanation...</p>
           </div>
+
+          <!-- SECTION: Process & Complaint -->
+          <div>
+            <div class="flex items-center gap-2 mb-6">
+              <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+                <i data-lucide="list-ordered" class="w-5 h-5"></i>
+              </div>
+              <h2 class="text-xl font-bold">Process & How to Complain</h2>
+            </div>
+            
+            <!-- JS Inject: Process Steps -->
+            <div id="processContainer" class="space-y-0">
+              <!-- Example of how JS will structure steps, currently empty placeholder -->
+              <!-- <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">...</div> -->
+            </div>
+          </div>
+
+          <!-- SECTION: Real-time Incidents -->
+          <div>
+            <div class="flex items-center gap-2 mb-6">
+              <div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600 dark:text-orange-400">
+                <i data-lucide="history" class="w-5 h-5"></i>
+              </div>
+              <h2 class="text-xl font-bold">Related Incidents & Cases</h2>
+            </div>
+
+            <!-- JS Inject: Incidents Timeline -->
+            <div id="incidentsContainer" class="timeline-line relative space-y-8 pl-2">
+              <!-- JS will populate timeline items here -->
+              <div class="text-sm text-neutral-400 italic">Loading case history...</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Sidebar (4 cols) -->
+        <aside class="lg:col-span-4 space-y-8">
+          
+          <!-- SIDEBAR: Penalties Box -->
+          <div class="bg-red-50/50 dark:bg-red-900/10 rounded-2xl border border-red-100 dark:border-red-900/30 p-5 md:p-6">
+            <div class="flex items-center gap-2 mb-4 text-red-600 dark:text-red-400">
+              <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+              <h3 class="font-bold text-sm uppercase tracking-wide">Penalties & Fines</h3>
+            </div>
+            
+            <!-- JS Inject: Penalties -->
+            <div id="penaltiesContainer" class="space-y-4">
+               <div class="h-4 bg-neutral-200 dark:bg-brand-dark-border rounded w-3/4 animate-pulse"></div>
+               <div class="h-4 bg-neutral-200 dark:bg-brand-dark-border rounded w-1/2 animate-pulse"></div>
+            </div>
+            
+            <div class="mt-5 pt-4 border-t border-red-200 dark:border-red-900/30 text-xs text-red-600/80 dark:text-red-400/80">
+              <p><strong>Note:</strong> Penalties may vary based on court discretion and severity.</p>
+            </div>
+          </div>
+
+          <!-- SIDEBAR: Expert Lawyers -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-lg">Expert Lawyers</h3>
+              <span class="text-[10px] font-semibold bg-neutral-100 dark:bg-brand-dark-border px-2 py-1 rounded text-neutral-500">Verified</span>
+            </div>
+
+            <!-- JS Inject: Lawyers List -->
+            <div id="lawyersContainer" class="grid gap-4">
+               <!-- Placeholder Loading State -->
+               <div class="bg-white dark:bg-brand-dark-card border border-neutral-100 dark:border-brand-dark-border rounded-xl p-4 flex items-center gap-3 animate-pulse">
+                 <div class="w-12 h-12 rounded-full bg-neutral-200 dark:bg-brand-dark-border"></div>
+                 <div class="flex-1 space-y-2">
+                   <div class="h-3 bg-neutral-200 dark:bg-brand-dark-border rounded w-3/4"></div>
+                   <div class="h-2 bg-neutral-200 dark:bg-brand-dark-border rounded w-1/2"></div>
+                 </div>
+               </div>
+            </div>
+          </div>
+
+          <!-- Sticky CTA (Optional) -->
+          <div class="hidden lg:block sticky top-24">
+             <a href="notwork.html" class="block w-full text-center py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-bold hover:opacity-90 transition shadow-lg">
+                Consult a Lawyer Now
+             </a>
+          </div>
+
         </aside>
-
-        <!-- RIGHT: Article Content -->
-        <article class="flex-1 min-w-0">
-
-          <!-- Font Resizer -->
-          <div class="font-resizer flex items-center gap-2 mb-6 no-print">
-            <span class="text-[11px] text-neutral-400" data-t="fontSize">Font Size:</span>
-            <button onclick="changeFont(-1)" class="w-7 h-7 flex items-center justify-center rounded border border-neutral-200 dark:border-brand-dark-border text-xs font-bold hover:border-brand-red transition">A-</button>
-            <button onclick="changeFont(0)" class="w-7 h-7 flex items-center justify-center rounded border border-brand-red text-xs font-bold bg-brand-red/10">A</button>
-            <button onclick="changeFont(1)" class="w-7 h-7 flex items-center justify-center rounded border border-neutral-200 dark:border-brand-dark-border text-xs font-bold hover:border-brand-red transition">A+</button>
-            <div class="ml-auto flex items-center gap-2">
-              <button onclick="window.print()" class="flex items-center gap-1 text-[11px] text-neutral-500 hover:text-brand-red transition" title="Print"><i data-lucide="printer" class="w-4 h-4"></i><span class="hidden sm:inline" data-t="print">Print</span></button>
-              <button onclick="downloadPDF()" class="flex items-center gap-1 text-[11px] text-neutral-500 hover:text-brand-red transition" title="Download PDF"><i data-lucide="download" class="w-4 h-4"></i><span class="hidden sm:inline" data-t="pdf">PDF</span></button>
-            </div>
-          </div>
-
-          <!-- TL;DR Box -->
-          <div id="tldrBox" class="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-900/30 rounded-2xl p-5 md:p-6 mb-8">
-            <div class="flex items-center gap-2 mb-2">
-              <i data-lucide="zap" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
-              <h3 class="font-bold text-sm text-blue-800 dark:text-blue-300" data-t="tldrTitle">TL;DR (Quick Summary)</h3>
-            </div>
-            <p id="tldrText" class="text-sm text-blue-900 dark:text-blue-200 leading-relaxed"></p>
-          </div>
-
-          <!-- Law Sections (rendered by JS) -->
-          <div id="lawSections" class="space-y-8 mb-10"></div>
-
-          <!-- Penalties Box -->
-          <div id="penaltyBox" class="penalty-box rounded-2xl p-5 md:p-6 mb-10 border border-red-200 dark:border-red-900/30">
-            <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 dark:text-red-400"></i>
-              <h3 class="font-bold text-sm text-red-800 dark:text-red-300" data-t="penaltiesTitle">Penalties & Fines</h3>
-            </div>
-            <div id="penaltyContent" class="text-sm text-red-900 dark:text-red-200 leading-relaxed"></div>
-          </div>
-
-          <!-- Real-world Example -->
-          <div id="exampleBox" class="bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-2xl p-5 md:p-6 mb-10">
-            <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="book-open" class="w-4 h-4 text-brand-red"></i>
-              <h3 class="font-bold text-sm" data-t="exampleTitle">Real-world Example</h3>
-            </div>
-            <p id="exampleText" class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"></p>
-          </div>
-
-          <!-- Official Source Link -->
-          <div id="sourceBox" class="flex items-start gap-3 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 mb-10">
-            <i data-lucide="external-link" class="w-5 h-5 text-brand-red shrink-0 mt-0.5"></i>
-            <div>
-              <h4 class="font-bold text-xs mb-1" data-t="sourceTitle">Official Source</h4>
-              <a id="sourceLink" href="#" target="_blank" rel="noopener" class="text-sm text-brand-red hover:underline break-all"></a>
-            </div>
-          </div>
-
-          <!-- Disclaimer -->
-          <div class="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-xl p-4 mb-10 text-xs text-yellow-800 dark:text-yellow-300 leading-relaxed" data-t="disclaimer">
-            ⚠️ <strong>Disclaimer:</strong> This is an educational explanation only. It is NOT official legal advice. Always consult a qualified lawyer for legal matters. GlobalLaw and its authors are not responsible for any actions taken based on this information.
-          </div>
-
-          <!-- Feedback -->
-          <div class="flex items-center justify-between bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 mb-10 no-print">
-            <span class="text-sm font-medium" data-t="feedbackQ">Was this explanation helpful?</span>
-            <div class="flex items-center gap-2">
-              <button onclick="feedback('up')" class="flex items-center gap-1 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition">
-                <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Yes
-              </button>
-              <button onclick="feedback('down')" class="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-semibold px-3 py-1.5 rounded-lg transition">
-                <i data-lucide="thumbs-down" class="w-3.5 h-3.5"></i> No
-              </button>
-            </div>
-          </div>
-
-          <!-- Related Laws -->
-          <div id="relatedSection" class="mb-10">
-            <h3 class="font-bold text-sm mb-4" data-t="relatedTitle">Related Laws</h3>
-            <div id="relatedGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
-          </div>
-
-          <!-- Back to Category -->
-          <a id="backToCat" href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-red hover:underline no-print">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i><span data-t="backToCat">Back to Category</span>
-          </a>
-
-        </article>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ============ FOOTER ============ -->
+ <!-- ============ FOOTER ============ -->
   <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800 no-print">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
@@ -319,403 +291,311 @@
     </div>
   </footer>
 
-  <!-- Floating WhatsApp -->
-  <div class="fixed bottom-5 right-5 z-50 no-print">
-    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="wa-pulse relative flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:50px;height:50px" aria-label="WhatsApp">
-      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
-  </div>
-
-  <!-- Toast -->
-  <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-4 py-3 toast-in max-w-xs">
-    <div class="flex items-center gap-2.5">
-      <div id="toastIcon" class="w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i></div>
-      <p id="toastMsg" class="text-xs font-medium"></p>
-    </div>
-  </div>
-
-
-  <!-- ============ JAVASCRIPT ============ -->
+  <!-- ============ SCRIPTS ============ -->
   <script>
+    
+  /**
+   * GLOBAL STATE & CONFIGURATION
+   */
+  let currentLang = localStorage.getItem('gl_lk_lang') || 'en';
+  let currentLaw = null;
+
+  // Helper to get translated text safely
+  function getTrans(obj) {
+    if (!obj) return '';
+    return obj[currentLang] || obj['en'] || '';
+  }
+
+  // Helper to safely set text content
+  function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  // Helper to safely set inner HTML
+  function setHtml(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+
+  /**
+   * INITIALIZATION
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lawId = urlParams.get('id');
+
+    // Check if DB is loaded
+    if (typeof LAWS_DB === 'undefined') {
+      renderError('Database Error', 'The legal database could not be loaded. Please refresh the page.');
+      return;
+    }
+
+    // Find Law
+    if (!lawId) {
+      renderError('Missing ID', 'No law ID specified in the URL.');
+      return;
+    }
+
+    currentLaw = LAWS_DB.find(l => l.id === lawId);
+
+    if (!currentLaw) {
+      renderError('Not Found', `We could not find a law with the ID: ${lawId}`);
+    } else {
+      renderPage();
+      // Inject Language Toggle Button dynamically if needed
+      injectLangToggle();
+    }
+  });
+
+  /**
+   * MAIN RENDER FUNCTION
+   */
+  function renderPage() {
+    // 1. Breadcrumbs
+    setText('breadcrumbCategory', getTrans(currentLaw.category));
+    setText('breadcrumbTitle', getTrans(currentLaw.title));
+
+    // 2. Hero Section
+    // Extract Year from Act Name using Regex (e.g., "of 2007")
+    const yearMatch = getTrans(currentLaw.officialActName).match(/of\s(\d{4})/);
+    const yearText = yearMatch ? yearMatch[1] : 'N/A';
+    
+    setText('heroYear', yearText);
+    setText('heroBadge', `<i data-lucide="scale" class="w-3 h-3"></i> ${getTrans(currentLaw.isLawOrRule)}`);
+    setText('heroTitle', getTrans(currentLaw.title));
+    setText('heroOfficialName', getTrans(currentLaw.officialActName));
+    setText('heroTldr', getTrans(currentLaw.tldr));
+
+    // 3. Long Description
+    setHtml('longDescriptionContainer', getTrans(currentLaw.longDescription));
+
+    // 4. Penalties Section
+    renderPenalties();
+
+    // 5. Process Section
+    renderProcess();
+
+    // 6. Incidents Section
+    renderIncidents();
+
+    // 7. Lawyers Section
+    renderLawyers();
+
+    // Re-initialize icons for newly added elements
     lucide.createIcons();
+  }
 
-    // =============================================================
-    // TRANSLATIONS
-    // =============================================================
-    const T = {
-      en: {
-        navHome:'Home',navCat:'Categories',navAbout:'About Us',navContact:'Contact',navSupport:'Support',navCredits:'Credits',
-        tocTitle:'Contents',tldrTitle:'TL;DR (Quick Summary)',penaltiesTitle:'Penalties & Fines',
-        exampleTitle:'Real-world Example',sourceTitle:'Official Source',disclaimer:'⚠️ <strong>Disclaimer:</strong> This is an educational explanation only. It is NOT official legal advice. Always consult a qualified lawyer for legal matters. GlobalLaw and its authors are not responsible for any actions taken based on this information.',
-        feedbackQ:'Was this explanation helpful?',relatedTitle:'Related Laws',backToCat:'← Back to Category',
-        shareLabel:'Share:',copyLink:'Copy Link',print:'Print',pdf:'PDF',fontSize:'Font Size:',
-        notFoundTitle:'Law not found',notFoundDesc:'The law you\'re looking for doesn\'t exist or has been moved.',backToCats:'Back to Categories',
-        copied:'Link copied!',feedbackThanks:'Thanks for your feedback!',
-        ftDesc:"Making Sri Lanka's law accessible to everyone.",
-        ftQL:'Quick Links',ftLL:'Legal Links',ftCon:'Contact',ftPriv:'Privacy Policy',ftTerms:'Terms of Use',
-        viewDetails:'View Details →',
-      },
-      si: {
-        navHome:'මුල් පිටුව',navCat:'කාණ්ඩ',navAbout:'අප ගැන',navContact:'සම්බන්ධ කරගන්න',navSupport:'සහාය',navCredits:'ස්තුතිය',
-        tocTitle:'අන්තර්ගතය',tldrTitle:'සාරාංශය (ඉක්මන් සාරාංශය)',penaltiesTitle:'දඬුවම් සහ දඩ මුදල්',
-        exampleTitle:'ප්‍රායෝගික උදාහරණය',sourceTitle:'නිල මූලාශ්‍රය',disclaimer:'⚠️ <strong>අවවාදයයි:</strong> මෙය අධ්‍යාපනික පැහැදිලි කිරීමක් පමණයි. නිල නීති උපදෙස් නොවේ. නීතිමය කටයුතු සඳහා සුදුසුකම් ලත් නීතිඥයෙකුගෙන් උපදෙස් ගන්න්න.',
-        feedbackQ:'මේ පැහැදිලි කිරීම ප්‍රයෝජනවත්ද?',relatedTitle:'සම්බන්ධ නීති',backToCat:'← කාණ්ඩයට ආපහර',
-        shareLabel:'හවුන්න:',copyLink:'Link පිටපත් කරන්න',print:'මුද්‍රණය',pdf:'PDF',fontSize:'අකුර ප්‍රමාණය:',
-        notFoundTitle:'නීතිය හමු නැත',notFoundDesc:'ඔබ සොයන නීතිය නොමැත හෝ ගෙන්වා ඇත.',backToCats:'කාණ්ඩ වලට ආපහර',
-        copied:'Link පිටපත් විය!',feedbackThanks:'ඔබේ ප්‍රතිකල්පයට ස්තුතියි!',
-        ftDesc:'ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
-        ftQL:'ඉක්මන් සබැඳි',ftLL:'නීතිමය සබැඳි',ftCon:'සම්බන්ධ කරගන්න',ftPriv:'පෞද්ගලිකත්ව ප්‍රතිපත්තිය',ftTerms:'භාවිතා කිරීමේ කොන්දේසි',
-        viewDetails:'විස්තර බලන්න →',
-      }
-    };
+  /**
+   * RENDER PENALTIES
+   */
+  function renderPenalties() {
+    const p = currentLaw.penalties;
+    if (!p) return;
 
-    // =============================================================
-    // LAW DATA
-    // 🔧 ADD NEW LAWS HERE — just add objects to this list
-    // =============================================================
-    const LAWS = {
+    const html = `
+      <div class="space-y-3">
+        <div class="flex items-start gap-3">
+          <i data-lucide="lock" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Jail Time</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.jailTime)}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i data-lucide="banknote" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Fine Amount</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.fineAmount)}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <i data-lucide="gavel" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+          <div>
+            <p class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500">Court Type</p>
+            <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">${getTrans(p.courtType)}</p>
+          </div>
+        </div>
+        <div class="pt-2 border-t border-neutral-200 dark:border-brand-dark-border">
+             <p class="text-[11px] text-neutral-500"><span class="font-bold">Duration:</span> ${getTrans(p.averageCaseDuration)}</p>
+        </div>
+      </div>
+    `;
+    setHtml('penaltiesContainer', html);
+  }
 
-      'penal-code': {
-        category: { id:'criminal', icon:'🚔', name:{en:'Criminal Laws',si:'අපරාධ නීති'} },
-        title: { en:'Penal Code (No. 2 of 1883)', si:'දණ්ඩ නීති සංග්‍රහය (1883 අංක 2)' },
-        tldr: { en:'Sri Lanka\'s main criminal law with 511 sections defining offences from theft to murder. Recently amended in 2024 to include cyber crime and online harassment provisions. This is the foundation of all criminal prosecution in Sri Lanka.', si:'ශ්‍රී ලංකාවේ ප්‍රධාන අපරාධ නීතිය. වගන්ති 511කින් හොරකමේ සිට ඝාතනය දක්වා අපරාධ අර්ථ දක්වයි. 2024දී සයිබර් අපරාධ සහ මාර්ගගත පීඩාකාරීත්වය සඳහා සංශෝධනය කර ඇත.' },
-        year: 1883, updated: '2024', readTime: '8 min',
-        source: 'https://www.commonlii.org/lk/legis/consol_act/18832/',
-        penalties: { en:'<strong>Offences vary widely:</strong><br>• Theft: Up to 2 years imprisonment or fine<br>• Robbery: 3-7 years rigorous imprisonment<br>• Assault: 6 months - 2 years<br>• Murder: Death penalty or life imprisonment<br>• Cyber harassment (2024 amendment): Up to 5 years<br>• Hacking: Up to 3 years + fine up to Rs. 500,000<br>• Causing hurt: 1-3 years<br><br>Some offences carry minimum mandatory sentences that judges cannot reduce.', si:'<strong>අපරාධ අනුව පුළුන්:</strong><br>• හොරකම: වසර 2 ක් දක්වා හෝ දඩ<br>• මංකොල් හොරකම: දැඩි සිර දඬුවම් වසර 3-7<br>• පහරදීම: මාස 6 - වසර 2<br>• ඝාතනය: මරණ දඬුවම හෝ ජීවිත් සිර දඬුවම්<br>• සයිබර් පීඩාකාරීත්වය (2024 සංශෝධනය): වසර 5 දක්වා<br>• හැකිං: වසර 3 + රු. 500,000 දක්වා දඩ' },
-        example: { en:'<strong>Scenario:</strong> Kamal posts a threatening message on Facebook about his neighbor Nimal. Under the 2024 amendment, this falls under cyber harassment (Section 345). Kamal can be arrested without a warrant, face up to 5 years in prison, and be fined up to Rs. 500,000. Even if Kamal claims it was "just a joke," the law treats it seriously if the recipient felt threatened.', si:'<strong>උදාහරණය:</strong> කමල් ෆේස්බුක් එකේ ඔහුගේ අසල්ගුවා නිමල් ගැන තර්ජනාත්මක පණිවුඩුවක් දමයි. 2024 සංශෝධනය යටතේ මෙය සයිබර් පීඩාකාරීත්වය (345 වගන්තිය) යට යටත් වේ. කමල් වරන්තරයකින් අත්අඩංගුවට ගත් විය හැකි, වසර 5 දක්වා සිර දඬුවම් සහ රු. 500,000 දක්වා දඩයක් ගෙවිය හැකි. කමල් කියනවා "සෙල්ලක් ප්‍රහාරයක්" කියුත් වුණත්, නිමල්ට තර්ජනා වුණ බව නම්, නීතිය එය බර ගනිනවා ඇත.' },
-        sections: [
-          { heading:{en:'What is the Penal Code?',si:'දණ්ඩ නීති සංග්‍රහය යනු මොනවද?'}, content:{en:'The Penal Code of Sri Lanka, enacted in 1883, is the primary criminal legislation of the country. It defines all major criminal offences, prescribes punishments, and outlines the general principles of criminal liability. Modelled after the Indian Penal Code of 1860, it has been amended over 30 times to address emerging crimes including cyber offences.',si:'ශ්‍රී ලංකාවේ දණ්ඩ නීති සංග්‍රහය 1883 දී ස්ථාපිත කරන ලද ප්‍රධාන අපරාධ නීති සංග්‍රහයයි. මෙය සියලුම ප්‍රධාන අපරාධ අර්ථ දක්වන, දඬුවම් නියම කරන, සහ අපරාධ වගකීම්ගේ සාමාන්‍ය මූලධර්ම පැහැදිලි කරයි. 1860 ඉන්දියාන දණ්ඩ නීති සංග්‍රහය මාදිරුවෙන් සෑදු මෙය වසර 30කට වැඩි සංශෝධන කර ඇත.'} },
-          { heading:{en:'Key Amendments (2024)',si:'ප්‍රධාන සංශෝධන (2024)'}, content:{en:'<strong>Cyber Crime Provisions:</strong> New sections were added specifically targeting online harassment, revenge porn, identity theft, and unauthorised access to computer systems. Penalties include imprisonment up to 5 years and fines up to Rs. 500,000.<br><br><strong>Enhanced Protection for Vulnerable Groups:</strong> Stricter penalties for crimes against women, children, and elderly persons.<br><strong>Community Service:</strong> New provision allowing courts to order community service as an alternative to short-term imprisonment.', si:'<strong>සයිබර් අපරාධ විධිවිධාන:</strong> මාර්ගගත පීඩාකාරීත්වය, ප්‍රතිකාර අශ්ලිලතිය, අනන්‍යතාවය සොරකම සහ පරිගණක පද්ධතිවලට අනවසරක් නොමැතිව ඇතුළත්වීම ඉලක්කම් එකත් එකක් එකතුරා කර ඇත. වසර 5 දක්වා සහ රු. 500,000 දක්වා දඩ දක්වා ඇත.<br><br><strong>අවදානලුන්ට වැඩි ආරක්ෂාව:</strong> කාන්තා, ළමුන් සහ වැඩිහිටින්න්න්ට එරෙහිව අපරාධ සඳහා තව්‍ය දඬුවම්.<br><strong>සමාජ සේවා:</strong> කෙටින කාලීන සිර දඬුවම් වෙනුවට අධිකරණ සමාජ සේවා නියාම කරන නව විධිවිධානයක්.'} },
-          { heading:{en:'How Cases Are Filed',si:'නඩු කොහොම ගොනු කරන්නේ?'}, content:{en:'<strong>1. FIR (First Information Report):</strong> Filed at the nearest police station. Police must record your complaint and give you a copy.<br><strong>2. Investigation:</strong> Police investigate, collect evidence, arrest suspects if needed.<br><strong>3. Attorney General\'s Advice:</strong> For serious offences, police seek the AG\'s direction before filing charges.<br><strong>4. Court Process:</strong> Magistrate Court → High Court (for serious offences) → Supreme Court (appeals).<br><strong>5. Bail:</strong> For bailable offences, bail is a right. For non-bailable offences, only the High Court can grant bail.', si:'<strong>1. FIR (පළමු තොරතුරු වාර්තාව):</strong> ආසන්නට ඇති පොලිසියකදී ගොනු කරන්න. පොලිසියේ ඔබේ පැමිණිල්ල සටහන් ගත යුතුරන්න ඕනේ.<br><strong>2. පරීක්ෂණය:</strong> පොලිසිය සාක්ෂි රැස්සූ කර, සැකිල්ලාගුරුවන්න් අත්අඩංගුවට ගන්න.<br><strong>3. නියෝජිතා ජෙනරාල් උපදේශය:</strong> බරපරල අපරාධ සඳහා පොලිසිය ඒ උපදේශය ලබා ගනී.<br><strong>4. අධිකරණ ක්‍රියාවලාව:</strong> මහේස්ත්‍රාධිකරණය → මහාධිකරණය (බරපරල) → ශ්‍රේෂ්ඨාධිකරණය (අභියාදන).<br><strong>5. ඇප:</strong> ඇප දියන අපරාධවලට ඇප අයිතියකි. ඇප නොදියන අපරාධවලට මහාධිකරණයට පමණක් අයිතිය.'} }
-        ],
-        related: ['computer-crimes-act','criminal-procedure-code','evidence-ordinance','bail-act']
-      },
+  /**
+   * RENDER PROCESS (COMPLAINT)
+   */
+  function renderProcess() {
+    const proc = currentLaw.complaintProcess;
+    if (!proc) return;
 
-      'computer-crimes-act': {
-        category: { id:'cyber', icon:'💻', name:{en:'Cyber Laws',si:'සයිබර් නීති'} },
-        title: { en:'Computer Crimes Act No. 24 of 2007', si:'පරිගණක අපරාධ පනත No. 24 දරණ (2007)' },
-        tldr: { en:'Sri Lanka\'s dedicated cyber crime law covering hacking, unauthorised access, data theft, and electronic fraud. Provides for investigation by CID\'s Computer Crimes Division and CERT. Maximum penalty is 5 years imprisonment or Rs. 500,000 fine or both.', si:'ශ්‍රී ලංකාවේ විශේෂ සයිබර් අපරාධ නීතිය. හැකිං, අනවසරක් නොමැති ප්‍රවේශය, දත්ත සොරකම් සහ ඉලෙක්ට්‍රොනික වංචා ආවරණය කරයි. උපරිමික වසර 5ක් හෝ රු. 500,000 දඩ.' },
-        year: 2007, updated: '2023', readTime: '6 min',
-        source: 'https://www.commonlii.org/lk/legis/consol_act/20072/',
-        penalties: { en:'• Unauthorised access to a computer: Up to 3 years + fine<br>• Unauthorised access with intention of causing harm: Up to 5 years + fine<br>• Damage to a computer system: Up to 3 years + fine up to Rs. 100,000<br>• Electronic fraud: Up to 5 years + fine up to Rs. 500,000<br>• Unauthorised disclosure of passwords: Up to 2 years + fine<br>• Intercepting electronic communication: Up to 3 years + fine', si:'• පරිගණකයකට අනවසරක් නොමැතිව ප්‍රවේශය: වසර 3 + දඩ<br>• හානි කිරීමේ අදහසින් ප්‍රවේශය: වසර 5 + දඩ<br>• පරිගණක පද්ධතියට හානි කිරීම: වසර 3 + රු. 100,000 දඩ<br>• ඉලෙක්ට්‍රොනික වංචාව: වසර 5 + රු. 500,000 දඩ<br>• මුරපල හෙළින්න: වසර 2 + දඩ<br>• ඉලෙක්ට්‍රොනික සන්නියුරු අසුරන්න: වසර 3 + දඩ' },
-        example: { en:'<strong>Scenario:</strong> Sita discovers someone logged into her email account without permission and read her private messages. She reports this to the local police station. Under Section 3 of the Computer Crimes Act, this is "unauthorised access to a computer" and carries up to 3 years imprisonment. The CID\'s Computer Crimes Division can investigate. Evidence like IP logs and email server records are admissible in court under the Evidence (Special Provisions) Act.', si:'<strong>උදාහරණය:</strong> සිතාට කෙනෙකුනෙක් ඇයගේ ඊමේල් ගිණුවට අනවසරක් නැතුව ලොගින් ඇතුළින් පෞද්ගලික පණිවුඩු කියවුන් බලන බව දකී. ඇය ආසන්නට ඇති පොලිසියට පැමිණිල්ල් කරයි. පරිගණක අපරාධ පනතේ 3 වන වගන්තිය යටත් මෙය පැමිණිල්ල් වේ. CID සයිබර් අපරාධ කොට්ඨාසය පරීක්ෂණය කරයි. IP ලොග් සහ ඊමේල් සර්වර් වාර්තාවන් සාක්ෂි ලෙසින්න පුළුන්නේ.' },
-        sections: [
-          { heading:{en:'What offences are covered?',si:'කුම අපරාධ ආවරණය වේ?'}, content:{en:'The Act covers: unauthorised access to computers, unauthorised copying of data, damage to computer systems, electronic fraud, unauthorised disclosure of passwords, interception of electronic communications, and use of computers for committing offences.', si:'පනත යටත් කරන්නේ: පරිගණකයන්ට අනවසරක් නොමැතිව ඇතුළුවීම, දත්ත අනවසරක් නොමැතිව පිටපත් කිරීම, පරිගණක පද්ධතිවලට හානි කිරීම, ඉලෙක්ට්‍රොනික වංචාව, මුරපල හෙළින්න සහ අපරාධ කිරීමට පරිගණක භාවිතාව.'} },
-          { heading:{en:'How to Report a Cyber Crime',si:'සයිබර් අපරාධයක් කොහොම වාර්තා කරන්නේ?'}, content:{en:'<strong>1. Preserve Evidence:</strong> Take screenshots, save emails, don\'t delete anything.<br><strong>2. Report to Police:</strong> File a complaint at the nearest police station or call 119.<br><strong>3. Report to CERT:</strong> Contact Sri Lanka CERT at 1919 or cert.gov.lk.<br><strong>4. Document Everything:</strong> Note dates, times, URLs, and the people involved.<br><strong>5. Bank:</strong> If financial fraud, inform your bank immediately to freeze accounts.', si:'<strong>1. සාක්ෂි ආරක්ෂා කරන්න:</strong> තිරන් රුප ගන්න, ඊමේල් සේව් කරන්න, කිසිමක් මකන්න එපා.<br><strong>2. පොලිසියට කියන්න:</strong> ආසන්නට ඇති පොලිසියකදී පැමිණිල්ල් කරන්න හෝ 119 ට කතා කරන්න.<br><strong>3. CERT වෙතට කියන්න:</strong> 1919 ට කතා කරන්න හෝ cert.gov.lk වෙත පැමිණිල්ල් කරන්න.<br><strong>4. සියල්ම සටහන් ගන්න:</strong> දින, වේලාවන්, URLs සහ ඊට සම්බන්ධ පුද්ගලන් සටහන්ගත් කරගන්න.<br><strong>5. බැංකුවට කියන්න:</strong> මූල්‍ය වංචාවක් නම්, ඒකාරණම බැංකුවට කියන්න ගිණුන් මුදල් අටවුල් කරන්න.'} }
-        ],
-        related: ['penal-code','online-safety-bill','electronic-transactions-act','data-protection-act']
-      },
-
-      'online-safety-bill': {
-        category: { id:'cyber', icon:'💻', name:{en:'Cyber Laws',si:'සයිබර් නීති'} },
-        title: { en:'Online Safety Bill (2024)', si:'මාර්ගගත ආරක්ෂණ පනත (2024)' },
-        tldr: { en:'New legislation regulating online content, social media platforms, and addressing online harassment, hate speech, and misinformation. Establishes an Online Safety Commission with powers to order content removal. Highly debated bill with concerns about freedom of expression.', si:'මාර්ගගත අන්තර්ගතය, සමාජ මාධ්‍යවලාවල සහ මාර්ගගත පීඩාකාරීත්වය, වෛාදී භාෂාව සහ වැරටටි තොරතුරු පාලන පාලන නියාමනය කරන නව පනතයකි. ප්‍රකාශන නිදහස් ගැන පිළිබඳුන් පාලන බලත් ඇති මාර්ගගත ආරක්ෂණ කොමිෂන් පිහිටුවන්න පනතයකි.' },
-        year: 2024, updated: '2024', readTime: '7 min',
-        source: 'https://www.parliament.lk/',
-        penalties: { en:'• Posting harmful content: Up to 5 years + fine up to Rs. 10 million<br>• Online harassment: Up to 3 years<br>• Hate speech: Up to 5 years<br>• Misinformation: Up to 3 years<br>• Platform non-compliance: Fines up to Rs. 100 million<br><br>Note: Penalties are significantly higher than existing cyber laws, which has raised concerns.', si:'• හානි අන්තර්ගතය පළම් කිරීම: වසර 5 + රු. 10 මිලියන් දඩ<br>• මාර්ගගත පීඩාකාරීත්වය: වසර 3<br>• වෛාදී භාෂාව: වසර 5<br>• වැටටි තොරතුරු: රු. 100 මිලියන් දඩ<br><br>සටහන: දඩ මුදල් පවත්ම පවතින සයිබර් නීතිවලට වඩා බොහෝ ඇති නිසා ප්‍රකාශන ඇති.' },
-        example: { en:'<strong>Scenario:</strong> Ruwan posts a political meme about a minister on Facebook. Under this bill, if the Online Safety Commission determines it to be "harmful," they can order Facebook to remove it. Ruwan could face up to 5 years imprisonment. Critics argue this could be used to suppress political speech.', si:'<strong>උදාහරණය:</strong> රුවන් ෆේස්බුක් එකේ අමාත්‍යවරයෙකු ගැන මීම් එකක් පළම් කරයි. මේ පනත යටත් මාර්ගගත ආරක්ෂණ කොමිෂන් එකක් ඒය "හානි" යැයි තීරණය කරන්නේ, ෆේස්බුක්ට ඒය ඉවත්ත්ම ඉවත්ත්ම පාලන නියෝග කරන්නට පුළුවනවා. රුවන්ට වසර 5ක් දක්වා සිර දඬුවම් නියම හිමි වෙන්න පුළුවනවා. විවේචකාරුවන් පවසන් මෙය දේශපාලන මතයාවක් මනින්න භාවිත්ත්‍රය මන්ත්‍රණයට පාවින්න පුළුවනවා යයි කියා තර්ජනා කරති.' },
-        sections: [
-          { heading:{en:'What does this bill regulate?',si:'මේ පනත මොනවා නියාමනය කරන්නේ?'}, content:{en:'The bill regulates: harmful online content, online harassment and bullying, hate speech, misinformation and fake news, social media platform obligations, and establishes the Online Safety Commission as the regulatory body.', si:'පනත නියාමනය කරන්නේ: හානි මාර්ගගත අන්තර්ගතය, මාර්ගගත පීඩාකාරීත්වය, වෛාදී භාෂාව, වැටටි තොරතුරු සහ සමාජ මාධ්‍යවලාවල යුතුම් පැහැදිලි කරන අන්තර්ගත ආරක්ෂණ කොමිෂන් පිහිටුවීම.'} },
-          { heading:{en:'Key Concerns',si:'ප්‍රධාන අනිවේයන්'}, content:{en:'<strong>Freedom of Expression:</strong> Critics argue vague definitions of "harmful" content could be misused to suppress legitimate speech and journalism.<br><br><strong>Massive Fines:</strong> Platform fines up to Rs. 100 million could force companies like Meta to exit Sri Lanka.<br><br><strong>Due Process:</strong> Content removal can happen before judicial review, raising fairness concerns.<br><br><strong>Overreach:</strong> Bill applies to all online content, not just social media posts.', si:'<strong>ප්‍රකාශන නිදහස්:</strong> "හානි" අන්තර්ගතය අර්ථ දැක්වීම් නිසා ව්‍යායාත්මක මතයාවක් සහ මාධ්‍ය මාධ්‍යවලාව මන්ත්‍රණයට භයින්න භාවිත්ත්‍රය කරනවා ඇත.<br><br><strong>විශාල දඩ:</strong> වේදිකාවලට රු. 100 මිලියන් දඩක් දැමුණුවීම Meta වගේ සමාජයන් වෙතින්න ලංකාවෙන් යන්න බලන්න පුළුවනවා.<br><br><strong>සාධාරණ ක්‍රියාවලාව:</strong> අධිකරණ විභාගයකින්න පෙර අන්තර්ගතය ඉවත්ත්ම ඉවත්තම ඉවරන්න එක්ක්.'} }
-        ],
-        related: ['penal-code','computer-crimes-act','right-to-information-act']
-      },
-
-      'domestic-violence-act': {
-        category: { id:'family', icon:'👨‍👩‍👧', name:{en:'Family Laws',si:'පවුල් නීති'} },
-        title: { en:'Prevention of Domestic Violence Act No. 34 of 2005', si:'ගෘහස්ථ ප්‍රචණ්ඩත්වය වැළැක්වීමේ පනත No. 34 දරණ (2005)' },
-        tldr: { en:'Protects victims of domestic violence through protection orders, safe houses, and counseling. Covers physical, emotional, sexual, and economic abuse between family members. The court can issue Interim Protection Orders (IPO) within 24 hours. Both criminal and civil remedies available.', si:'පවුල් ප්‍රචණ්ඩත්වයේ පීඩිතයන්නන්ට ආරක්ෂා කරන ආරක්ෂා ආඥාවන්, ආරක්ෂිත නිවාස් සහ උපදේශනය හරහා පවුල් සමාජයන් අතර භෞද්ධ ප්‍රචණ්ඩත්වාවට ආවරණය වෙයි. අධිකරණයට පැයින්න 24කින් තුළ අන්තර්යාමික ආරක්ෂා ආඥාවන් (IPO) නිකුතුවන්න පුළුවනවා.' },
-        year: 2005, updated: '2023', readTime: '6 min',
-        source: 'https://www.commonlii.org/lk/legis/consol_act/20055/',
-        penalties: { en:'• Physical abuse: Up to 5 years + fine<br>• Emotional abuse: Up to 2 years<br>• Economic abuse (withholding money): Up to 2 years<br>• Violating protection order: Up to 2 years or fine<br>• Forcing marriage: Up to 2 years<br>• Child abuse within family: Enhanced penalties under separate law', si:'• ශාරීරික පහරදීම: වසර 5 + දඩ<br>• මානසික පහරදීම: වසර 2<br>• ආර්ථික පහරදීම (මුදල් හිරිනීම): වසර 2<br>• ආරක්ෂා ආඥාවනය ක්‍රියා කිරීම: වසර 2 හෝ දඩ<br>• බලහත් කිරීම: වසර 2<br>• පවුලය ඇතුළ ළමා අපචාරය: වෙනම නීතියට යටත් වැඩි දඬුවම්' },
-        example: { en:'<strong>Scenario:</strong> Nimal regularly threatens and physically abuses his wife Malini. Malini goes to the nearest police station and files a complaint. The magistrate issues an Interim Protection Order (IPO) within 24 hours, barring Nimal from entering the house. Malini and her children are sent to a safe house. Nimal is later arrested and can face up to 5 years in prison. Even without Nimal\'s arrest, Malini can claim maintenance under this Act.', si:'<strong>උදාහරණය:</strong> නිමල් ඔහුගේ බිරිඳ මාලිනින්නට නිතරින්නේ තර්ජනා කරන සහ ශාරීරික පහරදයි. මාලිනි ආසන්නට ඇති පොලිසියට පැමිණිල්ල් කරයි. මහේස්ත්‍රාධිකාරණය පැයින් 24කින් තුළ අන්තර්යාමික ආරක්ෂා ආඥාවනයක් (IPO) නිකුතුවන්නේ, නිමල්ව නිවාස් ඇතුළට එන්න තහන්න තහන්න කරයි. මාලිනි සහ ඇයගේ දරුවන්ලාන්ට ආරක්ෂිත නිවාසයක් වෙතට යවනවා.' },
-        sections: [
-          { heading:{en:'What counts as domestic violence?',si:'ගෘහස්ථ ප්‍රචණ්ඩත්වාවය කුමක්ද?'}, content:{en:'The Act recognises four types: <strong>Physical</strong> (hitting, burning, using weapons), <strong>Emotional</strong> (threats, isolation, humiliation), <strong>Sexual</strong> (marital rape, forced acts), and <strong>Economic</strong> (controlling money, preventing employment, property damage). It applies to spouses, ex-spouses, children, parents, siblings, and other family members.', si:'පනත හඳුනා වර්ග 4ක් අර්ථ දක්වයි: <strong>ශාරීරික</strong> (පහරදීම, ගිනිඅඟුරුම), <strong>මානසික</strong> (තර්ජනා, විනිසුර, අපහරදීම), <strong>ලිංගික</strong> (විවාහේ බලාගෙනවා), <strong>ආර්ථික</strong> (මුදල් පාලන්න, රැකියාව වැළැක්වීම අවහරුවීම). මෙය භාර්‍යවලාවන්න්, හිටින්න්න්, දරුවන්ලාන්ට සහ අනෙකුත් පවුලේ සිටින්නන්ටත් අදාළා.'} },
-          { heading:{en:'How to get a Protection Order',si:'ආරක්ෂා ආඥාවනයක් කෙලින්නේ කොහොමද?'}, content:{en:'<strong>Step 1:</strong> Go to the nearest Magistrate Court with a written complaint (police report recommended).<br><strong>Step 2:</strong> File an application under Section 11 of the Act.<br><strong>Step 3:</strong> The magistrate may issue an Interim Protection Order (IPO) within 24 hours.<br><strong>Step 4:</strong> A hearing follows within 14 days. The order can include barring the abuser, child custody, maintenance, and residence rights.<br><strong>Step 5:</strong> If violated, file a complaint — punishment up to 2 years.', si:'<strong>පියම 1:</strong> පොලිසි වාර්තාවයක් සමඟ (නිර්යාමිකය ලැබින්න ලැබේ) මහේස්ත්‍රාධිකරණයට යන්න.<br><strong>පියම 2:</strong> 11 වන්තිය යටත් පැමිණිල්ල් ගොන්න.<br><strong>පියම 3:</strong> මහේස්ත්‍රාධිකරණය 24 පැයින් තුළ IPO නිකුතුවන්න.<br><strong>පියම 4:</strong> 14 දවස් තුළ විභාගයකයක්. අයිතියට එන්න නියම එකක් ඇතුලත් නියම එකක් තියෙන්න.<br><strong>පියම 5:</strong> ක්‍රියා කරුණු නම් වුවන්න — වසර 2 දක් දක්වා සිර දඬුවම්.'} }
-        ],
-        related: ['penal-code','maintenance-act','muslim-marriage-act','child-protection']
-      },
-
-      'epf-act': {
-        category: { id:'labor', icon:'💰', name:{en:'Corporate / Labor Laws',si:'කෝපරේට් / කම්කරු නීති'} },
-        title: { en:'Employees Provident Fund Act No. 15 of 1958', si:'සේවක සේවකායෝජන අරමුදල පනත No. 15 දරණ (1958)' },
-        tldr: { en:'Sri Lanka\'s largest retirement savings scheme. Employer contributes 12% and employee contributes 8% of monthly salary. Currently holds over Rs. 3 trillion. Full refund available at retirement, partial withdrawal allowed for housing, medical, and education. Interest rate reviewed annually.', si:'ශ්‍රී ලංකාවේ විශාලම විශ්‍රාම ඉතුරුම් ක්‍රමය. සේවායෝජකායෝජකයා 12% සේවකයෝජකයටත්, සේවකයායෝජකයා 8% සේවකයායෝජකාටත් මාසික වැටුපුරුමේ දාන්න. දැනට රු. 3 ට්‍රිලියන් ඇත. විශ්‍රාම ලබාගෙන විටුපුරුවීම, නිවාස්, වෛන්ත්‍ර සහ අධ්‍යාපන සඳහා අස්වසන් ගන්න්න පුළුවනා.' },
-        year: 1958, updated: '2024', readTime: '6 min',
-        source: 'https://www.epf.gov.lk/',
-        penalties: { en:'<strong>Employer violations:</strong><br>• Not registering: Fine up to Rs. 100,000 + Rs. 5,000 per employee per month<br>• Not contributing: Fine up to Rs. 100,000 + 2 years imprisonment<br>• Late payment: 10% interest per annum on delayed amount<br><br><strong>Employee violations:</strong><br>• Providing false information: Fine up to Rs. 50,000<br>• Attempting double withdrawal: Fine up to Rs. 25,000', si:'<strong>සේවායෝජකයෝජකයගේ ක්‍රියා:</strong><br>• ලියාපදිංචින්න: රු. 100,000 + සේවකයෝජයෙකුට රු. 5,000<br>• මුදල් නොදීම: රු. 100,000 + වසර 2 සිර<br>-> පමා කරන්න ගැන්නෙන්න: වාර්ෂික 10% පොල්ලේ<br><strong>සේවකයායෝජකයාගේ ක්‍රියා:</strong><br>• බොරු තොරතුරු දීම: රු. 50,000 දක්වා දඩ<br>• දෙව්ත්‍ර ආපස්සුන් ගන්න්නට උත්ස්‍රීම: රු. 25,000 දක්' },
-        example: { en:'<strong>Scenario:</strong> Sunil works at a company earning Rs. 80,000/month. His employer deducts 12% (Rs. 9,600) and his own 8% (Rs. 6,400) = Rs. 16,000/month into EPF. After 30 years, his balance is approximately Rs. 12 million. He can withdraw partially for a housing loan (50% of balance) or medical expenses. At retirement, the full amount plus interest is refunded tax-free. If the company doesn\'t pay, Sunil can complain to the Labour Department or file a case in Labour Tribunal.', si:'<strong>උදාහරණය:</strong> සුනිල් රුපකායයක වැටුපුරුන් රු. 80,000ක් හොයන්න. ඔහේ සේවායෝජකයෝජයා 12% (රු. 9,600) සහ ඔහේම 8% (රු. 6,400) = මාසිකට රු. 16,000 EPF ගසන්තුරුන්නේ. 30 වසරකින් පසු ඔහේ ශේවාරට රු. 12 මිලියන් පමින් ඇත. නිවාසක්, වෛන්ත්‍ර සහ අධ්‍යාපනය සඳහා අස්වසාන් ගන්න්න පුළුවනා. සේවායෝජයෝජකාව මුදල් නොදුපන්න නම් වුවන්න, ශ්‍රී ලංකාවේ ශ්‍රේෂ්ඨාධිකරණයට කියන්න හෝ ලේබෝ ගින්න.' },
-        sections: [
-          { heading:{en:'How does EPF work?',si:'EPF ක්‍රියා කරන්නේ කොහොමද?'}, content:{en:'<strong>Contributions:</strong> 12% by employer + 8% by employee from monthly salary.<br><strong>Interest:</strong> Reviewed annually by the Central Bank. Currently around 8-12%.<br><strong>Withdrawal:</strong> Full at retirement (55+ for women, 60 for men). Partial for housing (50%), medical, education.<br><strong>Tax-free:</strong> EPF returns are completely exempt from income tax.<br><strong>Refund:</strong> Full amount + interest paid within 5 working days of application.', si:'<strong>දායකත්:</strong> සේවායෝජකයෝජකා 12% + සේවකයෝජයා 8% මාසික වැටුපුරුවෙන්න.<br><strong>පොළියේ ප්‍රතිකම:</strong> මහ බැංකුවේ විදෙසා පරීක්ෂණය කරයි. දැනට 8-12%.<br><strong>ආපසුරු ගන්න්න:</strong> විශ්‍රාම විශ්‍රාමයට (කාන්තා වසර 55+, පිරිමින් වසර 60). නිවාස්, වෛන්ත්‍ර, අධ්‍යාපන සඳහා අස්වසාන් ගන්න්න පුළුවන්න.<br><strong>බදුන් නැතුන වියම:</strong> EPF ආපසුරු බදුන් නැතුන වියම.'} },
-          { heading:{en:'How to check your EPF balance',si:'ඔබේ EPF බැලන්ස් පරීක්ෂණය කරන්නේ කොහොමද?'}, content:{en:'<strong>Online:</strong> Visit epf.gov.lk → Click "Member" → Enter your NIC number → View balance and transactions.<br><strong>App:</strong> Download the "EPF Member App" from Play Store/App Store.<br><strong>Phone:</strong> Call EPF department: 011 2355355.<br><strong>In Person:</strong> Visit your nearest EPF regional office with NIC and payslip.', si:'<strong>Online:</strong> epf.gov.l/k වෙතට යන්න → "Member" ඔබන්ටට අන්තර්ගතුන් ඇති අන්තර්ගතුන් ඇතුන් ටයුන් දාන්න.<br><strong>App:</strong> "EPF Member App" Play Store එකෙන් ඩවින්ලෝඩ් කරගන්න.<br><strong>Phone:</strong> EPF දෙපාර්ට්මේන්ට: 011 2355355.<br><strong>තුන්:</strong> ආසන්නට ඇති EPF කාලාපයට අන්තර්ගතුන් ඇතින් ටයුන් සහ පේන්ටිලිප් ගෙන්න්න.'} }
-        ],
-        related: ['etf-act','wages-board-ordinance','shop-office-act','termination-employment-act']
-      }
-
-    };
-
-    // =============================================================
-    // STATE
-    // =============================================================
-    let lang = 'en';
-    const saved = localStorage.getItem('gl_lk_lang');
-    if (saved && T[saved]) lang = saved;
-    let currentLaw = null;
-    let currentFontSize = 16;
-
-    // =============================================================
-    // INIT
-    // =============================================================
-    document.addEventListener('DOMContentLoaded', function() {
-      lucide.createIcons();
-      document.getElementById('langLbl').textContent = lang.toUpperCase();
-      applyTranslations();
-      loadLaw();
-    });
-
-    function loadLaw() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
-      if (!id || !LAWS[id]) {
-        document.getElementById('notFound').classList.remove('hidden');
-        document.getElementById('lawContent').classList.add('hidden');
-        document.title = 'Law Not Found - GlobalLaw';
-        return;
-      }
-      currentLaw = LAWS[id];
-      document.getElementById('notFound').classList.add('hidden');
-      document.getElementById('lawContent').classList.remove('hidden');
-      document.title = (currentLaw.title[lang] || currentLaw.title.en) + ' - GlobalLaw Sri Lanka';
-      renderLaw();
-      lucide.createIcons();
+    let docsHtml = '';
+    if (proc.requiredDocuments) {
+      docsHtml = `<ul class="list-disc pl-4 mt-2 space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
+        ${proc.requiredDocuments.map(d => `<li>${getTrans(d)}</li>`).join('')}
+      </ul>`;
     }
 
-    // =============================================================
-    // RENDER
-    // =============================================================
-    function renderLaw() {
-      const L = currentLaw;
-      const d = T[lang] || T.en;
-
-      // Breadcrumb
-      document.getElementById('breadcrumb').innerHTML =
-        '<a href="index.html" class="hover:text-brand-red transition">GlobalLaw</a>' +
-        '<i data-lucide="chevron-right" class="w-3 h-3"></i>' +
-        '<a href="lk.html" class="hover:text-brand-red transition">🇱🇰 Sri Lanka</a>' +
-        '<i data-lucide="chevron-right" class="w-3 h-3"></i>' +
-        '<a href="lk-categories.html?cat=' + L.category.id + '" class="hover:text-brand-red transition">' + (L.category.name[lang] || L.category.name.en) + '</a>' +
-        '<i data-lucide="chevron-right" class="w-3 h-3"></i>' +
-        '<span class="text-neutral-700 dark:text-neutral-200 font-medium">' + (L.title[lang] || L.title.en) + '</span>';
-
-      // Category link
-      document.getElementById('catLink').href = 'lk-categories.html?cat=' + L.category.id;
-      document.getElementById('catIcon').textContent = L.category.icon;
-      document.getElementById('catName').textContent = L.category.name[lang] || L.category.name.en;
-
-      // Title & Meta
-      document.getElementById('lawTitle').textContent = L.title[lang] || L.title.en;
-      document.getElementById('metaYear').textContent = (d.yearLabel || 'Year') + ': ' ' + L.year;
-      document.getElementById('metaUpdated').textContent = (d.updatedLabel || 'Updated') + ': ' + L.updated;
-      document.getElementById('metaReadTime').textContent = (d.readLabel || 'Read') + ': ' + L.readTime;
-
-      // TLDR
-      document.getElementById('tldrText').textContent = L.tldr[lang] || L.tldr.en;
-
-      // Sections
-      const secContainer = document.getElementById('lawSections');
-      let secHTML = '';
-      L.sections.forEach(function(sec, i) {
-        const h = sec.heading[lang] || sec.heading.en;
-        const c = sec.content[lang] || sec.content.en;
-        const anchor = 'section-' + i;
-        secHTML += '<section id="' + anchor + '" class="scroll-mt-20">' +
-          '<h2 class="text-lg md:text-xl font-bold mb-4 pb-2 border-b border-neutral-200 dark:border-brand-dark-border">' + h + '</h2>' +
-          '<div class="prose prose prose-neutral dark:prose-invert max-w-none text-sm md:text-base leading-relaxed" style="font-size:' + currentFontSize + 'px">' + c + '</div>' +
-          '</section>';
-      });
-      secContainer.innerHTML = secHTML;
-
-      // Penalties
-      document.getElementById('penaltyContent').innerHTML = L.penalties[lang] || L.penalties.en;
-
-      // Example
-      if (L.example) {
-        document.getElementById('exampleBox').classList.remove('hidden');
-        document.getElementById('exampleText').innerHTML = L.example[lang] || L.example.en;
-      } else {
-        document.getElementById('exampleBox').classList.add('hidden');
-      }
-
-      // Source
-      if (L.source) {
-        document.getElementById('sourceBox').classList.remove('hidden');
-        document.getElementById('sourceLink').href = L.source;
-        document.getElementById('sourceLink').textContent = L.source;
-      } else {
-        document.getElementById('sourceBox').classList.add('hidden');
-      }
-
-      // Related Laws
-      const relGrid = document.getElementById('relatedGrid');
-      let relHTML = '';
-      let relCount = 0;
-      L.related.forEach(function(relId) {
-        if (LAWS[relId]) {
-          const r = LAWS[relId];
-          relHTML += '<a href="lk-law-details.html?id=' + relId + '" class="flex items-start gap-3 bg-neutral-50 dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl p-4 hover:border-brand-red transition group">' +
-            '<div class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-lg shrink-0">' + r.category.icon + '</div>' +
-            '<div class="flex-1 min-w-0">' +
-            '<h4 class="font-semibold text-xs group-hover:text-brand-red transition leading-tight">' + (r.title[lang] || r.title.en) + '</h4>' +
-            '<p class="text-[11px] text-neutral-400 mt-0.5">' + (r.tldr[lang] || r.tldr.en).substring(0, 80) + '...</p>' +
-            '</div>' +
-            '<span class="text-brand-red text-[11px] font-semibold shrink-0">' + (d.viewDetails || 'View Details →') + '</span>' +
-            '</a>';
-          relCount++;
-        }
-      });
-      if (relCount === 0) document.getElementById('relatedSection').classList.add('hidden');
-      relGrid.innerHTML = relHTML;
-
-      // Back to Category
-      document.getElementById('backToCat').href = 'lk-categories.html?cat=' + L.category.id;
-
-      // TOC
-      buildTOC();
+    let contactsHtml = '';
+    if (proc.contactNumbers) {
+      contactsHtml = `<div class="mt-3 flex flex-wrap gap-2">
+        ${proc.contactNumbers.map(c => `
+          <a href="tel:${c.number}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-bold border border-green-100 dark:border-green-900/30 hover:bg-green-100 transition">
+            <i data-lucide="phone" class="w-3 h-3"></i> ${c.org}
+          </a>
+        `).join('')}
+      </div>`;
     }
 
-    // =============================================================
-    // TABLE OF CONTENTS
-    // =============================================================
-    function buildTOC() {
-      const nav = document.getElementById('tocNav');
-      let html = '';
-      currentLaw.sections.forEach(function(sec, i) {
-        const h = sec.heading[lang] || sec.heading.en;
-        html += '<a href="#section-' + i + '" class="toc-link text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1 block" data-toc="section-' + i + '">' + h + '</a>';
-      });
-      nav.innerHTML = html;
-      lucide.createIcons();
-      // Scroll spy
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            document.querySelectorAll('.toc-link').forEach(function(l) { l.classList.remove('active'); });
-            document.querySelector('[data-toc="section-' + entry.target.id + '"]')?.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-20%', threshold: 0.1' });
-      document.querySelectorAll('section[id^="section-"]').forEach(function(sec) { observer.observe(sec); });
+    const html = `
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <!-- Step Dot -->
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">1. First Step</h4>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.firstStep)}</p>
+      </div>
+
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">2. Authority to Contact</h4>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">${getTrans(proc.whoToMeet)}</p>
+        ${contactsHtml}
+      </div>
+
+      <div class="relative pl-8 pb-8 border-l-2 border-neutral-100 dark:border-brand-dark-border last:border-0 last:pb-0">
+        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-brand-dark border-2 border-brand-red z-10"></div>
+        
+        <h4 class="text-sm font-bold text-neutral-900 dark:text-white mb-1">3. Required Documents</h4>
+        ${docsHtml}
+      </div>
+    `;
+    setHtml('processContainer', html);
+  }
+
+  /**
+   * RENDER INCIDENTS
+   */
+  function renderIncidents() {
+    const incs = currentLaw.incidents;
+    if (!incs || incs.length === 0) {
+      setHtml('incidentsContainer', '<p class="text-sm text-neutral-500 pl-8">No recent incidents recorded.</p>');
+      return;
     }
 
-    // =============================================================
-    // FONT SIZE
-    // =============================================================
-    function changeFont(dir) {
-      if (dir === 0) currentFontSize = 16;
-      else currentFont = Math.max(12, Math.min(24, currentFont + (dir * 2));
-      document.querySelectorAll('#lawSections .prose').forEach(function(el) { el.style.fontSize = currentFont + 'px'; });
+    const html = incs.map((inc, index) => `
+      <div class="relative pl-8 pb-8 last:pb-0">
+        <!-- Timeline Dot -->
+        <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600 z-10 ring-4 ring-white dark:ring-brand-dark"></div>
+        
+        <div class="bg-neutral-50 dark:bg-brand-dark-card rounded-xl p-4 border border-neutral-100 dark:border-brand-dark-border">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] font-mono font-bold text-brand-red bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">${inc.incidentDate}</span>
+            <span class="text-[10px] font-bold text-neutral-400 uppercase">Case #${index + 100}</span>
+          </div>
+          <p class="text-sm text-neutral-700 dark:text-neutral-200 font-medium mb-2">${getTrans(inc.description)}</p>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 bg-white dark:bg-brand-dark p-2 rounded border border-neutral-100 dark:border-brand-dark-border">
+            <strong>Outcome:</strong> ${getTrans(inc.outcome)}
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    setHtml('incidentsContainer', html);
+  }
+
+  /**
+   * RENDER LAWYERS
+   */
+  function renderLawyers() {
+    const lawyers = currentLaw.lawyers;
+    if (!lawyers || lawyers.length === 0) {
+      setHtml('lawyersContainer', '<p class="text-xs text-neutral-500 text-center py-4">No expert data available.</p>');
+      return;
     }
 
-    // =============================================================
-    // SHARE
-    // =============================================================
-    function shareLaw(platform) {
-      const title = currentLaw.title[lang] || currentLaw.title.en;
-      const url = window.location.href;
-      let link = '';
-      switch (platform) {
-        case 'whatsapp': link = 'https://wa.me/?text=' + encodeURIComponent(title + '\n' + url); break;
-        case 'facebook': link = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '&t=' + encodeURIComponent(title); break;
-        case 'twitter': link = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url); break;
-      }
-      if (link) window.open(link, '_blank', 'width=600,height=400');
-    }
+    const html = lawyers.map(law => `
+      <div class="bg-white dark:bg-brand-dark-card border border-neutral-100 dark:border-brand-dark-border rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition cursor-pointer group">
+        <div class="relative shrink-0">
+          <img src="${law.photoUrl || 'https://via.placeholder.com/150'}" alt="${getTrans(law.name)}" class="w-12 h-12 rounded-full object-cover border-2 border-neutral-100 dark:border-brand-dark-border group-hover:border-brand-red transition">
+          <div class="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-brand-dark-card ${law.isAvailable ? 'bg-green-500' : 'bg-neutral-400'}" title="${law.isAvailable ? 'Available' : 'Busy'}"></div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-sm font-bold text-neutral-900 dark:text-white truncate">${getTrans(law.name)}</h4>
+          <p class="text-[11px] text-brand-red font-medium mb-1 truncate">${getTrans(law.jobRole)}</p>
+          <p class="text-[10px] text-neutral-500 dark:text-neutral-400 line-clamp-2">${getTrans(law.shortDesc)}</p>
+        </div>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-300 group-hover:text-brand-red transition shrink-0"></i>
+      </div>
+    `).join('');
 
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href);
-      showToast('Copied!', true);
-    }
+    setHtml('lawyersContainer', html);
+  }
 
-    // =============================================================
-    // DOWNLOAD PDF / PRINT
-    // =============================================================
-    function downloadPDF() {
-      window.print();
+  /**
+   * LANGUAGE TOGGLE LOGIC
+   */
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'si' : 'en';
+    localStorage.setItem('gl_lk_lang', currentLang);
+    
+    // Re-render text content
+    renderPage();
+    
+    // Update button text if it exists
+    const btn = document.getElementById('langToggleBtn');
+    if(btn) {
+        btn.innerHTML = `<span class="text-xs font-bold">${currentLang === 'en' ? 'SWITCH TO SINHALA' : 'SWITCH TO ENGLISH'}</span>`;
     }
+  }
 
-    // =============================================================
-    // FEEDBACK
-    // =============================================================
-    function feedback(type) {
-      showToast((type === 'up' ? '👍' : '👎') + ' Thanks for your feedback!', false);
-    }
+  // Inject a toggle button if one doesn't exist in the skeleton
+  function injectLangToggle() {
+    if (document.getElementById('langToggleBtn')) return; // Already exists
 
-    // =============================================================
-    // TOAST
-    // =============================================================
-    let toastTimer = null;
-    function showToast(msg, success) {
-      const box = document.getElementById('toastBox');
-      const icon = document.getElementById('toastIcon');
-      document.getElementById('toastMsg').textContent = msg;
-      icon.className = 'w-7 h-7 rounded-full flex items-center justify-center shrink-0 ' +
-        (success ? 'bg-green-100 dark:bg-green-900/30' : 'bg-yellow-100 dark:bg-yellow-900/30');
-      icon.innerHTML = success
-        ? '<i data-lucide="check" class="w-3.5 h-3.5 text-green-600 dark:text-green-400"></i>'
-        : '<i data-lucide="info" class="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400"></i>';
-      box.classList.remove('hidden');
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(function() { box.classList.add('hidden'); }, 2500);
+    const hero = document.querySelector('section.bg-neutral-50.dark\\:bg-brand-dark .max-w-7xl');
+    if (hero) {
+      const btn = document.createElement('button');
+      btn.id = 'langToggleBtn';
+      btn.onclick = toggleLanguage;
+      btn.className = 'mt-6 inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg text-xs font-bold text-neutral-600 dark:text-neutral-300 hover:border-brand-red hover:text-brand-red transition shadow-sm';
+      btn.innerHTML = `<i data-lucide="languages" class="w-3.5 h-3.5"></i> <span>SWITCH TO SINHALA</span>`;
+      hero.appendChild(btn);
       lucide.createIcons();
     }
+  }
 
-    // =============================================================
-    // LANGUAGE
-    // =============================================================
-    function applyTranslations() {
-      const d = T[lang] || T.en;
-      document.querySelectorAll('[data-t]').forEach(function(el) {
-        const k = el.getAttribute('data-t');
-        if (d[k]) el.textContent = d[k];
-      });
-      document.documentElement.lang = lang === 'si' ? 'si' : 'en';
-      document.querySelectorAll('.ld-btn').forEach(function(b) {
-        var isEn = b.textContent.includes('English');
-        var chk = b.querySelector('.ld-chk');
-        if (chk) {
-          if ((isEn && lang === 'en') || (!isEn && lang === 'si')) chk.classList.remove('hidden');
-          else chk.classList.add('hidden');
-        }
-      });
-    }
+  /**
+   * ERROR HANDLING (404)
+   */
+  function renderError(title, message) {
+    // Hide main sections
+    document.getElementById('heroTitle').parentElement.parentElement.parentElement.style.display = 'none';
+    document.querySelector('.lg\\:col-span-8').style.display = 'none';
+    document.querySelector('.lg\\:col-span-4').style.display = 'none';
 
-    function setLang(l) {
-      lang = l;
-      localStorage.setItem('gl_lk_lang', l);
-      document.getElementById('langLbl').textContent = l.toUpperCase();
-      applyTranslations();
-      if (currentLaw) renderLaw();
-      toggleLang();
-    }
+    // Inject Error UI
+    const errorContainer = document.createElement('div');
+    errorContainer.className = 'max-w-2xl mx-auto text-center py-20';
+    errorContainer.innerHTML = `
+      <div class="w-20 h-20 bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="file-question" class="w-10 h-10 text-red-500"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">404</h1>
+      <h2 class="text-xl font-bold text-neutral-700 dark:text-neutral-200 mb-4">${title}</h2>
+      <p class="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md mx-auto">${message}</p>
+      <a href="lk-categories.html" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red hover:bg-brand-red-dark text-white font-bold rounded-xl transition shadow-lg shadow-red-500/20">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Categories
+      </a>
+    `;
+    
+    document.querySelector('section.py-8.md\\:py-12 .max-w-7xl').appendChild(errorContainer);
+    lucide.createIcons();
+  }
 
-    function toggleLang() { document.getElementById('langDD').classList.toggle('hidden'); }
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('#langBtn') && !e.target.closest('#langDD'))
-        document.getElementById('langDD').classList.add('hidden');
-    });
-
-    // Dark Mode
-    function toggleDark() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('gl_dark', document.documentElement.classList.contains('dark'));
-    }
-    if (localStorage.getItem('gl_dark') === 'true' ||
-      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches))
-      document.documentElement.classList.add('dark');
-
-    // Mobile Menu
-    document.querySelector('#mobMenu button')?.addEventListener('click', function() {
-      document.getElementById('mobMenu').classList.toggle('hidden');
-    });
   </script>
 
 </body>
