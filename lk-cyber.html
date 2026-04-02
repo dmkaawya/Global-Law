@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <!-- =============================================
+       GlobalLaw - Cyber Laws Category (lk-cyber.html)
+       
+       🔧 HOW TO EDIT:
+       
+       1. Add more laws:
+          → Go to the CYBER_LAWS array in the script below.
+          → Copy an existing object and edit the details.
+       
+       2. Change Layout:
+          → Currently set to grid-cols-3 (lg screens).
+          → Change grid-cols-3 to grid-cols-2 or 4 in the #cardGrid section if needed.
+       
+       ============================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Laws - GlobalLaw Sri Lanka</title>
+  <meta name="description" content="Sri Lankan Cyber Laws explained simply. Computer Crime Act, Data Protection, and more.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { red: '#DC2626', 'red-light': '#EF4444', 'red-dark': '#B91C1C', dark: '#050505', 'dark-card': '#1A1A1A', 'dark-border': '#262626' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 9px; }
+
+    /* Card hover effect */
+    .law-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
+    }
+    .law-card:hover {
+      transform: translateY(-5px);
+      border-color: #DC2626;
+      box-shadow: 0 20px 40px -10px rgba(220,38,38,0.15);
+    }
+    
+    /* Icon background pulse */
+    .icon-bg {
+      background: linear-gradient(135deg, #FEF2F2 0%, #FFFFFF 100%);
+    }
+    .dark .icon-bg {
+      background: linear-gradient(135deg, #450a0a 0%, #1A1A1A 100%);
+    }
+
+    /* Fade animation */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)} }
+    .fu { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.1s; }
+    .d3 { animation-delay: 0.15s; }
+    .d4 { animation-delay: 0.2s; }
+    .d5 { animation-delay: 0.25s; }
+
+    /* Dot pattern */
+    .dot-bg { background-image: radial-gradient(circle at 1px 1px,#DC2626 1px,transparent 0); background-size: 32px 32px; }
+    
+    /* Toast */
+    @keyframes slideR { from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1} }
+    .toast-in { animation: slideR 0.35s ease forwards; }
+
+    /* Mobile menu */
+    @keyframes slideD { from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)} }
+    .mob-menu { animation: slideD 0.25s ease forwards; }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-brand-dark text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
+
+  <!-- ============ NAVIGATION BAR ============ -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-lg border-b border-neutral-200 dark:border-brand-dark-border transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="flex items-center justify-between h-14 md:h-16">
+        <!-- Logo -->
+        <a href="lk.html" class="flex items-center gap-1.5 shrink-0">
+          <span class="text-lg md:text-2xl font-extrabold tracking-tight"><span class="text-brand-red">Global</span><span class="dark:text-white">Law</span></span>
+          <span class="text-base md:text-lg">🇱🇰</span>
+        </a>
+        
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-5 lg:gap-7 text-[13px] font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navHome">Home</a>
+          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navCat">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red transition" data-i18n="navContact">Contact</a>
+        </div>
+
+        <!-- Right Side -->
+        <div class="flex items-center gap-1.5 md:gap-2.5">
+          <!-- Language Switch -->
+          <div class="relative">
+            <button onclick="toggleLangDD()" id="langBtn" class="flex items-center gap-1 text-[11px] font-semibold px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-brand-dark-border hover:border-brand-red transition">
+              <i data-lucide="globe" class="w-3 h-3"></i><span id="langLabel">EN</span><i data-lucide="chevron-down" class="w-2.5 h-2.5"></i>
+            </button>
+            <div id="langDD" class="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-lg shadow-xl overflow-hidden z-50">
+              <button onclick="setLang('en')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇬🇧</span><span>English</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+              <button onclick="setLang('si')" class="ld-opt w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-neutral-50 dark:hover:bg-brand-dark-border transition text-left"><span>🇱🇰</span><span>සිංහල</span><span class="ml-auto ld-chk text-brand-red hidden">✓</span></button>
+            </div>
+          </div>
+          
+          <!-- Dark/Light -->
+          <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Toggle theme">
+            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-yellow-400"></i>
+            <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-500"></i>
+          </button>
+          
+          <!-- Mobile Menu -->
+          <button onclick="toggleMob()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-brand-dark-card transition" aria-label="Menu">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobMenu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-brand-dark-border pt-3 mob-menu">
+        <div class="flex flex-col gap-2.5 text-sm font-medium">
+          <a href="lk.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navHome">Home</a>
+          <a href="lk-categories.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navCat">Categories</a>
+          <a href="lk-about.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navAbout">About Us</a>
+          <a href="lk-contact.html" class="text-neutral-500 dark:text-neutral-400 hover:text-brand-red py-1" data-i18n="navContact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ============ BREADCRUMB ============ -->
+  <div class="bg-neutral-50 dark:bg-brand-dark border-b border-neutral-100 dark:border-brand-dark-border">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-2.5">
+      <nav class="flex items-center gap-1.5 text-[11px] sm:text-xs text-neutral-400">
+        <a href="index.html" class="hover:text-brand-red transition">GlobalLaw</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <a href="lk.html" class="hover:text-brand-red transition">🇱🇰 Sri Lanka</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <a href="lk-categories.html" class="hover:text-brand-red transition" data-i18n="navCat">Categories</a>
+        <i data-lucide="chevron-right" class="w-3 h-3"></i>
+        <span class="text-neutral-700 dark:text-neutral-200 font-medium" data-i18n="crumbCurrent">Cyber Laws</span>
+      </nav>
+    </div>
+  </div>
+
+
+  <!-- ============ PAGE HEADER ============ -->
+  <section class="relative overflow-hidden bg-neutral-50 dark:bg-brand-dark transition-colors">
+    <div class="absolute inset-0 dot-bg opacity-[0.03] dark:opacity-[0.05]"></div>
+    <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-10 md:pt-16 md:pb-12">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 text-brand-red text-[10px] font-bold uppercase tracking-wider mb-3">
+            <i data-lucide="shield-alert" class="w-3 h-3"></i>
+            <span data-i18n="catBadge">Digital & Technology</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2.5 text-neutral-900 dark:text-white" data-i18n="pageTitle">Cyber Laws</h1>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-i18n="pageDesc">
+            Key legal frameworks governing the internet, data protection, and digital transactions in Sri Lanka. Understand your rights and penalties in the digital space.
+          </p>
+        </div>
+        <div class="hidden md:flex">
+            <!-- Decorative big icon -->
+            <div class="w-20 h-20 bg-white dark:bg-brand-dark-card rounded-2xl shadow-xl border border-neutral-100 dark:border-brand-dark-border flex items-center justify-center text-4xl">
+                💻
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ LAW CARDS GRID ============ -->
+  <section class="py-8 md:py-14 bg-white dark:bg-brand-dark transition-colors">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+            <span data-i18n="listTitle">Legislation & Acts</span>
+            <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-brand-dark-border text-neutral-500" id="lawCountBadge">10</span>
+        </h2>
+        <!-- Simple Sort/Filter visual placeholder -->
+        <div class="flex items-center gap-2 text-[11px] text-neutral-400">
+            <span data-i18n="sortBy">Sort by:</span>
+            <select class="bg-transparent font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none cursor-pointer">
+                <option data-i18n="optRelevance">Relevance</option>
+                <option data-i18n="optYear">Year (Newest)</option>
+            </select>
+        </div>
+      </div>
+
+      <div id="cardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <!-- Cards rendered by JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-neutral-900 dark:bg-black text-white border-t border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+        <div class="col-span-2 md:col-span-1">
+          <div class="text-xl font-extrabold tracking-tight mb-2.5"><span class="text-brand-red">Global</span>Law <span class="text-base">🇱🇰</span></div>
+          <p class="text-neutral-400 text-xs leading-relaxed mb-3" data-i18n="ftDesc">Making Sri Lanka's law accessible to everyone.</p>
+          <div class="bg-yellow-900/20 border border-yellow-800/30 rounded-lg p-2.5 text-[10px] text-yellow-400 leading-relaxed" data-i18n="ftDisc">⚠️ Disclaimer: Educational platform only. Not legal advice.</div>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftQL">Quick Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="lk.html" class="text-neutral-400 hover:text-brand-red transition">Home</a></li>
+            <li><a href="lk-categories.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navCat">Categories</a></li>
+            <li><a href="lk-about.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navAbout">About Us</a></li>
+            <li><a href="lk-contact.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="navSupport">Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftLL">Legal Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="notwork.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftPriv">Privacy Policy</a></li>
+            <li><a href="notwork.html" class="text-neutral-400 hover:text-brand-red transition" data-i18n="ftTerms">Terms of Use</a></li>
+            <li><a href="https://www.justice.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">Ministry of Justice ↗</a></li>
+            <li><a href="https://www.cert.gov.lk" target="_blank" rel="noopener" class="text-neutral-400 hover:text-brand-red transition">CERT Sri Lanka ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-[11px] uppercase tracking-wider mb-3 text-neutral-300" data-i18n="ftCon">Contact</h4>
+          <ul class="space-y-2 text-xs">
+            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i><a href="mailto:dmkaawya@gmail.com" class="hover:text-brand-red transition">dmkaawya@gmail.com</a></li>
+            <li class="flex items-center gap-1.5 text-neutral-400"><i data-lucide="message-circle" class="w-3.5 h-3.5 shrink-0"></i><a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="hover:text-brand-red transition">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 pt-5 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-neutral-500 text-[11px]">Copyright © 2026 GlobalLaw. All Rights Reserved.</p>
+        <p class="text-neutral-500 text-[11px]">Powered by <a href="https://vezlo.dev" target="_blank" rel="noopener" class="text-brand-red hover:underline font-semibold">Vezlo</a> <span class="text-neutral-600 mx-0.5">|</span> DMC Group</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating WhatsApp -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <a href="https://wa.me/94775048455" target="_blank" rel="noopener" class="relative flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition hover:scale-110" style="width:50px;height:50px" aria-label="WhatsApp">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
+  <!-- Toast -->
+  <div id="toastBox" class="hidden fixed top-20 right-4 z-[90] bg-white dark:bg-brand-dark-card border border-neutral-200 dark:border-brand-dark-border rounded-xl shadow-2xl px-4 py-3 toast-in max-w-xs">
+    <div class="flex items-center gap-2.5">
+      <div class="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><i data-lucide="lock" class="w-3.5 h-3.5 text-brand-red"></i></div>
+      <p id="toastMsg" class="text-xs font-medium"></p>
+    </div>
+  </div>
+
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    lucide.createIcons();
+
+    // =============================================================
+    //
+    //   🔧 DATA: CYBER LAWS (10 OPTIONS)
+    //
+    // =============================================================
+    const CYBER_LAWS = [
+      {
+        id: 'cca-2007',
+        icon: '👾',
+        title: { en: 'Computer Crime Act No. 24 of 2007', si: 'පරිගණක අපරාධ පනත අංක 24 දරණ 2007' },
+        tldr: { en: 'The primary law dealing with hacking, illegal access, and data damage.', si: 'හැකිං, නීති විරෝධී ප්‍රවේශය සහ දත්ත විනාශ කිරීම සම්බන්ධ ප්‍රධාන නීතිය.' },
+        penalty: { en: 'Up to 5 years imprisonment or fine up to Rs. 300,000.', si: 'වසර 5 දක්වා සිර දඬුවම හෝ රු. 300,000 ක් දක්වා දඩයක්.' },
+        year: '2007'
+      },
+      {
+        id: 'pdpa-2022',
+        icon: '🛡️',
+        title: { en: 'Personal Data Protection Act No. 9 of 2022', si: 'පුද්ගලික දත්ත ආරක්ෂණ පනත අංක 9 දරණ 2022' },
+        tldr: { en: 'Protects individual privacy regarding the processing of personal data.', si: 'පුද්ගලික දත්ත සැකසීම පිළිබඳව පුද්ගල පෞද්ගලිකත්වය ආරක්ෂා කරයි.' },
+        penalty: { en: 'Fines up to Rs. 10 Million or imprisonment.', si: 'රු. 10 මිලියන දක්වා දඩ හෝ සිර දඬුවම.' },
+        year: '2022'
+      },
+      {
+        id: 'osa-2024',
+        icon: '🛑',
+        title: { en: 'Online Safety Act No. 1 of 2024', si: 'අන්තර්ජාල ආරක්ෂිත භාවය පනත අංක 1 දරණ 2024' },
+        tldr: { en: 'Regulates online content to prevent false statements and hate speech.', si: 'ව්‍යාජ ප්‍රකාශ සහ නිග්‍රහාවලි වැළැක්වීම සඳහා අන්තර්ජාල අන්තර්ගතයන් පාලනය කරයි.' },
+        penalty: { en: 'Up to 5 years jail and heavy fines for prohibited posts.', si: 'තහනම් කළ පළ කිරීම් සඳහා වසර 5 දක්වා සිර දඬුවම සහ බරපතල දඩ.' },
+        year: '2024'
+      },
+      {
+        id: 'eta-2006',
+        icon: '✍️',
+        title: { en: 'Electronic Transactions Act No. 19 of 2006', si: 'විද්‍යුත් ගනුදෙනු පනත අංක 19 දරණ 2006' },
+        tldr: { en: 'Gives legal recognition to digital signatures and electronic contracts.', si: 'ඩිජිටල් අත්සන් සහ විද්‍යුත් ගිවිසුම්වලට නීත්‍යානුකූල පිළිගැනීමක් ලබා දෙයි.' },
+        penalty: { en: 'Fines for fraud or falsification of electronic records.', si: 'විද්‍යුත් වාර්තා ව්‍යාජ කිරීම සඳහා දඩ.' },
+        year: '2006'
+      },
+      {
+        id: 'evi-1995',
+        icon: '📑',
+        title: { en: 'Evidence (Special Provisions) Act No. 14 of 1995', si: 'සාක්ෂි (විශේෂ විධිවිධාන) පනත අංක 14 දරණ 1995' },
+        tldr: { en: 'Allows electronic evidence and computer printouts in court.', si: 'අධිකරණයන්හිදී විද්‍යුත් සාක්ෂි සහ පරිගණක මුද්‍රණ භාවිතා කිරීමට ඉඩ ලබා දෙයි.' },
+        penalty: { en: 'Perjury laws apply if evidence is fabricated.', si: 'සාක්ෂි ව්‍යාජ කළහොත් අසත්‍ය සාක්ෂි දීමේ නීති බල පැවැත්වේ.' },
+        year: '1995'
+      },
+      {
+        id: 'pdsa-2006',
+        icon: '💳',
+        title: { en: 'Payment Devices and Services Act No. 28 of 2006', si: 'ගෙවීම් උපාංග සහ සේවා පනත අංක 28 දරණ 2006' },
+        tldr: { en: 'Regulates electronic money (e-money) and payment card systems.', si: 'විද්‍යුත් මුදල් (e-money) සහ ගෙවීම් කාඩ්පත් පද්ධති පාලනය කරයි.' },
+        penalty: { en: 'Licenses can be cancelled; fines for operating illegally.', si: 'බලපත්‍ර අහෝසි කළ හැක; නීති විරෝධීව කටයුතු කළහොත් දඩ.' },
+        year: '2006'
+      },
+      {
+        id: 'ip-2003',
+        icon: '©️',
+        title: { en: 'Intellectual Property Act No. 36 of 2003', si: 'බුද්ධිමය දේපළ පනත අංක 36 දරණ 2003' },
+        tldr: { en: 'Protects software code and digital content copyright.', si: 'මෘදුකාංග කේත සහ ඩිජිටල් අන්තර්ගතයන්ගේ ප්‍රකාශන අයිතිය ආරක්ෂා කරයි.' },
+        penalty: { en: 'Compensation damages and fines up to Rs. 500,000.', si: 'වන්දි ගෙවීම සහ රු. 500,000 දක්වා දඩ.' },
+        year: '2003'
+      },
+      {
+        id: 'pc-2022',
+        icon: '⚖️',
+        title: { en: 'Penal Code (Amendment) No. 22 of 2022', si: 'දණ්ඩ නීති සංග්‍රහය (සංශෝධන) අංක 22 දරණ 2022' },
+        tldr: { en: 'Addresses cyber harassment, stalking, and voyeurism online.', si: 'සයිබර් ප්‍රහාර, පසුපස ගැටීම් සහ කාමාංශ නැරඹීම් සම්බන්ධයෙන් සැලකිල්ලට ගනී.' },
+        penalty: { en: 'Imprisonment up to 5 years depending on severity.', si: 'බරපතලත්වය අනුව වසර 5 දක්වා සිර දඬුවම.' },
+        year: '2022'
+      },
+      {
+        id: 'tele-1991',
+        icon: '📡',
+        title: { en: 'Telecommunications Act No. 25 of 1991', si: 'තොරතුරු සහ සන්නිවේදන පනත අංක 25 දරණ 1991' },
+        tldr: { en: 'Regulates spectrum and interception of communications.', si: 'වර්ණාවලිය සහ සන්නිවේදන අතුරුදහන් කිරීම පාලනය කරයි.' },
+        penalty: { en: 'Heavy fines for unauthorized networks.', si: 'අවසර නැති ජාල සඳහා බරපතල දඩ.' },
+        year: '1991'
+      },
+      {
+        id: 'cert-2005',
+        icon: '🏢',
+        title: { en: 'Sri Lanka CERT Act No. 30 of 2005', si: 'ශ්‍රී ලංකා සර්ට් පනත අංක 30 දරණ 2005' },
+        tldr: { en: 'Established the national Computer Emergency Readiness Team.', si: 'ජාතික පරිගණක හදිසි මෙහෙයුම් කණ්ඩායම (SLCERT) පිහිටුවයි.' },
+        penalty: { en: 'N/A (Administrative Framework).', si: 'අදාළ නැත (පරිපාලන රාමුවකි).' },
+        year: '2005'
+      }
+    ];
+
+
+    // =============================================================
+    // TRANSLATIONS
+    // =============================================================
+    const T = {
+      en: {
+        navHome: 'Home', navCat: 'Categories', navAbout: 'About Us', navContact: 'Contact', navSupport: 'Support',
+        crumbCurrent: 'Cyber Laws',
+        catBadge: 'Digital & Technology',
+        pageTitle: 'Cyber Laws',
+        pageDesc: "Key legal frameworks governing the internet, data protection, and digital transactions in Sri Lanka. Understand your rights and penalties in the digital space.",
+        listTitle: 'Legislation & Acts',
+        sortBy: 'Sort by:',
+        optRelevance: 'Relevance',
+        optYear: 'Year (Newest)',
+        lblPenalty: 'Penalty',
+        btnRead: 'Read Full Law →',
+        ftDesc: "Making Sri Lanka's law accessible to everyone.",
+        ftDisc: '⚠️ Disclaimer: Educational platform only. Not legal advice.',
+        ftQL: 'Quick Links', ftLL: 'Legal Links', ftCon: 'Contact', ftPriv: 'Privacy Policy', ftTerms: 'Terms of Use',
+      },
+      si: {
+        navHome: 'මුල් පිටුව', navCat: 'කාණ්ඩ', navAbout: 'අප ගැන', navContact: 'සම්බන්ධ කරගන්න', navSupport: 'සහාය',
+        crumbCurrent: 'සයිබර් නීති',
+        catBadge: 'ඩිජිටල් හා තාක්ෂණය',
+        pageTitle: 'සයිබර් නීති',
+        pageDesc: 'අන්තර්ජාලය, දත්ත ආරක්ෂණය සහ ශ්‍රී ලංකාවේ ඩිජිටල් ගනුදෙනු පාලනය කරන ප්‍රධාන නීතිමය රාමු. ඩිජිටල් අවකාශයේ ඔබේ අයිතිවාසිකම් සහ දඩ මුදල් පිළිබඳව දැනගන්න.',
+        listTitle: 'පනත් සහ ප්‍රඥප්ති',
+        sortBy: 'සැකසීම:',
+        optRelevance: 'ප්‍රමුඛත්වය',
+        optYear: 'වසර (අලුත්ම)',
+        lblPenalty: 'දඬුවම',
+        btnRead: 'නීතිය සම්පූර්ණයෙන් කරුණු බලන්න →',
+        ftDesc: 'ශ්‍රී ලංකාවේ නීතිය සෑමට ලේසි කිරීම.',
+        ftDisc: '⚠️ අවවාදයයි: අධ්‍යාපනික වේදිකාවක් පමණයි. නීති උපදෙස් නොවේ.',
+        ftQL: 'ඉක්මන් සබැඳි', ftLL: 'නීතිමය සබැඳි', ftCon: 'සම්බන්ධ කරගන්න', ftPriv: 'පෞද්ගලිකත්ව ප්‍රතිපත්තිය', ftTerms: 'භාවිතා කිරීමේ කොන්දේසි',
+      }
+    };
+
+    let lang = 'en';
+    const saved = localStorage.getItem('gl_lk_lang');
+    if (saved && T[saved]) lang = saved;
+
+    // =============================================================
+    // RENDER CARDS
+    // =============================================================
+    function renderCards() {
+      var d = T[lang] || T.en;
+      var grid = document.getElementById('cardGrid');
+      var html = '';
+
+      CYBER_LAWS.forEach(function(law, index) {
+        // Get delay class for animation
+        var delayClass = 'd' + (index % 5 + 1); 
+        var title = law.title[lang] || law.title.en;
+        var tldr = law.tldr[lang] || law.tldr.en;
+        var penalty = law.penalty[lang] || law.penalty.en;
+
+        html += `
+          <div class="law-card bg-white dark:bg-brand-dark-card rounded-2xl p-5 md:p-6 border border-neutral-100 dark:border-brand-dark-border flex flex-col h-full fu ${delayClass}">
+            
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl icon-bg flex items-center justify-center text-2xl shadow-sm border border-neutral-100 dark:border-brand-dark-border">
+                    ${law.icon}
+                </div>
+                <span class="text-[10px] font-mono font-bold text-neutral-400 bg-neutral-50 dark:bg-brand-dark px-2 py-1 rounded-md">${law.year}</span>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-bold mb-2 leading-snug text-neutral-900 dark:text-white">${title}</h3>
+            
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4 flex-grow">
+                ${tldr}
+            </p>
+
+            <div class="mt-auto pt-4 border-t border-neutral-100 dark:border-brand-dark-border">
+                <div class="mb-4">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-neutral-400 block mb-1" data-i18n="lblPenalty">${d.lblPenalty}</span>
+                    <p class="text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-brand-dark/50 p-2 rounded-lg border border-neutral-100 dark:border-brand-dark-border">
+                        ${penalty}
+                    </p>
+                </div>
+                <a href="law-details.html?id=${law.id}" class="block w-full text-center py-2.5 rounded-xl bg-brand-red hover:bg-brand-red-dark text-white text-xs font-bold transition shadow-lg shadow-red-500/20">
+                    ${d.btnRead}
+                </a>
+            </div>
+
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    // =============================================================
+    // TRANSLATION ENGINE
+    // =============================================================
+    function applyT() {
+      var d = T[lang] || T.en;
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n');
+        if (d[k]) el.textContent = d[k];
+      });
+      document.documentElement.lang = lang === 'si' ? 'si' : 'en';
+      
+      // Update Lang Dropdown UI
+      document.querySelectorAll('.ld-opt').forEach(function(b) {
+        var isEn = b.textContent.includes('English');
+        var chk = b.querySelector('.ld-chk');
+        if (chk) {
+          if ((isEn && lang === 'en') || (!isEn && lang === 'si')) chk.classList.remove('hidden');
+          else chk.classList.add('hidden');
+        }
+      });
+      
+      document.getElementById('langLabel').textContent = lang.toUpperCase();
+      // Re-render cards to update dynamic content
+      renderCards();
+    }
+
+    function setLang(l) {
+      lang = l;
+      localStorage.setItem('gl_lk_lang', l);
+      applyT();
+      toggleLangDD();
+    }
+
+    function toggleLangDD() { document.getElementById('langDD').classList.toggle('hidden'); }
+
+    // Close lang dropdown on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#langBtn') && !e.target.closest('#langDD'))
+        document.getElementById('langDD').classList.add('hidden');
+    });
+
+    // =============================================================
+    // DARK MODE
+    // =============================================================
+    function toggleDark() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('gl_dark', document.documentElement.classList.contains('dark'));
+    }
+    if (localStorage.getItem('gl_dark') === 'true' ||
+      (!localStorage.getItem('gl_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // =============================================================
+    // MOBILE MENU
+    // =============================================================
+    function toggleMob() { document.getElementById('mobMenu').classList.toggle('hidden'); }
+
+    // =============================================================
+    // INITIALIZE
+    // =============================================================
+    document.getElementById('lawCountBadge').textContent = CYBER_LAWS.length;
+    applyT();
+    renderCards();
+
+  </script>
+
+</body>
+</html>
